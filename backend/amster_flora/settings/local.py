@@ -1,6 +1,6 @@
 from django.conf.urls.static import static
 
-from apexflora_api.settings import BASE_DIR, DEBUG, MIDDLEWARE
+from . import BASE_DIR, DEBUG, MIDDLEWARE
 
 MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
 
