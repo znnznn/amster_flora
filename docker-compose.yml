@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres
+    expose:
+      - 5432
+    volumes:
+      - ./:/code
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: db
+  backend:
+    build: ./backend
+    image: amster_flora_latest
+    volumes:
+      - ./backend:/app/backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - db
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
+    command: npm run dev
+    links:
+      - backend
+
+volumes:
+  static_volume:
