@@ -3,6 +3,7 @@ import { Montserrat } from 'next/font/google'
 import type { PropsWithChildren } from 'react'
 
 import './globals.css'
+import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 
 const montserrat = Montserrat({
@@ -22,7 +23,8 @@ const RootLayout = ({ children }: PropsWithChildren) => {
         <html lang='en'>
             <body className={`${montserrat.className} antialiased`}>
                 <Header />
-                {children}
+                <main>{children}</main>
+                <Footer />
             </body>
         </html>
     )

@@ -22,28 +22,28 @@ export const Header = () => {
                 <ul className='flex items-center justify-end gap-x-4 text-accent'>
                     <li>
                         <Link
-                            className='inline-block p-1'
+                            className='block p-1 transition-colors hover:text-background'
                             href='/search'>
                             <Search className='size-6' />
                         </Link>
                     </li>
                     <li>
                         <Link
-                            className='inline-block p-1'
+                            className='block p-1 transition-colors hover:text-background'
                             href='/profile'>
                             <UserRound className='size-6' />
                         </Link>
                     </li>
                     <li>
                         <Link
-                            className='inline-block p-1'
+                            className='block p-1 transition-colors hover:text-background'
                             href='/favorites'>
                             <Heart className='size-6' />
                         </Link>
                     </li>
                     <li>
                         <Link
-                            className='inline-block p-1'
+                            className='block p-1 transition-colors hover:text-background'
                             href='/cart'>
                             <ShoppingCart className='size-6' />
                         </Link>
