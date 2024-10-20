@@ -1,5 +1,9 @@
 'use client'
 
+import Image from 'next/image'
+
+import EnFlag from '@/assets/images/flags/en.png'
+import UaFlag from '@/assets/images/flags/ua.png'
 import {
     Select,
     SelectContent,
@@ -11,11 +15,13 @@ import {
 const langOptions = [
     {
         value: 'uk',
-        label: 'Українська'
+        label: 'Українська',
+        icon: UaFlag
     },
     {
         value: 'en',
-        label: 'English'
+        label: 'English',
+        icon: EnFlag
     }
 ]
 
@@ -41,7 +47,7 @@ export const LangSelect = () => {
         <Select
             defaultValue={selectedLang}
             onValueChange={handleLangChange}>
-            <SelectTrigger className='w-28 border-none bg-transparent p-0 font-medium focus:ring-0 focus:ring-offset-0'>
+            <SelectTrigger className='w-32 border-none bg-transparent p-0 font-medium focus:ring-0 focus:ring-offset-0'>
                 <SelectValue placeholder='Select a fruit' />
             </SelectTrigger>
             <SelectContent className='border-primary bg-accent text-primary'>
@@ -50,7 +56,15 @@ export const LangSelect = () => {
                         key={lang.value}
                         className='font-medium hover:bg-primary hover:text-accent-foreground'
                         value={lang.value}>
-                        {lang.label}
+                        <div className='flex items-center gap-x-2'>
+                            <Image
+                                width={16}
+                                height={16}
+                                src={lang.icon}
+                                alt={lang.label}
+                            />
+                            {lang.label}
+                        </div>
                     </SelectItem>
                 ))}
             </SelectContent>
