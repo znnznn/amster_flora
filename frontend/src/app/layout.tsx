@@ -3,6 +3,7 @@ import { Montserrat } from 'next/font/google'
 import type { PropsWithChildren } from 'react'
 
 import './globals.css'
+import { Header } from '@/components/header'
 
 const montserrat = Montserrat({
     subsets: ['cyrillic'],
@@ -19,7 +20,10 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: PropsWithChildren) => {
     return (
         <html lang='en'>
-            <body className={`${montserrat.className} antialiased`}>{children}</body>
+            <body className={`${montserrat.className} antialiased`}>
+                <Header />
+                {children}
+            </body>
         </html>
     )
 }
