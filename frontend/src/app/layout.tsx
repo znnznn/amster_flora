@@ -3,6 +3,7 @@ import { Montserrat } from 'next/font/google'
 import type { PropsWithChildren } from 'react'
 
 import './globals.css'
+import { CookieConsent } from '@/components/cookie-consent'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 
@@ -25,6 +26,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
                 <Header />
                 <main>{children}</main>
                 <Footer />
+                <CookieConsent />
             </body>
         </html>
     )

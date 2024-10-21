@@ -86,7 +86,8 @@ const config: Config = {
                 marquee: 'marquee 25s linear infinite',
                 marquee2: 'marquee2 25s linear infinite',
                 'accordion-down': 'accordion-down 0.2s ease-out',
-                'accordion-up': 'accordion-up 0.2s ease-out'
+                'accordion-up': 'accordion-up 0.2s ease-out',
+                'spin-slow': 'spin 25s linear infinite'
             }
         }
     },
