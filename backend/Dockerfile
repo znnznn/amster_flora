@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.12-slim-bullseye
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONPATH "${PYTONPATH}:/backend"
@@ -22,8 +22,8 @@ RUN apt-get update &&  \
     gcc \
     postgresql-common \
     g++ && \
-    sh -c "curl -o /usr/share/postgresql-common/pgdg/apt-archive.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc" &&\
-    sh -c 'echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt-archive.postgresql.org.asc] https://apt-archive.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list' &&\
+    sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list' && \
+    sh -c "wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -" && \
     apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends  \
