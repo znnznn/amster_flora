@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import type { PropsWithChildren } from 'react'
 
 import './globals.css'
@@ -24,12 +25,15 @@ const RootLayout = ({ children }: PropsWithChildren) => {
         <html lang='en'>
             <body className={`${montserrat.className} antialiased`}>
                 <Header />
-                <main>{children}</main>
+
+                <main>
+                    <NuqsAdapter>{children}</NuqsAdapter>
+                </main>
+
                 <Footer />
                 <CookieConsent />
             </body>
         </html>
     )
 }
-
 export default RootLayout

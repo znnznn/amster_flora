@@ -12,7 +12,7 @@ import {
 
 const Story = () => {
     return (
-        <section className='mt-16 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-6'>
+        <section className='mt-12 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-6'>
             <Breadcrumb>
                 <BreadcrumbList className='max-sm:justify-center'>
                     <BreadcrumbItem>
