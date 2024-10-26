@@ -1,8 +1,12 @@
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import type { PropsWithChildren } from 'react'
 
 import './globals.css'
+import { CookieConsent } from '@/components/cookie-consent'
+import { Footer } from '@/components/footer'
+import { Header } from '@/components/header'
 
 const montserrat = Montserrat({
     subsets: ['cyrillic'],
@@ -19,9 +23,17 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: PropsWithChildren) => {
     return (
         <html lang='en'>
-            <body className={`${montserrat.className} antialiased`}>{children}</body>
+            <body className={`${montserrat.className} antialiased`}>
+                <Header />
+
+                <main>
+                    <NuqsAdapter>{children}</NuqsAdapter>
+                </main>
+
+                <Footer />
+                <CookieConsent />
+            </body>
         </html>
     )
 }
-
 export default RootLayout
