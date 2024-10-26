@@ -2,6 +2,7 @@
 
 import { Clock, Facebook, Instagram, MapPin, Phone } from 'lucide-react'
 import Link from 'next/link'
+import { useState } from 'react'
 
 import { ContactsForm } from './contacts-form'
 import contacts from '@/assets/images/contacts.jpg'
@@ -90,25 +91,24 @@ export const Contacts = () => {
     )
 }
 
-const setCityInCookie = (city: string) => {
-    document.cookie = `city=${city}; path=/; max-age=31536000; SameSite=Strict`
-}
+// const setCityInCookie = (city: string) => {
+//     document.cookie = `city=${city}; path=/; max-age=31536000; SameSite=Strict`
+// }
 
-const getCityFromCookie = () => {
-    const cityCookie = document.cookie.split('; ').find((row) => row.startsWith('city='))
-    return cityCookie ? cityCookie.split('=')[1] : null
-}
+// const getCityFromCookie = () => {
+//     const cityCookie = document.cookie.split('; ').find((row) => row.startsWith('city='))
+//     return cityCookie ? cityCookie.split('=')[1] : null
+// }
 
 const cityOptions = ['Київ', 'Львів', 'Рівне']
 
 const CityTabs = () => {
-    const defaultCity = 'Рівне'
-    const selectedCity = getCityFromCookie() || defaultCity
+    const [city, setCity] = useState('Рівне')
 
     return (
         <Tabs
-            defaultValue={selectedCity}
-            onValueChange={setCityInCookie}>
+            defaultValue={city}
+            onValueChange={setCity}>
             <TabsList className='flex h-fit flex-col gap-y-6 bg-transparent p-0'>
                 {cityOptions.map((city) => (
                     <TabsTrigger

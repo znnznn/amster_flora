@@ -1,9 +1,6 @@
 import { Heart, Search, ShoppingCart, UserRound } from 'lucide-react'
 import Link from 'next/link'
 
-import { CitySelect } from './city-select'
-import { CurrencySelect } from './currency-select'
-import { LangSelect } from './lang-select'
 import { Logo } from './logo'
 import {
     DropdownMenu,
@@ -15,7 +12,7 @@ import {
 export const Header = () => {
     return (
         <header>
-            <HeaderTop />
+            {/* <HeaderTop /> */}
             <div className='grid h-20 grid-cols-3 grid-rows-1 items-center gap-x-8 bg-primary px-20 text-accent'>
                 <HeaderNav />
                 <Logo className='mx-auto' />
@@ -120,19 +117,19 @@ const ClientMenuItem = () => {
     )
 }
 
-const HeaderTop = () => {
-    return (
-        <div className='grid h-8 grid-cols-3 grid-rows-1 items-center gap-x-8 bg-accent px-20 py-1.5 text-primary'>
-            <CitySelect />
-            <Link
-                className='mx-auto w-fit font-medium text-primary transition-colors hover:text-background'
-                href='tel:+3800687778893'>
-                +380 068 777 88 93
-            </Link>
-            <div className='flex items-center justify-end gap-x-4'>
-                <LangSelect />
-                <CurrencySelect />
-            </div>
-        </div>
-    )
-}
+// const HeaderTop = () => {
+//     return (
+//         <div className='grid h-8 grid-cols-3 grid-rows-1 items-center gap-x-8 bg-accent px-20 py-1.5 text-primary'>
+//             <CitySelect />
+//             <Link
+//                 className='mx-auto w-fit font-medium text-primary transition-colors hover:text-background'
+//                 href='tel:+3800687778893'>
+//                 +380 068 777 88 93
+//             </Link>
+//             <div className='flex items-center justify-end gap-x-4'>
+//                 <LangSelect />
+//                 <CurrencySelect />
+//             </div>
+//         </div>
+//     )
+// }

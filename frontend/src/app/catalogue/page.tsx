@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import { ActiveFilters } from './components/active-filters'
 import { FiltersSidebar } from './components/filters-sidebar'
 import { Products } from './components/products'
@@ -10,7 +12,7 @@ import {
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
 
-const Catalogue = () => {
+const CataloguePage = () => {
     return (
         <section className='mt-12 max-sm:mt-8'>
             <Breadcrumb className='px-20 max-md:px-16 max-sm:px-6'>
@@ -27,9 +29,13 @@ const Catalogue = () => {
             <h1 className='mt-4 text-center text-[28px] font-semibold'>Букети</h1>
 
             <div className='mt-8 flex items-start gap-x-5 pr-20'>
-                <FiltersSidebar />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <FiltersSidebar />
+                </Suspense>
                 <div className='flex flex-col gap-y-6'>
-                    <ActiveFilters />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <ActiveFilters />
+                    </Suspense>
                     <Products />
                 </div>
             </div>
@@ -37,4 +43,4 @@ const Catalogue = () => {
     )
 }
 
-export default Catalogue
+export default CataloguePage

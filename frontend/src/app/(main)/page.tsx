@@ -1,6 +1,7 @@
+import { Catalogue } from '../../components/catalogue'
+
 import { Advantages } from './components/advantages'
 import { Bouquets } from './components/bouquets'
-import { Catalogue } from './components/catalogue'
 import { Contacts } from './components/contacts'
 import { Delivery } from './components/delivery'
 import { Faq } from './components/faq'
@@ -11,14 +12,14 @@ import { Hero } from './components/hero'
 import { Story } from './components/story'
 import { TickerTape } from '@/app/(main)/components/ticker-tape'
 
-const Home = () => {
+const MainPage = () => {
     return (
         <>
             <TickerTape />
             <Hero />
             <Bouquets />
             <Flowerpots />
-            <Catalogue />
+            <Catalogue className='mt-72' />
             <Advantages />
             <Story />
             <Flowers />
@@ -30,4 +31,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default MainPage

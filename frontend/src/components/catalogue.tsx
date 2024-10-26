@@ -10,10 +10,17 @@ import {
     CarouselNext,
     CarouselPrevious
 } from '@/components/ui/carousel'
+import { cn } from '@/lib/utils'
 
-export const Catalogue = () => {
+type CatalogueProps = React.HTMLAttributes<HTMLDivElement>
+
+export const Catalogue = ({ className }: CatalogueProps) => {
     return (
-        <section className='mt-72 overflow-hidden px-20 max-md:mt-16 max-md:px-16 max-sm:mt-10 max-sm:px-6'>
+        <section
+            className={cn(
+                'overflow-hidden px-20 max-md:mt-16 max-md:px-16 max-sm:mt-10 max-sm:px-6',
+                className
+            )}>
             <h2 className='sr-only text-left text-[28px] font-bold'>Каталог квітів</h2>
 
             <Carousel

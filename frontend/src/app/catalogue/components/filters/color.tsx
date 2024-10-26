@@ -16,7 +16,7 @@ export const ColorFilter = () => {
     const selectedColors = color ? color.split(',') : []
 
     const handleValueChange = (colorId: string) => {
-        let updatedColors = selectedColors.includes(colorId)
+        const updatedColors = selectedColors.includes(colorId)
             ? selectedColors.filter((c) => c !== colorId)
             : [...selectedColors, colorId]
 

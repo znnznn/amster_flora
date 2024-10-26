@@ -10,7 +10,7 @@ import {
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
 
-const Story = () => {
+const StoryPage = () => {
     return (
         <section className='mt-12 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-6'>
             <Breadcrumb>
@@ -88,4 +88,4 @@ const Story = () => {
     )
 }
 
-export default Story
+export default StoryPage
