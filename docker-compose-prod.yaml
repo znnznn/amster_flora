@@ -4,7 +4,7 @@ services:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: docker/nginx/backend/Dockerfile
+      dockerfile: nginx/backend/Dockerfile
     ports:
       - "80:80"
       - "443:443"
