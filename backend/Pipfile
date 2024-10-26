@@ -16,6 +16,7 @@ pillow = "*"
 django-storages = "*"
 boto3 = "*"
 django-debug-toolbar = "*"
+google-auth = "*"
 
 [dev-packages]
 
