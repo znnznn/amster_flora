@@ -2,7 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "production" ]
+    branches: [ "main" ]
 
 jobs:
 
@@ -29,24 +29,7 @@ jobs:
             EMAIL_HOST=${{ secrets.EMAIL_HOST }}
             EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}
             EMAIL_PORT=${{ secrets.EMAIL_PORT }}
-            FE_URL=${{ secrets.FE_URL }}
-            AWS_S3_ACCESS_KEY_ID=${{ secrets.AWS_S3_ACCESS_KEY_ID }}
-            AWS_S3_SECRET_ACCESS_KEY=${{ secrets.AWS_S3_SECRET_ACCESS_KEY }}
-            AWS_STORAGE_BUCKET_NAME=${{ secrets.AWS_STORAGE_BUCKET_NAME }}
-            ACCESS_TOKEN_LIFETIME=${{ secrets.ACCESS_TOKEN_LIFETIME }}
-            TOKEN_1C_CONNECTION=${{ secrets.TOKEN_1C_CONNECTION }}
-            TOKEN_TELEGRAM_CONNECTION=${{ secrets.TOKEN_TELEGRAM_CONNECTION }}
-            GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-            KEY_CRM_API_KEY=${{ secrets.KEY_CRM_API_KEY }}
-            GOOGLE_SHEET_PRICE_URL=${{ secrets.GOOGLE_SHEET_PRICE_URL }}
           directory: ${{ github.workspace }}/backend
-      - name: Create google_key.json
-        uses: jsdaniell/create-json@v1.2.3
-        id: create-json
-        with:
-          name: google_key.json
-          json: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
-          dir: backend/
       - name: Stop containers
         run: docker compose stop
       - name: Build the Docker image
