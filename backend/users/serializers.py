@@ -83,7 +83,7 @@ class UserListSerializer(serializers.ModelSerializer):
 
 
 class LoginSerializer(TokenObtainSerializer):
-    token_class = RefreshToken
+    token_class = RefreshToken   # RefreshToken.for_user(self.user)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
