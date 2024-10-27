@@ -5,18 +5,12 @@ import Image from 'next/image'
 import { useState } from 'react'
 
 import { FlowerInfo } from './flower-info'
+import { FlowerSlider } from './flower-slider'
 import { AddGiftModal } from './modals/add-gift'
 import { AddLetterModal } from './modals/add-letter'
 import { QuickOrderModal } from './modals/quick-order'
 import flower from '@/assets/images/flower.jpg'
 import { Button } from '@/components/ui/button'
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious
-} from '@/components/ui/carousel'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 
 export const Flower = () => {
@@ -116,50 +110,5 @@ export const Flower = () => {
             </div>
             <FlowerInfo />
         </>
-    )
-}
-
-const FlowerSlider = () => {
-    return (
-        <Carousel
-            opts={{
-                loop: true
-            }}
-            className='flex w-52 flex-col items-center justify-center gap-y-4'
-            orientation='vertical'>
-            <CarouselPrevious className='static translate-x-0' />
-
-            <CarouselContent className='-mt-1 h-[540px]'>
-                <CarouselItem className='basis-1/3'>
-                    <Image
-                        src={flower}
-                        alt={'Півоній'}
-                        className='h-40 rounded-[22px] object-cover'
-                    />
-                </CarouselItem>
-                <CarouselItem className='basis-1/3'>
-                    <Image
-                        src={flower}
-                        alt={'Півоній'}
-                        className='h-40 rounded-[22px] object-cover'
-                    />
-                </CarouselItem>
-                <CarouselItem className='basis-1/3'>
-                    <Image
-                        src={flower}
-                        alt={'Півоній'}
-                        className='h-40 rounded-[22px] object-cover'
-                    />
-                </CarouselItem>
-                <CarouselItem className='basis-1/3'>
-                    <Image
-                        src={flower}
-                        alt={'Півоній'}
-                        className='h-40 rounded-[22px] object-cover'
-                    />
-                </CarouselItem>
-            </CarouselContent>
-            <CarouselNext className='static translate-x-0' />
-        </Carousel>
     )
 }
