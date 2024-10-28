@@ -96,7 +96,7 @@ export const Flower = () => {
                     </div>
                     <div className='flex items-center justify-between gap-x-12'>
                         <input
-                            className='w-60 border-b border-b-accent/40 bg-transparent px-0.5 pb-2 text-sm outline-none'
+                            className='w-60 border-b border-b-accent/40 bg-transparent px-0.5 pb-2 text-sm outline-none placeholder:text-muted-foreground'
                             type='text'
                             placeholder='Промокод/Дисконтна картка'
                         />
