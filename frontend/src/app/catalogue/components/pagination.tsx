@@ -11,11 +11,11 @@ import {
     Pagination as PaginationWrapper
 } from '@/components/ui/pagination'
 
-interface PaginationProps {
+interface CataloguePaginationProps {
     count: number
 }
 
-export const CataloguePagination = ({ count }: PaginationProps) => {
+export const CataloguePagination = ({ count }: CataloguePaginationProps) => {
     const limitStep = 24
 
     const [limit, setLimit] = useQueryState('limit', {

@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import { CheckoutCard } from './checkout-card'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 
 export const CheckoutInfo = () => {
     return (
@@ -18,8 +19,9 @@ export const CheckoutInfo = () => {
             </ul>
 
             <div className='flex items-center justify-between gap-x-6'>
-                <input
-                    className='w-60 border-b border-b-primary bg-transparent px-0.5 pb-2 text-sm outline-none placeholder:text-muted-foreground'
+                <Input
+                    variant='underline'
+                    className='w-60'
                     type='text'
                     placeholder='Промокод/Дисконтна картка'
                 />
@@ -37,8 +39,9 @@ export const CheckoutInfo = () => {
                     <span className='text-lg'>35 бонусів</span>
                 </div>
                 <div className='flex flex-col items-end gap-y-4'>
-                    <input
-                        className='w-60 border-b border-b-primary bg-transparent px-0.5 pb-2 text-sm outline-none placeholder:text-muted-foreground'
+                    <Input
+                        variant='underline'
+                        className='w-60'
                         type='text'
                         placeholder='Скільки бонусів списати'
                     />

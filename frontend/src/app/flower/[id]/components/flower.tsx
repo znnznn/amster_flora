@@ -11,6 +11,7 @@ import { AddLetterModal } from './modals/add-letter'
 import { QuickOrderModal } from './modals/quick-order'
 import flower from '@/assets/images/flower.jpg'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 
 export const Flower = () => {
@@ -95,8 +96,8 @@ export const Flower = () => {
                         <QuickOrderModal />
                     </div>
                     <div className='flex items-center justify-between gap-x-12'>
-                        <input
-                            className='w-60 border-b border-b-accent/40 bg-transparent px-0.5 pb-2 text-sm outline-none placeholder:text-muted-foreground'
+                        <Input
+                            className='w-60'
                             type='text'
                             placeholder='Промокод/Дисконтна картка'
                         />
