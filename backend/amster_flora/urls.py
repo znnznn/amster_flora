@@ -16,7 +16,7 @@ urlpatterns = [
     path('/', include(router.urls)),
     # path('api/v1/token/', TokenObtainPairView.as_view(), name='token_create'),
     # path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('/', include('amster_flora.doc_api')),
+    path('api/', include('amster_flora.doc_api')),
     path("__debug__/", include("debug_toolbar.urls")),
 ]
 
