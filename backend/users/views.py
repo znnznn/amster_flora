@@ -1,4 +1,5 @@
 from django.db.models import Prefetch
+from django.shortcuts import render
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, viewsets, status
 from rest_framework.decorators import action
@@ -108,3 +109,6 @@ class ContactUsAPIView(viewsets.ModelViewSet):
         if self.action == 'create':
             return [AllowAny()]
         return super().get_permissions()
+
+def customer_page(request):
+    return render(request, "index1.html", {})

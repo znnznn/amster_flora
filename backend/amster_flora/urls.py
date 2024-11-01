@@ -3,7 +3,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from users.views import UserViewSet, ContactUsAPIView
+from users.views import UserViewSet, ContactUsAPIView, customer_page
 from .settings import ENVIRONMENT
 
 router = DefaultRouter()
@@ -15,6 +15,8 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
     path('/', include(router.urls)),
+    path('', customer_page),
+    path('', include('auth.urls'), name="social-login"),
     path('auth/token/', TokenObtainPairView.as_view(), name='token_create'),
     path('auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/', include('amster_flora.doc_api')),
