@@ -1,13 +1,15 @@
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from rest_framework import serializers
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from amster_flora.settings import GOOGLE_AUTH_CLIENT_ID
 from common.constants import Role
 from users.models import User
+from users.serializers import UserListSerializer
 
 
-class SocialAccountLoginSerializer(serializers.Serializer):
+class GoogleOAuthLoginSerializer(serializers.Serializer):
     token = serializers.CharField()
 
     def validate(self, attrs):
@@ -25,5 +27,13 @@ class SocialAccountLoginSerializer(serializers.Serializer):
                 'is_active': True
             }
             user = User.objects.create_user(**user_data)
-        attrs['user'] = user
-        return attrs
+        return_attrs = {}
+        token_class = RefreshToken
+        refresh = token_class.for_user(user)
+        return_attrs['refresh'] = str(refresh)
+        return_attrs['access'] = str(refresh.access_token)
+        return_attrs['user'] = UserListSerializer(user).data
+        return return_attrs
+
+    def to_representation(self, instance):
+        return instance

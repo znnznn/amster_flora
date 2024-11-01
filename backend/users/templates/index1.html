@@ -1,57 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="google-signin-client_id"
-        content="586948538433-m3kq8a79oogn5dbksh08dfth5s1462ej.apps.googleusercontent.com">
-
+  <meta name="google-signin-client_id" content="586948538433-m3kq8a79oogn5dbksh08dfth5s1462ej.apps.googleusercontent.com">
+  <title>Google Sign-In</title>
 </head>
 <body>
-<div id="my-signin2"></div>
-
-<script>
-    function onSuccess(googleUser) {
-        console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-        var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId());
-        console.log('Full Name: ' + profile.getName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());
-
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://localhost:8000/google/auth');
-        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8"');
-        xhr.onload = function () {
-            console.log('Signed in as: ' + xhr.responseText);
-        };
-        xhr.send(JSON.stringify({
-                'token':id_token,
-                "avatar": profile.getImageUrl(),
-                "email": profile.getEmail(),
-                "username": profile.getName()
-        })
-        );
-
+  <script src="https://accounts.google.com/gsi/client" async></script>
+  <script>
+    function decodeJwtResponse(token) {
+      const payload = token.split('.')[1];
+      const decodedPayload = JSON.parse(atob(payload));
+      return decodedPayload;
     }
 
-    function onFailure(error) {
-        console.log(error);
+    function handleCredentialResponse(response) {
+      console.log("Credential Token: " + response.credential);
+      const responsePayload = decodeJwtResponse(response.credential);
+      console.log("ID: " + responsePayload.sub);
+      console.log('Full Name: ' + responsePayload.name);
+      console.log('Email: ' + responsePayload.email);
     }
 
-    function renderButton() {
-        gapi.signin2.render('my-signin2', {
-            'scope': 'profile email',
-            'width': 240,
-            'height': 50,
-            'longtitle': true,
-            'theme': 'dark',
-            'onsuccess': onSuccess,
-            'onfailure': onFailure
-        });
+    window.onload = function () {
+      google.accounts.id.initialize({
+        client_id: "586948538433-m3kq8a79oogn5dbksh08dfth5s1462ej.apps.googleusercontent.com",
+        callback: handleCredentialResponse,
+        auto_select: false,
+        cancel_on_tap_outside: false
+      });
+      google.accounts.id.renderButton(
+        document.getElementById("buttonDiv"),
+        { theme: "outline", size: "medium" }
+      );
+      google.accounts.id.prompt();
     }
-</script>
-<script src="https://api.google.com/js/platform.js?onload=renderButton" async defer></script>
+  </script>
+  <div id="buttonDiv"></div>
 </body>
 </html>
