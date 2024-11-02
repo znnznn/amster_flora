@@ -39,7 +39,7 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-    command: npm run start
+    command: npm run start:server
 
 volumes:
   static_volume:

@@ -3,7 +3,7 @@ FROM node:20.3.0 as base
 # Step 1. Rebuild the source code only when needed
 FROM base AS builder
 
-WORKDIR /app/frontend
+WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
@@ -42,14 +42,26 @@ RUN \
 # Step 2. Production image, copy all the files and run next
 FROM base AS runner
 
-WORKDIR /app/frontend
+WORKDIR /app
 
-COPY --from=builder /app/frontend/src ./src
+# You only need to copy next.config.js if you are NOT using the default configuration
+COPY --from=builder /app/next.config.mjs ./
+COPY --from=builder /app/components.json ./
+COPY --from=builder /app/.editorconfig ./
+COPY --from=builder /app/.prettierrc ./
+COPY --from=builder /app/postcss.config.mjs ./
+COPY --from=builder /app/tailwind.config.ts ./
+COPY --from=builder /app/tsconfig.json ./
+COPY --from=builder /app/src ./src
+
+# Set the correct permission for prerender cache
+#RUN mkdir .next
+#RUN chown nextjs:nodejs .next
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/frontend/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/frontend/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 # Environment variables must be redefined at run time
 ARG ENV_VARIABLE

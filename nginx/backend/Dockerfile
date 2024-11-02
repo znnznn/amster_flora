@@ -3,7 +3,7 @@ FROM node:20.3.0 as base
 # Step 1. Rebuild the source code only when needed
 FROM base AS builder
 
-WORKDIR /app/frontend
+WORKDIR /app
 
 
 COPY frontend/. .
@@ -37,8 +37,8 @@ FROM nginx:stable-alpine
 
 EXPOSE 80
 
-COPY --from=builder /app/frontend/.next ./.next
-COPY --from=builder /app/frontend/node_modules ./node_modules
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
 
 COPY ./nginx/backend/default.conf /etc/nginx/conf.d/default.conf
 
