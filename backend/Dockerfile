@@ -33,4 +33,4 @@ RUN apt-get update &&  \
     # install application requirements
     pip install --upgrade pip &&\
     pip install pipenv && \
-    PIPENV_VENV_IN_PROJECT=1 pipenv install --system
+    PIPENV_VENV_IN_PROJECT=1 pipenv install --system --deploy --ignore-pipfile
