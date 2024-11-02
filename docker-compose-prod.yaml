@@ -1,9 +1,8 @@
 services:
 
   nginx:
-    image: nginx:alpine
-    restart: unless-stopped
-    build: .
+    restart: always
+    image: nginx:latest
     ports:
       - "80:80"
       - "443:443"
