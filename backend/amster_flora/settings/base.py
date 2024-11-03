@@ -160,5 +160,5 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
 CORS_ORIGIN_ALLOW_ALL = True
 
 FE_URL = config('FE_URL', default='localhost:3000')
-GOOGLE_AUTH_CLIENT_ID = config('GOOGLE_AUTH_CLIENT_ID', default='586948538433-m3kq8a79oogn5dbksh08dfth5s1462ej.apps.googleusercontent.com')
-GOOGLE_AUTH_CLIENT_SECRET = config('GOOGLE_AUTH_CLIENT_SECRET', default='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')
+GOOGLE_AUTH_CLIENT_ID = config('GOOGLE_AUTH_CLIENT_ID', default='')
+GOOGLE_AUTH_CLIENT_SECRET = config('GOOGLE_AUTH_CLIENT_SECRET', default='')
