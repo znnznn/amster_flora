@@ -28,7 +28,7 @@ export const AuthModal = () => {
                 <UserRound className='size-6' />
             </SheetTrigger>
             <SheetContent
-                className='inset-x-auto right-20 w-[440px] rounded-b-3xl border border-t-0 border-accent bg-primary px-12'
+                className='inset-x-auto right-20 w-[440px] rounded-b-3xl border border-t-0 border-accent px-12'
                 side='top'>
                 {currentModal === 'login' ? (
                     <LoginForm setCurrentModal={setCurrentModal} />

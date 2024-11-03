@@ -45,7 +45,10 @@ const CataloguePage = () => {
                     </div>
                 </div>
             </section>
-            <Catalogue className='mt-28' />
+            <Catalogue
+                className='mt-28'
+                activeTab='promo'
+            />
             <DiscountModal />
         </>
     )

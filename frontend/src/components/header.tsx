@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { AuthModal } from './auth/modal'
 import { CitySelect } from './city-select'
 import { CurrencySelect } from './currency-select'
+import { HeaderCatalogue } from './header-catalogue'
 import { LangSelect } from './lang-select'
 import { Logo } from './logo'
 import {
@@ -31,11 +32,6 @@ export const Header = () => {
                         </Link>
                     </li>
                     <li>
-                        {/* <Link
-                            className='block p-1 transition-colors hover:text-background'
-                            href='/account'>
-                            <UserRound className='size-6' />
-                        </Link> */}
                         {isAuth ? (
                             <Link
                                 className='block p-1 transition-colors hover:text-background'
@@ -71,16 +67,12 @@ const HeaderNav = () => {
         <nav>
             <ul className='flex items-center gap-x-4 font-medium'>
                 <li>
-                    <Link
-                        className='p-1 transition-colors hover:text-background'
-                        href='/catalogue'>
-                        Букети
-                    </Link>
+                    <HeaderCatalogue />
                 </li>
                 <li>
                     <Link
                         className='p-1 transition-colors hover:text-background'
-                        href='/'>
+                        href='/catalogue'>
                         Вазони
                     </Link>
                 </li>

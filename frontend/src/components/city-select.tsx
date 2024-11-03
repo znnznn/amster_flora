@@ -45,7 +45,7 @@ export const CitySelect = () => {
                 <ChevronDown className='size-4' />
             </SheetTrigger>
             <SheetContent
-                className='w-96 rounded-br-3xl border-r border-accent bg-primary text-accent'
+                className='w-96 rounded-br-3xl border-r border-accent text-accent'
                 side='top'>
                 {isCitySelectionMode && (
                     <button

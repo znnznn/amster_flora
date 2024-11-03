@@ -53,7 +53,10 @@ const CartPage = () => {
                     </Button>
                 </div>
             </section>
-            <Catalogue className='mt-28' />
+            <Catalogue
+                className='mt-28'
+                activeTab='similar'
+            />
         </>
     )
 }
