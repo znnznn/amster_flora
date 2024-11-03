@@ -34,7 +34,7 @@ jobs:
           full_text: |
             GOOGLE_AUTH_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
             FACEBOOK_APP_ID=${{ secrets.FACEBOOK_APP_ID }}
-          directory: ${{ github.workspace }}/fronted
+          directory: ${{ github.workspace }}/frontend
       - name: Build the Docker image
         run: docker logout && docker compose up --build -d
       - name: run Tests
