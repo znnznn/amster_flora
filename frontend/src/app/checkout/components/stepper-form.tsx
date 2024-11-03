@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { withMask } from 'use-mask-input'
 import { object, string, type infer as zodInfer } from 'zod'
 
 import { SocialsButtons } from '@/components/socials-buttons'
@@ -86,7 +87,8 @@ export const StepperForm = () => {
                                     name='phone'
                                     render={({ field }) => (
                                         <FormItem className='w-full'>
-                                            <FormControl>
+                                            <FormControl
+                                                ref={withMask('+380 99 999 99 99')}>
                                                 <Input
                                                     type='tel'
                                                     inputMode='tel'
@@ -147,10 +149,7 @@ export const StepperForm = () => {
                                     Продовжити
                                 </Button>
 
-                                <div className='flex flex-col items-center gap-y-2'>
-                                    <span>Увійти за допомогою</span>
-                                    <SocialsButtons />
-                                </div>
+                                <SocialsButtons />
                             </div>
                         </div>
                     ) : null}

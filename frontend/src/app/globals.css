@@ -71,7 +71,7 @@ body {
 
 @layer base {
     * {
-        @apply border-border;
+        @apply border-border underline-offset-4;
     }
     body {
         @apply bg-background text-foreground;

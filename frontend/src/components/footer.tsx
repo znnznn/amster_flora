@@ -87,7 +87,7 @@ export const Footer = () => {
                 <li>
                     <Link
                         className='transition-colors hover:text-background'
-                        href='/bouquets'>
+                        href='/catalogue'>
                         Букети
                     </Link>
                 </li>

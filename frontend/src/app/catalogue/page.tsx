@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 
 import { ActiveFilters } from './components/active-filters'
 import { FiltersSidebar } from './components/filters-sidebar'
+import { DiscountModal } from './components/modals/discount-modal'
 import { CataloguePagination } from './components/pagination'
 import { Products } from './components/products'
 import { Catalogue } from '@/components/catalogue'
@@ -45,6 +46,7 @@ const CataloguePage = () => {
                 </div>
             </section>
             <Catalogue className='mt-28' />
+            <DiscountModal />
         </>
     )
 }

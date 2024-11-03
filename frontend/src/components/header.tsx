@@ -1,6 +1,7 @@
 import { Heart, Search, ShoppingCart, UserRound } from 'lucide-react'
 import Link from 'next/link'
 
+import { AuthModal } from './auth/modal'
 import { CitySelect } from './city-select'
 import { CurrencySelect } from './currency-select'
 import { LangSelect } from './lang-select'
@@ -13,6 +14,8 @@ import {
 } from '@/components/ui/dropdown-menu'
 
 export const Header = () => {
+    const isAuth = false
+
     return (
         <header>
             <HeaderTop />
@@ -28,16 +31,25 @@ export const Header = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link
+                        {/* <Link
                             className='block p-1 transition-colors hover:text-background'
-                            href='/profile'>
+                            href='/account'>
                             <UserRound className='size-6' />
-                        </Link>
+                        </Link> */}
+                        {isAuth ? (
+                            <Link
+                                className='block p-1 transition-colors hover:text-background'
+                                href='/account'>
+                                <UserRound className='size-6' />
+                            </Link>
+                        ) : (
+                            <AuthModal />
+                        )}
                     </li>
                     <li>
                         <Link
                             className='block p-1 transition-colors hover:text-background'
-                            href='/favorites'>
+                            href='/account/favorite'>
                             <Heart className='size-6' />
                         </Link>
                     </li>
@@ -61,7 +73,7 @@ const HeaderNav = () => {
                 <li>
                     <Link
                         className='p-1 transition-colors hover:text-background'
-                        href='/bouquets'>
+                        href='/catalogue'>
                         Букети
                     </Link>
                 </li>
