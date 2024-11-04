@@ -1,5 +1,10 @@
+'use client'
+
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2 } from 'lucide-react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useMutation } from 'react-query'
 import { withMask } from 'use-mask-input'
 import { object, string, type infer as zodInfer } from 'zod'
 
@@ -7,6 +12,7 @@ import { SocialsButtons } from '../socials-buttons'
 import { SheetHeader, SheetTitle } from '../ui/sheet'
 
 import type { CurrentModal } from './modal'
+import { credintialsLogin } from '@/api/auth/auth'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -24,9 +30,12 @@ type LoginFormData = zodInfer<typeof loginSchema>
 
 interface LoginFormProps {
     setCurrentModal: React.Dispatch<React.SetStateAction<CurrentModal>>
+    setIsSheetOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const LoginForm = ({ setCurrentModal }: LoginFormProps) => {
+export const LoginForm = ({ setCurrentModal, setIsSheetOpen }: LoginFormProps) => {
+    const [errorMessage, setErrorMessage] = useState('')
+
     const form = useForm<LoginFormData>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
@@ -35,9 +44,21 @@ export const LoginForm = ({ setCurrentModal }: LoginFormProps) => {
         }
     })
 
+    const mutation = useMutation({
+        mutationFn: credintialsLogin,
+        onSuccess: () => {
+            form.reset()
+            setIsSheetOpen(false)
+        },
+        onError: (error: any) => {
+            setErrorMessage(error.message)
+        }
+    })
+
     const onSubmit = (data: LoginFormData) => {
-        console.log(data)
+        mutation.mutate(data)
     }
+
     return (
         <>
             <SheetHeader>
@@ -54,7 +75,10 @@ export const LoginForm = ({ setCurrentModal }: LoginFormProps) => {
                         name='phone'
                         render={({ field }) => (
                             <FormItem className='w-full'>
-                                <FormControl ref={withMask('+380 99 999 99 99')}>
+                                <FormControl
+                                    ref={withMask('+380 99 999 99 99', {
+                                        inputmode: 'tel'
+                                    })}>
                                     <Input
                                         type='tel'
                                         inputMode='tel'
@@ -96,8 +120,14 @@ export const LoginForm = ({ setCurrentModal }: LoginFormProps) => {
                         size='lg'
                         variant='secondary'
                         type='submit'>
-                        Увійти
+                        {mutation.isLoading ? <Loader2 /> : 'Увійти'}
                     </Button>
+
+                    {errorMessage ? (
+                        <div className='w-full rounded-md bg-destructive/15 p-2 text-center text-sm text-destructive'>
+                            {errorMessage}
+                        </div>
+                    ) : null}
 
                     <div className='mt-2'>
                         <div className='text-center text-sm text-background'>
@@ -111,7 +141,7 @@ export const LoginForm = ({ setCurrentModal }: LoginFormProps) => {
                             Створити акаунт
                         </Button>
                     </div>
-                    <SocialsButtons />
+                    <SocialsButtons setIsSheetOpen={setIsSheetOpen} />
                 </form>
             </Form>
         </>

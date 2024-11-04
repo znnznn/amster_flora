@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 
 export const Header = () => {
+    // const isAuth = !!cookies().get('access_token')?.value
     const isAuth = false
 
     return (

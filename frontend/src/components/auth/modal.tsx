@@ -31,7 +31,10 @@ export const AuthModal = () => {
                 className='inset-x-auto right-20 w-[440px] rounded-b-3xl border border-t-0 border-accent px-12'
                 side='top'>
                 {currentModal === 'login' ? (
-                    <LoginForm setCurrentModal={setCurrentModal} />
+                    <LoginForm
+                        setCurrentModal={setCurrentModal}
+                        setIsSheetOpen={setIsSheetOpen}
+                    />
                 ) : currentModal === 'password-reset' ? (
                     <PasswordResetForm setCurrentModal={setCurrentModal} />
                 ) : currentModal === 'phone-password-reset' ? (
