@@ -1,33 +1,29 @@
-import type { CredintialsLoginData, LoginResponse } from './auth.types'
+import { api } from '..'
+
+import type { CredintialsLoginData, LoginResponse, RegisterData } from './auth.types'
 
 export const googleAuth = async (token: string): Promise<LoginResponse> => {
-    const response = await fetch('https://api.amster.org.ua/auth/google/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            token
-        })
+    const response = await api.post('/auth/google/', {
+        token
     })
 
-    return response.json()
+    return response.data
 }
 
 export const credintialsLogin = async ({
     phone,
     password
 }: CredintialsLoginData): Promise<LoginResponse> => {
-    const response = await fetch('https://api.amster.org.ua/auth/token/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            phone,
-            password
-        })
+    const response = await api.post('/auth/token/', {
+        phone,
+        password
     })
 
-    return response.json()
+    return response.data
+}
+
+export const register = async (payload: RegisterData): Promise<LoginResponse> => {
+    const response = await api.post('/auth/register/', payload)
+
+    return response.data
 }

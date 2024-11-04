@@ -1,6 +1,7 @@
 'use client'
 
 import { GoogleLogin } from '@react-oauth/google'
+import { useRouter } from 'next/navigation'
 
 import { Button } from './ui/button'
 import { googleAuth } from '@/api/auth/auth'
@@ -24,6 +25,8 @@ const setUser = (user: User) => {
 }
 
 export const SocialsButtons = ({ className, setIsSheetOpen }: SocialsButtonsProps) => {
+    const router = useRouter()
+
     return (
         <div
             className={cn(
@@ -44,6 +47,7 @@ export const SocialsButtons = ({ className, setIsSheetOpen }: SocialsButtonsProp
                                 setRefreshToken(response.refresh)
                                 setUser(response.user)
                                 setIsSheetOpen?.(false)
+                                router.refresh()
                             }
                         )
                     }}

@@ -1,10 +1,10 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { date, object, string, type infer as zodInfer } from 'zod'
 
+import type { User } from '@/api/users/users.types'
 import { Button } from '@/components/ui/button'
 import { DatePicker } from '@/components/ui/date-picker'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
@@ -49,17 +49,24 @@ const profileSchema = object({
 type ContactsFormData = zodInfer<typeof profileSchema>
 
 export const ProfileForm = () => {
-    const [currentDate] = useState(new Date())
+    const currentUser = JSON.parse(
+        document.cookie
+            .split('; ')
+            .find((cookie) => cookie.startsWith('user='))
+            ?.split('=')[1] || ''
+    ) as User
+
+    // const [currentDate] = useState(new Date())
 
     const form = useForm<ContactsFormData>({
         resolver: zodResolver(profileSchema),
         defaultValues: {
-            first_name: 'Василь',
-            last_name: 'Васильович',
-            email: 'vasyl@gmail.com',
-            phone_number: '+380679999569',
+            first_name: currentUser.first_name,
+            last_name: currentUser.last_name,
+            email: currentUser.email,
+            phone_number: currentUser.phone_number,
             password: '',
-            date: currentDate
+            date: '' as any
         }
     })
 

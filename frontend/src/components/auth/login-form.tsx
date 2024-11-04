@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
@@ -35,6 +36,7 @@ interface LoginFormProps {
 
 export const LoginForm = ({ setCurrentModal, setIsSheetOpen }: LoginFormProps) => {
     const [errorMessage, setErrorMessage] = useState('')
+    const router = useRouter()
 
     const form = useForm<LoginFormData>({
         resolver: zodResolver(loginSchema),
@@ -49,6 +51,7 @@ export const LoginForm = ({ setCurrentModal, setIsSheetOpen }: LoginFormProps) =
         onSuccess: () => {
             form.reset()
             setIsSheetOpen(false)
+            router.refresh()
         },
         onError: (error: any) => {
             setErrorMessage(error.message)
