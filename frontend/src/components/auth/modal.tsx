@@ -38,9 +38,15 @@ export const AuthModal = () => {
                 ) : currentModal === 'password-reset' ? (
                     <PasswordResetForm setCurrentModal={setCurrentModal} />
                 ) : currentModal === 'phone-password-reset' ? (
-                    <PhonePasswordResetForm setCurrentModal={setCurrentModal} />
+                    <PhonePasswordResetForm
+                        setCurrentModal={setCurrentModal}
+                        setIsSheetOpen={setIsSheetOpen}
+                    />
                 ) : (
-                    <RegistrationForm setCurrentModal={setCurrentModal} />
+                    <RegistrationForm
+                        setCurrentModal={setCurrentModal}
+                        setSheetOpen={setIsSheetOpen}
+                    />
                 )}
             </SheetContent>
         </Sheet>

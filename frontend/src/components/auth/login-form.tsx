@@ -10,8 +10,10 @@ import { withMask } from 'use-mask-input'
 import { object, string, type infer as zodInfer } from 'zod'
 
 import { SocialsButtons } from '../socials-buttons'
+import { PasswordWithReveal } from '../ui/password-with-reveal'
 import { SheetHeader, SheetTitle } from '../ui/sheet'
 
+import { ErrorMessage } from './error-message'
 import type { CurrentModal } from './modal'
 import { credintialsLogin } from '@/api/auth/auth'
 import { Button } from '@/components/ui/button'
@@ -100,11 +102,7 @@ export const LoginForm = ({ setCurrentModal, setIsSheetOpen }: LoginFormProps) =
                         render={({ field }) => (
                             <FormItem className='w-full'>
                                 <FormControl>
-                                    <Input
-                                        type='password'
-                                        placeholder='Пароль'
-                                        {...field}
-                                    />
+                                    <PasswordWithReveal {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -126,11 +124,7 @@ export const LoginForm = ({ setCurrentModal, setIsSheetOpen }: LoginFormProps) =
                         {mutation.isLoading ? <Loader2 /> : 'Увійти'}
                     </Button>
 
-                    {errorMessage ? (
-                        <div className='w-full rounded-md bg-destructive/15 p-2 text-center text-sm text-destructive'>
-                            {errorMessage}
-                        </div>
-                    ) : null}
+                    <ErrorMessage message={errorMessage} />
 
                     <div className='mt-2'>
                         <div className='text-center text-sm text-background'>

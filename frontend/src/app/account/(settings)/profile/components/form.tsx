@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 import { DatePicker } from '@/components/ui/date-picker'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input, inputVariants } from '@/components/ui/input'
+import { PasswordWithReveal } from '@/components/ui/password-with-reveal'
 import { cn } from '@/lib/utils'
 
 const profileSchema = object({
@@ -160,11 +161,9 @@ export const ProfileForm = () => {
                         render={({ field }) => (
                             <FormItem>
                                 <FormControl>
-                                    <Input
-                                        variant='underline'
-                                        type='password'
-                                        placeholder='Пароль'
+                                    <PasswordWithReveal
                                         {...field}
+                                        variant='underline'
                                     />
                                 </FormControl>
 

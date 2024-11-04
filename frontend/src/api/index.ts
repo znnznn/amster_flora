@@ -4,6 +4,10 @@ export const api = axios.create({
     baseURL: 'https://api.amster.org.ua'
 })
 
+export const publicApi = axios.create({
+    baseURL: 'https://api.amster.org.ua'
+})
+
 api.interceptors.request.use(
     (request) => {
         if (true) {

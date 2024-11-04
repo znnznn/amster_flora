@@ -1,12 +1,18 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2 } from 'lucide-react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useMutation } from 'react-query'
 import { withMask } from 'use-mask-input'
 import { object, string, type infer as zodInfer } from 'zod'
 
 import { SocialsButtons } from '../socials-buttons'
+import { PasswordWithReveal } from '../ui/password-with-reveal'
 import { SheetHeader, SheetTitle } from '../ui/sheet'
 
+import { ErrorMessage } from './error-message'
 import type { CurrentModal } from './modal'
+import { register } from '@/api/auth/auth'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -15,7 +21,7 @@ const registrationSchema = object({
     password: string().min(1, {
         message: 'Це поле є обов’язковим'
     }),
-    phone: string().min(1, {
+    phone_number: string().min(1, {
         message: 'Це поле є обов’язковим'
     }),
     email: string()
@@ -25,7 +31,7 @@ const registrationSchema = object({
         .email({
             message: 'Це поле має відповідати формату email'
         }),
-    username: string().min(1, {
+    first_name: string().min(1, {
         message: 'Це поле є обов’язковим'
     })
 })
@@ -34,19 +40,40 @@ type RegistrationFormData = zodInfer<typeof registrationSchema>
 
 interface RegistrationFormProps {
     setCurrentModal: React.Dispatch<React.SetStateAction<CurrentModal>>
+    setSheetOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const RegistrationForm = ({ setCurrentModal }: RegistrationFormProps) => {
+export const RegistrationForm = ({
+    setCurrentModal,
+    setSheetOpen
+}: RegistrationFormProps) => {
+    const [errorMessage, setErrorMessage] = useState('')
+
     const form = useForm<RegistrationFormData>({
         resolver: zodResolver(registrationSchema),
         defaultValues: {
             password: '',
-            phone: ''
+            phone_number: ''
+        }
+    })
+
+    const mutation = useMutation({
+        mutationFn: register,
+        onSuccess: () => {
+            form.reset()
+            setSheetOpen(false)
+        },
+        onError: (error: any) => {
+            setErrorMessage(error.message)
         }
     })
 
     const onSubmit = (data: RegistrationFormData) => {
-        console.log(data)
+        mutation.mutate({
+            ...data,
+            role: 'client',
+            last_name: data.first_name
+        })
     }
     return (
         <>
@@ -61,7 +88,7 @@ export const RegistrationForm = ({ setCurrentModal }: RegistrationFormProps) => 
                     className='mt-4 flex flex-col items-center gap-y-4'>
                     <FormField
                         control={form.control}
-                        name='phone'
+                        name='phone_number'
                         render={({ field }) => (
                             <FormItem className='w-full'>
                                 <FormControl ref={withMask('+380 99 999 99 99')}>
@@ -79,7 +106,7 @@ export const RegistrationForm = ({ setCurrentModal }: RegistrationFormProps) => 
                     />
                     <FormField
                         control={form.control}
-                        name='username'
+                        name='first_name'
                         render={({ field }) => (
                             <FormItem className='w-full'>
                                 <FormControl>
@@ -92,22 +119,7 @@ export const RegistrationForm = ({ setCurrentModal }: RegistrationFormProps) => 
                             </FormItem>
                         )}
                     />
-                    <FormField
-                        control={form.control}
-                        name='password'
-                        render={({ field }) => (
-                            <FormItem className='w-full'>
-                                <FormControl>
-                                    <Input
-                                        type='password'
-                                        placeholder='Пароль'
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+
                     <FormField
                         control={form.control}
                         name='email'
@@ -125,14 +137,29 @@ export const RegistrationForm = ({ setCurrentModal }: RegistrationFormProps) => 
                             </FormItem>
                         )}
                     />
+                    <FormField
+                        control={form.control}
+                        name='password'
+                        render={({ field }) => (
+                            <FormItem className='w-full'>
+                                <FormControl>
+                                    <PasswordWithReveal {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
 
                     <Button
                         className='w-full'
                         size='lg'
                         variant='secondary'
                         type='submit'>
-                        Зареєструватися
+                        {mutation.isLoading ? <Loader2 /> : 'Зареєструватися'}
                     </Button>
+
+                    <ErrorMessage message={errorMessage} />
+
                     <SocialsButtons />
 
                     <div className='mt-2'>

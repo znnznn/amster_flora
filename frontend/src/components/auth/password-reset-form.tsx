@@ -1,11 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2 } from 'lucide-react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useMutation } from 'react-query'
 import { object, string, type infer as zodInfer } from 'zod'
 
 import { Button } from '../ui/button'
 import { SheetHeader, SheetTitle } from '../ui/sheet'
 
+import { ErrorMessage } from './error-message'
 import type { CurrentModal } from './modal'
+import { SuccessMessage } from './success-message'
+import { resetPassword } from '@/api/passwords/passwords'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
@@ -26,6 +32,9 @@ interface PasswordResetFormProps {
 }
 
 export const PasswordResetForm = ({ setCurrentModal }: PasswordResetFormProps) => {
+    const [errorMessage, setErrorMessage] = useState('')
+    const [successMessage, setSuccessMessage] = useState('')
+
     const form = useForm<PasswordResetFormData>({
         resolver: zodResolver(passwordResetSchema),
         defaultValues: {
@@ -33,8 +42,21 @@ export const PasswordResetForm = ({ setCurrentModal }: PasswordResetFormProps) =
         }
     })
 
+    const mutation = useMutation({
+        mutationFn: resetPassword,
+        onSuccess: () => {
+            form.reset()
+            setSuccessMessage('Ми надіслали посилання. Перевірте свою електронну пошту.')
+        },
+        onError: (error: any) => {
+            setErrorMessage(error.message)
+        }
+    })
+
     const onSubmit = (data: PasswordResetFormData) => {
-        console.log(data)
+        mutation.mutate(data.email)
+        setErrorMessage('')
+        setSuccessMessage('')
     }
 
     return (
@@ -72,8 +94,11 @@ export const PasswordResetForm = ({ setCurrentModal }: PasswordResetFormProps) =
                         size='lg'
                         variant='secondary'
                         type='submit'>
-                        Надіслати
+                        {mutation.isLoading ? <Loader2 /> : 'Надіслати'}
                     </Button>
+                    <ErrorMessage message={errorMessage} />
+                    <SuccessMessage message={successMessage} />
+
                     <Button
                         onClick={() => setCurrentModal('phone-password-reset')}
                         type='button'
