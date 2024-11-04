@@ -47,6 +47,7 @@ export const Hero = () => {
                     loop: true
                 }}
                 plugins={[
+                    // @ts-ignore
                     Autoplay({
                         delay: 10_000
                     })
@@ -62,7 +63,7 @@ export const Hero = () => {
                             <Button
                                 size='lg'
                                 className='mt-6 w-full'>
-                                <Link href='/'>Замовити</Link>
+                                <Link href='/catalogue'>Замовити</Link>
                             </Button>
                         </div>
                         <Image

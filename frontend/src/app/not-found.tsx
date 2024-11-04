@@ -15,9 +15,8 @@ const NotFound = () => {
                 <Link
                     className='text-primary'
                     href='/'>
-                    головну
-                </Link>{' '}
-                сторінку.
+                    головну сторінку.
+                </Link>
             </p>
         </section>
     )

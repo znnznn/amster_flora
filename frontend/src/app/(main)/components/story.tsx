@@ -2,6 +2,7 @@
 
 import { motion, useAnimation, useInView } from 'framer-motion'
 import { MoveUpRight } from 'lucide-react'
+import Link from 'next/link'
 import { useEffect, useRef } from 'react'
 
 import story from '@/assets/images/story.jpg'
@@ -44,11 +45,13 @@ export const Story = () => {
                     та підтримці, ми виросли в повноцінний магазин, де кожна квітка
                     обирається з турботою та увагою.
                 </p>
-                <Button
-                    variant='secondary'
-                    size='lg'>
-                    Про нас
-                </Button>
+                <Link href='/story'>
+                    <Button
+                        variant='secondary'
+                        size='lg'>
+                        Про нас
+                    </Button>
+                </Link>
             </div>
             <AboutUsButton />
         </section>
@@ -59,9 +62,11 @@ const AboutUsButton = () => {
     const text = 'про нас про нас про нас про нас'
 
     return (
-        <div className='absolute bottom-4 right-12 size-52 rounded-full transition-transform hover:rotate-45 hover:scale-90'>
+        <Link
+            href='/story'
+            className='absolute bottom-4 right-12 size-52 rounded-full transition-transform hover:rotate-45 hover:scale-90'>
             <svg
-                className='animate-spin-slow h-full w-full rounded-full'
+                className='h-full w-full animate-spin-slow rounded-full'
                 viewBox='0 0 100 100'>
                 <path
                     id='circlePath'
@@ -79,6 +84,6 @@ const AboutUsButton = () => {
             <div className='absolute inset-5 flex cursor-pointer items-center justify-center rounded-full'>
                 <MoveUpRight className='size-20 text-accent' />
             </div>
-        </div>
+        </Link>
     )
 }

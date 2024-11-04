@@ -23,7 +23,7 @@ export const AccountSidebar = () => {
                                 pathname === '/account/profile' ? 'text-primary' : ''
                             )}
                             variant='link'>
-                            <Link href={'/account/profile'}>
+                            <Link href='/account/profile'>
                                 <UserRound className='!size-5' />
                                 Персональні дані
                             </Link>

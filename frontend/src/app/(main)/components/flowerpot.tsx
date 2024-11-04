@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, useAnimation, useInView } from 'framer-motion'
+import Link from 'next/link'
 import { useEffect, useRef } from 'react'
 
 import flowerpot from '@/assets/images/flowerpot.png'
@@ -53,11 +54,13 @@ export const Flowerpots = () => {
                         приїжджають до вас з найкращих квіткових плантацій світу, щоб
                         стати частиною ваших особливих моментів.
                     </p>
-                    <Button
-                        size='lg'
-                        variant='secondary'>
-                        До каталогу
-                    </Button>
+                    <Link href='/catalogue'>
+                        <Button
+                            size='lg'
+                            variant='secondary'>
+                            До каталогу
+                        </Button>
+                    </Link>
                 </motion.div>
                 <motion.div
                     animate={controls}
