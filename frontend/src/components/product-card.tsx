@@ -70,7 +70,7 @@ export const ProductCard = () => {
                 </div>
 
                 <Button
-                    className='mx-auto mt-3 w-fit'
+                    className='mx-auto mt-3 w-fit border-b-[3px] border-r-[3px] border-primary'
                     size='lg'
                     variant='secondary'>
                     До кошика

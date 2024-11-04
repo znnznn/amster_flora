@@ -19,7 +19,10 @@ const MainPage = () => {
             <Hero />
             <Bouquets />
             <Flowerpots />
-            <Catalogue className='mt-72' />
+            <Catalogue
+                className='mt-72'
+                activeTab='promo'
+            />
             <Advantages />
             <Story />
             <Flowers />

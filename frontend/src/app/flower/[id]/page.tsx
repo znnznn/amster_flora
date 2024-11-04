@@ -50,7 +50,10 @@ const FlowerPage = ({ params }: FlowerProps) => {
 
             <Advantages />
 
-            <Catalogue className='mt-28' />
+            <Catalogue
+                className='mt-28'
+                activeTab='similar'
+            />
         </>
     )
 }

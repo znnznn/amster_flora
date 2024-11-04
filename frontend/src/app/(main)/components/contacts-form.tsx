@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { withMask } from 'use-mask-input'
 import { string, z } from 'zod'
 
 import { Button } from '@/components/ui/button'
@@ -58,11 +59,11 @@ export const ContactsForm = () => {
                     name='phone'
                     render={({ field }) => (
                         <FormItem>
-                            <FormControl>
+                            <FormControl ref={withMask('+380 99 999 99 99')}>
                                 <Input
                                     type='tel'
                                     inputMode='tel'
-                                    placeholder='096 222 4444'
+                                    placeholder='+380 068 777 88 93'
                                     {...field}
                                 />
                             </FormControl>

@@ -43,14 +43,15 @@ export const Footer = () => {
                 <li>
                     <Link
                         className='transition-colors hover:text-background'
-                        href='/'>
+                        href='/story'>
                         Про нас
                     </Link>
                 </li>
                 <li>
                     <Link
+                        scroll
                         className='transition-colors hover:text-background'
-                        href='/'>
+                        href='#contacts'>
                         Контакти
                     </Link>
                 </li>
@@ -87,7 +88,7 @@ export const Footer = () => {
                 <li>
                     <Link
                         className='transition-colors hover:text-background'
-                        href='/bouquets'>
+                        href='/catalogue'>
                         Букети
                     </Link>
                 </li>

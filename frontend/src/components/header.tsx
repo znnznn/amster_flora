@@ -1,6 +1,12 @@
 import { Heart, Search, ShoppingCart, UserRound } from 'lucide-react'
+import { cookies } from 'next/headers'
 import Link from 'next/link'
 
+import { AuthModal } from './auth/modal'
+import { CitySelect } from './city-select'
+import { CurrencySelect } from './currency-select'
+import { HeaderCatalogue } from './header-catalogue'
+import { LangSelect } from './lang-select'
 import { Logo } from './logo'
 import {
     DropdownMenu,
@@ -10,44 +16,53 @@ import {
 } from '@/components/ui/dropdown-menu'
 
 export const Header = () => {
+    const isAuth = !!cookies().get('access_token')?.value
+
     return (
-        <header>
-            {/* <HeaderTop /> */}
-            <div className='grid h-20 grid-cols-3 grid-rows-1 items-center gap-x-8 bg-primary px-20 text-accent'>
-                <HeaderNav />
-                <Logo className='mx-auto' />
-                <ul className='flex items-center justify-end gap-x-4 text-accent'>
-                    <li>
-                        <Link
-                            className='block p-1 transition-colors hover:text-background'
-                            href='/search'>
-                            <Search className='size-6' />
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            className='block p-1 transition-colors hover:text-background'
-                            href='/profile'>
-                            <UserRound className='size-6' />
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            className='block p-1 transition-colors hover:text-background'
-                            href='/favorites'>
-                            <Heart className='size-6' />
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            className='block p-1 transition-colors hover:text-background'
-                            href='/cart'>
-                            <ShoppingCart className='size-6' />
-                        </Link>
-                    </li>
-                </ul>
-            </div>
-        </header>
+        <>
+            <HeaderTop />
+
+            <header className='sticky top-0 z-50 border-b border-b-accent'>
+                <div className='grid h-20 grid-cols-3 grid-rows-1 items-center gap-x-8 bg-primary px-20 text-accent'>
+                    <HeaderNav />
+                    <Logo className='mx-auto' />
+                    <ul className='flex items-center justify-end gap-x-4 text-accent'>
+                        <li>
+                            <Link
+                                className='block p-1 transition-colors hover:text-background'
+                                href='/search'>
+                                <Search className='size-6' />
+                            </Link>
+                        </li>
+                        <li>
+                            {isAuth ? (
+                                <Link
+                                    className='block p-1 transition-colors hover:text-background'
+                                    href='/account'>
+                                    <UserRound className='size-6' />
+                                </Link>
+                            ) : (
+                                <AuthModal />
+                            )}
+                        </li>
+                        <li>
+                            <Link
+                                className='block p-1 transition-colors hover:text-background'
+                                href='/account/favorite'>
+                                <Heart className='size-6' />
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                className='block p-1 transition-colors hover:text-background'
+                                href='/cart'>
+                                <ShoppingCart className='size-6' />
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+        </>
     )
 }
 
@@ -56,16 +71,12 @@ const HeaderNav = () => {
         <nav>
             <ul className='flex items-center gap-x-4 font-medium'>
                 <li>
-                    <Link
-                        className='p-1 transition-colors hover:text-background'
-                        href='/bouquets'>
-                        Букети
-                    </Link>
+                    <HeaderCatalogue />
                 </li>
                 <li>
                     <Link
                         className='p-1 transition-colors hover:text-background'
-                        href='/'>
+                        href='/catalogue'>
                         Вазони
                     </Link>
                 </li>
@@ -117,19 +128,19 @@ const ClientMenuItem = () => {
     )
 }
 
-// const HeaderTop = () => {
-//     return (
-//         <div className='grid h-8 grid-cols-3 grid-rows-1 items-center gap-x-8 bg-accent px-20 py-1.5 text-primary'>
-//             <CitySelect />
-//             <Link
-//                 className='mx-auto w-fit font-medium text-primary transition-colors hover:text-background'
-//                 href='tel:+3800687778893'>
-//                 +380 068 777 88 93
-//             </Link>
-//             <div className='flex items-center justify-end gap-x-4'>
-//                 <LangSelect />
-//                 <CurrencySelect />
-//             </div>
-//         </div>
-//     )
-// }
+const HeaderTop = () => {
+    return (
+        <div className='grid h-8 grid-cols-3 grid-rows-1 items-center gap-x-8 bg-accent px-20 py-1.5 text-primary'>
+            <CitySelect />
+            <Link
+                className='mx-auto w-fit font-medium text-primary transition-colors hover:text-background'
+                href='tel:+3800687778893'>
+                +380 068 777 88 93
+            </Link>
+            <div className='flex items-center justify-end gap-x-4'>
+                <LangSelect />
+                <CurrencySelect />
+            </div>
+        </div>
+    )
+}

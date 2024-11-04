@@ -71,9 +71,24 @@ body {
 
 @layer base {
     * {
-        @apply border-border;
+        @apply border-border underline-offset-4;
     }
+
+    html {
+        @apply scroll-smooth;
+    }
+
+    section {
+        @apply scroll-mt-24;
+    }
+
     body {
         @apply bg-background text-foreground;
+    }
+
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
     }
 }

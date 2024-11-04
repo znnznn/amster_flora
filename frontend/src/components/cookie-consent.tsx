@@ -19,12 +19,10 @@ export const CookieConsent = () => {
             open={isSheetOpen}
             onOpenChange={setIsSheetOpen}>
             <SheetContent
-                className='inset-x-auto right-0 w-[560px] rounded-tl-3xl border-none bg-primary text-accent'
+                className='inset-x-auto right-0 w-[560px] rounded-tl-3xl border-none text-accent'
                 side='bottom'>
                 <SheetHeader>
-                    <SheetTitle className='text-background'>
-                        Використання файлів cookie
-                    </SheetTitle>
+                    <SheetTitle>Використання файлів cookie</SheetTitle>
                     <SheetDescription className='text-background'>
                         Цей сайт використовує файли cookie для покращення роботи.
                         Продовжуючи користуватися сайтом, ви погоджуєтеся з використанням

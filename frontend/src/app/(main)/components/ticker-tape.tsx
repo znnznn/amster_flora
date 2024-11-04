@@ -13,7 +13,7 @@ export const TickerTape = () => {
                     ))}
             </div>
 
-            <div className='animate-marquee2 absolute top-0 whitespace-nowrap py-2'>
+            <div className='absolute top-0 animate-marquee2 whitespace-nowrap py-2'>
                 {Array(10)
                     .fill(0)
                     .map((_, index) => (
