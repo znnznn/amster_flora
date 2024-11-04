@@ -5,9 +5,8 @@ import { useQueryState } from 'nuqs'
 import { Checkbox } from '@/components/ui/checkbox'
 
 const availabilityOptions = [
-    { id: 'in-stock', label: 'In Stock' },
-    { id: 'out-of-stock', label: 'Out of Stock' },
-    { id: 'pre-order', label: 'Pre Order' }
+    { id: 'in-stock', label: 'В наявності' },
+    { id: 'out-of-stock', label: 'Не в наявності' }
 ]
 
 export const AvailabilityFilter = () => {

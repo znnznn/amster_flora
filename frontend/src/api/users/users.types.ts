@@ -10,7 +10,7 @@ export interface User {
     phone_number: any
     role: UserRoles
     is_active: boolean
-    last_login: any
+    last_login: string | null
 }
 
 export type UserResponse = Response<User>

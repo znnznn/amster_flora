@@ -73,6 +73,15 @@ body {
     * {
         @apply border-border underline-offset-4;
     }
+
+    html {
+        @apply scroll-smooth;
+    }
+
+    section {
+        @apply scroll-mt-24;
+    }
+
     body {
         @apply bg-background text-foreground;
     }

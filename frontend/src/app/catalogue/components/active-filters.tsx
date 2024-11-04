@@ -6,6 +6,30 @@ import { useQueryState } from 'nuqs'
 import { SortingFilter } from './filters/sorting'
 import { Button } from '@/components/ui/button'
 
+// Define mapping objects to convert values to labels
+const colorLabels = {
+    red: 'Червоний',
+    yellow: 'Жовтий',
+    white: 'Білий'
+} as const
+
+const flowerLabels = {
+    rose: 'Троянда',
+    tulip: 'Тюльпан',
+    lilly: 'Лілія'
+} as const
+
+const availabilityLabels = {
+    'in-stock': 'В наявності',
+    'out-of-stock': 'Не в наявності'
+} as const
+
+const sizeLabels = {
+    small: 'S',
+    medium: 'M',
+    large: 'L'
+} as const
+
 export const ActiveFilters = () => {
     const [color, setColor] = useQueryState('color', { defaultValue: '' })
     const [flower, setFlower] = useQueryState('flower', { defaultValue: '' })
@@ -22,14 +46,30 @@ export const ActiveFilters = () => {
     }
 
     const activeFilters = [
-        { label: 'Колір', values: color.split(','), setFilter: setColor },
-        { label: 'Квітка', values: flower.split(','), setFilter: setFlower },
+        {
+            label: 'Колір',
+            values: color.split(','),
+            setFilter: setColor,
+            labels: colorLabels
+        },
+        {
+            label: 'Квітка',
+            values: flower.split(','),
+            setFilter: setFlower,
+            labels: flowerLabels
+        },
         {
             label: 'Наявність',
             values: availability.split(','),
-            setFilter: setAvailability
+            setFilter: setAvailability,
+            labels: availabilityLabels
         },
-        { label: 'Розмір', values: size.split(','), setFilter: setSize }
+        {
+            label: 'Розмір',
+            values: size.split(','),
+            setFilter: setSize,
+            labels: sizeLabels as any
+        }
     ].filter((filter) => filter.values.some((value) => value))
 
     const isActiveFilters = activeFilters.some((filter) => filter.values.length)
@@ -47,7 +87,7 @@ export const ActiveFilters = () => {
                         Скинути фільтри
                     </Button>
                     <ul className='flex items-center gap-x-2'>
-                        {activeFilters.map(({ label, values, setFilter }) =>
+                        {activeFilters.map(({ label, values, setFilter, labels }) =>
                             values.map(
                                 (value, index) =>
                                     value && (
@@ -55,6 +95,7 @@ export const ActiveFilters = () => {
                                             <ActiveFilter
                                                 label={label}
                                                 value={value}
+                                                valueLabel={labels[value] || value}
                                                 setFilter={setFilter}
                                                 allValues={values}
                                             />
@@ -73,11 +114,13 @@ export const ActiveFilters = () => {
 const ActiveFilter = ({
     label,
     value,
+    valueLabel,
     allValues,
     setFilter
 }: {
     label: string
     value: string
+    valueLabel: string
     allValues: string[]
     setFilter: (value: string) => void
 }) => {
@@ -91,7 +134,7 @@ const ActiveFilter = ({
             onClick={removeFilter}
             className='flex cursor-pointer items-center gap-x-2 rounded-sm p-1.5 text-primary transition-colors hover:bg-accent/40'>
             <span className='text-sm underline underline-offset-2'>
-                {label}: {value}
+                {label}: {valueLabel}
             </span>
             <X className='h-4 w-4' />
         </button>

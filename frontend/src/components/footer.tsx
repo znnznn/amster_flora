@@ -49,8 +49,9 @@ export const Footer = () => {
                 </li>
                 <li>
                     <Link
+                        scroll
                         className='transition-colors hover:text-background'
-                        href='/contacts'>
+                        href='#contacts'>
                         Контакти
                     </Link>
                 </li>

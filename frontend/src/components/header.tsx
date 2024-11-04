@@ -19,47 +19,50 @@ export const Header = () => {
     const isAuth = !!cookies().get('access_token')?.value
 
     return (
-        <header>
+        <>
             <HeaderTop />
-            <div className='grid h-20 grid-cols-3 grid-rows-1 items-center gap-x-8 bg-primary px-20 text-accent'>
-                <HeaderNav />
-                <Logo className='mx-auto' />
-                <ul className='flex items-center justify-end gap-x-4 text-accent'>
-                    <li>
-                        <Link
-                            className='block p-1 transition-colors hover:text-background'
-                            href='/search'>
-                            <Search className='size-6' />
-                        </Link>
-                    </li>
-                    <li>
-                        {isAuth ? (
+
+            <header className='sticky top-0 z-50 border-b border-b-accent'>
+                <div className='grid h-20 grid-cols-3 grid-rows-1 items-center gap-x-8 bg-primary px-20 text-accent'>
+                    <HeaderNav />
+                    <Logo className='mx-auto' />
+                    <ul className='flex items-center justify-end gap-x-4 text-accent'>
+                        <li>
                             <Link
                                 className='block p-1 transition-colors hover:text-background'
-                                href='/account'>
-                                <UserRound className='size-6' />
+                                href='/search'>
+                                <Search className='size-6' />
                             </Link>
-                        ) : (
-                            <AuthModal />
-                        )}
-                    </li>
-                    <li>
-                        <Link
-                            className='block p-1 transition-colors hover:text-background'
-                            href='/account/favorite'>
-                            <Heart className='size-6' />
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            className='block p-1 transition-colors hover:text-background'
-                            href='/cart'>
-                            <ShoppingCart className='size-6' />
-                        </Link>
-                    </li>
-                </ul>
-            </div>
-        </header>
+                        </li>
+                        <li>
+                            {isAuth ? (
+                                <Link
+                                    className='block p-1 transition-colors hover:text-background'
+                                    href='/account'>
+                                    <UserRound className='size-6' />
+                                </Link>
+                            ) : (
+                                <AuthModal />
+                            )}
+                        </li>
+                        <li>
+                            <Link
+                                className='block p-1 transition-colors hover:text-background'
+                                href='/account/favorite'>
+                                <Heart className='size-6' />
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                className='block p-1 transition-colors hover:text-background'
+                                href='/cart'>
+                                <ShoppingCart className='size-6' />
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+        </>
     )
 }
 
