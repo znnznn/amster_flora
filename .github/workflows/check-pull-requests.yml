@@ -32,7 +32,7 @@ jobs:
         uses: DeveloperRic/action-create-env@v1.0.2
         with:
           full_text: |
-            GOOGLE_AUTH_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
+            GOOGLE_AUTH_CLIENT_ID=${{ secrets.GOOGLE_AUTH_CLIENT_SECRET }}
             FACEBOOK_APP_ID=${{ secrets.FACEBOOK_APP_ID }}
           directory: ${{ github.workspace }}/frontend
       - name: Build the Docker image
