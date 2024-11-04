@@ -1,4 +1,5 @@
 import { Heart, Search, ShoppingCart, UserRound } from 'lucide-react'
+import { cookies } from 'next/headers'
 import Link from 'next/link'
 
 import { AuthModal } from './auth/modal'
@@ -15,8 +16,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 
 export const Header = () => {
-    // const isAuth = !!cookies().get('access_token')?.value
-    const isAuth = false
+    const isAuth = !!cookies().get('access_token')?.value
 
     return (
         <header>

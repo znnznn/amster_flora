@@ -1,3 +1,5 @@
+import type { Response } from '../index.types'
+
 export type UserRoles = 'client' | 'admin'
 
 export interface User {
@@ -10,3 +12,5 @@ export interface User {
     is_active: boolean
     last_login: any
 }
+
+export type UserResponse = Response<User>
