@@ -22,7 +22,7 @@ export const Catalogue = ({ className, activeTab }: CatalogueProps) => {
     return (
         <section
             className={cn(
-                'overflow-hidden px-20 max-md:mt-16 max-md:px-16 max-sm:mt-10 max-sm:px-6',
+                'overflow-hidden px-20 max-md:mt-16 max-md:px-16 max-sm:mt-10 max-sm:px-4',
                 className
             )}>
             <h2 className='sr-only text-left text-[28px] font-bold'>Каталог квітів</h2>

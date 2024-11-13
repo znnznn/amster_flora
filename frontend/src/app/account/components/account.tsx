@@ -7,13 +7,15 @@ export const Account = () => {
             <li>
                 <Link
                     href='/account/profile'
-                    className='group flex h-full flex-col gap-y-5 rounded-[22px] border p-6 transition-colors hover:border-accent'>
-                    <h3 className='flex items-center gap-x-4 text-lg font-medium'>
+                    className='group flex h-full flex-col gap-y-5 rounded-[22px] border p-6 transition-colors hover:border-accent max-md:p-5'>
+                    <h3 className='flex items-center gap-x-4 text-lg font-medium max-md:text-sm'>
                         <UserRound className='size-6' />
                         Персональні дані
                     </h3>
-                    <p className='text-primary/80'>Налаштування особистої інформації</p>
-                    <button className='ml-auto flex items-center justify-end transition-colors group-hover:text-accent'>
+                    <p className='text-primary/80 max-md:text-sm'>
+                        Налаштування особистої інформації
+                    </p>
+                    <button className='flex items-center justify-end transition-colors group-hover:text-accent max-md:text-sm'>
                         Перейти
                         <ArrowRight className='ml-2 size-4 transition-transform group-hover:translate-x-1' />
                     </button>
@@ -23,14 +25,14 @@ export const Account = () => {
                 <Link
                     href='/account/favorite'
                     className='group flex h-full flex-col gap-y-5 rounded-[22px] border p-6 transition-colors hover:border-accent'>
-                    <h3 className='flex items-center gap-x-4 text-lg font-medium'>
+                    <h3 className='flex items-center gap-x-4 text-lg font-medium max-md:text-sm'>
                         <Heart className='size-6' />
                         Збережене
                     </h3>
-                    <p className='text-primary/80'>
+                    <p className='text-primary/80 max-md:text-sm'>
                         Переглядайте всі товари, які ви додали до вподобань.
                     </p>
-                    <button className='ml-auto flex items-center justify-end transition-colors group-hover:text-accent'>
+                    <button className='flex items-center justify-end transition-colors group-hover:text-accent max-md:text-sm'>
                         Перейти
                         <ArrowRight className='ml-2 size-4 transition-transform group-hover:translate-x-1' />
                     </button>
@@ -40,14 +42,14 @@ export const Account = () => {
                 <Link
                     href='/account/orders'
                     className='group flex h-full flex-col gap-y-5 rounded-[22px] border p-6 transition-colors hover:border-accent'>
-                    <h3 className='flex items-center gap-x-4 text-lg font-medium'>
+                    <h3 className='flex items-center gap-x-4 text-lg font-medium max-md:text-sm'>
                         <ShoppingBag className='size-6' />
                         Мої замовлення
                     </h3>
-                    <p className='text-primary/80'>
+                    <p className='text-primary/80 max-md:text-sm'>
                         Переглядайте історію покупок, відслідковуйте статус замовлення
                     </p>
-                    <button className='ml-auto flex items-center justify-end transition-colors group-hover:text-accent'>
+                    <button className='flex items-center justify-end transition-colors group-hover:text-accent max-md:text-sm'>
                         Перейти
                         <ArrowRight className='ml-2 size-4 transition-transform group-hover:translate-x-1' />
                     </button>
@@ -57,14 +59,14 @@ export const Account = () => {
                 <Link
                     href='/account/watched'
                     className='group flex h-full flex-col gap-y-5 rounded-[22px] border p-6 transition-colors hover:border-accent'>
-                    <h3 className='flex items-center gap-x-4 text-lg font-medium'>
+                    <h3 className='flex items-center gap-x-4 text-lg font-medium max-md:text-sm'>
                         <Eye className='size-6' />
                         Переглянуті
                     </h3>
-                    <p className='text-primary/80'>
+                    <p className='text-primary/80 max-md:text-sm'>
                         Переглядайте всі товари, які ви додали до вподобань.
                     </p>
-                    <button className='ml-auto flex items-center justify-end transition-colors group-hover:text-accent'>
+                    <button className='flex items-center justify-end transition-colors group-hover:text-accent max-md:text-sm'>
                         Перейти
                         <ArrowRight className='ml-2 size-4 transition-transform group-hover:translate-x-1' />
                     </button>

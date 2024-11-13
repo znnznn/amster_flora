@@ -15,7 +15,7 @@ import { Button } from '@/components/ui/button'
 const CartPage = () => {
     return (
         <>
-            <section className='mt-12 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-6'>
+            <section className='mt-12 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-4'>
                 <Breadcrumb>
                     <BreadcrumbList className='max-sm:justify-center'>
                         <BreadcrumbItem>

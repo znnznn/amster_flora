@@ -5,7 +5,7 @@ import { Logo } from './logo'
 
 export const Footer = () => {
     return (
-        <footer className='mt-28 grid grid-cols-4 gap-8 bg-primary px-20 pb-5 pt-10 text-accent max-lg:grid-cols-3 max-md:grid-cols-2 max-md:px-10 max-sm:grid-cols-1'>
+        <footer className='mt-28 grid grid-cols-4 gap-8 bg-primary px-20 pb-5 pt-10 text-accent max-lg:grid-cols-3 max-md:mt-16 max-md:grid-cols-2 max-md:px-10 max-sm:grid-cols-1'>
             <div>
                 <Logo />
                 <ul className='mt-7 flex flex-col gap-y-4 text-accent'>

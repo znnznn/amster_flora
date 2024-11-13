@@ -13,8 +13,8 @@ import {
 const PaymentAndDeliveryPage = () => {
     return (
         <>
-            <section className='mt-12 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-6'>
-                <Breadcrumb className='px-20 max-md:px-16 max-sm:px-6'>
+            <section className='mt-12 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-4'>
+                <Breadcrumb className='px-20 max-md:px-16 max-sm:px-4'>
                     <BreadcrumbList className='max-sm:justify-center'>
                         <BreadcrumbItem>
                             <BreadcrumbLink href='/'>Головна</BreadcrumbLink>
@@ -33,7 +33,7 @@ const PaymentAndDeliveryPage = () => {
             <SelfDelivery />
 
             <Courier />
-            <section className='mt-16 space-y-4 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-6'>
+            <section className='mt-16 space-y-4 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-4'>
                 <h2 className='sr-only text-[28px] font-semibold'>Деталі замовлення</h2>
                 <p>
                     Шановні клієнти, під час здійснення замовлення з кур'єрською доставкою

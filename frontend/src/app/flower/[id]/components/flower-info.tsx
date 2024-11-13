@@ -4,7 +4,7 @@ export const FlowerInfo = () => {
     return (
         <Tabs
             defaultValue='composition'
-            className='mt-12 h-40 px-20 max-md:px-16 max-sm:px-6'>
+            className='mt-12 h-40 px-20 max-md:px-16 max-sm:px-4'>
             <TabsList className='bg-transparent'>
                 <TabsTrigger
                     className='rounded-none border-b bg-transparent px-8 text-lg !shadow-none data-[state=active]:border-b-primary'
@@ -27,7 +27,7 @@ export const FlowerInfo = () => {
                 value='composition'>
                 <p>
                     <span className='font-medium'>Квіти:</span>гортензія, троянда,
-                    орнітогалум, еустома, клематис, астранція 
+                    орнітогалум, еустома, клематис, астранція
                 </p>
                 <p>
                     <span className='font-medium'>Декоративні матеріали: </span>

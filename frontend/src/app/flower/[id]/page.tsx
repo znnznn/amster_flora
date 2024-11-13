@@ -26,7 +26,7 @@ const FlowerPage = ({ params }: FlowerProps) => {
     return (
         <>
             <section className='mt-12 max-sm:mt-8'>
-                <Breadcrumb className='px-20 max-md:px-16 max-sm:px-6'>
+                <Breadcrumb className='px-20 max-md:px-16 max-sm:px-4'>
                     <BreadcrumbList className='max-sm:justify-center'>
                         <BreadcrumbItem>
                             <BreadcrumbLink href='/'>Головна</BreadcrumbLink>
