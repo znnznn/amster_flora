@@ -112,7 +112,7 @@ export const DiscountModal = () => {
                     </Link>
                 </p>
 
-                <SocialsButtons className='mt-6' />
+                <SocialsButtons className='mt-6 text-background' />
             </DialogContent>
         </Dialog>
     )

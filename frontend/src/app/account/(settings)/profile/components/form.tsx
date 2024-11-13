@@ -57,8 +57,6 @@ export const ProfileForm = () => {
             ?.split('=')[1] || ''
     ) as User
 
-    // const [currentDate] = useState(new Date())
-
     const form = useForm<ContactsFormData>({
         resolver: zodResolver(profileSchema),
         defaultValues: {

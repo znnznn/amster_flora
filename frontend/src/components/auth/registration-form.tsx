@@ -160,7 +160,7 @@ export const RegistrationForm = ({
 
                     <ErrorMessage message={errorMessage} />
 
-                    <SocialsButtons />
+                    <SocialsButtons className='text-background' />
 
                     <div className='mt-2'>
                         <div className='text-center text-sm text-background'>

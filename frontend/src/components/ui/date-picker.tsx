@@ -43,6 +43,7 @@ export const DatePicker = ({
             <PopoverContent className='w-auto p-0'>
                 <Calendar
                     mode='single'
+                    locale={uk}
                     selected={date}
                     onSelect={setDate}
                     initialFocus

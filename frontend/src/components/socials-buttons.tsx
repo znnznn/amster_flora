@@ -33,7 +33,7 @@ export const SocialsButtons = ({ className, setIsSheetOpen }: SocialsButtonsProp
                 className,
                 'flex flex-col items-center justify-center gap-y-1'
             )}>
-            <span className='text-sm text-background'>Увійти за допомогою</span>
+            <span className='text-sm'>Увійти за допомогою</span>
 
             <div className='flex items-center gap-x-4'>
                 <GoogleLogin

@@ -138,7 +138,10 @@ export const LoginForm = ({ setCurrentModal, setIsSheetOpen }: LoginFormProps) =
                             Створити акаунт
                         </Button>
                     </div>
-                    <SocialsButtons setIsSheetOpen={setIsSheetOpen} />
+                    <SocialsButtons
+                        className='text-background'
+                        setIsSheetOpen={setIsSheetOpen}
+                    />
                 </form>
             </Form>
         </>
