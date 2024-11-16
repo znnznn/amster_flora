@@ -1,0 +1,70 @@
+from django.db import models
+from mptt.fields import TreeForeignKey
+from mptt.models import MPTTModel
+
+from common.constants import PHONE_REGEX
+from users.models import User
+
+
+class Category(MPTTModel):
+    name = models.CharField(max_length=255, unique=True)
+    origin_id = models.CharField(max_length=55, null=True, blank=True, unique=True)
+    parent = TreeForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='children')
+
+    class MPTTMeta:
+        order_insertion_by = ['name']
+
+    def __str__(self):
+        return self.name
+
+class Shop(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    city = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    phone_number = models.CharField(max_length=17, unique=True, null=True, blank=True, validators=[PHONE_REGEX])
+    email = models.EmailField(unique=True)
+
+    def __str__(self):
+        return self.name
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    sku = models.CharField(max_length=255, unique=True)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.PositiveIntegerField(default=0)
+    quantity_sold = models.PositiveIntegerField(default=0)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    is_visible = models.BooleanField(default=True)
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='products')
+
+
+class Image(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='images/')
+
+    def delete(self, using=None, keep_parents=False):
+        super().delete(using, keep_parents)
+        if self.image:
+            self.image.storage.delete(str(self.image.name))
+
+    def save(self, *args, force_insert=False, force_update=False, using=None, update_fields=None):
+        if self.pk:
+            old_instance = Image.objects.values('image').get(pk=self.pk)
+            if old_instance.get('image') and old_instance.get('image') != self.image:
+                self.image.storage.delete(str(old_instance.get('image')))
+        super().save(force_insert, force_update, using, update_fields)
+
+
+class WishList(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='wish_list')
+    creator = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['product', 'creator'], name='wish_list_constraint',
+                violation_error_message='This product is already in this storage')
+        ]
+

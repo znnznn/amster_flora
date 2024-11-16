@@ -1,0 +1,100 @@
+from django.db.models import ProtectedError, Prefetch
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import status
+from rest_framework.decorators import action
+from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.generics import get_object_or_404
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
+
+from amster_flora.doc_api import ShopsDocAPIView, CategoriesDocAPIView, WishListDocAPIView
+from common.constants import Role
+from common.mixins import ListWithOutPaginationMixin
+from products.filters import CategoryFilter, WishListFilter, WishListOrderingFilter
+from products.models import Shop, Category, Product, WishList
+from products.serializers import (
+    ShopSerializer, CategorySerializer, CategoryTreeSerializer, CategoryRetrieveSerializer, WishListCreateSerializer
+)
+from users.permissions import IsAuthenticatedAs, IsSafeMethod
+
+
+class ShopsViewSet(ModelViewSet):
+    swagger_schema = ShopsDocAPIView
+    serializer_class = ShopSerializer
+    permission_classes = (IsAuthenticatedAs(Role.ADMIN, ),)
+    queryset = Shop.objects.all()
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    ordering_fields = ("city", "name")
+    search_fields = ("name", "city")
+    filterset_fields = ("name", "city")
+
+
+class CategoriesViewSet(ModelViewSet, ListWithOutPaginationMixin):
+    swagger_schema = CategoriesDocAPIView
+    serializer_class = CategorySerializer
+    permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER, ) | IsSafeMethod,)
+    queryset = Category.objects.all().prefetch_related("children")
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_class = CategoryFilter
+    ordering_fields = ("name",)
+    search_fields = ("name",)
+
+    def get_serializer_class(self):
+        if self.action in ('list', 'node_children', 'list_without_pagination'):
+            return CategoryTreeSerializer
+        if self.action == 'retrieve':
+            return CategoryRetrieveSerializer
+        return CategorySerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.action == 'root_nodes':
+            queryset = queryset.filter(parent=None)
+        return queryset
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance.parent:
+            parent_category = Category.objects.filter(id=instance.parent_id).first()
+            products = Product.objects.filter(category=instance)
+            for product in products:
+                product.category = parent_category
+            Product.objects.bulk_update(products, ['category'])
+        try:
+            self.perform_destroy(instance)
+        except ProtectedError as exp:
+            return Response(status=status.HTTP_423_LOCKED, data={'detail': "Заборонено видаляти категорію з товарами."})
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @action(detail=False, methods=['get'], url_path='root-nodes')
+    def root_nodes(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    @action(detail=True, methods=['get'], url_path='children')
+    def node_children(self, request, *args, **kwargs):
+        instance = self.get_object()
+        queryset = instance.get_descendants(include_self=False)
+        return Response(self.get_serializer(queryset, many=True).data)
+
+
+class WishListViewSet(ModelViewSet):
+    swagger_schema = WishListDocAPIView
+    serializer_class = WishListCreateSerializer
+    permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER, Role.CLIENT),)
+    queryset = WishList.objects.select_related("product", "creator").prefetch_related("product__images")
+    filter_backends = [DjangoFilterBackend, SearchFilter, WishListOrderingFilter]
+    filterset_class = WishListFilter
+    ordering_fields = ("name", "category")
+    search_fields = ("product__name",)
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.request.user.role == Role.CLIENT:
+            return queryset.filter(creator=self.request.user)
+        return queryset
+
+    @action(detail=True, methods=['delete'], url_path='delete')
+    def delete_by_shop_product(self, request, *args, **kwargs):
+        wish_product = get_object_or_404(self.get_queryset().filter(product_id=kwargs['pk']), creator=request.user)
+        wish_product.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

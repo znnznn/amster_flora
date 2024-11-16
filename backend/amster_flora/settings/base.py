@@ -36,6 +36,7 @@ INSTALLED_APPS = [
 
     # own apps
     'users',
+    'products',
 ]
 
 AUTH_USER_MODEL = "users.User"

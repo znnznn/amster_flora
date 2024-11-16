@@ -137,3 +137,157 @@ class ContactUsDocAPIView(SwaggerAutoSchema):
                         .
                         """
         return operation
+
+
+class ShopsDocAPIView(SwaggerAutoSchema):
+    def get_operation(self, operation_keys=None):
+        operation = super().get_operation(operation_keys)
+        if operation['operationId'] == 'shops_list':
+            operation['summary'] = 'Get list of shops'
+            operation['description'] = """
+                                                      Allowed only admin
+                        .                                            
+                        """
+        elif operation['operationId'] == 'shops_create':
+            operation['summary'] = 'Create a new shop'
+            operation['description'] = """
+                                                      Allowed only admin
+                        .                                            
+                        """
+        elif operation['operationId'] == 'shops_read':
+            operation['summary'] = 'Get shop by id'
+            operation['description'] = """
+                                                      Allowed only admin
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        elif operation['operationId'] == 'shops_delete':
+            operation['summary'] = 'Delete shop by id'
+            operation['description'] = """
+                                                      Allowed only admin
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        else:
+            operation['summary'] = 'Update shop by id'
+            operation['description'] = """
+                                                      Allowed only admin
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        return operation
+
+
+class CategoriesDocAPIView(SwaggerAutoSchema):
+    def get_operation(self, operation_keys=None):
+        operation = super().get_operation(operation_keys)
+        if operation['operationId'] == 'categories_list':
+            operation['summary'] = 'Get list of categories'
+            operation['description'] = """
+                                                      Allowed any users
+                        .                                            
+                        """
+        elif operation['operationId'] == 'categories_create':
+            operation['summary'] = 'Create a new category'
+            operation['description'] = """
+                                                      Allowed only admin
+                        .                                            
+                        """
+        elif operation['operationId'] == 'categories_read':
+            operation['summary'] = 'Get category by id'
+            operation['description'] = """
+                                                      Allowed any users
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        elif operation['operationId'] == 'categories_delete':
+            operation['summary'] = 'Delete category by id'
+            operation['description'] = """
+                                                      Allowed only admin
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        elif operation['operationId'] == 'categories_node_children':
+            operation['summary'] = 'Get list of category children'
+            operation['description'] = """
+                                                      Allowed any users
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        elif operation['operationId'] == 'categories_root_nodes':
+            operation['summary'] = 'Get list of categories which are root nodes'
+            operation['description'] = """
+                                                      Allowed any users
+                        .                                            
+                        """
+        elif operation['operationId'] == 'categories_list_without_pagination':
+            operation['summary'] = 'Get list of categories without pagination'
+            operation['description'] = """
+                                                      Allowed Any Users
+                        .                                            
+                        """
+        else:
+            operation['summary'] = 'Update category by id'
+            operation['description'] = """
+                                                      Allowed only admin
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        return operation
+
+
+class WishListDocAPIView(SwaggerAutoSchema):
+    def get_operation(self, operation_keys=None):
+        operation = super().get_operation(operation_keys)
+        if operation['operationId'] == 'wish-list_list':
+            operation['summary'] = 'Get list of wish lists'
+            operation['description'] = """
+                                                      Allowed Admin, Manager, Owner
+                        .                                            
+                        """
+        elif operation['operationId'] == 'wish-list_create':
+            operation['summary'] = 'Add shop product to wish list'
+            operation['description'] = """
+                                                      Allowed Admin, Manager, Owner
+                        .                                            
+                        """
+        elif operation['operationId'] == 'wish-list_read':
+            operation['summary'] = 'Get product from wish list by id'
+            operation['description'] = """
+                                                      Allowed Admin, Manager, Owner
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        elif operation['operationId'] == 'wish-list_delete':
+            operation['summary'] = 'Delete product from wish list by id'
+            operation['description'] = """
+                                                      Allowed Admin, Manager, Owner
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        elif operation['operationId'] == 'wish-list_delete_by_shop_product':
+            operation['summary'] = 'Delete product from wish list by id shop_product'
+            operation['description'] = """
+                                                      Allowed only Owner
+                                                      needs params:
+                                                      - id (shop_product)
+                        .
+                        """
+        else:
+            operation['summary'] = 'Update wish list by id'
+            operation['description'] = """
+                                                      Allowed Admin, Manager, Owner
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        return operation

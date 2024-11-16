@@ -18,6 +18,8 @@ boto3 = "*"
 django-debug-toolbar = "*"
 google-auth = "*"
 requests = "*"
+django-mptt = "*"
+djangorestframework-recursive = "*"
 
 [dev-packages]
 
