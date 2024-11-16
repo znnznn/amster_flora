@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Facebook Login Test</title>
+</head>
+<body>
+
+<div id="status">Not logged in</div>
+
+<script>
+function statusChangeCallback(response) {
+    console.log('statusChangeCallback called with response:', response);
+    if (response.status === 'connected') {
+        console.log('User is connected to the app and Facebook.');
+        FB.api('/me', { fields: 'name, email' }, function(response) {
+            console.log('API response for /me:', response);
+            document.getElementById('status').innerHTML =
+                'Thanks for logging in, ' + response.name + '!';
+        });
+    } else {
+        document.getElementById('status').innerHTML = 'Please log into this app.';
+        console.log('User is not logged into the app.');
+    }
+}
+
+function checkLoginState() {
+    setTimeout(() => {
+        FB.getLoginStatus(function(response) {
+            console.log('FB.getLoginStatus response:', response);
+            statusChangeCallback(response);
+            if (response.status === 'connected') {
+                console.log('Access token:', response.authResponse.accessToken);
+            }
+        });
+    }, 500); // Delay of 500ms to allow token propagation
+}
+
+window.fbAsyncInit = function() {
+    FB.init({
+        appId      : '1658271168366054',
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v2.2'
+    });
+
+    console.log('FB SDK initialized.');
+    FB.AppEvents.logPageView();
+
+    // Listen for authentication state changes
+    FB.Event.subscribe('auth.authResponseChange', function(response) {
+        console.log('authResponseChange event fired:', response);
+        statusChangeCallback(response);
+    });
+
+    // Initial login status check
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
+};
+
+// Load the SDK asynchronously
+(function(d, s, id) {
+   var js, fjs = d.getElementsByTagName(s)[0];
+   if (d.getElementById(id)) { return; }
+   js = d.createElement(s); js.id = id;
+   js.src = "https://connect.facebook.net/en_US/sdk.js";
+   fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+<fb:login-button
+  scope="public_profile,email"
+  onlogin="checkLoginState();">
+</fb:login-button>
+
+</body>
+</html>
