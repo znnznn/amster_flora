@@ -3,12 +3,19 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
+from products.views import WishListViewSet, CategoriesViewSet, VariantsViewSet, ProductsViewSet
+from shops.views import ShopsViewSet
 from users.views import UserViewSet, ContactUsAPIView, customer_page
 from .settings import ENVIRONMENT
 
 router = DefaultRouter()
 router.register('users', UserViewSet)
 router.register('contact-us', ContactUsAPIView)
+router.register('shops', ShopsViewSet)
+router.register('wish-list', WishListViewSet)
+router.register('categories', CategoriesViewSet)
+router.register('variants', VariantsViewSet)
+router.register('products', ProductsViewSet)
 
 
 urlpatterns = [

@@ -21,3 +21,17 @@ class Role:
         MANAGER: "Менеджер",
         CLIENT: "Клієнт",
     }
+
+
+class Size:
+    SMALL = "small"
+    MEDIUM = "medium"
+    LARGE = "large"
+    EXTRA_LARGE = "extra_large"
+
+    SIZE_CHOICES = [
+        (SMALL, "small"),
+        (MEDIUM, "medium"),
+        (LARGE, "large"),
+        (EXTRA_LARGE, "extra_large"),
+    ]

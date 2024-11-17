@@ -7,26 +7,16 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from amster_flora.doc_api import ShopsDocAPIView, CategoriesDocAPIView, WishListDocAPIView
+from amster_flora.doc_api import CategoriesDocAPIView, WishListDocAPIView
 from common.constants import Role
 from common.mixins import ListWithOutPaginationMixin
 from products.filters import CategoryFilter, WishListFilter, WishListOrderingFilter
-from products.models import Shop, Category, Product, WishList
+from products.models import Category, Product, WishList, Variant
 from products.serializers import (
-    ShopSerializer, CategorySerializer, CategoryTreeSerializer, CategoryRetrieveSerializer, WishListCreateSerializer
+    CategorySerializer, CategoryTreeSerializer, CategoryRetrieveSerializer, WishListCreateSerializer, VariantSerializer,
+    ProductCreateSerializer
 )
 from users.permissions import IsAuthenticatedAs, IsSafeMethod
-
-
-class ShopsViewSet(ModelViewSet):
-    swagger_schema = ShopsDocAPIView
-    serializer_class = ShopSerializer
-    permission_classes = (IsAuthenticatedAs(Role.ADMIN, ),)
-    queryset = Shop.objects.all()
-    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    ordering_fields = ("city", "name")
-    search_fields = ("name", "city")
-    filterset_fields = ("name", "city")
 
 
 class CategoriesViewSet(ModelViewSet, ListWithOutPaginationMixin):
@@ -98,3 +88,15 @@ class WishListViewSet(ModelViewSet):
         wish_product = get_object_or_404(self.get_queryset().filter(product_id=kwargs['pk']), creator=request.user)
         wish_product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class VariantsViewSet(ModelViewSet):
+    serializer_class = VariantSerializer
+    permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER, ) | IsSafeMethod,)
+    queryset = Variant.objects.select_related("product", "product__category").prefetch_related("images")
+
+
+class ProductsViewSet(ModelViewSet):
+    serializer_class = ProductCreateSerializer
+    permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER, ) | IsSafeMethod,)
+    queryset = Product.objects.select_related("category", "shop").prefetch_related("variants", "variants__images")
