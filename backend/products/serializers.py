@@ -89,7 +89,6 @@ class VariantCreateSerializer(serializers.ModelSerializer):
         fields = ('id', 'size', 'height', 'diameter', 'hex_color', 'quantity', 'price', 'image', 'images', 'components',)
 
     def create(self, validated_data):
-        print("*****************************************************************")
         validated_data['product'] = self.context['product']
         images = validated_data.pop('images', None)
         components = validated_data.pop('components', None)
@@ -118,9 +117,6 @@ class ProductCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         variants = validated_data.pop('variants', None)
-        print("*****************************************************************")
-        print(variants)
-
         product = Product.objects.create(**validated_data)
         if variants:
             variants = VariantCreateSerializer(many=True, data=variants, context={'product': product})
