@@ -291,3 +291,50 @@ class WishListDocAPIView(SwaggerAutoSchema):
                         .
                         """
         return operation
+
+class ProductDocAPIView(SwaggerAutoSchema):
+    def get_operation(self, operation_keys=None):
+        operation = super().get_operation(operation_keys)
+        if operation['operationId'] == 'products_list':
+            operation['summary'] = 'Get list of products'
+            operation['description'] = """
+                                                      Allowed any users
+                           Ordering by:
+                                  - name
+                                  - category                                                       
+                                  - price                                                       
+                                  - height                                                       
+                                  - diameter                           
+                        .                                            
+                        """
+        elif operation['operationId'] == 'products_create':
+            operation['summary'] = 'Create a new product'
+            operation['description'] = """
+                                                      Allowed only admin
+                        .                                            
+                        """
+        elif operation['operationId'] == 'products_read':
+            operation['summary'] = 'Get product by id'
+            operation['description'] = """
+                                                      Allowed any users
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        elif operation['operationId'] == 'products_delete':
+            operation['summary'] = 'Delete product by id'
+            operation['description'] = """
+                                                      Allowed only admin
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        else:
+            operation['summary'] = 'Update product by id'
+            operation['description'] = """
+                                                      Allowed only admin
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        return operation
