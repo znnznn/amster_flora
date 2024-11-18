@@ -3,8 +3,13 @@ from rest_framework import serializers
 from rest_framework_recursive.fields import RecursiveField
 
 from common.constants import Size
-from products.models import Shop, Category, WishList, Image, Variant, Product
+from products.models import Shop, Category, WishList, Image, Variant, Product, Component
 
+
+class ComponentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Component
+        fields = ('id', 'key_crm_id', 'origin_sku', 'quantity')
 
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -72,31 +77,39 @@ class WishListCreateSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
 
-class VariantSerializer(serializers.ModelSerializer):
+class VariantCreateSerializer(serializers.ModelSerializer):
     images = serializers.ListField(
         required=False, allow_empty=True,
         child=serializers.ImageField(max_length=1000, allow_empty_file=False, use_url=False)
     )
+    components = ComponentSerializer(many=True)
 
     class Meta:
         model = Variant
-        fields = ('id', 'size', 'height', 'diameter', 'hex_color', 'quantity', 'price', 'product', 'image', 'images')
+        fields = ('id', 'size', 'height', 'diameter', 'hex_color', 'quantity', 'price', 'image', 'images', 'components',)
 
     def create(self, validated_data):
+        validated_data['product'] = self.context['product']
         images = validated_data.pop('images', None)
+        components = validated_data.pop('components', None)
         variant = super().create(validated_data)
         if images:
-            Image.objects.bulk_create([Image(product=variant, image=image) for image in images])
+            Image.objects.bulk_create([Image(variant=variant, image=image) for image in images])
+        if components:
+            Component.objects.bulk_create([Component(variant=variant, **component) for component in components])
         return variant
 
-    def to_representation(self, instance):
-        return instance
+
+class VariantRetrieveSerializer(VariantCreateSerializer):
+    images = ImageSerializer(many=True)
+    components = ComponentSerializer(many=True)
+
 
 
 class ProductCreateSerializer(serializers.ModelSerializer):
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
     shop = serializers.PrimaryKeyRelatedField(queryset=Shop.objects.all())
-    variants = VariantSerializer(many=True)
+    variants = VariantCreateSerializer(many=True)
 
     class Meta:
         model = Product
@@ -106,5 +119,23 @@ class ProductCreateSerializer(serializers.ModelSerializer):
         variants = validated_data.pop('variants', None)
         product = Product.objects.create(**validated_data)
         if variants:
-            Variant.objects.bulk_create([Variant(product=product, **variant) for variant in variants])
+            variants = VariantCreateSerializer(many=True, data=variants, context={'product': product})
+            variants.is_valid(raise_exception=True)
+            variants = variants.save()
+            product.variants.set(variants)
         return product
+
+    def to_representation(self, instance):
+        instance = Product.objects.select_related("category", "shop").prefetch_related("variants", "variants__images").get(id=instance.id)
+        return ProductListSerializer(instance).data
+
+
+class ProductListSerializer(serializers.ModelSerializer):
+    variants = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Product
+        fields = ('id', 'name', 'sku', 'description', 'category', 'shop', 'variants',)
+
+    def get_variants(self, obj):
+        return VariantRetrieveSerializer(obj.variants.all(), many=True).data

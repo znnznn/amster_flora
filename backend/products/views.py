@@ -13,8 +13,8 @@ from common.mixins import ListWithOutPaginationMixin
 from products.filters import CategoryFilter, WishListFilter, WishListOrderingFilter
 from products.models import Category, Product, WishList, Variant
 from products.serializers import (
-    CategorySerializer, CategoryTreeSerializer, CategoryRetrieveSerializer, WishListCreateSerializer, VariantSerializer,
-    ProductCreateSerializer
+    CategorySerializer, CategoryTreeSerializer, CategoryRetrieveSerializer, WishListCreateSerializer, VariantCreateSerializer,
+    ProductCreateSerializer, ProductListSerializer, VariantRetrieveSerializer
 )
 from users.permissions import IsAuthenticatedAs, IsSafeMethod
 
@@ -91,12 +91,22 @@ class WishListViewSet(ModelViewSet):
 
 
 class VariantsViewSet(ModelViewSet):
-    serializer_class = VariantSerializer
+    serializer_class = VariantCreateSerializer
     permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER, ) | IsSafeMethod,)
     queryset = Variant.objects.select_related("product", "product__category").prefetch_related("images")
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return VariantRetrieveSerializer
+        return VariantCreateSerializer
 
 
 class ProductsViewSet(ModelViewSet):
     serializer_class = ProductCreateSerializer
     permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER, ) | IsSafeMethod,)
     queryset = Product.objects.select_related("category", "shop").prefetch_related("variants", "variants__images")
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return ProductListSerializer
+        return ProductCreateSerializer

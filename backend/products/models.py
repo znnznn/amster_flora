@@ -36,7 +36,7 @@ class Variant(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=0)
     quantity_sold = models.PositiveIntegerField(default=0)
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
 
 
 class Image(models.Model):
@@ -68,4 +68,9 @@ class WishList(models.Model):
         ]
 
 
-
+class Component(models.Model):
+    """ Use for flower composition """
+    variant = models.ForeignKey(Variant, on_delete=models.CASCADE, related_name='components')
+    key_crm_id = models.PositiveIntegerField(default=0)
+    origin_sku = models.CharField(max_length=255)
+    quantity = models.PositiveIntegerField(default=0)
