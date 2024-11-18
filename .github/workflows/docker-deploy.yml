@@ -46,6 +46,8 @@ jobs:
           directory: ${{ github.workspace }}/frontend
       - name: Stop containers
         run: docker compose stop
+      - name: Remove containers
+        run: docker compose -f docker-compose-prod.yaml down
       - name: Build the Docker image
         run: docker compose -f docker-compose-prod.yaml build
       - name: Run containers
