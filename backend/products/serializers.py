@@ -14,7 +14,7 @@ class ComponentSerializer(serializers.ModelSerializer):
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
-        fields = ('id', 'image', 'product')
+        fields = ('id', 'image', 'variant')
 
 
 class FileUploadSerializer(serializers.ModelSerializer):

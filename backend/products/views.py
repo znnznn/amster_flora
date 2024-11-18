@@ -1,4 +1,4 @@
-from django.db.models import ProtectedError, Prefetch
+from django.db.models import ProtectedError, Prefetch, F, Q
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status
 from rest_framework.decorators import action
@@ -7,10 +7,10 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from amster_flora.doc_api import CategoriesDocAPIView, WishListDocAPIView
+from amster_flora.doc_api import CategoriesDocAPIView, WishListDocAPIView, ProductDocAPIView
 from common.constants import Role
 from common.mixins import ListWithOutPaginationMixin
-from products.filters import CategoryFilter, WishListFilter, WishListOrderingFilter
+from products.filters import CategoryFilter, WishListFilter, WishListOrderingFilter, ProductOrderingFilter, ProductFilter
 from products.models import Category, Product, WishList, Variant
 from products.serializers import (
     CategorySerializer, CategoryTreeSerializer, CategoryRetrieveSerializer, WishListCreateSerializer, VariantCreateSerializer,
@@ -102,11 +102,23 @@ class VariantsViewSet(ModelViewSet):
 
 
 class ProductsViewSet(ModelViewSet):
+    swagger_schema = ProductDocAPIView
     serializer_class = ProductCreateSerializer
     permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER, ) | IsSafeMethod,)
     queryset = Product.objects.select_related("category", "shop").prefetch_related("variants", "variants__images")
+    filter_backends = [DjangoFilterBackend, SearchFilter, ProductOrderingFilter]
+    filterset_class = ProductFilter
+    ordering_fields = ("name", "category", "price", "height", "diameter",)
+    search_fields = ("name",)
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return ProductListSerializer
         return ProductCreateSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if not self.request.user.is_authenticated or self.request.user.role == Role.CLIENT:
+            available_variants = Variant.objects.filter(quantity__gt=F('quantity_sold')).values_list('product__id', flat=True)
+            return queryset.filter(Q(id__in=available_variants))
+        return queryset.distinct()
