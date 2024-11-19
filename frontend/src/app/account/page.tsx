@@ -11,7 +11,7 @@ import {
 
 const AccountPage = () => {
     return (
-        <section className='mt-12 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-4'>
+        <section className='mt-12 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-3'>
             <div className='flex items-center justify-between gap-x-10 gap-y-4 max-md:flex-col'>
                 <Breadcrumb>
                     <BreadcrumbList className='max-sm:justify-center'>

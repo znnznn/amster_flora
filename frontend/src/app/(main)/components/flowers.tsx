@@ -9,7 +9,7 @@ import tulpin from '@/assets/images/tulpin.jpg'
 
 export const Flowers = () => {
     return (
-        <section className='mt-48 px-20 max-md:mt-16 max-md:px-16 max-sm:mt-10 max-sm:px-4'>
+        <section className='mt-48 px-20 max-md:mt-16 max-md:px-16 max-sm:mt-10 max-sm:px-3'>
             <h2 className='sr-only text-center text-[28px] font-bold'>Квіти</h2>
 
             <div className='grid h-[600px] w-full grid-cols-3 grid-rows-2 gap-5 text-right text-[28px] font-semibold leading-none max-md:grid-cols-2 max-md:gap-x-6 max-md:gap-y-10 max-sm:grid-cols-1 max-sm:gap-x-4 max-sm:gap-y-8'>

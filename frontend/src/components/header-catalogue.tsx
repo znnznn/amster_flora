@@ -42,7 +42,7 @@ export const HeaderCatalogue = () => {
                 <span>Букети</span>
             </SheetTrigger>
             <SheetContent
-                className='flex h-80 items-center justify-between gap-x-12 rounded-b-3xl border border-t-0 border-accent px-24 max-md:px-16 max-sm:px-4'
+                className='flex h-80 items-center justify-between gap-x-12 rounded-b-3xl border border-t-0 border-accent px-24 max-md:px-16 max-sm:px-3'
                 side='top'>
                 <div className='flex h-full flex-col items-start justify-between gap-x-6'>
                     <ul className='flex w-4/6 flex-wrap items-center gap-4'>

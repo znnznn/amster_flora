@@ -13,7 +13,7 @@ export const SuccessView = () => {
                     alt='flower'
                     className='h-[180px] w-full rounded-[22px] object-cover'
                 />
-                <h1 className='text-center text-[28px] font-semibold'>
+                <h1 className='text-center text-[28px] font-semibold max-md:text-lg'>
                     Дякуємо за ваше замовлення!
                 </h1>
                 <div className='flex w-full flex-col gap-y-2'>

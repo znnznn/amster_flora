@@ -39,11 +39,11 @@ export const ProductCard = () => {
                 <Image
                     src={bg2}
                     alt='Калістегія махрова американська'
-                    className='h-52 object-cover'
+                    className='h-52 object-cover max-md:h-40'
                 />
                 <div
                     className={cn(
-                        'absolute inset-0 flex flex-col justify-between bg-primary/70 p-4 text-sm text-background transition-opacity',
+                        'absolute inset-0 flex flex-col justify-between bg-primary/70 p-4 text-sm text-background transition-opacity max-md:text-xs',
                         isOverlayVisible ? 'opacity-100' : 'opacity-0'
                     )}>
                     <ul>
@@ -59,22 +59,22 @@ export const ProductCard = () => {
                 </div>
             </div>
 
-            <div className='flex flex-col p-4 pt-6'>
-                <h1 className='px-6 text-center font-medium'>
+            <div className='flex flex-col p-4 pt-6 max-sm:pt-4'>
+                <h1 className='px-6 text-center font-medium max-md:text-sm'>
                     Калістегія махрова американська
                 </h1>
 
-                <div className='mt-6 px-6 text-center'>
-                    <div className='text-accent line-through'>2 300₴</div>
-                    <div className='text-lg'>2 300₴</div>
+                <div className='mt-6 px-6 text-center max-sm:mt-4'>
+                    <div className='text-accent line-through max-md:text-sm'>2 600₴</div>
+                    <div className='text-lg max-md:text-base'>2 300₴</div>
                 </div>
 
                 <Button
-                    className='mx-auto mt-3 w-fit border-b-[3px] border-r-[3px] border-primary'
+                    className='mx-auto mt-3 w-fit gap-x-2 border-b-[3px] border-r-[3px] border-primary max-md:w-full max-sm:mt-2'
                     size='lg'
                     variant='secondary'>
-                    До кошика
-                    <ShoppingCart className='ml-2 size-4' />
+                    <span className='max-sm:hidden'> До кошика</span>
+                    <ShoppingCart />
                 </Button>
             </div>
         </article>

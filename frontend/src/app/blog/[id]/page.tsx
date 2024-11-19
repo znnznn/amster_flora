@@ -21,7 +21,7 @@ export const generateMetadata = async ({ params }: BlogPostProps) => {
 
 const BlogPostPage = ({ params }: BlogPostProps) => {
     return (
-        <section className='mt-12 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-4'>
+        <section className='mt-12 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-3'>
             <Breadcrumb>
                 <BreadcrumbList className='max-sm:justify-center'>
                     <BreadcrumbItem>

@@ -77,11 +77,13 @@ export const CataloguePagination = ({ count }: CataloguePaginationProps) => {
 
     return (
         <div className='flex flex-col items-center justify-center gap-y-4'>
-            <Button
-                onClick={handleLimitChange}
-                variant='ghost'>
-                Показати ще {limitStep}
-            </Button>
+            {count > limitStep ? (
+                <Button
+                    onClick={handleLimitChange}
+                    variant='ghost'>
+                    Показати ще {limitStep}
+                </Button>
+            ) : null}
             <PaginationWrapper>
                 <PaginationContent>
                     <PaginationItem>

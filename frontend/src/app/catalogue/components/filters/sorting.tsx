@@ -17,7 +17,7 @@ export const SortingFilter = () => {
         <Select
             defaultValue={sorting}
             onValueChange={setSorting}>
-            <SelectTrigger className='w-48 border-none font-medium'>
+            <SelectTrigger className='w-48 font-medium max-sm:w-full'>
                 <SelectValue placeholder='Theme' />
             </SelectTrigger>
             <SelectContent>

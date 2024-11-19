@@ -38,11 +38,11 @@ const CheckoutPage = () => {
                 <SuccessView />
             ) : (
                 <>
-                    <h1 className='mt-6 text-center text-[28px] font-semibold'>
+                    <h1 className='mt-6 text-center text-[28px] font-semibold max-md:text-lg'>
                         Оформлення замовлення
                     </h1>
                     <div className='mt-20 flex items-start justify-between gap-x-20'>
-                        <StepperForm setIsSuccess={setIsSuccess} />
+                        <StepperForm />
                         <CheckoutInfo />
                     </div>
                 </>

@@ -4,7 +4,7 @@ export const FlowerInfo = () => {
     return (
         <Tabs
             defaultValue='composition'
-            className='mt-12 h-40 px-20 max-md:px-16 max-sm:px-4'>
+            className='mt-12 h-40 px-20 max-md:px-16 max-sm:px-3'>
             <TabsList className='bg-transparent'>
                 <TabsTrigger
                     className='rounded-none border-b bg-transparent px-8 text-lg !shadow-none data-[state=active]:border-b-primary'

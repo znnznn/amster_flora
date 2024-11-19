@@ -15,7 +15,7 @@ import { Button } from '@/components/ui/button'
 const CartPage = () => {
     return (
         <>
-            <section className='mt-12 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-4'>
+            <section className='mt-12 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-3'>
                 <Breadcrumb>
                     <BreadcrumbList className='max-sm:justify-center'>
                         <BreadcrumbItem>
@@ -27,7 +27,9 @@ const CartPage = () => {
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
-                <h1 className='mt-4 text-center text-[28px] font-semibold'>Кошик</h1>
+                <h1 className='mt-4 text-center text-[28px] font-semibold max-md:text-lg'>
+                    Кошик
+                </h1>
 
                 <ul className='mx-auto mt-12 max-w-4xl space-y-5'>
                     <li>

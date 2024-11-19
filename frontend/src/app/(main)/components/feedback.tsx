@@ -12,7 +12,7 @@ import {
 
 export const Feedback = () => {
     return (
-        <section className='rela mt-28 px-20 max-md:mt-16 max-md:px-16 max-sm:mt-10 max-sm:px-4'>
+        <section className='rela mt-28 px-20 max-md:mt-16 max-md:px-16 max-sm:mt-10 max-sm:px-3'>
             <Carousel
                 opts={{
                     align: 'start',

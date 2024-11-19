@@ -13,7 +13,7 @@ import {
 const AccountLayout = ({ children }: PropsWithChildren) => {
     return (
         <>
-            <div className='mt-12 flex items-center gap-x-14 px-20 max-lg:flex-col max-lg:gap-y-4 max-md:px-16 max-sm:mt-8 max-sm:px-4'>
+            <div className='mt-12 flex items-center gap-x-14 px-20 max-lg:flex-col max-lg:gap-y-4 max-md:px-16 max-sm:mt-8 max-sm:px-3'>
                 <Breadcrumb>
                     <BreadcrumbList className='max-sm:justify-center'>
                         <BreadcrumbItem>
@@ -29,7 +29,7 @@ const AccountLayout = ({ children }: PropsWithChildren) => {
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
-                <h1 className='text-center text-[28px] font-semibold'>
+                <h1 className='text-center text-[28px] font-semibold max-md:text-lg'>
                     Персональні дані
                 </h1>
             </div>

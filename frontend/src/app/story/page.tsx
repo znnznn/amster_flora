@@ -12,7 +12,7 @@ import {
 
 const StoryPage = () => {
     return (
-        <section className='mt-12 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-4'>
+        <section className='mt-12 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-3'>
             <Breadcrumb>
                 <BreadcrumbList className='max-sm:justify-center'>
                     <BreadcrumbItem>
@@ -24,7 +24,9 @@ const StoryPage = () => {
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <h1 className='mt-4 text-center text-[28px] font-semibold'>Історія</h1>
+            <h1 className='mt-4 text-center text-[28px] font-semibold max-md:text-lg'>
+                Історія
+            </h1>
 
             <div className='mt-10 flex flex-col gap-y-14 max-md:mt-6 max-md:gap-y-8'>
                 <div className='flex items-center gap-8 max-lg:flex-col max-md:gap-4'>

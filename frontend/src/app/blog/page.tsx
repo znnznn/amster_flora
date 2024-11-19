@@ -12,7 +12,7 @@ import {
 
 const BlogPage = () => {
     return (
-        <section className='mt-12 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-4'>
+        <section className='mt-12 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-3'>
             <Breadcrumb>
                 <BreadcrumbList className='max-sm:justify-center'>
                     <BreadcrumbItem>
@@ -24,7 +24,9 @@ const BlogPage = () => {
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <h1 className='mt-4 text-center text-[28px] font-semibold'>Блог</h1>
+            <h1 className='mt-4 text-center text-[28px] font-semibold max-md:text-lg'>
+                Блог
+            </h1>
 
             <ul className='mt-10 space-y-5'>
                 <li>

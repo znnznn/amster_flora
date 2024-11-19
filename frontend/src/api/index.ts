@@ -12,7 +12,7 @@ api.interceptors.request.use(
     (request) => {
         if (true) {
             request.headers['Authorization'] =
-                `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNzUwOTYzLCJpYXQiOjE3MzA3NTA2NjMsImp0aSI6ImUzZjdlZDhjM2MxNTQ0Njk4MGYzMWMxMWE2Y2M1ZGFjIiwidXNlcl9pZCI6NH0.7ua6Ks3Y9tHJThsm9k1-qRQlx3YCQ7_l1tUTKRbHFi4`
+                `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMyMDQ5OTI1LCJpYXQiOjE3MzIwNDk2MjUsImp0aSI6IjhkMDA5Yjk5OWM5MzQxZGY4MDc5MzdmMWQ0NGE0Y2VjIiwidXNlcl9pZCI6NH0.0DHLAe6EIoy-fF4PvyPM4r2ulNZGDmolUs7qgZWTex4`
         }
         return request
     },
