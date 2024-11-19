@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils'
 export const AccountSidebar = () => {
     const pathname = usePathname()
     return (
-        <aside className='h-[430px] rounded-r-[22px] border-y border-r py-6 pl-14 pr-6'>
+        <aside className='h-[430px] rounded-r-[22px] border-y border-r py-6 pl-14 pr-6 max-lg:hidden'>
             <nav className='flex h-full flex-col items-start justify-between'>
                 <ul className='flex flex-col gap-y-4'>
                     <li>

@@ -1,6 +1,7 @@
 import { BookHeart, ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
 
+import { ScrollArea } from './ui/scroll-area'
 import flower from '@/assets/images/flower.jpg'
 import { Button } from '@/components/ui/button'
 import {
@@ -17,30 +18,34 @@ import {
     DialogTitle,
     DialogTrigger
 } from '@/components/ui/dialog'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { cn } from '@/lib/utils'
 
-export const AddLetterModal = () => {
+export const AddLetterModal = ({
+    className
+}: React.HtmlHTMLAttributes<HTMLButtonElement>) => {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant='ghost'>
+                <Button
+                    className={cn(className)}
+                    variant='ghost'>
                     <BookHeart className='size-5' />
                     Підписати листівку
                 </Button>
             </DialogTrigger>
-            <DialogContent className='max-w-[620px] px-14'>
+            <DialogContent className='max-w-2xl px-14'>
                 <DialogHeader>
-                    <DialogTitle>Обрати листівку</DialogTitle>
+                    <DialogTitle className='text-center'>Обрати листівку</DialogTitle>
                     <Carousel
                         opts={{
                             loop: true,
                             align: 'start',
                             dragFree: true
                         }}
-                        className='!mt-8 flex items-center justify-between gap-x-6'>
+                        className='!mt-8 flex w-full items-center justify-between gap-x-6'>
                         <CarouselPrevious className='static translate-y-0 border-accent text-accent' />
 
-                        <CarouselContent>
+                        <CarouselContent className='w-full'>
                             <CarouselItem className='basis-1/4'>
                                 <Button
                                     className='text-accent'
@@ -85,7 +90,7 @@ export const AddLetterModal = () => {
                         <CarouselNext className='static translate-y-0 border-accent text-accent' />
                     </Carousel>
 
-                    <ScrollArea className='!mt-6 h-[440px] py-2'>
+                    <ScrollArea className='!mt-6 h-[440px] py-2 max-md:h-80'>
                         <ul className='flex flex-col gap-y-3'>
                             <li>
                                 <GiftCard />
@@ -106,7 +111,7 @@ export const AddLetterModal = () => {
 
 const GiftCard = () => {
     return (
-        <div className='flex h-36 items-center justify-between gap-x-6 overflow-hidden rounded-[22px] bg-background'>
+        <div className='flex h-36 max-w-full items-center justify-between gap-x-6 overflow-hidden rounded-[22px] bg-background'>
             <div className='px-5 py-7'>
                 <div className='flex items-center justify-between gap-x-4 text-lg font-medium'>
                     <span>Ваза</span>
@@ -120,7 +125,7 @@ const GiftCard = () => {
                 </Button>
             </div>
             <Image
-                className='h-full w-48 rounded-[22px] object-cover'
+                className='h-full w-48 rounded-[22px] object-cover max-md:w-36'
                 src={flower}
                 alt='Флорес'
             />

@@ -5,8 +5,10 @@ import { useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { cn } from '@/lib/utils'
 
-interface StepperInputProps {
+// @ts-ignore
+interface StepperInputProps extends React.HtmlHTMLAttributes<HTMLButtonElement> {
     min?: number
     max?: number
     step?: number
@@ -21,7 +23,8 @@ export const StepperInput = ({
     step = 1,
     defaultValue = min,
     onChange,
-    disabled = false
+    disabled = false,
+    className
 }: StepperInputProps) => {
     const [value, setValue] = useState(defaultValue)
 
@@ -54,7 +57,11 @@ export const StepperInput = ({
     }
 
     return (
-        <div className='flex items-center space-x-2 rounded-md border border-accent bg-primary text-accent'>
+        <div
+            className={cn(
+                'flex items-center space-x-2 rounded-md border border-accent bg-primary text-accent',
+                className
+            )}>
             <Button
                 variant='link'
                 size='icon'

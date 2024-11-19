@@ -36,7 +36,7 @@ export const DatePicker = ({
                             locale: uk
                         })
                     ) : (
-                        <span>DD-MM-YYYY</span>
+                        <span className='truncate'>DD-MM-YYYY</span>
                     )}
                 </Button>
             </PopoverTrigger>

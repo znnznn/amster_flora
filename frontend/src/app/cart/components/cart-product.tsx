@@ -13,20 +13,45 @@ export const CartProduct = () => {
                 alt='Півоній'
                 className='h-full w-48 rounded-xl object-cover'
             />
-            <div className='flex h-full flex-col items-start justify-between'>
+            <div className='flex h-full flex-col items-start justify-between max-lg:hidden'>
                 <div>
-                    <h2 className='text-[22px] font-semibold'>Букет півоній</h2>
-                    <div className='mt-1.5 flex items-center gap-x-2 text-sm text-muted'>
+                    <h2 className='text-[22px] font-semibold max-lg:text-lg'>
+                        Букет півоній
+                    </h2>
+                    <div className='mt-1.5 flex items-center gap-x-2 text-sm text-muted max-lg:text-xs'>
                         <CircleCheck className='size-4' />В в наявності
                     </div>
                 </div>
-                <AddLetterModal />
+                <AddLetterModal className='max-lg:hidden' />
             </div>
-            <div className='flex items-center gap-x-4'>
+            <div className='flex items-center gap-x-4 max-lg:hidden'>
                 <span className='text-sm text-accent line-through'>2 300₴</span>
-                <span className='text-[22px] font-medium'>2 000₴</span>
+                <span className='text-[22px] font-medium max-lg:text-base'>2 000₴</span>
             </div>
             <StepperInput
+                className='max-lg:hidden'
+                min={1}
+                max={5}
+                step={1}
+            />
+
+            <div className='hidden h-full flex-col items-start justify-between max-lg:flex'>
+                <div>
+                    <h2 className='text-[22px] font-semibold max-lg:text-lg'>
+                        Букет півоній
+                    </h2>
+                    <div className='mt-1.5 flex items-center gap-x-2 text-sm text-muted max-lg:text-xs'>
+                        <CircleCheck className='size-4' />В в наявності
+                    </div>
+                </div>
+                <AddLetterModal className='hidden max-lg:flex' />
+            </div>
+            <div className='hidden items-center gap-x-4 max-lg:flex'>
+                <span className='text-sm text-accent line-through'>2 300₴</span>
+                <span className='text-[22px] font-medium max-lg:text-base'>2 000₴</span>
+            </div>
+            <StepperInput
+                className='hidden max-lg:flex'
                 min={1}
                 max={5}
                 step={1}

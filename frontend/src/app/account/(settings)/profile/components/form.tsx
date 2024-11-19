@@ -60,12 +60,11 @@ export const ProfileForm = () => {
     const form = useForm<ContactsFormData>({
         resolver: zodResolver(profileSchema),
         defaultValues: {
-            first_name: currentUser.first_name,
-            last_name: currentUser.last_name,
-            email: currentUser.email,
-            phone_number: currentUser.phone_number,
-            password: '',
-            date: '' as any
+            first_name: currentUser.first_name || '',
+            last_name: currentUser.last_name || '',
+            email: currentUser.email || '',
+            phone_number: currentUser.phone_number || '',
+            password: ''
         }
     })
 
@@ -78,7 +77,7 @@ export const ProfileForm = () => {
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
                 className='mt-8 w-full'>
-                <div className='grid grid-cols-3 items-center gap-x-10'>
+                <div className='grid grid-cols-3 grid-rows-2 items-start gap-x-10 max-md:grid-cols-2 max-md:gap-x-5'>
                     <FormField
                         control={form.control}
                         name='first_name'
@@ -134,8 +133,6 @@ export const ProfileForm = () => {
                             </FormItem>
                         )}
                     />
-                </div>
-                <div className='mt-5 grid grid-cols-3 items-center gap-x-10'>
                     <FormField
                         control={form.control}
                         name='last_name'
@@ -190,13 +187,16 @@ export const ProfileForm = () => {
                         )}
                     />
                 </div>
-                <Button
-                    className='mt-10'
-                    size='lg'
-                    variant='secondary'
-                    type='submit'>
-                    Зберегти
-                </Button>
+
+                <div className='mt-10 max-lg:mx-auto max-lg:w-52'>
+                    <Button
+                        className='w-full'
+                        size='lg'
+                        variant='secondary'
+                        type='submit'>
+                        Зберегти
+                    </Button>
+                </div>
             </form>
         </Form>
     )
