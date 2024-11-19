@@ -10,6 +10,14 @@ export const googleAuth = async (token: string): Promise<LoginResponse> => {
     return response.data
 }
 
+export const facebookAuth = async (token: string): Promise<LoginResponse> => {
+    const response = await publicApi.post('/auth/facebook/', {
+        token
+    })
+
+    return response.data
+}
+
 export const credintialsLogin = async ({
     phone,
     password

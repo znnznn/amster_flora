@@ -4,7 +4,7 @@ import { GoogleLogin } from '@react-oauth/google'
 import { useRouter } from 'next/navigation'
 import FacebookLogin from 'react-facebook-login'
 
-import { googleAuth } from '@/api/auth/auth'
+import { facebookAuth, googleAuth } from '@/api/auth/auth'
 import type { User } from '@/api/users/users.types'
 import { cn } from '@/lib/utils'
 
@@ -29,10 +29,17 @@ export const SocialsButtons = ({ className, setIsSheetOpen }: SocialsButtonsProp
 
     const handleFacebookCallback = (response: any) => {
         if (response?.status === 'unknown') {
-            console.error('Sorry!', 'Something went wrong with facebook Login.')
+            console.log('Sorry!', 'Something went wrong with facebook Login.')
             return
         }
-        console.log(response)
+
+        facebookAuth(response.accessToken).then((response) => {
+            setAccessToken(response.access)
+            setRefreshToken(response.refresh)
+            setUser(response.user)
+            setIsSheetOpen?.(false)
+            router.refresh()
+        })
     }
 
     return (
@@ -88,9 +95,9 @@ export const SocialsButtons = ({ className, setIsSheetOpen }: SocialsButtonsProp
                             </defs>
                         </svg>
                     }
-                    appId='1658271168366054'
+                    appId='585697583978416'
                     autoLoad={false}
-                    fields='name,email,picture'
+                    scope='public_profile'
                     callback={handleFacebookCallback}
                 />
 
