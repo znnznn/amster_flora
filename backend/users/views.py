@@ -111,4 +111,6 @@ class ContactUsAPIView(viewsets.ModelViewSet):
         return super().get_permissions()
 
 def customer_page(request):
+    print(request.user)
+    print(request.GET.dict())
     return render(request, "i3.html", {})

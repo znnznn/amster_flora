@@ -22,7 +22,7 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
     path('', include(router.urls)),
-    path('facebook/', customer_page),
+    # path('facebook/', customer_page),
     path('', include('auth.urls'), name="social-login"),
     path('auth/token/', TokenObtainPairView.as_view(), name='token_create'),
     path('auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
