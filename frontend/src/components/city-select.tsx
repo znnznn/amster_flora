@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowLeft, ChevronDown } from 'lucide-react'
+import { ArrowLeft, ChevronDown, MapPin } from 'lucide-react'
 import { useState } from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -11,6 +11,7 @@ import {
     SheetTitle,
     SheetTrigger
 } from '@/components/ui/sheet'
+import { cn } from '@/lib/utils'
 
 const setCityInCookie = (city: string) => {
     document.cookie = `city=${city}; path=/; max-age=31536000; SameSite=Strict`
@@ -23,7 +24,11 @@ const getCityFromCookie = () => {
 
 const cityOptions = ['Київ', 'Львів', 'Рівне']
 
-export const CitySelect = () => {
+interface CitySelectProps extends React.HTMLAttributes<HTMLButtonElement> {
+    withIcon?: boolean
+}
+
+export const CitySelect = ({ withIcon = false, className }: CitySelectProps) => {
     const defaultCity = 'Рівне'
     const selectedCity = getCityFromCookie() || defaultCity
 
@@ -40,9 +45,14 @@ export const CitySelect = () => {
         <Sheet
             open={isSheetOpen}
             onOpenChange={setIsSheetOpen}>
-            <SheetTrigger className='flex w-fit items-center gap-x-1 rounded-sm p-0.5 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'>
+            <SheetTrigger
+                className={cn(
+                    'flex w-fit items-center gap-x-1 rounded-sm p-0.5 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+                    className
+                )}>
+                {withIcon ? <MapPin className='mr-1' /> : ''}
                 <span className='font-medium'>{selectedCity}</span>
-                <ChevronDown className='size-4' />
+                <ChevronDown />
             </SheetTrigger>
             <SheetContent
                 className='w-96 rounded-br-3xl border-r border-accent text-accent'

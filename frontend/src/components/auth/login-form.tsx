@@ -21,9 +21,18 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import { Input } from '@/components/ui/input'
 
 const loginSchema = object({
-    password: string().min(1, {
-        message: 'Це поле є обов’язковим'
-    }),
+    password: string({
+        required_error: "Це поле є обов'язковим"
+    })
+        .min(1, "Це поле є обов'язковим")
+        .min(8, 'Пароль повинен містити не менше 8 символів')
+        .regex(/[a-z]/, 'Пароль повинен містити не менше однієї малої літери')
+        .regex(/[A-Z]/, 'Пароль повинен містити не менше однієї великої літери')
+        .regex(/[0-9]/, 'Пароль повинен містити не менше однієї цифри')
+        .regex(
+            /[!@#$%^&*]/,
+            'Пароль повинен містити не менше одного спеціального символу (!@#$%^&*)'
+        ),
     phone: string().min(1, {
         message: 'Це поле є обов’язковим'
     })

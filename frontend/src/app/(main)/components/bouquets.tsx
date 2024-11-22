@@ -41,7 +41,7 @@ export const Bouquets = () => {
     return (
         <section
             ref={ref}
-            className='mt-32 pl-20 pr-32'>
+            className='mt-32 pl-20 pr-32 max-lg:pl-16'>
             <div className='relative rounded-lg border p-8'>
                 <motion.div
                     animate={controls}

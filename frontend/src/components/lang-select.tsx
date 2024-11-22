@@ -11,6 +11,7 @@ import {
     SelectTrigger,
     SelectValue
 } from '@/components/ui/select'
+import { cn } from '@/lib/utils'
 
 const langOptions = [
     {
@@ -34,7 +35,11 @@ const getLangFromCookie = () => {
     return langCookie ? langCookie.split('=')[1] : null
 }
 
-export const LangSelect = () => {
+interface LangSelectProps extends React.HTMLAttributes<HTMLButtonElement> {
+    withIcon?: boolean
+}
+
+export const LangSelect = ({ withIcon = true, className }: LangSelectProps) => {
     const defaultLang = 'uk'
 
     const selectedLang = getLangFromCookie() || defaultLang
@@ -47,7 +52,11 @@ export const LangSelect = () => {
         <Select
             defaultValue={selectedLang}
             onValueChange={handleLangChange}>
-            <SelectTrigger className='w-32 border-none bg-transparent p-0 font-medium focus:ring-0 focus:ring-offset-0'>
+            <SelectTrigger
+                className={cn(
+                    'w-32 border-none bg-transparent p-0 font-medium focus:ring-0 focus:ring-offset-0',
+                    className
+                )}>
                 <SelectValue placeholder='Select a fruit' />
             </SelectTrigger>
             <SelectContent className='border-primary bg-accent text-primary'>
@@ -58,6 +67,7 @@ export const LangSelect = () => {
                         value={lang.value}>
                         <div className='flex items-center gap-x-2'>
                             <Image
+                                className={withIcon ? '' : 'hidden'}
                                 width={16}
                                 height={16}
                                 src={lang.icon}

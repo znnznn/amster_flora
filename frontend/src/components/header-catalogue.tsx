@@ -10,6 +10,7 @@ import flower from '@/assets/images/flower.jpg'
 import defaultImage from '@/assets/images/flower.png'
 import flowerpot from '@/assets/images/flowerpot.jpg'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { cn } from '@/lib/utils'
 
 const flowers = [
     { title: 'Троянда', cover: flowerpot },
@@ -28,7 +29,9 @@ const flowers = [
     { title: 'Півонії', cover: flower }
 ]
 
-export const HeaderCatalogue = () => {
+interface HeaderCatalogueProps extends React.HTMLAttributes<HTMLButtonElement> {}
+
+export const HeaderCatalogue = ({ className }: HeaderCatalogueProps) => {
     const [open, setOpen] = useState(false)
     const [currentImage, setCurrentImage] = useState(defaultImage)
 
@@ -37,12 +40,11 @@ export const HeaderCatalogue = () => {
             open={open}
             onOpenChange={setOpen}>
             <SheetTrigger
-                className='cursor-pointer p-1 transition-colors hover:text-background'
-                asChild>
+                className={cn('p-1 transition-colors hover:text-background', className)}>
                 <span>Букети</span>
             </SheetTrigger>
             <SheetContent
-                className='flex h-80 items-center justify-between gap-x-12 rounded-b-3xl border border-t-0 border-accent px-24 max-md:px-16 max-sm:px-3'
+                className='flex h-80 items-center justify-between gap-x-12 rounded-b-3xl border border-t-0 border-accent px-24 max-md:px-10 max-sm:px-3'
                 side='top'>
                 <div className='flex h-full flex-col items-start justify-between gap-x-6'>
                     <ul className='flex w-4/6 flex-wrap items-center gap-4'>

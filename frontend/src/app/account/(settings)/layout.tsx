@@ -13,7 +13,7 @@ import {
 const AccountLayout = ({ children }: PropsWithChildren) => {
     return (
         <>
-            <div className='mt-12 flex items-center gap-x-14 px-20 max-lg:flex-col max-lg:gap-y-4 max-md:px-16 max-sm:mt-8 max-sm:px-3'>
+            <div className='mt-12 flex items-center gap-x-14 px-20 max-lg:flex-col max-lg:gap-y-4 max-lg:px-16 max-md:px-10 max-sm:mt-8 max-sm:px-3'>
                 <Breadcrumb>
                     <BreadcrumbList className='max-sm:justify-center'>
                         <BreadcrumbItem>

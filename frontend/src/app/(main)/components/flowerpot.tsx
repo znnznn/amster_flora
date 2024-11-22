@@ -41,7 +41,7 @@ export const Flowerpots = () => {
     return (
         <section
             ref={ref}
-            className='mt-72 pl-32 pr-20'>
+            className='mt-72 pl-32 pr-20 max-lg:pr-16'>
             <div className='relative flex justify-end rounded-lg border px-4 py-8'>
                 <motion.div
                     animate={controls}

@@ -97,7 +97,8 @@ export const SocialsButtons = ({ className, setIsSheetOpen }: SocialsButtonsProp
                     }
                     appId='585697583978416'
                     autoLoad={false}
-                    scope='public_profile'
+                    fields='name,email'
+                    scope='email'
                     callback={handleFacebookCallback}
                 />
 

@@ -1,6 +1,6 @@
 export const TickerTape = () => {
     return (
-        <div className='relative flex h-10 overflow-x-hidden bg-accent font-medium text-primary'>
+        <div className='relative flex h-10 overflow-x-hidden bg-accent font-medium text-primary max-md:hidden'>
             <div className='animate-marquee whitespace-nowrap py-2'>
                 {Array(10)
                     .fill(0)

@@ -17,7 +17,7 @@ import {
 const CheckoutPage = () => {
     const [isSuccess, setIsSuccess] = useState(false)
     return (
-        <section className='mt-12 pl-20 max-md:pl-16 max-sm:mt-8 max-sm:pl-6'>
+        <section className='mt-12 pl-20 max-lg:pl-16 max-md:pl-16 max-sm:mt-8 max-sm:pl-6'>
             <Breadcrumb>
                 <BreadcrumbList className='max-sm:justify-center'>
                     <BreadcrumbItem>

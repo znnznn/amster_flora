@@ -27,7 +27,7 @@ export const Story = () => {
     return (
         <section
             ref={ref}
-            className='relative mt-48 flex h-[460px] justify-end bg-primary px-20 py-6 max-md:mt-24 max-md:px-16 max-sm:mt-10 max-sm:px-3'>
+            className='relative mt-48 flex h-[460px] justify-end bg-primary px-20 py-6 max-lg:px-16 max-md:mt-24 max-md:px-10 max-sm:mt-10 max-sm:px-3'>
             <motion.img
                 animate={controls}
                 initial='hidden'

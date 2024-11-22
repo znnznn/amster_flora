@@ -8,6 +8,7 @@ import { PasswordResetForm } from './password-reset-form'
 import { PhonePasswordResetForm } from './phone-password-reset-form'
 import { RegistrationForm } from './registration-form'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { cn } from '@/lib/utils'
 
 export type CurrentModal =
     | 'login'
@@ -15,7 +16,10 @@ export type CurrentModal =
     | 'register'
     | 'phone-password-reset'
 
-export const AuthModal = () => {
+interface AuthModalProps extends React.HTMLAttributes<HTMLButtonElement> {
+    withText?: boolean
+}
+export const AuthModal = ({ withText = false, className }: AuthModalProps) => {
     const [currentModal, setCurrentModal] = useState<CurrentModal>('login')
 
     const [isSheetOpen, setIsSheetOpen] = useState(false)
@@ -24,8 +28,13 @@ export const AuthModal = () => {
         <Sheet
             open={isSheetOpen}
             onOpenChange={setIsSheetOpen}>
-            <SheetTrigger className='p-1 transition-colors hover:text-background'>
-                <UserRound className='size-6' />
+            <SheetTrigger
+                className={cn(
+                    'flex items-center gap-x-2 p-1 transition-colors hover:text-background',
+                    className
+                )}>
+                <UserRound className='size-6' />{' '}
+                <span className={withText ? '' : 'hidden'}>Особистий кабінет</span>
             </SheetTrigger>
             <SheetContent
                 className='inset-x-auto right-20 w-[440px] rounded-b-3xl border border-t-0 border-accent px-12'

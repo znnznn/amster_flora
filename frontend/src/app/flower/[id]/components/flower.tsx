@@ -19,7 +19,7 @@ export const Flower = () => {
 
     return (
         <>
-            <div className='mt-8 flex h-[700px] w-full items-start gap-x-14 rounded-[22px] bg-primary px-20 py-8 text-accent'>
+            <div className='mt-8 flex h-[700px] w-full items-start gap-x-14 rounded-[22px] bg-primary px-20 py-8 text-accent max-lg:px-16'>
                 <FlowerSlider />
                 <Image
                     src={flower}

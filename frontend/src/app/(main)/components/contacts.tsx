@@ -8,7 +8,7 @@ import contacts from '@/assets/images/contacts.jpg'
 export const Contacts = () => {
     return (
         <section
-            className='mt-28 px-20 max-md:mt-16 max-md:px-16 max-sm:mt-10 max-sm:px-3'
+            className='mt-28 px-20 max-lg:px-16 max-md:mt-16 max-md:px-10 max-sm:mt-10 max-sm:px-3'
             id='contacts'>
             <h2 className='text-center text-[28px] font-bold'>Контакти</h2>
 

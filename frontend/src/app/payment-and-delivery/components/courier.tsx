@@ -1,6 +1,6 @@
 export const Courier = () => {
     return (
-        <section className='mt-12 px-20 max-md:px-16 max-sm:mt-8 max-sm:px-3'>
+        <section className='mt-12 px-20 max-lg:px-16 max-md:px-10 max-sm:mt-8 max-sm:px-3'>
             <h2 className='text-[28px] font-semibold'>Кур’єр</h2>
 
             <ul className='mt-10 flex items-center justify-center gap-x-20'>
