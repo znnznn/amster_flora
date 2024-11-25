@@ -41,15 +41,15 @@ export const Bouquets = () => {
     return (
         <section
             ref={ref}
-            className='mt-32 pl-20 pr-32 max-lg:pl-16'>
-            <div className='relative rounded-lg border p-8'>
+            className='container mt-32 pr-20 max-md:mt-20 max-sm:mt-12 max-sm:pr-4'>
+            <div className='relative rounded-lg border p-8 max-md:p-4'>
                 <motion.div
                     animate={controls}
                     initial='hidden'
                     variants={textVariants}
                     className='flex flex-col items-start gap-y-7'>
-                    <h2 className='text-[28px] font-semibold'>Букети</h2>
-                    <p className='max-w-[500px] font-medium'>
+                    <h2 className='text-[28px] font-semibold max-md:text-lg'>Букети</h2>
+                    <p className='max-w-[500px] font-medium max-lg:max-w-[400px]'>
                         Наші букети народжуються з ретельно відібраних квітів, які
                         приїжджають до вас з найкращих квіткових плантацій світу, щоб
                         стати частиною ваших особливих моментів.
@@ -66,12 +66,12 @@ export const Bouquets = () => {
                     animate={controls}
                     initial='hidden'
                     variants={squareVariants}
-                    className='absolute -right-16 top-1/2 z-10 size-96 -translate-y-1/2 rounded-full bg-accent'>
+                    className='absolute -right-14 top-1/2 z-10 size-96 -translate-y-1/2 rounded-full bg-accent max-lg:size-72 max-md:size-52 max-sm:hidden'>
                     <motion.img
                         animate={controls}
                         initial='hidden'
                         variants={imageVariants}
-                        className='absolute left-1/2 top-1/2 size-[500px] -translate-x-1/2 -translate-y-1/2'
+                        className='absolute left-1/2 top-1/2 size-[500px] -translate-x-1/2 -translate-y-1/2 max-lg:size-96 max-md:size-64 max-sm:size-48'
                         src={flowers.src}
                         alt='flower pot'
                     />

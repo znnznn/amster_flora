@@ -47,8 +47,8 @@ export const Header = () => {
         <>
             <HeaderTop />
 
-            <header className='sticky top-0 z-50 border-b border-b-accent'>
-                <div className='grid h-20 grid-cols-3 grid-rows-1 items-center gap-x-8 bg-primary px-20 text-accent max-lg:px-16 max-md:px-10 max-sm:px-3'>
+            <header className='sticky top-0 z-50 border-b border-b-accent bg-primary'>
+                <div className='container grid h-20 grid-cols-3 grid-rows-1 items-center gap-x-8 text-accent'>
                     <HeaderNav />
                     <MobileHeaderNav />
                     <Logo className='mx-auto' />
@@ -158,16 +158,18 @@ const ClientMenuItem = () => {
 
 const HeaderTop = () => {
     return (
-        <div className='grid h-8 grid-cols-3 grid-rows-1 items-center gap-x-8 bg-accent px-20 py-1.5 text-primary max-lg:hidden max-lg:px-16 max-md:px-10 max-sm:px-3'>
-            <CitySelect />
-            <Link
-                className='mx-auto w-fit font-medium text-primary transition-colors hover:text-background'
-                href='tel:+3800687778893'>
-                +380 068 777 88 93
-            </Link>
-            <div className='flex items-center justify-end gap-x-4'>
-                <LangSelect />
-                <CurrencySelect />
+        <div className='bg-accent'>
+            <div className='container grid h-8 grid-cols-3 grid-rows-1 items-center gap-x-8 py-1.5 text-primary max-lg:hidden'>
+                <CitySelect />
+                <Link
+                    className='mx-auto w-fit font-medium text-primary transition-colors hover:text-background'
+                    href='tel:+3800687778893'>
+                    +380 068 777 88 93
+                </Link>
+                <div className='flex items-center justify-end gap-x-4'>
+                    <LangSelect />
+                    <CurrencySelect />
+                </div>
             </div>
         </div>
     )

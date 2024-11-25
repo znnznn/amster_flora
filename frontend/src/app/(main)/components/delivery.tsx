@@ -15,15 +15,15 @@ export const Delivery = () => {
     const [isDeliveryOpen, setIsDeliveryOpen] = useState(false)
 
     return (
-        <section className='mt-28 flex items-start justify-between gap-x-10 px-20 max-lg:flex-col max-lg:px-16 max-md:mt-16 max-md:px-10 max-sm:mt-10 max-sm:px-3'>
+        <section className='mt-28 flex items-start justify-between gap-x-10  max-lg:flex-col  max-md:mt-16 container'>
             <Image
                 src={delivery}
                 alt='Доставка'
                 className='shrink-0 rounded-[22px] object-cover max-lg:h-80 max-lg:w-full max-md:h-60 max-sm:hidden'
             />
 
-            <div className='max-lg:mt-10'>
-                <h2 className='text-[28px] font-bold'>
+            <div className='max-lg:mt-10 max-md:!mt-0'>
+                <h2 className='text-[28px] font-bold max-md:text-lg'>
                     Оперативна доставка квітів по Києву
                 </h2>
                 {isDeliveryOpen ? null : (

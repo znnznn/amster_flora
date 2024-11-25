@@ -34,7 +34,9 @@ const PaymentAndDeliveryPage = () => {
 
             <Courier />
             <section className='mt-16 space-y-4 px-20 max-lg:px-16 max-md:px-10 max-sm:mt-8 max-sm:px-3'>
-                <h2 className='sr-only text-[28px] font-semibold'>Деталі замовлення</h2>
+                <h2 className='sr-only text-[28px] font-semibold max-md:text-lg'>
+                    Деталі замовлення
+                </h2>
                 <p>
                     Шановні клієнти, під час здійснення замовлення з кур'єрською доставкою
                     необхідно врахувати, що мінімальний час на виконання замовлення

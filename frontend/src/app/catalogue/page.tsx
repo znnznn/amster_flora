@@ -54,7 +54,7 @@ const CataloguePage = async () => {
                 </div>
             </section>
             <Catalogue
-                className='mt-28'
+                className='mt-28 max-md:mt-16'
                 activeTab='promo'
             />
             {/* <DiscountModal /> */}

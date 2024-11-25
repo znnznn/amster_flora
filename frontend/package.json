@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
+        "dev": "next dev --turbo",
         "build": "next build",
         "start": "next start",
         "lint": "next lint"
@@ -62,7 +62,7 @@
         "@types/react-dom": "^18",
         "@types/react-facebook-login": "^4.1.11",
         "postcss": "^8",
-        "prettier-plugin-tailwindcss": "^0.6.8",
+        "prettier-plugin-tailwindcss": "^0.6.9",
         "tailwindcss": "^3.4.1",
         "typescript": "^5"
     }

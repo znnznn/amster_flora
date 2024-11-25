@@ -1,11 +1,13 @@
 export const Advantages = () => {
     return (
-        <section className='mt-28 px-20 max-lg:px-16 max-md:mt-16 max-md:px-10 max-sm:mt-10 max-sm:px-3'>
-            <h2 className='sr-only text-center text-[28px] font-bold'>Переваги</h2>
+        <section className='mt-28 container max-md:mt-16 '>
+            <h2 className='sr-only text-center text-[28px] font-bold max-md:text-lg'>
+                Переваги
+            </h2>
 
             <ul className='grid grid-cols-4 items-center gap-8 max-lg:grid-cols-2 max-sm:grid-cols-1'>
                 <li className='flex flex-col items-center'>
-                    <div className='flex size-24 items-center justify-center rounded-full bg-accent/40'>
+                    <div className='flex size-24 items-center justify-center rounded-full bg-accent/40 max-md:size-20'>
                         <svg
                             width='67'
                             height='66'
@@ -18,13 +20,15 @@ export const Advantages = () => {
                             />
                         </svg>
                     </div>
-                    <h3 className='mt-5 text-center font-bold'>Великий вибір</h3>
-                    <p className='mt-3 max-w-60 text-center'>
+                    <h3 className='mt-5 text-center font-bold max-md:text-sm'>
+                        Великий вибір
+                    </h3>
+                    <p className='mt-3 max-w-60 text-center max-md:text-xs'>
                         В нас більше ніж 50 варіантів букетів на будь-який смак
                     </p>
                 </li>
                 <li className='flex flex-col items-center'>
-                    <div className='flex size-24 items-center justify-center rounded-full bg-accent/40'>
+                    <div className='flex size-24 items-center justify-center rounded-full bg-accent/40 max-md:size-20'>
                         <svg
                             width='67'
                             height='66'
@@ -37,13 +41,15 @@ export const Advantages = () => {
                             />
                         </svg>
                     </div>
-                    <h3 className='mt-5 text-center font-bold'>Великий вибір</h3>
-                    <p className='mt-3 max-w-60 text-center'>
+                    <h3 className='mt-5 text-center font-bold max-md:text-sm'>
+                        Великий вибір
+                    </h3>
+                    <p className='mt-3 max-w-60 text-center max-md:text-xs'>
                         В нас більше ніж 50 варіантів букетів на будь-який смак
                     </p>
                 </li>
                 <li className='flex flex-col items-center'>
-                    <div className='flex size-24 items-center justify-center rounded-full bg-accent/40'>
+                    <div className='flex size-24 items-center justify-center rounded-full bg-accent/40 max-md:size-20'>
                         <svg
                             width='67'
                             height='66'
@@ -75,13 +81,15 @@ export const Advantages = () => {
                             </defs>
                         </svg>
                     </div>
-                    <h3 className='mt-5 text-center font-bold'>Великий вибір</h3>
-                    <p className='mt-3 max-w-60 text-center'>
+                    <h3 className='mt-5 text-center font-bold max-md:text-sm'>
+                        Великий вибір
+                    </h3>
+                    <p className='mt-3 max-w-60 text-center max-md:text-xs'>
                         В нас більше ніж 50 варіантів букетів на будь-який смак
                     </p>
                 </li>
                 <li className='flex flex-col items-center'>
-                    <div className='flex size-24 items-center justify-center rounded-full bg-accent/40'>
+                    <div className='flex size-24 items-center justify-center rounded-full bg-accent/40 max-md:size-20'>
                         <svg
                             width='67'
                             height='66'
@@ -94,8 +102,10 @@ export const Advantages = () => {
                             />
                         </svg>
                     </div>
-                    <h3 className='mt-5 text-center font-bold'>Великий вибір</h3>
-                    <p className='mt-3 max-w-60 text-center'>
+                    <h3 className='mt-5 text-center font-bold max-md:text-sm'>
+                        Великий вибір
+                    </h3>
+                    <p className='mt-3 max-w-60 text-center max-md:text-xs'>
                         В нас більше ніж 50 варіантів букетів на будь-який смак
                     </p>
                 </li>

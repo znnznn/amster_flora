@@ -1,7 +1,7 @@
 export const Post = () => {
     return (
         <section className='mt-12 px-20 max-lg:px-16 max-md:px-10 max-sm:mt-8 max-sm:px-3'>
-            <h2 className='text-[28px] font-semibold'>Нова пошта</h2>
+            <h2 className='text-[28px] font-semibold max-md:text-lg'>Нова пошта</h2>
 
             <div className='mt-10 space-y-4'>
                 <p>Доставка по місту Київ працює щодня цілодобово!</p>

@@ -2,7 +2,6 @@
 
 import Autoplay from 'embla-carousel-autoplay'
 import { Facebook, Instagram } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -38,7 +37,7 @@ export const Hero = () => {
     }, [api])
 
     return (
-        <section className='relative h-[750px]'>
+        <section className='relative h-[calc(100vh-150px)] max-h-[750px] max-md:h-[calc(100vh-80px)] max-md:max-h-[650px]'>
             <SocialLinks />
 
             <Carousel
@@ -52,51 +51,70 @@ export const Hero = () => {
                         delay: 10_000
                     })
                 ]}
-                className='h-[750px]'>
-                <CarouselContent className='h-[750px]'>
-                    <CarouselItem>
-                        <div className='absolute bottom-20 left-40 max-w-96'>
-                            <p className='text-lg font-medium text-primary'>
-                                Lorem Ipsum is simply dummy text of the printing and
-                                typesetting industry. Lorem Ipsum
-                            </p>
-                            <Button
-                                size='lg'
-                                className='mt-6 w-full'>
-                                <Link href='/catalogue'>Замовити</Link>
-                            </Button>
+                className='h-[calc(100vh-150px)] max-h-[750px] max-md:h-[calc(100vh-80px)] max-md:max-h-[650px]'>
+                <CarouselContent className='h-[calc(100vh-150px)] max-h-[750px] max-md:h-[calc(100vh-80px)] max-md:max-h-[650px]'>
+                    <CarouselItem className='h-full'>
+                        <div
+                            className='h-full bg-cover bg-center bg-no-repeat pb-10 pl-32 max-md:pb-24 max-md:pl-0'
+                            style={{
+                                backgroundImage: `url(${bg.src}`
+                            }}>
+                            <div className='container flex h-full items-end justify-start max-md:justify-center'>
+                                <div className='max-w-96'>
+                                    <p className='text-lg font-medium text-primary'>
+                                        Lorem Ipsum is simply dummy text of the printing
+                                        and typesetting industry. Lorem Ipsum
+                                    </p>
+                                    <Button
+                                        size='lg'
+                                        className='mt-6 w-full'>
+                                        <Link href='/catalogue'>Замовити</Link>
+                                    </Button>
+                                </div>
+                            </div>
                         </div>
-                        <Image
-                            priority
-                            src={bg}
-                            alt='bg'
-                        />
                     </CarouselItem>
-                    <CarouselItem>
-                        <Image
-                            priority
-                            src={bg2}
-                            alt='bg'
-                        />
+                    <CarouselItem className='h-full'>
+                        <div
+                            className='h-full bg-cover bg-center bg-no-repeat pb-10 pl-32 max-md:pb-24 max-md:pl-0'
+                            style={{
+                                backgroundImage: `url(${bg2.src}`
+                            }}>
+                            <div className='container flex h-full items-end justify-start max-md:justify-center'>
+                                <div className='max-w-96'>
+                                    <p className='text-lg font-medium text-primary'>
+                                        Lorem Ipsum is simply dummy text of the printing
+                                        and typesetting industry. Lorem Ipsum
+                                    </p>
+                                    <Button
+                                        size='lg'
+                                        className='mt-6 w-full'>
+                                        <Link href='/catalogue'>Замовити</Link>
+                                    </Button>
+                                </div>
+                            </div>
+                        </div>
                     </CarouselItem>
                 </CarouselContent>
 
-                <div className='absolute right-10 top-1/2 z-10 flex -translate-y-1/2 flex-col items-center justify-center gap-y-2'>
-                    {Array.from({ length: count }).map((_, index) => (
-                        <button
-                            key={index}
-                            className={cn(
-                                'size-4 rounded-full border-2 border-accent transition-colors',
-                                {
-                                    'bg-accent': index + 1 === current
-                                }
-                            )}
-                            onClick={() => api?.scrollTo(index)}></button>
-                    ))}
-                </div>
-                <div className='absolute bottom-12 right-20'>
-                    <CarouselPrevious className='text-accent' />
-                    <CarouselNext className='text-accent' />
+                <div className='container absolute inset-0 z-0 flex items-center justify-end max-md:items-start max-md:pt-40'>
+                    <div className='flex flex-col items-center gap-y-2 max-md:justify-start'>
+                        {Array.from({ length: count }).map((_, index) => (
+                            <button
+                                key={index}
+                                className={cn(
+                                    'size-4 rounded-full border-2 border-accent transition-colors',
+                                    {
+                                        'bg-accent': index + 1 === current
+                                    }
+                                )}
+                                onClick={() => api?.scrollTo(index)}></button>
+                        ))}
+                    </div>
+                    <div className='absolute bottom-14 right-20'>
+                        <CarouselPrevious className='bg-primary text-accent' />
+                        <CarouselNext className='bg-primary text-accent' />
+                    </div>
                 </div>
             </Carousel>
         </section>
@@ -105,7 +123,7 @@ export const Hero = () => {
 
 const SocialLinks = () => {
     return (
-        <ul className='absolute left-10 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-y-4 text-primary'>
+        <ul className='absolute left-10 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-y-4 text-primary max-md:top-40'>
             <li>
                 <Link
                     className='transition-colors hover:text-accent'

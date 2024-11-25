@@ -1,5 +1,6 @@
 import { Catalogue } from '../../components/catalogue'
 
+import { TickerTape } from '@/app/(main)/components/ticker-tape'
 import { Advantages } from './components/advantages'
 import { Bouquets } from './components/bouquets'
 import { Contacts } from './components/contacts'
@@ -10,7 +11,6 @@ import { Flowerpots } from './components/flowerpot'
 import { Flowers } from './components/flowers'
 import { Hero } from './components/hero'
 import { Story } from './components/story'
-import { TickerTape } from '@/app/(main)/components/ticker-tape'
 
 const MainPage = () => {
     return (

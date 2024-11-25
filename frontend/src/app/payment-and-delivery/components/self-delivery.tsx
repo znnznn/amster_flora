@@ -9,7 +9,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 export const SelfDelivery = () => {
     return (
         <section className='mt-12 px-20 max-lg:px-16 max-md:px-10 max-sm:mt-8 max-sm:px-3'>
-            <h2 className='text-[28px] font-semibold'>Самовивіз</h2>
+            <h2 className='text-[28px] font-semibold max-md:text-lg'>Самовивіз</h2>
 
             <div className='mr-8 mt-10 flex items-start justify-between gap-x-10'>
                 <div className='w-1/2'>

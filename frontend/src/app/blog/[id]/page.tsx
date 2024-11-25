@@ -37,7 +37,9 @@ const BlogPostPage = ({ params }: BlogPostProps) => {
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <h1 className='mt-4 text-center text-[28px] font-semibold'>{params.id}</h1>
+            <h1 className='mt-4 text-center text-[28px] font-semibold max-md:text-lg'>
+                {params.id}
+            </h1>
 
             <div className='mt-10 flex flex-col gap-y-3 text-lg'>
                 <p>Квіти: Різноманіття і Догляд за Красою Природи.</p>

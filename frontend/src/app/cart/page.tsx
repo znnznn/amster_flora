@@ -56,7 +56,7 @@ const CartPage = () => {
                 </div>
             </section>
             <Catalogue
-                className='mt-28'
+                className='mt-28 max-md:mt-16'
                 activeTab='similar'
             />
         </>

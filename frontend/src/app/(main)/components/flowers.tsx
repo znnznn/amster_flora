@@ -9,11 +9,13 @@ import tulpin from '@/assets/images/tulpin.jpg'
 
 export const Flowers = () => {
     return (
-        <section className='mt-48 px-20 max-lg:px-16 max-md:mt-16 max-md:px-10 max-sm:mt-10 max-sm:px-3'>
-            <h2 className='sr-only text-center text-[28px] font-bold'>Квіти</h2>
+        <section className='container mt-48 max-md:mt-16'>
+            <h2 className='sr-only text-center text-[28px] font-bold max-md:text-lg'>
+                Квіти
+            </h2>
 
-            <div className='grid h-[600px] w-full grid-cols-3 grid-rows-2 gap-5 text-right text-[28px] font-semibold leading-none max-md:grid-cols-2 max-md:gap-x-6 max-md:gap-y-10 max-sm:grid-cols-1 max-sm:gap-x-4 max-sm:gap-y-8'>
-                <div className='group relative size-full cursor-pointer overflow-hidden rounded-[22px] bg-primary'>
+            <div className='grid w-full grid-cols-3 gap-5 text-right text-[28px] font-semibold leading-none max-md:grid-cols-2 max-md:gap-3 max-md:text-lg'>
+                <div className='group relative cursor-pointer overflow-hidden rounded-[22px] bg-primary'>
                     <h3 className='absolute right-5 top-5 z-10 text-accent'>Троянда</h3>
                     <Image
                         src={rose}
@@ -21,7 +23,7 @@ export const Flowers = () => {
                         className='size-full origin-top-left object-cover transition-transform duration-500 group-hover:scale-110'
                     />
                 </div>
-                <div className='group relative size-full cursor-pointer overflow-hidden rounded-[22px] bg-primary'>
+                <div className='group relative cursor-pointer overflow-hidden rounded-[22px] bg-primary'>
                     <h3 className='absolute right-5 top-5 z-10 text-primary'>Тюльпан</h3>
                     <Image
                         src={tulpin}
@@ -29,7 +31,7 @@ export const Flowers = () => {
                         className='size-full origin-top-left object-cover transition-transform duration-500 group-hover:scale-110'
                     />
                 </div>
-                <div className='group relative size-full cursor-pointer overflow-hidden rounded-[22px] bg-primary'>
+                <div className='group relative cursor-pointer overflow-hidden rounded-[22px] bg-primary'>
                     <h3 className='absolute right-5 top-5 z-10 text-accent'>
                         Хризантема
                     </h3>
@@ -39,7 +41,7 @@ export const Flowers = () => {
                         className='size-full origin-top-left object-cover transition-transform duration-500 group-hover:scale-110'
                     />
                 </div>
-                <div className='group relative size-full cursor-pointer overflow-hidden rounded-[22px] bg-primary'>
+                <div className='group relative cursor-pointer overflow-hidden rounded-[22px] bg-primary'>
                     <h3 className='absolute right-5 top-5 z-10 text-primary'>Вазони</h3>
                     <Image
                         src={flowerpot}
@@ -47,7 +49,7 @@ export const Flowers = () => {
                         className='size-full origin-top-left object-cover transition-transform duration-500 group-hover:scale-110'
                     />
                 </div>
-                <div className='group relative size-full cursor-pointer overflow-hidden rounded-[22px] bg-primary'>
+                <div className='group relative cursor-pointer overflow-hidden rounded-[22px] bg-primary'>
                     <h3 className='absolute right-5 top-5 z-10 text-accent'>Орхідея</h3>
                     <Image
                         src={orchid}
@@ -55,7 +57,7 @@ export const Flowers = () => {
                         className='size-full origin-top-left object-cover transition-transform duration-500 group-hover:scale-110'
                     />
                 </div>
-                <div className='group relative size-full cursor-pointer overflow-hidden rounded-[22px] bg-primary'>
+                <div className='group relative cursor-pointer overflow-hidden rounded-[22px] bg-primary'>
                     <h3 className='absolute right-5 top-5 z-10 text-primary'>Півонії</h3>
                     <Image
                         src={pion}

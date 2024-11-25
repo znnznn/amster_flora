@@ -27,7 +27,9 @@ export const Flower = () => {
                     className='h-full rounded-[22px] object-cover'
                 />
                 <div className='flex flex-col gap-y-11'>
-                    <h2 className='text-[28px] font-semibold'>Букет півоній</h2>
+                    <h2 className='text-[28px] font-semibold max-md:text-lg'>
+                        Букет півоній
+                    </h2>
 
                     <div className='flex items-center justify-between gap-x-4'>
                         <div className='flex items-center gap-x-2'>
