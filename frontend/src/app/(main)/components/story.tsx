@@ -53,7 +53,7 @@ export const Story = () => {
             </p>
            </div>
             <div className='flex max-w-[460px] max-lg:max-w-[400px] flex-col items-start gap-y-6 max-md:hidden'>
-                <h2 className='text-[28px] text-accent max-md:text-lg'>Історія</h2>
+                <h2 className='text-2xl text-accent max-md:text-lg'>Історія</h2>
                 <p className='text-background'>
                     Наш магазин квітів заснований з любов'ю до краси природи та бажанням
                     дарувати радість людям. Все почалося з маленької майстерні, де ми
@@ -91,7 +91,7 @@ const AboutUsButton = () => {
                     d='M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0'
                     fill='none'
                 />
-                <text className='fill-accent text-[11.5px] font-bold'>
+                <text className='fill-accent text-xs font-bold'>
                     <textPath
                         href='#circlePath'
                         startOffset='0%'>

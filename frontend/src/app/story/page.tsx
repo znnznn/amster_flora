@@ -24,14 +24,14 @@ const StoryPage = () => {
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <h1 className='mt-4 text-center text-[28px] font-semibold max-md:text-lg'>
+            <h1 className='mt-4 text-center text-2xl font-semibold max-md:text-lg'>
                 Історія
             </h1>
 
             <div className='mt-10 flex flex-col gap-y-14 max-md:mt-6 max-md:gap-y-8'>
                 <div className='flex items-center gap-8 max-lg:flex-col max-md:gap-4'>
                     <Image
-                        className='h-[374px] rounded-[33px] object-cover max-lg:h-72 max-md:h-64 max-sm:h-52'
+                        className='h-[374px] rounded-4xl object-cover max-lg:h-72 max-md:h-64 max-sm:h-52'
                         src={stories}
                         alt='Історія'
                     />
@@ -52,14 +52,14 @@ const StoryPage = () => {
                         змінити своє життя і слідувати своєму покликанню.
                     </p>
                     <Image
-                        className='h-[374px] rounded-[33px] object-cover max-lg:h-72 max-md:h-64 max-sm:h-52'
+                        className='h-[374px] rounded-4xl object-cover max-lg:h-72 max-md:h-64 max-sm:h-52'
                         src={stories}
                         alt='Історія'
                     />
                 </div>
                 <div className='flex items-center gap-8 max-lg:flex-col max-md:gap-4'>
                     <Image
-                        className='h-[374px] rounded-[33px] object-cover max-lg:h-72 max-md:h-64 max-sm:h-52'
+                        className='h-[374px] rounded-4xl object-cover max-lg:h-72 max-md:h-64 max-sm:h-52'
                         src={stories}
                         alt='Історія'
                     />
@@ -80,7 +80,7 @@ const StoryPage = () => {
                         змінити своє життя і слідувати своєму покликанню.
                     </p>
                     <Image
-                        className='h-[374px] rounded-[33px] object-cover max-lg:h-72 max-md:h-64 max-sm:h-52'
+                        className='h-[374px] rounded-4xl object-cover max-lg:h-72 max-md:h-64 max-sm:h-52'
                         src={stories}
                         alt='Історія'
                     />

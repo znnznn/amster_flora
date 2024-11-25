@@ -14,9 +14,6 @@ import {
     type infer as zodInfer
 } from 'zod'
 
-import { ShopSelect } from './conrols/shop-select'
-import { StreetSelect } from './conrols/street-select'
-import { TimePicker } from './conrols/time-picker'
 import type { User } from '@/api/users/users.types'
 import { CityInput } from '@/components/city-input'
 import { SocialsButtons } from '@/components/socials-buttons'
@@ -38,6 +35,9 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Switch } from '@/components/ui/switch'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
+import { ShopSelect } from './conrols/shop-select'
+import { StreetSelect } from './conrols/street-select'
+import { TimePicker } from './conrols/time-picker'
 
 const citySchema = object({
     name: string().min(1, {
@@ -132,7 +132,7 @@ export const StepperForm = () => {
                 <div className='w-full rounded-3xl border p-6'>
                     <h2
                         className={cn(
-                            'text-[22px] font-medium text-primary transition-opacity'
+                            'text-2xl font-medium text-primary transition-opacity'
                         )}>
                         Ваші дані
                     </h2>
@@ -151,7 +151,7 @@ export const StepperForm = () => {
                 <div className='w-full rounded-3xl border p-6'>
                     <h2
                         className={cn(
-                            'text-[22px] font-medium text-primary transition-opacity'
+                            'text-2xl font-medium text-primary transition-opacity'
                         )}>
                         Доставка
                     </h2>
@@ -177,7 +177,7 @@ export const StepperForm = () => {
                 <div className='w-full rounded-3xl border p-6'>
                     <h2
                         className={cn(
-                            'text-[22px] font-medium text-primary transition-opacity'
+                            'text-2xl font-medium text-primary transition-opacity'
                         )}>
                         Оплата
                     </h2>

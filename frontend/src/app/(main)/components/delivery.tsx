@@ -19,11 +19,11 @@ export const Delivery = () => {
             <Image
                 src={delivery}
                 alt='Доставка'
-                className='shrink-0 rounded-[22px] object-cover max-lg:h-80 max-lg:w-full max-md:h-60 max-sm:hidden'
+                className='shrink-0 rounded-3xl object-cover max-lg:h-80 max-lg:w-full max-md:h-60 max-sm:hidden'
             />
 
             <div className='max-lg:mt-10 max-md:!mt-0'>
-                <h2 className='text-[28px] font-bold max-md:text-lg'>
+                <h2 className='text-2xl font-bold max-md:text-lg'>
                     Оперативна доставка квітів по Києву
                 </h2>
                 {isDeliveryOpen ? null : (

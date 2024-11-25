@@ -48,7 +48,7 @@ export const Bouquets = () => {
                     initial='hidden'
                     variants={textVariants}
                     className='flex flex-col items-start gap-y-7'>
-                    <h2 className='text-[28px] font-semibold max-md:text-lg'>Букети</h2>
+                    <h2 className='text-2xl font-semibold max-md:text-lg'>Букети</h2>
                     <p className='max-w-[500px] font-medium max-lg:max-w-[400px]'>
                         Наші букети народжуються з ретельно відібраних квітів, які
                         приїжджають до вас з найкращих квіткових плантацій світу, щоб

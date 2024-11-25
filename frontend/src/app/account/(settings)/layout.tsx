@@ -1,6 +1,5 @@
 import type { PropsWithChildren } from 'react'
 
-import { AccountSidebar } from './components/sidebar'
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -9,6 +8,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import { AccountSidebar } from './components/sidebar'
 
 const AccountLayout = ({ children }: PropsWithChildren) => {
     return (
@@ -29,7 +29,7 @@ const AccountLayout = ({ children }: PropsWithChildren) => {
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
-                <h1 className='text-center text-[28px] font-semibold max-md:text-lg'>
+                <h1 className='text-center text-2xl font-semibold max-md:text-lg'>
                     Персональні дані
                 </h1>
             </div>

@@ -2,9 +2,6 @@
 
 import { useState } from 'react'
 
-import { CheckoutInfo } from './components/checkout-info'
-import { StepperForm } from './components/stepper-form'
-import { SuccessView } from './components/success-view'
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -13,6 +10,9 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import { CheckoutInfo } from './components/checkout-info'
+import { StepperForm } from './components/stepper-form'
+import { SuccessView } from './components/success-view'
 
 const CheckoutPage = () => {
     const [isSuccess, setIsSuccess] = useState(false)
@@ -38,7 +38,7 @@ const CheckoutPage = () => {
                 <SuccessView />
             ) : (
                 <>
-                    <h1 className='mt-6 text-center text-[28px] font-semibold max-md:text-lg'>
+                    <h1 className='mt-6 text-center text-2xl font-semibold max-md:text-lg'>
                         Оформлення замовлення
                     </h1>
                     <div className='mt-20 flex items-start justify-between gap-x-20'>

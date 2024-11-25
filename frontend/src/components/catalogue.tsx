@@ -22,7 +22,7 @@ export const Catalogue = ({ className, activeTab }: CatalogueProps) => {
     return (
         <section
             className={cn(' max-md:mt-16 max-lg:min-h-[640px] max-md:min-h-[540px] container', className)}>
-            <h2 className='sr-only text-left text-[28px] font-bold'>Каталог квітів</h2>
+            <h2 className='sr-only text-left text-2xl font-bold'>Каталог квітів</h2>
 
             <Carousel
                 opts={{
@@ -30,7 +30,7 @@ export const Catalogue = ({ className, activeTab }: CatalogueProps) => {
                     loop: true,
                     dragFree: true
                 }}>
-                <div className='flex h-[490px] max-lg:h-64 w-fit flex-col items-start justify-between rounded-[22px] bg-primary max-lg:w-3/4 max-lg:mx-auto py-6 pl-6 pr-16 max-lg:p-4 max-lg:!pb-16 max-lg:relative max-sm:w-[90%]'>
+                <div className='flex h-[490px] max-lg:h-64 w-fit flex-col items-start justify-between rounded-3xl bg-primary max-lg:w-3/4 max-lg:mx-auto py-6 pl-6 pr-16 max-lg:p-4 max-lg:!pb-16 max-lg:relative max-sm:w-[90%]'>
 
                     <div className='relative flex w-fit items-center gap-x-4 pt-10 max-lg:absolute max-lg:right-32'>
                         <CarouselPrevious className='left-0 border-accent text-accent' />
@@ -41,18 +41,18 @@ export const Catalogue = ({ className, activeTab }: CatalogueProps) => {
                         defaultValue={activeTab}>
                         <TabsList className='flex flex-col items-start gap-y-2 bg-transparent p-0 h-full'>
                             <TabsTrigger
-                                className='bg-transparent text-left text-[22px] max-md:text-base text-accent/50 hover:text-background data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:hover:text-background'
+                                className='bg-transparent text-left text-2xl max-md:text-base text-accent/50 hover:text-background data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:hover:text-background'
                                 value='promo'>
                                 <DiamondPercent className='mr-2 !size-6' /> Акції
                             </TabsTrigger>
 
                             <TabsTrigger
-                                className='bg-transparent text-left text-[22px] max-md:text-base text-accent/50 hover:text-background data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:hover:text-background'
+                                className='bg-transparent text-left text-2xl max-md:text-base text-accent/50 hover:text-background data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:hover:text-background'
                                 value='best-sellers'>
                                 Бестселери
                             </TabsTrigger>
                             <TabsTrigger
-                                className='bg-transparent text-left text-[22px] max-md:text-base text-accent/50 hover:text-background data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:hover:text-background'
+                                className='bg-transparent text-left text-2xl max-md:text-base text-accent/50 hover:text-background data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:hover:text-background'
                                 value='similar'>
                                 Суміжні товари
                             </TabsTrigger>
@@ -100,7 +100,7 @@ export const Catalogue = ({ className, activeTab }: CatalogueProps) => {
 
                     <Link className='block max-lg:ml-auto' href='/catalogue'>
                         <Button
-                            className='group text-[22px] max-md:text-base text-accent'
+                            className='group text-2xl max-md:text-base text-accent'
                             variant='link'>
                             До каталогу
                             <ArrowRight

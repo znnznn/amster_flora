@@ -1,10 +1,16 @@
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export const FlowerInfo = () => {
     return (
         <Tabs
             defaultValue='composition'
-            className='mt-12 h-40 px-20 max-lg:px-16 max-md:px-10 max-sm:px-3'>
+            className='mt-12 container max-md:hidden'>
             <TabsList className='bg-transparent'>
                 <TabsTrigger
                     className='rounded-none border-b bg-transparent px-8 text-lg !shadow-none data-[state=active]:border-b-primary'
@@ -68,3 +74,61 @@ export const FlowerInfo = () => {
         </Tabs>
     )
 }
+
+
+
+
+export const FlowerInfoAccordion = () => {
+  return (
+    <Accordion type="single" collapsible className="mt-8 container max-md:block hidden">
+      <AccordionItem value="composition">
+        <AccordionTrigger className="text-lg font-medium">Склад</AccordionTrigger>
+        <AccordionContent className="text-lg">
+          <p>
+            <span className="font-medium">Квіти: </span>
+            гортензія, троянда, орнітогалум, еустома, клематис, астранція
+          </p>
+          <p>
+            <span className="font-medium">Декоративні матеріали: </span>
+            флористичний пакувальний папір, стрічка
+          </p>
+          <p className="mt-4">
+            <span className="font-medium">Увага: </span>
+            букет зовні може відрізнятися від зображення на сайті, склад
+            залишається без змін.
+          </p>
+        </AccordionContent>
+      </AccordionItem>
+
+      <AccordionItem value="specs">
+        <AccordionTrigger className="text-lg font-medium">Характеристики</AccordionTrigger>
+        <AccordionContent className="text-lg">
+          <p>
+            <span className="font-medium">Квіти: </span>
+            гортензія, троянда, орнітогалум, еустома, клематис, астранція
+          </p>
+          <p>
+            <span className="font-medium">Декоративні матеріали: </span>
+            флористичний пакувальний папір, стрічка
+          </p>
+        </AccordionContent>
+      </AccordionItem>
+
+      <AccordionItem value="payment-and-delivery">
+        <AccordionTrigger className="text-lg font-medium">Доставка і оплата</AccordionTrigger>
+        <AccordionContent className="text-lg">
+          <p>
+            <span className="font-medium">Квіти: </span>
+            гортензія, троянда, орнітогалум, еустома, клематис, астранція
+          </p>
+          <p className="mt-4">
+            <span className="font-medium">Увага: </span>
+            букет зовні може відрізнятися від зображення на сайті, склад
+            залишається без змін.
+          </p>
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  )
+}
+

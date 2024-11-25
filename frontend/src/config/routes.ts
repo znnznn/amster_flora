@@ -5,7 +5,8 @@ export const publicRoutes = [
     '/payment-and-delivery',
     '/promo',
     '/search',
-    '/catalogue'
+    '/catalogue',
+    'flower/:id'
 ]
 
 export const defaultLoginRedirect = '/'

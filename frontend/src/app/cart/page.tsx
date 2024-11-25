@@ -1,6 +1,5 @@
 import Link from 'next/link'
 
-import { CartProduct } from './components/cart-product'
 import { Catalogue } from '@/components/catalogue'
 import {
     Breadcrumb,
@@ -11,6 +10,7 @@ import {
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
 import { Button } from '@/components/ui/button'
+import { CartProduct } from './components/cart-product'
 
 const CartPage = () => {
     return (
@@ -27,7 +27,7 @@ const CartPage = () => {
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
-                <h1 className='mt-4 text-center text-[28px] font-semibold max-md:text-lg'>
+                <h1 className='mt-4 text-center text-2xl font-semibold max-md:text-lg'>
                     Кошик
                 </h1>
 

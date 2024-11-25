@@ -5,8 +5,8 @@ import flower from '@/assets/images/flower.jpg'
 
 export const BlogPost = () => {
     return (
-        <article className='group flex h-72 items-start justify-between gap-x-5 rounded-[22px] border p-5 transition-colors hover:border-accent max-lg:h-fit max-md:p-4'>
-            <div className='size-64 shrink-0 overflow-hidden rounded-[22px] max-lg:hidden'>
+        <article className='group flex h-72 items-start justify-between gap-x-5 rounded-3xl border p-5 transition-colors hover:border-accent max-lg:h-fit max-md:p-4'>
+            <div className='size-64 shrink-0 overflow-hidden rounded-3xl max-lg:hidden'>
                 <Image
                     src={flower}
                     alt='Півоній'
@@ -14,7 +14,7 @@ export const BlogPost = () => {
                 />
             </div>
             <div className='flex min-h-full flex-col justify-between gap-y-5 max-lg:hidden'>
-                <h1 className='text-[22px] font-medium'>
+                <h1 className='text-2xl font-medium'>
                     "Квіти: Різноманіття і Догляд за Красою Природи"
                 </h1>
                 <p className='text-lg'>
@@ -30,14 +30,14 @@ export const BlogPost = () => {
 
             <div className='hidden min-h-full flex-col justify-between gap-y-5 max-lg:flex'>
                 <div className='flex items-start gap-x-5'>
-                    <div className='hidden size-40 shrink-0 overflow-hidden rounded-[22px] max-lg:block max-sm:size-32'>
+                    <div className='hidden size-40 shrink-0 overflow-hidden rounded-3xl max-lg:block max-sm:size-32'>
                         <Image
                             src={flower}
                             alt='Півоній'
                             className='size-full object-cover'
                         />
                     </div>
-                    <h1 className='max-w-96 text-[22px] font-medium max-md:text-lg'>
+                    <h1 className='max-w-96 text-2xl font-medium max-md:text-lg'>
                         "Квіти: Різноманіття і Догляд за Красою Природи"
                     </h1>
                 </div>

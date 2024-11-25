@@ -21,7 +21,7 @@ export const ProductCard = () => {
         <article
             onMouseEnter={() => setIsOverlayVisible(true)}
             onMouseLeave={() => setIsOverlayVisible(false)}
-            className='relative overflow-hidden rounded-[22px] border bg-background'>
+            className='relative overflow-hidden rounded-3xl border bg-background'>
             <button
                 onClick={toggleFavorite}
                 className={cn(

@@ -2,12 +2,6 @@
 
 import { Filter } from 'lucide-react'
 
-import { MobileActiveFilters } from './active-filters'
-import { AvailabilityFilter } from './filters/availability'
-import { ColorFilter } from './filters/color'
-import { FlowerFilter } from './filters/flower'
-import { PriceFilter } from './filters/price'
-import { SizeFilter } from './filters/size'
 import {
     Accordion,
     AccordionContent,
@@ -22,6 +16,12 @@ import {
     SheetTitle,
     SheetTrigger
 } from '@/components/ui/sheet'
+import { MobileActiveFilters } from './active-filters'
+import { AvailabilityFilter } from './filters/availability'
+import { ColorFilter } from './filters/color'
+import { FlowerFilter } from './filters/flower'
+import { PriceFilter } from './filters/price'
+import { SizeFilter } from './filters/size'
 
 export const FiltersSidebar = () => {
     return (
@@ -31,7 +31,7 @@ export const FiltersSidebar = () => {
                     className='border-none'
                     value='flower'>
                     <AccordionTrigger className='py-0'>
-                        <h3 className='text-[22px] font-medium text-accent'>Квітка</h3>
+                        <h3 className='text-2xl font-medium text-accent'>Квітка</h3>
                     </AccordionTrigger>
                     <AccordionContent>
                         <FlowerFilter />
@@ -41,7 +41,7 @@ export const FiltersSidebar = () => {
                     className='border-none'
                     value='availability'>
                     <AccordionTrigger className='pb-0 pt-6'>
-                        <h3 className='text-[22px] font-medium text-accent'>Наявність</h3>
+                        <h3 className='text-2xl font-medium text-accent'>Наявність</h3>
                     </AccordionTrigger>
                     <AccordionContent>
                         <AvailabilityFilter />
@@ -51,7 +51,7 @@ export const FiltersSidebar = () => {
                     className='border-none'
                     value='color'>
                     <AccordionTrigger className='pb-0 pt-6'>
-                        <h3 className='text-[22px] font-medium text-accent'>Колір</h3>
+                        <h3 className='text-2xl font-medium text-accent'>Колір</h3>
                     </AccordionTrigger>
                     <AccordionContent>
                         <ColorFilter />
@@ -89,7 +89,7 @@ export const MobileFilterSidebar = () => {
                             className='border-none'
                             value='flower'>
                             <AccordionTrigger className='py-0'>
-                                <h3 className='text-[22px] font-medium text-accent'>
+                                <h3 className='text-2xl font-medium text-accent'>
                                     Квітка
                                 </h3>
                             </AccordionTrigger>
@@ -101,7 +101,7 @@ export const MobileFilterSidebar = () => {
                             className='border-none'
                             value='availability'>
                             <AccordionTrigger className='pb-0 pt-6'>
-                                <h3 className='text-[22px] font-medium text-accent'>
+                                <h3 className='text-2xl font-medium text-accent'>
                                     Наявність
                                 </h3>
                             </AccordionTrigger>
@@ -113,7 +113,7 @@ export const MobileFilterSidebar = () => {
                             className='border-none'
                             value='color'>
                             <AccordionTrigger className='pb-0 pt-6'>
-                                <h3 className='text-[22px] font-medium text-accent'>
+                                <h3 className='text-2xl font-medium text-accent'>
                                     Колір
                                 </h3>
                             </AccordionTrigger>

@@ -7,7 +7,7 @@ export const Account = () => {
             <li>
                 <Link
                     href='/account/profile'
-                    className='group flex h-full flex-col gap-y-5 rounded-[22px] border p-6 transition-colors hover:border-accent max-md:p-5'>
+                    className='group flex h-full flex-col gap-y-5 rounded-3xl border p-6 transition-colors hover:border-accent max-md:p-5'>
                     <h3 className='flex items-center gap-x-4 text-lg font-medium max-md:text-sm'>
                         <UserRound className='size-6' />
                         Персональні дані
@@ -24,7 +24,7 @@ export const Account = () => {
             <li>
                 <Link
                     href='/account/favorite'
-                    className='group flex h-full flex-col gap-y-5 rounded-[22px] border p-6 transition-colors hover:border-accent'>
+                    className='group flex h-full flex-col gap-y-5 rounded-3xl border p-6 transition-colors hover:border-accent'>
                     <h3 className='flex items-center gap-x-4 text-lg font-medium max-md:text-sm'>
                         <Heart className='size-6' />
                         Збережене
@@ -41,7 +41,7 @@ export const Account = () => {
             <li>
                 <Link
                     href='/account/orders'
-                    className='group flex h-full flex-col gap-y-5 rounded-[22px] border p-6 transition-colors hover:border-accent'>
+                    className='group flex h-full flex-col gap-y-5 rounded-3xl border p-6 transition-colors hover:border-accent'>
                     <h3 className='flex items-center gap-x-4 text-lg font-medium max-md:text-sm'>
                         <ShoppingBag className='size-6' />
                         Мої замовлення
@@ -58,7 +58,7 @@ export const Account = () => {
             <li>
                 <Link
                     href='/account/watched'
-                    className='group flex h-full flex-col gap-y-5 rounded-[22px] border p-6 transition-colors hover:border-accent'>
+                    className='group flex h-full flex-col gap-y-5 rounded-3xl border p-6 transition-colors hover:border-accent'>
                     <h3 className='flex items-center gap-x-4 text-lg font-medium max-md:text-sm'>
                         <Eye className='size-6' />
                         Переглянуті

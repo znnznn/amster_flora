@@ -4,30 +4,31 @@ import { CircleCheck, ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
 
-import { FlowerInfo } from './flower-info'
-import { FlowerSlider } from './flower-slider'
-import { AddGiftModal } from './modals/add-gift'
-import { AddLetterModal } from './modals/add-letter'
-import { QuickOrderModal } from './modals/quick-order'
 import flower from '@/assets/images/flower.jpg'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { FlowerInfo, FlowerInfoAccordion } from './flower-info'
+import { FlowerSlider } from './flower-slider'
+import { AddGiftModal } from './modals/add-gift'
+import { AddLetterModal } from './modals/add-letter'
+import { QuickOrderModal } from './modals/quick-order'
 
 export const Flower = () => {
     const [size, setSize] = useState('m')
 
     return (
         <>
-            <div className='mt-8 flex h-[700px] w-full items-start gap-x-14 rounded-[22px] bg-primary px-20 py-8 text-accent max-lg:px-16'>
-                <FlowerSlider />
+            <div className='mt-8 h-[700px]   rounded-3xl bg-primary py-8 text-accent '>
+<div className='container flex items-start max-2xl:justify-center gap-x-14  h-full'>
+<FlowerSlider />
                 <Image
                     src={flower}
                     alt={'Півоній'}
-                    className='h-full rounded-[22px] object-cover'
+                    className='h-full rounded-3xl object-cover max-2xl:hidden'
                 />
                 <div className='flex flex-col gap-y-11'>
-                    <h2 className='text-[28px] font-semibold max-md:text-lg'>
+                    <h2 className='text-2xl font-semibold max-md:text-lg'>
                         Букет півоній
                     </h2>
 
@@ -40,7 +41,7 @@ export const Flower = () => {
 
                     <div className='flex items-center gap-x-4'>
                         <span className='text-accent/40 line-through'>2 300₴</span>
-                        <span className='text-[22px] font-medium'>2 000₴</span>
+                        <span className='text-2xl font-medium'>2 000₴</span>
                     </div>
 
                     <div className='flex items-end justify-between gap-x-4'>
@@ -110,8 +111,10 @@ export const Flower = () => {
                         </Button>
                     </div>
                 </div>
+</div>
             </div>
             <FlowerInfo />
+            <FlowerInfoAccordion/>
         </>
     )
 }

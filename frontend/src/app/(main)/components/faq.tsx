@@ -8,7 +8,7 @@ import {
 export const Faq = () => {
     return (
         <section className='mt-28 max-md:mt-16 container'>
-            <h2 className='text-center text-[28px] font-bold max-md:text-lg'>
+            <h2 className='text-center text-2xl font-bold max-md:text-lg'>
                 Часті питання
             </h2>
 

@@ -1,6 +1,3 @@
-import { Courier } from './components/courier'
-import { Post } from './components/post'
-import { SelfDelivery } from './components/self-delivery'
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -9,6 +6,9 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import { Courier } from './components/courier'
+import { Post } from './components/post'
+import { SelfDelivery } from './components/self-delivery'
 
 const PaymentAndDeliveryPage = () => {
     return (
@@ -25,7 +25,7 @@ const PaymentAndDeliveryPage = () => {
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
-                <h1 className='mt-4 text-center text-[28px] font-semibold max-md:text-lg'>
+                <h1 className='mt-4 text-center text-2xl font-semibold max-md:text-lg'>
                     Оплата і доставка
                 </h1>
             </section>
@@ -34,7 +34,7 @@ const PaymentAndDeliveryPage = () => {
 
             <Courier />
             <section className='mt-16 space-y-4 px-20 max-lg:px-16 max-md:px-10 max-sm:mt-8 max-sm:px-3'>
-                <h2 className='sr-only text-[28px] font-semibold max-md:text-lg'>
+                <h2 className='sr-only text-2xl font-semibold max-md:text-lg'>
                     Деталі замовлення
                 </h2>
                 <p>

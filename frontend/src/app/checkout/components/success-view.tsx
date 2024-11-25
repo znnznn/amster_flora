@@ -11,9 +11,9 @@ export const SuccessView = () => {
                 <Image
                     src={CheckoutSuccess}
                     alt='flower'
-                    className='h-[180px] w-full rounded-[22px] object-cover'
+                    className='h-[180px] w-full rounded-3xl object-cover'
                 />
-                <h1 className='text-center text-[28px] font-semibold max-md:text-lg'>
+                <h1 className='text-center text-2xl font-semibold max-md:text-lg'>
                     Дякуємо за ваше замовлення!
                 </h1>
                 <div className='flex w-full flex-col gap-y-2'>
@@ -29,7 +29,7 @@ export const SuccessView = () => {
                         <span>Кількість товарів</span>
                         <span>5</span>
                     </div>
-                    <div className='flex items-center justify-between gap-x-6 text-[22px] font-medium'>
+                    <div className='flex items-center justify-between gap-x-6 text-2xl font-medium'>
                         <span>Загальна сумма:</span>
                         <span>5444</span>
                     </div>

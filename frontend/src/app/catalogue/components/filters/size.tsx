@@ -7,7 +7,7 @@ export const SizeFilter = () => {
 
     return (
         <div>
-            <h3 className='text-[22px] font-medium text-accent'>Розмір</h3>
+            <h3 className='text-2xl font-medium text-accent'>Розмір</h3>
             <ToggleGroup
                 defaultValue={size}
                 onValueChange={setSize}

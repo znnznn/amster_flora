@@ -1,9 +1,9 @@
 import { CircleCheck } from 'lucide-react'
 import Image from 'next/image'
 
-import { StepperInput } from './stepper-input'
 import flower from '@/assets/images/flower.jpg'
 import { AddLetterModal } from '@/components/add-letter'
+import { StepperInput } from './stepper-input'
 
 export const CartProduct = () => {
     return (
@@ -15,7 +15,7 @@ export const CartProduct = () => {
             />
             <div className='flex h-full flex-col items-start justify-between max-lg:hidden'>
                 <div>
-                    <h2 className='text-[22px] font-semibold max-lg:text-lg'>
+                    <h2 className='text-2xl font-semibold max-lg:text-lg'>
                         Букет півоній
                     </h2>
                     <div className='mt-1.5 flex items-center gap-x-2 text-sm text-muted max-lg:text-xs'>
@@ -26,7 +26,7 @@ export const CartProduct = () => {
             </div>
             <div className='flex items-center gap-x-4 max-lg:hidden'>
                 <span className='text-sm text-accent line-through'>2 300₴</span>
-                <span className='text-[22px] font-medium max-lg:text-base'>2 000₴</span>
+                <span className='text-2xl font-medium max-lg:text-base'>2 000₴</span>
             </div>
             <StepperInput
                 className='max-lg:hidden'
@@ -37,7 +37,7 @@ export const CartProduct = () => {
 
             <div className='hidden h-full flex-col items-start justify-between max-lg:flex'>
                 <div>
-                    <h2 className='text-[22px] font-semibold max-lg:text-lg'>
+                    <h2 className='text-2xl font-semibold max-lg:text-lg'>
                         Букет півоній
                     </h2>
                     <div className='mt-1.5 flex items-center gap-x-2 text-sm text-muted max-lg:text-xs'>
@@ -48,7 +48,7 @@ export const CartProduct = () => {
             </div>
             <div className='hidden items-center gap-x-4 max-lg:flex'>
                 <span className='text-sm text-accent line-through'>2 300₴</span>
-                <span className='text-[22px] font-medium max-lg:text-base'>2 000₴</span>
+                <span className='text-2xl font-medium max-lg:text-base'>2 000₴</span>
             </div>
             <StepperInput
                 className='hidden max-lg:flex'

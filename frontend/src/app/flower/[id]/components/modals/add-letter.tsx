@@ -106,7 +106,7 @@ export const AddLetterModal = () => {
 
 const GiftCard = () => {
     return (
-        <div className='flex h-36 items-center justify-between gap-x-6 overflow-hidden rounded-[22px] bg-background'>
+        <div className='flex h-36 items-center justify-between gap-x-6 overflow-hidden rounded-3xl bg-background'>
             <div className='px-5 py-7'>
                 <div className='flex items-center justify-between gap-x-4 text-lg font-medium'>
                     <span>Ваза</span>
@@ -120,7 +120,7 @@ const GiftCard = () => {
                 </Button>
             </div>
             <Image
-                className='h-full w-48 rounded-[22px] object-cover'
+                className='h-full w-48 rounded-3xl object-cover'
                 src={flower}
                 alt='Флорес'
             />

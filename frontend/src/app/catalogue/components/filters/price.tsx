@@ -13,7 +13,7 @@ export const PriceFilter = () => {
 
     return (
         <div>
-            <h3 className='text-[22px] font-medium text-accent'>Вартість</h3>
+            <h3 className='text-2xl font-medium text-accent'>Вартість</h3>
             <DualSlider
                 className='mt-4 w-full'
                 step={5}

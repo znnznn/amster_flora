@@ -1,14 +1,14 @@
 import Link from 'next/link'
 
-import { CheckoutCard } from './checkout-card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { CheckoutCard } from './checkout-card'
 
 export const CheckoutInfo = () => {
     return (
         <div className='w-full max-w-xl space-y-8 rounded-l-[22px] bg-accent p-10'>
             <div className='flex items-center justify-between gap-x-6'>
-                <h2 className='text-[22px] font-medium text-primary'>Ваше замовлення</h2>
+                <h2 className='text-2xl font-medium text-primary'>Ваше замовлення</h2>
                 <Button variant='link'>Редагувати</Button>
             </div>
 
@@ -56,12 +56,12 @@ export const CheckoutInfo = () => {
 
             <div>
                 <div className='flex items-center justify-between gap-x-6'>
-                    <span className='text-[22px] font-medium text-primary'>Знижка</span>
-                    <span className='text-[22px] font-medium text-primary'>330 ₴</span>
+                    <span className='text-2xl font-medium text-primary'>Знижка</span>
+                    <span className='text-2xl font-medium text-primary'>330 ₴</span>
                 </div>
                 <div className='mt-1 flex items-center justify-between gap-x-6'>
-                    <span className='text-[22px] font-medium text-primary'>Разом</span>
-                    <span className='text-[22px] font-medium text-primary'>2330 ₴</span>
+                    <span className='text-2xl font-medium text-primary'>Разом</span>
+                    <span className='text-2xl font-medium text-primary'>2330 ₴</span>
                 </div>
             </div>
         </div>

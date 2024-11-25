@@ -1,4 +1,3 @@
-import { Flower } from './components/flower'
 import { Advantages } from '@/app/(main)/components/advantages'
 import { Catalogue } from '@/components/catalogue'
 import {
@@ -9,6 +8,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import { Flower } from './components/flower'
 
 interface FlowerProps {
     params: {
@@ -41,7 +41,7 @@ const FlowerPage = ({ params }: FlowerProps) => {
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
-                <h1 className='mt-4 text-center text-[28px] font-semibold max-md:text-lg'>
+                <h1 className='mt-4 text-center text-2xl font-semibold max-md:text-lg'>
                     {params.id}
                 </h1>
 

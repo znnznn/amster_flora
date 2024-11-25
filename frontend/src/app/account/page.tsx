@@ -1,5 +1,3 @@
-import { Account } from './components/account'
-import { LogOutButton } from './components/log-out'
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -8,6 +6,8 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import { Account } from './components/account'
+import { LogOutButton } from './components/log-out'
 
 const AccountPage = () => {
     return (
@@ -24,7 +24,7 @@ const AccountPage = () => {
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
-                <h1 className='text-center text-[28px] font-semibold max-md:text-lg'>
+                <h1 className='text-center text-2xl font-semibold max-md:text-lg'>
                     Мій акаунт
                 </h1>
                 <LogOutButton className='max-md:hidden' />

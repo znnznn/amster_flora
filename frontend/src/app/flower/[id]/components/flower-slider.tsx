@@ -15,7 +15,7 @@ export const FlowerSlider = () => {
             opts={{
                 loop: true
             }}
-            className='flex w-52 flex-col items-center justify-center gap-y-4'
+            className='flex w-52 flex-col items-center justify-center gap-y-4 max-2xl:hidden'
             orientation='vertical'>
             <CarouselPrevious className='static translate-x-0' />
 
@@ -24,28 +24,28 @@ export const FlowerSlider = () => {
                     <Image
                         src={flower}
                         alt={'Півоній'}
-                        className='h-40 rounded-[22px] object-cover'
+                        className='h-40 rounded-3xl object-cover'
                     />
                 </CarouselItem>
                 <CarouselItem className='basis-1/3'>
                     <Image
                         src={flower}
                         alt={'Півоній'}
-                        className='h-40 rounded-[22px] object-cover'
+                        className='h-40 rounded-3xl object-cover'
                     />
                 </CarouselItem>
                 <CarouselItem className='basis-1/3'>
                     <Image
                         src={flower}
                         alt={'Півоній'}
-                        className='h-40 rounded-[22px] object-cover'
+                        className='h-40 rounded-3xl object-cover'
                     />
                 </CarouselItem>
                 <CarouselItem className='basis-1/3'>
                     <Image
                         src={flower}
                         alt={'Півоній'}
-                        className='h-40 rounded-[22px] object-cover'
+                        className='h-40 rounded-3xl object-cover'
                     />
                 </CarouselItem>
             </CarouselContent>

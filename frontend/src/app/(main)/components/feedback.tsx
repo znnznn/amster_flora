@@ -22,7 +22,7 @@ export const Feedback = () => {
                <div>
                  <div className='relative mx-auto flex w-fit items-center gap-x-4 '>
                     <CarouselPrevious className='border-primary text-primary' />
-                    <h2 className='text-left text-[28px] font-bold max-md:text-lg'>
+                    <h2 className='text-left text-2xl font-bold max-md:text-lg'>
                         Відгуки
                     </h2>
                     <CarouselNext className='border-primary text-primary' />
@@ -48,7 +48,7 @@ export const Feedback = () => {
 
 const FeedbackCard = () => {
     return (
-        <div className='rounded-[22px] bg-primary px-6 py-8'>
+        <div className='rounded-3xl bg-primary px-6 py-8'>
             <div className='flex items-center gap-x-8 max-sm:gap-x-4'>
                 <Image
                     src={avatar}
@@ -56,7 +56,7 @@ const FeedbackCard = () => {
                     className='size-20 shrink-0 rounded-full max-md:size-16'
                 />
                 <div className='flex flex-col gap-y-2'>
-                    <h3 className='text-[22px] font-medium text-accent max-md:text-base'>
+                    <h3 className='text-2xl font-medium text-accent max-md:text-base'>
                         Dakota Grant
                     </h3>
                     <div className='flex items-center gap-x-2'>

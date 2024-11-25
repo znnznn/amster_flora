@@ -1,7 +1,7 @@
 export const Advantages = () => {
     return (
         <section className='mt-28 container max-md:mt-16 '>
-            <h2 className='sr-only text-center text-[28px] font-bold max-md:text-lg'>
+            <h2 className='sr-only text-center text-2xl font-bold max-md:text-lg'>
                 Переваги
             </h2>
 

@@ -1,15 +1,15 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { CitySelect } from './city-select'
 import flower from '@/assets/images/flower.jpg'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { CitySelect } from './city-select'
 
 export const SelfDelivery = () => {
     return (
         <section className='mt-12 px-20 max-lg:px-16 max-md:px-10 max-sm:mt-8 max-sm:px-3'>
-            <h2 className='text-[28px] font-semibold max-md:text-lg'>Самовивіз</h2>
+            <h2 className='text-2xl font-semibold max-md:text-lg'>Самовивіз</h2>
 
             <div className='mr-8 mt-10 flex items-start justify-between gap-x-10'>
                 <div className='w-1/2'>
@@ -19,7 +19,7 @@ export const SelfDelivery = () => {
                             <Image
                                 src={flower}
                                 alt='Півоній'
-                                className='h-40 w-full rounded-[22px] object-cover'
+                                className='h-40 w-full rounded-3xl object-cover'
                             />
                             <div className='mt-6 flex flex-col gap-y-5'>
                                 <h1 className='text-lg font-medium'>
@@ -44,7 +44,7 @@ export const SelfDelivery = () => {
                             <Image
                                 src={flower}
                                 alt='Півоній'
-                                className='h-40 w-full rounded-[22px] object-cover'
+                                className='h-40 w-full rounded-3xl object-cover'
                             />
                             <div className='mt-6 flex flex-col gap-y-5'>
                                 <h1 className='text-lg font-medium'>
@@ -68,7 +68,7 @@ export const SelfDelivery = () => {
                     </ScrollArea>
                 </div>
                 <iframe
-                    className='h-96 w-full rounded-[22px] border-none'
+                    className='h-96 w-full rounded-3xl border-none'
                     src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2530.7586988519447!2d26.271852576726296!3d50.63159927162738!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472f15c3b586a6f9%3A0x578ed8236f6d0a32!2zQU1TVEVSIC0g0JzQsNCz0LDQt9C40L0g0JrQstGW0YLRltCy!5e0!3m2!1sru!2sua!4v1729455794707!5m2!1sru!2sua'
                     width='600'
                     height='450'

@@ -59,6 +59,8 @@ const config: Config = {
                 }
             },
             borderRadius: {
+                '4xl': '2rem',
+                '3xl': '1.375rem',
                 lg: 'var(--radius)',
                 md: 'calc(var(--radius) - 2px)',
                 sm: 'calc(var(--radius) - 4px)'
@@ -104,7 +106,22 @@ const config: Config = {
                 'accordion-up': 'accordion-up 0.2s ease-out',
                 'spin-slow': 'spin 25s linear infinite'
             }
-        }
+        },
+        fontSize: {
+            xs: ['0.75rem', { lineHeight: '1.3rem' }],
+            sm: ['0.875rem', { lineHeight: '1.3rem' }],
+            base: ['1rem', { lineHeight: '1.25rem' }],
+            lg: ['1.125rem', { lineHeight: '1.55rem' }],
+            xl: ['1.25rem', { lineHeight: '1.5rem' }],
+            '2xl': ['1.375rem', { lineHeight: '1.625rem' }],
+            '3xl': ['1.75rem', { lineHeight: '2.125rem' }],
+            '4xl': ['2rem', { lineHeight: '2.5rem' }],
+            '5xl': ['2.25rem', { lineHeight: '2.75rem' }],
+            '6xl': ['2.75rem', { lineHeight: '2.875rem' }],
+            '7xl': ['4rem', { lineHeight: '4.375rem' }],
+        },
+
+
     },
     plugins: [require('tailwindcss-animate')]
 }

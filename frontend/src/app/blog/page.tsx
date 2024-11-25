@@ -1,6 +1,5 @@
 import Link from 'next/link'
 
-import { BlogPost } from './components/blog-post'
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -9,6 +8,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import { BlogPost } from './components/blog-post'
 
 const BlogPage = () => {
     return (
@@ -24,7 +24,7 @@ const BlogPage = () => {
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <h1 className='mt-4 text-center text-[28px] font-semibold max-md:text-lg'>
+            <h1 className='mt-4 text-center text-2xl font-semibold max-md:text-lg'>
                 Блог
             </h1>
 

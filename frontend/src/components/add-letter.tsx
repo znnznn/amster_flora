@@ -1,7 +1,6 @@
 import { BookHeart, ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
 
-import { ScrollArea } from './ui/scroll-area'
 import flower from '@/assets/images/flower.jpg'
 import { Button } from '@/components/ui/button'
 import {
@@ -19,6 +18,7 @@ import {
     DialogTrigger
 } from '@/components/ui/dialog'
 import { cn } from '@/lib/utils'
+import { ScrollArea } from './ui/scroll-area'
 
 export const AddLetterModal = ({
     className
@@ -111,7 +111,7 @@ export const AddLetterModal = ({
 
 const GiftCard = () => {
     return (
-        <div className='flex h-36 max-w-full items-center justify-between gap-x-6 overflow-hidden rounded-[22px] bg-background'>
+        <div className='flex h-36 max-w-full items-center justify-between gap-x-6 overflow-hidden rounded-3xl bg-background'>
             <div className='px-5 py-7'>
                 <div className='flex items-center justify-between gap-x-4 text-lg font-medium'>
                     <span>Ваза</span>
@@ -125,7 +125,7 @@ const GiftCard = () => {
                 </Button>
             </div>
             <Image
-                className='h-full w-48 rounded-[22px] object-cover max-md:w-36'
+                className='h-full w-48 rounded-3xl object-cover max-md:w-36'
                 src={flower}
                 alt='Флорес'
             />

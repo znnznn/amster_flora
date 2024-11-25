@@ -37,7 +37,7 @@ const BlogPostPage = ({ params }: BlogPostProps) => {
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <h1 className='mt-4 text-center text-[28px] font-semibold max-md:text-lg'>
+            <h1 className='mt-4 text-center text-2xl font-semibold max-md:text-lg'>
                 {params.id}
             </h1>
 
