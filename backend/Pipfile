@@ -20,6 +20,10 @@ google-auth = "*"
 requests = "*"
 django-mptt = "*"
 djangorestframework-recursive = "*"
+celery = {extras = ["redis"], version = "*"}
+redis = "*"
+django-celery-results = "*"
+django-celery-beat = "*"
 
 [dev-packages]
 

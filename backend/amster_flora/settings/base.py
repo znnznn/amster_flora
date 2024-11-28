@@ -33,11 +33,13 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_yasg',
     'debug_toolbar',
+    'django_celery_results',
 
     # own apps
     'users',
     'products',
     'shops',
+    'key_crm',
 ]
 
 AUTH_USER_MODEL = "users.User"
@@ -118,6 +120,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ADMIN_SITE_HEADER = "Amster Flora administration"
 ADMIN_SITE_TITLE = "Amster Flora"
 
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": config('REDIS_URL', default='redis://redis:6379'),
+    }
+}
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -164,3 +173,14 @@ CORS_ORIGIN_ALLOW_ALL = True
 FE_URL = config('FE_URL', default='localhost:3000')
 GOOGLE_AUTH_CLIENT_ID = config('GOOGLE_AUTH_CLIENT_ID', default='')
 GOOGLE_AUTH_CLIENT_SECRET = config('GOOGLE_AUTH_CLIENT_SECRET', default='')
+
+KEY_CRM_API_KEY = config('KEY_CRM_API_KEY', default='')
+KEY_CRM_SOURCE_ID = config('KEY_CRM_SOURCE_ID', default=8)
+KET_CRM_URL = config('KEY_CRM_URL', default='https://openapi.keycrm.app/v1')
+
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_RESULT_EXTENDED = True
+CELERY_BROKER_URL = config('REDIS_URL', default='redis://redis:6379')
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'

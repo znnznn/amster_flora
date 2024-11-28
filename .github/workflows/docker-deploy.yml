@@ -36,6 +36,9 @@ jobs:
             GOOGLE_AUTH_CLIENT_SECRET=${{ secrets.GOOGLE_AUTH_CLIENT_SECRET }}
             FACEBOOK_APP_ID=${{ secrets.FACEBOOK_APP_ID }}
             FACEBOOK_APP_SECRET=${{ secrets.FACEBOOK_APP_SECRET }}
+            REDIS_URL=${{ secrets.REDIS_URL }}
+            BROKER_URL=${{ secrets.BROKER_URL }}
+            KEY_CRM_API_KEY=${{ secrets.KEY_CRM_API_KEY }}
           directory: ${{ github.workspace }}/backend
       - name: Create frontend .env
         uses: DeveloperRic/action-create-env@v1.0.2

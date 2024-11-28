@@ -21,6 +21,7 @@ router.register('products', ProductsViewSet)
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
+    path('key-crm/', include('key_crm.urls')),
     path('', include(router.urls)),
     # path('facebook/', customer_page),
     path('', include('auth.urls'), name="social-login"),
