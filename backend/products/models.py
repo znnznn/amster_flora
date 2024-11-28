@@ -3,6 +3,7 @@ from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
 from common.constants import Size
+from key_crm.models import KeyCRMProduct
 from shops.models import Shop
 from users.models import User
 
@@ -71,6 +72,5 @@ class WishList(models.Model):
 class Component(models.Model):
     """ Use for flower composition """
     variant = models.ForeignKey(Variant, on_delete=models.CASCADE, related_name='components')
-    key_crm_id = models.PositiveIntegerField(default=0)
-    origin_sku = models.CharField(max_length=255)
+    key_crm_product = models.ForeignKey(KeyCRMProduct, on_delete=models.CASCADE, related_name='components', null=True, blank=True)
     quantity = models.PositiveIntegerField(default=0)

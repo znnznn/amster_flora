@@ -1,4 +1,16 @@
 services:
+  redis:
+    image: redis
+  celery:
+    image: amster_flora_latest
+    volumes:
+      - ./backend:/app/backend
+    command: celery -A amster_flora worker --beat --loglevel=debug
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - backend
+      - redis
   db:
     image: postgres
     expose:

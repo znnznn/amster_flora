@@ -9,7 +9,7 @@ from products.models import Shop, Category, WishList, Image, Variant, Product, C
 class ComponentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Component
-        fields = ('id', 'key_crm_id', 'origin_sku', 'quantity')
+        fields = ('id', 'key_crm_product', 'quantity')
 
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
