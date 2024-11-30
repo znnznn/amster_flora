@@ -16,7 +16,7 @@ import { CataloguePagination } from './components/pagination'
 import { Products } from './components/products'
 
 const CataloguePage = async () => {
-    // const { data: products } = await getProducts()
+
 
     return (
         <>

@@ -3,10 +3,9 @@
 import { X } from 'lucide-react'
 import { useQueryState } from 'nuqs'
 
-import { SortingFilter } from './filters/sorting'
 import { Button } from '@/components/ui/button'
+import { SortingFilter } from './filters/sorting'
 
-// Define mapping objects to convert values to labels
 const colorLabels = {
     red: 'Червоний',
     yellow: 'Жовтий',

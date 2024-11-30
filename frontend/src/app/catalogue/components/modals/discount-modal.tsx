@@ -6,12 +6,12 @@ import { useForm } from 'react-hook-form'
 import { withMask } from 'use-mask-input'
 import { object, string, type infer as zodInfer } from 'zod'
 
-import type { User } from '@/api/users/users.types'
 import { SocialsButtons } from '@/components/socials-buttons'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { useAuth } from '@/hooks/use-auth'
 
 const loginSchema = object({
     username: string().min(1, {
@@ -25,10 +25,7 @@ const loginSchema = object({
 type LoginFormData = zodInfer<typeof loginSchema>
 
 export const DiscountModal = () => {
-    const userCookie = document.cookie
-        .split('; ')
-        .find((cookie) => cookie.startsWith('user='))
-    const currentUser = userCookie ? (JSON.parse(userCookie) as User) : ''
+    const { user } = useAuth()
 
     const form = useForm<LoginFormData>({
         resolver: zodResolver(loginSchema),
@@ -41,7 +38,7 @@ export const DiscountModal = () => {
     const onSubmit = (data: LoginFormData) => {
         console.log(data)
     }
-    const defaultOpen = currentUser ? currentUser.last_login !== null : false
+    const defaultOpen = user ? user.last_login !== null : false
 
     return (
         <Dialog defaultOpen={defaultOpen}>

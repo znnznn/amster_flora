@@ -4,12 +4,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { date, object, string, type infer as zodInfer } from 'zod'
 
-import type { User } from '@/api/users/users.types'
 import { Button } from '@/components/ui/button'
 import { DatePicker } from '@/components/ui/date-picker'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input, inputVariants } from '@/components/ui/input'
 import { PasswordWithReveal } from '@/components/ui/password-with-reveal'
+import { useAuth } from '@/hooks/use-auth'
 import { cn } from '@/lib/utils'
 import { withMask } from 'use-mask-input'
 
@@ -58,20 +58,19 @@ const profileSchema = object({
 type ContactsFormData = zodInfer<typeof profileSchema>
 
 export const ProfileForm = () => {
-    const currentUser = JSON.parse(
-        document.cookie
-            .split('; ')
-            .find((cookie) => cookie.startsWith('user='))
-            ?.split('=')[1] || ''
-    ) as User
+    const { user } = useAuth()
+
+    console.log(user);
+
+
 
     const form = useForm<ContactsFormData>({
         resolver: zodResolver(profileSchema),
         defaultValues: {
-            first_name: currentUser.first_name || '',
-            last_name: currentUser.last_name || '',
-            email: currentUser.email || '',
-            phone_number: currentUser.phone_number || '',
+            first_name: user?.first_name || '',
+            last_name: user?.last_name || '',
+            email: user?.email || '',
+            phone_number: user?.phone_number || '',
             password: ''
         }
     })

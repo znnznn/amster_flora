@@ -1,3 +1,4 @@
+'use client'
 import {
     Facebook,
     Heart,
@@ -8,16 +9,8 @@ import {
     UserRound,
     X
 } from 'lucide-react'
-import { cookies } from 'next/headers'
 import Link from 'next/link'
 
-import { AuthModal } from './auth/modal'
-import { CitySelect } from './city-select'
-import { CurrencySelect } from './currency-select'
-import { HeaderCatalogue } from './header-catalogue'
-import { LangSelect } from './lang-select'
-import { Logo } from './logo'
-import { Button } from './ui/button'
 import {
     Accordion,
     AccordionContent,
@@ -39,9 +32,17 @@ import {
     SheetTitle,
     SheetTrigger
 } from '@/components/ui/sheet'
+import { useAuth } from '@/hooks/use-auth'
+import { AuthModal } from './auth/modal'
+import { CitySelect } from './city-select'
+import { CurrencySelect } from './currency-select'
+import { HeaderCatalogue } from './header-catalogue'
+import { LangSelect } from './lang-select'
+import { Logo } from './logo'
+import { Button } from './ui/button'
 
 export const Header = () => {
-    const isAuth = !!cookies().get('access_token')?.value
+    const {isAuthenticated} = useAuth()
 
     return (
         <>
@@ -61,7 +62,7 @@ export const Header = () => {
                             </Link>
                         </li>
                         <li className='max-lg:hidden'>
-                            {isAuth ? (
+                            {isAuthenticated ? (
                                 <Link
                                     className='block p-1 transition-colors hover:text-background'
                                     href='/account'>
@@ -176,7 +177,8 @@ const HeaderTop = () => {
 }
 
 const MobileHeaderNav = () => {
-    const isAuth = !!cookies().get('access_token')?.value
+    const {isAuthenticated} = useAuth()
+
     return (
         <Sheet>
             <SheetTrigger asChild>
@@ -211,7 +213,7 @@ const MobileHeaderNav = () => {
                             className='w-full p-1'
                             withIcon
                         />
-                        {isAuth ? (
+                        {isAuthenticated ? (
                             <Link
                                 className='flex items-center gap-x-2 p-1 transition-colors hover:text-background'
                                 href='/account'>

@@ -6,7 +6,7 @@ export interface LoginResponse {
     user: User
 }
 
-export interface CredintialsLoginData {
+export interface LoginCredentials {
     phone: string
     password: string
 }
@@ -18,4 +18,10 @@ export interface RegisterData {
     phone_number: string
     role?: string
     password: string
+}
+
+
+export interface AuthTokens {
+    access: string;
+    refresh: string;
 }

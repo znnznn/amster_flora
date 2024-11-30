@@ -14,7 +14,6 @@ import {
     type infer as zodInfer
 } from 'zod'
 
-import type { User } from '@/api/users/users.types'
 import { CityInput } from '@/components/city-input'
 import { SocialsButtons } from '@/components/socials-buttons'
 import { Button } from '@/components/ui/button'
@@ -34,6 +33,7 @@ import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Switch } from '@/components/ui/switch'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { useAuth } from '@/hooks/use-auth'
 import { cn } from '@/lib/utils'
 import { ShopSelect } from './conrols/shop-select'
 import { StreetSelect } from './conrols/street-select'
@@ -94,12 +94,8 @@ const checkoutSchema = object({
 type CheckoutFormValues = zodInfer<typeof checkoutSchema>
 
 export const StepperForm = () => {
-    const currentUser = JSON.parse(
-        document.cookie
-            .split('; ')
-            .find((cookie) => cookie.startsWith('user='))
-            ?.split('=')[1] || ''
-    ) as User
+    const { user } = useAuth()
+
 
     const [step, setStep] = useState(2)
 
@@ -109,14 +105,14 @@ export const StepperForm = () => {
     const form = useForm<CheckoutFormValues>({
         resolver: zodResolver(checkoutSchema),
         defaultValues: {
-            username: currentUser?.first_name || '',
-            phone: currentUser?.phone_number || '',
+            username: user?.first_name || '',
+            phone: user?.phone_number || '',
             city: {
                 name: '',
                 ref: ''
             },
             paymentMethod: 'cash',
-            email: currentUser?.email || ''
+            email: user?.email || ''
         }
     })
 

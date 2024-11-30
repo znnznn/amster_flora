@@ -1,6 +1,6 @@
 import { publicApi } from '..'
 
-import type { CredintialsLoginData, LoginResponse, RegisterData } from './auth.types'
+import type { LoginCredentials, LoginResponse, RegisterData } from './auth.types'
 
 export const googleAuth = async (token: string): Promise<LoginResponse> => {
     const response = await publicApi.post('/auth/google/', {
@@ -21,7 +21,7 @@ export const facebookAuth = async (token: string): Promise<LoginResponse> => {
 export const credintialsLogin = async ({
     phone,
     password
-}: CredintialsLoginData): Promise<LoginResponse> => {
+}: LoginCredentials): Promise<LoginResponse> => {
     const response = await publicApi.post('/auth/token/', {
         phone,
         password

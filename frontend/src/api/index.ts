@@ -1,55 +1,64 @@
-import axios from 'axios'
+import { defaultLoginRedirect } from '@/config/routes';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+
+const baseURL = 'https://api.amster.org.ua';
 
 export const api = axios.create({
-    baseURL: 'https://api.amster.org.ua'
-})
+    baseURL,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+});
 
 export const publicApi = axios.create({
-    baseURL: 'https://api.amster.org.ua'
-})
+    baseURL,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+});
 
 api.interceptors.request.use(
-    (request) => {
-        if (true) {
-            request.headers['Authorization'] =
-                `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMyMDQ5OTI1LCJpYXQiOjE3MzIwNDk2MjUsImp0aSI6IjhkMDA5Yjk5OWM5MzQxZGY4MDc5MzdmMWQ0NGE0Y2VjIiwidXNlcl9pZCI6NH0.0DHLAe6EIoy-fF4PvyPM4r2ulNZGDmolUs7qgZWTex4`
+    (config) => {
+        const token = Cookies.get('access_token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
         }
-        return request
+        return config;
     },
     (error) => {
-        return Promise.reject(error)
+        return Promise.reject(error);
     }
-)
+);
 
-// api.interceptors.response.use(
-//     (response) => response,
-//     async (error) => {
-//         const originalRequest = error.config
-//         if (error.response.status === 401 && !originalRequest._retry) {
-//             originalRequest._retry = true
-//             try {
-//                 const refreshToken = cookies().get('refresh_token')?.value
+api.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+        const originalRequest = error.config;
 
-//                 const response = await axios.post(
-//                     'hhttps://api.amster.org.ua/token/refresh',
-//                     {
-//                         refreshToken
-//                     }
-//                 )
-//                 const { accessToken, refreshToken: newRefreshToken } = response.data
+        if (error.response?.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true;
 
-//                 cookies().set('access_token', accessToken, { path: '/' })
-//                 cookies().set('refresh_token', newRefreshToken, { path: '/' })
+            try {
+                const refreshToken = Cookies.get('refresh_token');
+                const response = await axios.post(`${baseURL}/auth/token/refresh/`, {
+                    refresh: refreshToken,
+                });
 
-//                 api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
-//                 return api(originalRequest)
-//             } catch (refreshError) {
-//                 console.error('Token refresh failed:', refreshError)
-//                 localStorage.removeItem('access_token')
-//                 localStorage.removeItem('refresh_token')
-//                 return Promise.reject(refreshError)
-//             }
-//         }
-//         return Promise.reject(error)
-//     }
-// )
+                const { access } = response.data;
+                Cookies.set('access_token', access);
+
+                originalRequest.headers.Authorization = `Bearer ${access}`;
+                return api(originalRequest);
+            } catch (refreshError) {
+                Cookies.remove('access_token');
+                Cookies.remove('refresh_token');
+                Cookies.remove('user');
+                window.location.href = defaultLoginRedirect
+                return Promise.reject(refreshError);
+            }
+        }
+
+        return Promise.reject(error);
+    }
+);

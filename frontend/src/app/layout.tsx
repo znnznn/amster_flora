@@ -4,11 +4,11 @@ import { Montserrat } from 'next/font/google'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import type { PropsWithChildren } from 'react'
 
-import './globals.css'
 import { CookieConsent } from '@/components/cookie-consent'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { ReactQueryProvider } from '@/providers/react-query-provider'
+import './globals.css'
 
 const montserrat = Montserrat({
     subsets: ['cyrillic'],
@@ -26,6 +26,7 @@ const clientId =
     '586948538433-m3kq8a79oogn5dbksh08dfth5s1462ej.apps.googleusercontent.com'
 
 const RootLayout = ({ children }: PropsWithChildren) => {
+
     return (
         <html lang='en'>
             <body className={`${montserrat.className} antialiased`}>
