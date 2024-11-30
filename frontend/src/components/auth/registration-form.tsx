@@ -10,12 +10,12 @@ import { SocialsButtons } from '../socials-buttons'
 import { PasswordWithReveal } from '../ui/password-with-reveal'
 import { SheetHeader, SheetTitle } from '../ui/sheet'
 
+import { ErrorMessage } from './error-message'
+import type { CurrentModal } from './modal'
 import { register } from '@/api/auth/auth'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { ErrorMessage } from './error-message'
-import type { CurrentModal } from './modal'
 
 const registrationSchema = object({
     password: string({

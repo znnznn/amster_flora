@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { CartProduct } from './components/cart-product'
 import { Catalogue } from '@/components/catalogue'
 import {
     Breadcrumb,
@@ -10,7 +11,6 @@ import {
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
 import { Button } from '@/components/ui/button'
-import { CartProduct } from './components/cart-product'
 
 const CartPage = () => {
     return (

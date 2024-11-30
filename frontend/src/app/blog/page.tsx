@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { BlogPost } from './components/blog-post'
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -8,7 +9,6 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import { BlogPost } from './components/blog-post'
 
 const BlogPage = () => {
     return (

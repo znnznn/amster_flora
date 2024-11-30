@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from 'react'
 
+import { AccountSidebar } from './components/sidebar'
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -8,7 +9,6 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import { AccountSidebar } from './components/sidebar'
 
 const AccountLayout = ({ children }: PropsWithChildren) => {
     return (

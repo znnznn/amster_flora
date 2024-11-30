@@ -1,9 +1,9 @@
 import { CircleCheck } from 'lucide-react'
 import Image from 'next/image'
 
+import { StepperInput } from './stepper-input'
 import flower from '@/assets/images/flower.jpg'
 import { AddLetterModal } from '@/components/add-letter'
-import { StepperInput } from './stepper-input'
 
 export const CartProduct = () => {
     return (

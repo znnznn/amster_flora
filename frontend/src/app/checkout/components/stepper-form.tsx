@@ -14,6 +14,9 @@ import {
     type infer as zodInfer
 } from 'zod'
 
+import { ShopSelect } from './conrols/shop-select'
+import { StreetSelect } from './conrols/street-select'
+import { TimePicker } from './conrols/time-picker'
 import { CityInput } from '@/components/city-input'
 import { SocialsButtons } from '@/components/socials-buttons'
 import { Button } from '@/components/ui/button'
@@ -35,9 +38,6 @@ import { Switch } from '@/components/ui/switch'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useAuth } from '@/hooks/use-auth'
 import { cn } from '@/lib/utils'
-import { ShopSelect } from './conrols/shop-select'
-import { StreetSelect } from './conrols/street-select'
-import { TimePicker } from './conrols/time-picker'
 
 const citySchema = object({
     name: string().min(1, {
@@ -95,7 +95,6 @@ type CheckoutFormValues = zodInfer<typeof checkoutSchema>
 
 export const StepperForm = () => {
     const { user } = useAuth()
-
 
     const [step, setStep] = useState(2)
 

@@ -1,4 +1,5 @@
 'use client'
+
 import {
     Facebook,
     Heart,
@@ -11,6 +12,13 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 
+import { AuthModal } from './auth/modal'
+import { CitySelect } from './city-select'
+import { CurrencySelect } from './currency-select'
+import { HeaderCatalogue } from './header-catalogue'
+import { LangSelect } from './lang-select'
+import { Logo } from './logo'
+import { Button } from './ui/button'
 import {
     Accordion,
     AccordionContent,
@@ -33,16 +41,9 @@ import {
     SheetTrigger
 } from '@/components/ui/sheet'
 import { useAuth } from '@/hooks/use-auth'
-import { AuthModal } from './auth/modal'
-import { CitySelect } from './city-select'
-import { CurrencySelect } from './currency-select'
-import { HeaderCatalogue } from './header-catalogue'
-import { LangSelect } from './lang-select'
-import { Logo } from './logo'
-import { Button } from './ui/button'
 
 export const Header = () => {
-    const {isAuthenticated} = useAuth()
+    const { isAuthenticated } = useAuth()
 
     return (
         <>
@@ -177,7 +178,7 @@ const HeaderTop = () => {
 }
 
 const MobileHeaderNav = () => {
-    const {isAuthenticated} = useAuth()
+    const { isAuthenticated } = useAuth()
 
     return (
         <Sheet>

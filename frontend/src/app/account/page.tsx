@@ -1,3 +1,5 @@
+import { Account } from './components/account'
+import { LogOutButton } from './components/log-out'
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -6,8 +8,6 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import { Account } from './components/account'
-import { LogOutButton } from './components/log-out'
 
 const AccountPage = () => {
     return (

@@ -1,3 +1,4 @@
+import { Flower } from './components/flower'
 import { Advantages } from '@/app/(main)/components/advantages'
 import { Catalogue } from '@/components/catalogue'
 import {
@@ -8,7 +9,6 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import { Flower } from './components/flower'
 
 interface FlowerProps {
     params: {

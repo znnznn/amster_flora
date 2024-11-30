@@ -3,8 +3,8 @@
 import { X } from 'lucide-react'
 import { useQueryState } from 'nuqs'
 
-import { Button } from '@/components/ui/button'
 import { SortingFilter } from './filters/sorting'
+import { Button } from '@/components/ui/button'
 
 const colorLabels = {
     red: 'Червоний',

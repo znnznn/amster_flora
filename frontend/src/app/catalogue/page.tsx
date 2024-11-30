@@ -1,5 +1,10 @@
 import { Suspense } from 'react'
 
+import { ActiveFilters } from './components/active-filters'
+import { FiltersSidebar, MobileFilterSidebar } from './components/filters-sidebar'
+import { SortingFilter } from './components/filters/sorting'
+import { CataloguePagination } from './components/pagination'
+import { Products } from './components/products'
 import { Catalogue } from '@/components/catalogue'
 import {
     Breadcrumb,
@@ -9,19 +14,8 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import { ActiveFilters } from './components/active-filters'
-import { FiltersSidebar, MobileFilterSidebar } from './components/filters-sidebar'
-import { SortingFilter } from './components/filters/sorting'
-import { CataloguePagination } from './components/pagination'
-import { Products } from './components/products'
 
 const CataloguePage = async () => {
-
-
-
-
-
-
     return (
         <>
             <section className='mt-12 max-sm:mt-8'>

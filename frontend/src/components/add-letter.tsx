@@ -1,6 +1,7 @@
 import { BookHeart, ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
 
+import { ScrollArea } from './ui/scroll-area'
 import flower from '@/assets/images/flower.jpg'
 import { Button } from '@/components/ui/button'
 import {
@@ -18,7 +19,6 @@ import {
     DialogTrigger
 } from '@/components/ui/dialog'
 import { cn } from '@/lib/utils'
-import { ScrollArea } from './ui/scroll-area'
 
 export const AddLetterModal = ({
     className

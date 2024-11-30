@@ -17,9 +17,9 @@ export interface AddProductPayload {
     category: number
     shop: number
     variants: Variant[]
-  }
+}
 
-  export interface Variant {
+export interface Variant {
     size: string
     height: number
     diameter: number
@@ -28,11 +28,11 @@ export interface AddProductPayload {
     price: string
     images: string[]
     components: Component[]
-  }
+}
 
-  export interface Component {
+export interface Component {
     key_crm_product: number
     quantity: number
-  }
+}
 
 export type ProductResponse = Response<Product>

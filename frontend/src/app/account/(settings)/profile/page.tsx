@@ -7,9 +7,7 @@ const ProfilePage = () => {
             <h2 className='text-2xl font-medium'>Персональні дані</h2>
             <ProfileForm />
 
-            <h2 className='mt-14 text-2xl font-medium max-lg:mt-10'>
-                Персональні дані
-            </h2>
+            <h2 className='mt-14 text-2xl font-medium max-lg:mt-10'>Персональні дані</h2>
             <Address />
         </section>
     )

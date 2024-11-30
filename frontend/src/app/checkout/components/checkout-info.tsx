@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
+import { CheckoutCard } from './checkout-card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { CheckoutCard } from './checkout-card'
 
 export const CheckoutInfo = () => {
     return (

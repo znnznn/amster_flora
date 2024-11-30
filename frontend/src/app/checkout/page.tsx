@@ -2,6 +2,9 @@
 
 import { useState } from 'react'
 
+import { CheckoutInfo } from './components/checkout-info'
+import { StepperForm } from './components/stepper-form'
+import { SuccessView } from './components/success-view'
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -10,9 +13,6 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import { CheckoutInfo } from './components/checkout-info'
-import { StepperForm } from './components/stepper-form'
-import { SuccessView } from './components/success-view'
 
 const CheckoutPage = () => {
     const [isSuccess, setIsSuccess] = useState(false)

@@ -21,8 +21,7 @@ export interface RegisterData {
     password: string
 }
 
-
 export interface AuthTokens {
-    access: string;
-    refresh: string;
+    access: string
+    refresh: string
 }

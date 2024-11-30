@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { withMask } from 'use-mask-input'
 import { date, object, string, type infer as zodInfer } from 'zod'
 
 import { Button } from '@/components/ui/button'
@@ -11,7 +12,6 @@ import { Input, inputVariants } from '@/components/ui/input'
 import { PasswordWithReveal } from '@/components/ui/password-with-reveal'
 import { useAuth } from '@/hooks/use-auth'
 import { cn } from '@/lib/utils'
-import { withMask } from 'use-mask-input'
 
 const profileSchema = object({
     first_name: string({
@@ -60,9 +60,7 @@ type ContactsFormData = zodInfer<typeof profileSchema>
 export const ProfileForm = () => {
     const { user } = useAuth()
 
-    console.log(user);
-
-
+    console.log(user)
 
     const form = useForm<ContactsFormData>({
         resolver: zodResolver(profileSchema),

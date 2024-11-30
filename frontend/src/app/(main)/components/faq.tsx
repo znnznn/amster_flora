@@ -7,7 +7,7 @@ import {
 
 export const Faq = () => {
     return (
-        <section className='mt-28 max-md:mt-16 container'>
+        <section className='container mt-28 max-md:mt-16'>
             <h2 className='text-center text-2xl font-bold max-md:text-lg'>
                 Часті питання
             </h2>

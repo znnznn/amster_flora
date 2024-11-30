@@ -8,12 +8,12 @@ import { object, string, type infer as zodInfer } from 'zod'
 import { Button } from '../ui/button'
 import { SheetHeader, SheetTitle } from '../ui/sheet'
 
-import { resetPassword } from '@/api/passwords/passwords'
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
 import { ErrorMessage } from './error-message'
 import type { CurrentModal } from './modal'
 import { SuccessMessage } from './success-message'
+import { resetPassword } from '@/api/passwords/passwords'
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 
 const passwordResetSchema = object({
     email: string()

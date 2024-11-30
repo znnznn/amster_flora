@@ -9,8 +9,7 @@ import { cn } from '@/lib/utils'
 interface LogOutButtonProps extends React.HTMLAttributes<HTMLButtonElement> {}
 
 export const LogOutButton = ({ className }: LogOutButtonProps) => {
-    const {logout} = useAuth()
-
+    const { logout } = useAuth()
 
     return (
         <Button

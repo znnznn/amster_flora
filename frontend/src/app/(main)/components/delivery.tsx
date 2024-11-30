@@ -15,7 +15,7 @@ export const Delivery = () => {
     const [isDeliveryOpen, setIsDeliveryOpen] = useState(false)
 
     return (
-        <section className='mt-28 flex items-start justify-between gap-x-10  max-lg:flex-col  max-md:mt-16 container'>
+        <section className='container mt-28 flex items-start justify-between gap-x-10 max-lg:flex-col max-md:mt-16'>
             <Image
                 src={delivery}
                 alt='Доставка'

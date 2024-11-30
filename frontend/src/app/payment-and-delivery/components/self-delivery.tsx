@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { CitySelect } from './city-select'
 import flower from '@/assets/images/flower.jpg'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { CitySelect } from './city-select'
 
 export const SelfDelivery = () => {
     return (

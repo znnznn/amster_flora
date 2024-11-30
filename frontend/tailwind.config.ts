@@ -118,10 +118,8 @@ const config: Config = {
             '4xl': ['2rem', { lineHeight: '2.5rem' }],
             '5xl': ['2.25rem', { lineHeight: '2.75rem' }],
             '6xl': ['2.75rem', { lineHeight: '2.875rem' }],
-            '7xl': ['4rem', { lineHeight: '4.375rem' }],
-        },
-
-
+            '7xl': ['4rem', { lineHeight: '4.375rem' }]
+        }
     },
     plugins: [require('tailwindcss-animate')]
 }

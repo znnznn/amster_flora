@@ -1,40 +1,46 @@
-import { credentialsLogin, getCurrentUser, isAuthenticated, logout as logoutApi } from '@/lib/auth';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query'
+
+import {
+    credentialsLogin,
+    getCurrentUser,
+    isAuthenticated,
+    logout as logoutApi
+} from '@/lib/auth'
 
 export const useAuth = () => {
-  const queryClient = useQueryClient();
+    const queryClient = useQueryClient()
 
-  const loginMutation = useMutation({
-    mutationFn: credentialsLogin,
-    onSuccess: (data) => {
-      queryClient.setQueryData(['user'], data.user);
-      queryClient.invalidateQueries({ queryKey: ['auth'] });
-    },
-  });
+    const loginMutation = useMutation({
+        mutationFn: credentialsLogin,
+        onSuccess: (data) => {
+            queryClient.setQueryData(['user'], data.user)
+            queryClient.invalidateQueries({ queryKey: ['auth'] })
+        }
+    })
 
-  const { data: isAuthenticatedStatus } = useQuery({
-    queryKey: ['auth'],
-    queryFn: isAuthenticated,
-  });
+    const { data: isAuthenticatedStatus } = useQuery({
+        queryKey: ['auth'],
+        queryFn: isAuthenticated
+    })
 
-//   const { data: user } = useQuery<User | null>({
-//     queryKey: ['user'],
-//     queryFn: getCurrentUser,
-//     enabled: isAuthenticatedStatus,
-//   });
+    //   const { data: user } = useQuery<User | null>({
+    //     queryKey: ['user'],
+    //     queryFn: getCurrentUser,
+    //     enabled: isAuthenticatedStatus,
+    //   });
 
-  const handleLogout = () => {
-    logoutApi();
-    queryClient.setQueryData(['user'], null);
-    queryClient.invalidateQueries({ queryKey: ['auth'] });
-  };
+    const handleLogout = () => {
+        logoutApi()
+        queryClient.setQueryData(['user'], null)
+        queryClient.invalidateQueries({ queryKey: ['auth'] })
+    }
 
-  return {
-    login: loginMutation.mutate,
-    logout: handleLogout,
-    isLoading: loginMutation.isLoading,
-    isError: loginMutation.isError,
-    isAuthenticated: isAuthenticatedStatus,
-    user: getCurrentUser(),
-  };
-};
+    return {
+        login: loginMutation.mutate,
+        logout: handleLogout,
+        isLoading: loginMutation.isLoading,
+        isError: loginMutation.isError,
+        isAuthenticated: isAuthenticatedStatus,
+        user: getCurrentUser()
+    }
+}

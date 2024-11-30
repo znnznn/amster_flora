@@ -2,6 +2,12 @@
 
 import { Filter } from 'lucide-react'
 
+import { MobileActiveFilters } from './active-filters'
+import { AvailabilityFilter } from './filters/availability'
+import { ColorFilter } from './filters/color'
+import { FlowerFilter } from './filters/flower'
+import { PriceFilter } from './filters/price'
+import { SizeFilter } from './filters/size'
 import {
     Accordion,
     AccordionContent,
@@ -16,12 +22,6 @@ import {
     SheetTitle,
     SheetTrigger
 } from '@/components/ui/sheet'
-import { MobileActiveFilters } from './active-filters'
-import { AvailabilityFilter } from './filters/availability'
-import { ColorFilter } from './filters/color'
-import { FlowerFilter } from './filters/flower'
-import { PriceFilter } from './filters/price'
-import { SizeFilter } from './filters/size'
 
 export const FiltersSidebar = () => {
     return (

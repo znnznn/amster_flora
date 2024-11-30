@@ -1,3 +1,6 @@
+import { Courier } from './components/courier'
+import { Post } from './components/post'
+import { SelfDelivery } from './components/self-delivery'
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -6,9 +9,6 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import { Courier } from './components/courier'
-import { Post } from './components/post'
-import { SelfDelivery } from './components/self-delivery'
 
 const PaymentAndDeliveryPage = () => {
     return (

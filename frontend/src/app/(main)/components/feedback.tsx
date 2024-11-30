@@ -19,28 +19,26 @@ export const Feedback = () => {
                     loop: true,
                     dragFree: true
                 }}>
-               <div>
-                 <div className='relative mx-auto flex w-fit items-center gap-x-4 '>
-                    <CarouselPrevious className='border-primary text-primary' />
-                    <h2 className='text-left text-2xl font-bold max-md:text-lg'>
-                        Відгуки
-                    </h2>
-                    <CarouselNext className='border-primary text-primary' />
+                <div>
+                    <div className='relative mx-auto flex w-fit items-center gap-x-4'>
+                        <CarouselPrevious className='border-primary text-primary' />
+                        <h2 className='text-left text-2xl font-bold max-md:text-lg'>
+                            Відгуки
+                        </h2>
+                        <CarouselNext className='border-primary text-primary' />
+                    </div>
+                    <div className='container relative left-5 mr-0 mt-10 px-0 2xl:left-0 2xl:mr-auto 2xl:pr-4'>
+                        <CarouselContent>
+                            {Array.from({ length: 7 }).map((_, index) => (
+                                <CarouselItem
+                                    key={index}
+                                    className='min-w-96 basis-1/4 max-lg:basis-1/2'>
+                                    <FeedbackCard />
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                    </div>
                 </div>
-                <div  className='container mr-0 px-0 2xl:mr-auto 2xl:pr-4 mt-10 relative left-5 2xl:left-0'>
-
-                <CarouselContent>
-                    {Array.from({ length: 7 }).map((_, index) => (
-                        <CarouselItem
-                            key={index}
-                            className='basis-1/4 min-w-96 max-lg:basis-1/2'>
-                            <FeedbackCard />
-                        </CarouselItem>
-                    ))}
-                </CarouselContent>
-                </div>
-
-               </div>
             </Carousel>
         </section>
     )

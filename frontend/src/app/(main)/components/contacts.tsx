@@ -1,10 +1,10 @@
 import { Clock, Facebook, Instagram, MapPin, Phone } from 'lucide-react'
 import Link from 'next/link'
 
-import contacts from '@/assets/images/contacts.jpg'
-import { cn } from '@/lib/utils'
 import { CityTabs } from './city-tabs'
 import { ContactsForm } from './contacts-form'
+import contacts from '@/assets/images/contacts.jpg'
+import { cn } from '@/lib/utils'
 
 export const Contacts = () => {
     return (

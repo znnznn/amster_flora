@@ -17,5 +17,4 @@ export interface KeyCrmComponent {
     height: string
 }
 
-
 export type KeyCrmComponentResponse = Response<KeyCrmComponent>
