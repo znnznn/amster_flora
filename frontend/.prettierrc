@@ -13,15 +13,16 @@
     "bracketSpacing": true,
     "importOrderSeparation": true,
     "importOrderSortSpecifiers": true,
-    "plugins": [ "prettier-plugin-tailwindcss"],
+    "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
     "importOrder": [
         "<THIRD_PARTY_MODULES>",
+        "^api/(.*)$",
+        "^app/(.*)$",
         "^assets/(.*)$",
         "^components/(.*)$",
         "^config/(.*)$",
         "^context/(.*)$",
         "^hooks/(.*)$",
-        "^modules/(.*)$",
         "^lib/(.*)$",
         "^pages/(.*)$",
         "^providers/(.*)$",
@@ -34,4 +35,3 @@
         "(.scss)$"
     ]
 }
-

@@ -1,20 +1,17 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { AlertCircle, CheckCircle, Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
+import { useMutation } from 'react-query'
 import { withMask } from 'use-mask-input'
 import { string, z } from 'zod'
 
 import { addContactUs } from '@/api/contact-us/contact-us'
-import {
-    Alert,
-    AlertDescription
-} from "@/components/ui/alert"
+import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { AlertCircle, CheckCircle, Loader2 } from 'lucide-react'
-import { useMutation } from 'react-query'
 
 const contactsSchema = z.object({
     name: string().min(1, {
@@ -36,17 +33,17 @@ export const ContactsForm = () => {
         }
     })
     const mutation = useMutation({
-        mutationFn: (payload: ContactsFormData) => addContactUs({
-            phone_number: payload.phone_number?.replaceAll(' ', ''),
-            name: payload.name,
-            text: 'some',
-            email: 'name@gmail.com',
-        }),
+        mutationFn: (payload: ContactsFormData) =>
+            addContactUs({
+                phone_number: payload.phone_number?.replaceAll(' ', ''),
+                name: payload.name,
+                text: 'some',
+                email: 'name@gmail.com'
+            }),
         onSuccess: () => {
             form.reset()
         }
     })
-
 
     const onSubmit = (data: ContactsFormData) => {
         mutation.mutate(data)
@@ -100,19 +97,24 @@ export const ContactsForm = () => {
                     Відправити
                 </Button>
             </form>
-            {mutation.isError ? <Alert closable variant="destructive" className='mt-4'>
-                <AlertCircle className="size-4" />
-                <AlertDescription>
-                    Щось пішло не так
-                </AlertDescription>
-            </Alert> : null}
-            {mutation.isSuccess ? <Alert closable className='mt-4' variant='success'>
-                <CheckCircle className="size-4" />
-                <AlertDescription>
-                    Повідомлення відправлено успішно
-                </AlertDescription>
-            </Alert> : null}
+            {mutation.isError ? (
+                <Alert
+                    closable
+                    variant='destructive'
+                    className='mt-4'>
+                    <AlertCircle className='size-4' />
+                    <AlertDescription>Щось пішло не так</AlertDescription>
+                </Alert>
+            ) : null}
+            {mutation.isSuccess ? (
+                <Alert
+                    closable
+                    className='mt-4'
+                    variant='success'>
+                    <CheckCircle className='size-4' />
+                    <AlertDescription>Повідомлення відправлено успішно</AlertDescription>
+                </Alert>
+            ) : null}
         </Form>
     )
 }
-
