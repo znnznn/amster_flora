@@ -6,17 +6,17 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
-import { withMask } from 'use-mask-input'
 import { object, string, type infer as zodInfer } from 'zod'
 
 import { SocialsButtons } from '../socials-buttons'
 import { PasswordWithReveal } from '../ui/password-with-reveal'
 import { SheetHeader, SheetTitle } from '../ui/sheet'
 
-import { credintialsLogin } from '@/api/auth/auth'
+
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { credentialsLogin } from '@/lib/auth'
 import { ErrorMessage } from './error-message'
 import type { CurrentModal } from './modal'
 
@@ -33,7 +33,7 @@ const loginSchema = object({
             /[!@#$%^&*]/,
             'Пароль повинен містити не менше одного спеціального символу (!@#$%^&*)'
         ),
-    phone: string().min(1, {
+    email: string().min(1, {
         message: 'Це поле є обов’язковим'
     })
 })
@@ -53,12 +53,12 @@ export const LoginForm = ({ setCurrentModal, setIsSheetOpen }: LoginFormProps) =
         resolver: zodResolver(loginSchema),
         defaultValues: {
             password: '',
-            phone: ''
+            email: ''
         }
     })
 
     const mutation = useMutation({
-        mutationFn: credintialsLogin,
+        mutationFn: credentialsLogin,
         onSuccess: () => {
             form.reset()
             setIsSheetOpen(false)
@@ -86,16 +86,17 @@ export const LoginForm = ({ setCurrentModal, setIsSheetOpen }: LoginFormProps) =
                     className='mt-4 flex flex-col items-center gap-y-4'>
                     <FormField
                         control={form.control}
-                        name='phone'
+                        name='email'
                         render={({ field }) => (
                             <FormItem className='w-full'>
                                 <FormControl
-                                    ref={withMask('+380 99 999 99 99', {
-                                        inputmode: 'tel'
-                                    })}>
+                                    // ref={withMask('+380 99 999 99 99', {
+                                    //     inputmode: 'tel'
+                                    // })}
+                                    >
                                     <Input
-                                        type='tel'
-                                        inputMode='tel'
+                                        type='email'
+                                        inputMode='email'
                                         placeholder='+380 068 777 88 93'
                                         {...field}
                                     />

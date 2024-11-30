@@ -4,11 +4,8 @@ import type { User } from '@/api/users/users.types';
 import { defaultLoginRedirect } from '@/config/routes';
 import Cookies from 'js-cookie';
 
-
-
-
-export const login = async (credentials: LoginCredentials): Promise<LoginResponse> => {
-    const response = await api.post<LoginResponse>('/auth/login', credentials);
+export const credentialsLogin = async (credentials: LoginCredentials): Promise<LoginResponse> => {
+    const response = await api.post<LoginResponse>('/auth/token/', credentials);
     const { access, refresh, user } = response.data;
 
     Cookies.set('access_token', access);

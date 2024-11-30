@@ -1,11 +1,11 @@
-import { getCurrentUser, isAuthenticated, login as loginApi, logout as logoutApi } from '@/lib/auth';
+import { credentialsLogin, getCurrentUser, isAuthenticated, logout as logoutApi } from '@/lib/auth';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 export const useAuth = () => {
   const queryClient = useQueryClient();
 
   const loginMutation = useMutation({
-    mutationFn: loginApi,
+    mutationFn: credentialsLogin,
     onSuccess: (data) => {
       queryClient.setQueryData(['user'], data.user);
       queryClient.invalidateQueries({ queryKey: ['auth'] });

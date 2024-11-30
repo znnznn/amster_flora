@@ -1,4 +1,4 @@
-import type { Product } from '@/api/products/productts.types'
+import type { Product } from '@/api/products/products.types'
 import { ProductCard } from '@/components/product-card'
 
 interface ProductsProps {

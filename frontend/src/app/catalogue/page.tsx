@@ -18,6 +18,10 @@ import { Products } from './components/products'
 const CataloguePage = async () => {
 
 
+
+
+
+
     return (
         <>
             <section className='mt-12 max-sm:mt-8'>

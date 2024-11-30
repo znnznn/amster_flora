@@ -109,7 +109,7 @@ export const ContactsForm = () => {
             {mutation.isSuccess ? <Alert closable className='mt-4' variant='success'>
                 <CheckCircle className="size-4" />
                 <AlertDescription>
-                   Повідомлення відправлено успішно
+                    Повідомлення відправлено успішно
                 </AlertDescription>
             </Alert> : null}
         </Form>
