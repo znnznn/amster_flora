@@ -5,7 +5,7 @@ services:
     image: amster_flora_latest
     volumes:
       - ./backend:/app/backend
-    command: celery -A amster_flora worker --beat --loglevel=debug
+    command: celery -A amster_flora worker --beat --loglevel=info
     env_file:
       - ./backend/.env
     depends_on:

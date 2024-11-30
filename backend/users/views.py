@@ -13,7 +13,7 @@ from amster_flora.doc_api import UsersDocAPIView, ContactUsDocAPIView
 from common.constants import Role
 from users.filters import UserFilter
 from users.models import User, Message
-from users.permissions import IsAuthenticatedAs, IsOwner, IsOwnerProfile
+from users.permissions import IsAuthenticatedAs, IsOwner, IsCreator
 from users.serializers import (
     UserSerializer, PasswordResetSerializer, SetPasswordSerializer, PasswordChangeSerializer, ContactUsSerializer, UserListSerializer
 )
