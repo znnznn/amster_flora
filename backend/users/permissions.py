@@ -19,7 +19,7 @@ class IsOwner(IsAuthenticated):
         return bool(super().has_permission(request, view) and obj == request.user)
 
 
-class IsOwnerProfile(IsAuthenticated):
+class IsCreator(IsAuthenticated):
     def has_object_permission(self, request, view, obj):
         return bool(super().has_permission(request, view) and obj.creator == request.user)
 

@@ -187,3 +187,9 @@ class ContactUsSerializer(serializers.ModelSerializer):
             del fields['is_read']
             del fields['comment']
         return fields
+
+
+class CreatorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'first_name', 'last_name', 'phone_number', 'role', 'last_login')
