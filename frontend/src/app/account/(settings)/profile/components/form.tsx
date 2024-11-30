@@ -11,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import { Input, inputVariants } from '@/components/ui/input'
 import { PasswordWithReveal } from '@/components/ui/password-with-reveal'
 import { cn } from '@/lib/utils'
+import { withMask } from 'use-mask-input'
 
 const profileSchema = object({
     first_name: string({
@@ -126,7 +127,7 @@ export const ProfileForm = () => {
                         name='phone_number'
                         render={({ field }) => (
                             <FormItem>
-                                <FormControl>
+                                <FormControl ref={withMask('+380 99 999 99 99')}>
                                     <Input
                                         variant='underline'
                                         type='tel'
