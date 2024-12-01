@@ -9,18 +9,13 @@ import {
     SelectTrigger,
     SelectValue
 } from '@/components/ui/select'
-
-const getCityFromCookie = () => {
-    const cityCookie = document.cookie.split('; ').find((row) => row.startsWith('city='))
-    return cityCookie ? cityCookie.split('=')[1] : null
-}
-
-export const cityOptions = ['Київ', 'Львів', 'Рівне']
+import { cityConfig } from '@/config/app'
+import { useCookie } from '@/hooks/use-cookies'
 
 export const CitySelect = () => {
-    const defaultCity = 'Рівне'
+    const [initialCity] = useCookie('city', cityConfig.default)
 
-    const [city, setCIty] = useState(getCityFromCookie() || defaultCity)
+    const [city, setCIty] = useState(initialCity)
 
     return (
         <Select
@@ -30,7 +25,7 @@ export const CitySelect = () => {
                 <SelectValue placeholder='Місто' />
             </SelectTrigger>
             <SelectContent>
-                {cityOptions.map((city) => (
+                {cityConfig.options.map((city) => (
                     <SelectItem
                         key={city}
                         value={city}>

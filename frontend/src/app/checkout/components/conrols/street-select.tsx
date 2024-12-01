@@ -47,8 +47,8 @@ export const StreetSelect = ({
     const options = useMemo(() => {
         if (data?.data) {
             return data.data.map((city) => ({
-                ref: city.Ref,
-                name: city.Description
+                ref: cities.Ref,
+                name: cities.Description
             }))
         }
         return []
@@ -70,7 +70,7 @@ export const StreetSelect = ({
                     aria-expanded={open}>
                     <span className='truncate'>
                         {' '}
-                        {city?.name && city.name ? city.name : 'Адреса'}
+                        {city?.name && cities.name ? cities.name : 'Адреса'}
                     </span>
                     <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                 </Button>
@@ -105,7 +105,7 @@ export const StreetSelect = ({
 
                                             setCity(
                                                 selectedCity &&
-                                                    selectedCity.name === city?.name
+                                                    selectedcities.name === city?.name
                                                     ? null
                                                     : selectedCity || null
                                             )

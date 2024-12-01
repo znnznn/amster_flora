@@ -2,8 +2,6 @@
 
 import Image from 'next/image'
 
-import EnFlag from '@/assets/images/flags/en.png'
-import UaFlag from '@/assets/images/flags/ua.png'
 import {
     Select,
     SelectContent,
@@ -11,47 +9,21 @@ import {
     SelectTrigger,
     SelectValue
 } from '@/components/ui/select'
+import { langConfig } from '@/config/app'
+import { useCookie } from '@/hooks/use-cookies'
 import { cn } from '@/lib/utils'
-
-const langOptions = [
-    {
-        value: 'uk',
-        label: 'Українська',
-        icon: UaFlag
-    },
-    {
-        value: 'en',
-        label: 'English',
-        icon: EnFlag
-    }
-]
-
-const setLangInCookie = (lang: string) => {
-    document.cookie = `lang=${lang}; path=/; max-age=31536000; SameSite=Strict`
-}
-
-const getLangFromCookie = () => {
-    const langCookie = document.cookie.split('; ').find((row) => row.startsWith('lang='))
-    return langCookie ? langCookie.split('=')[1] : null
-}
 
 interface LangSelectProps extends React.HTMLAttributes<HTMLButtonElement> {
     withIcon?: boolean
 }
 
 export const LangSelect = ({ withIcon = true, className }: LangSelectProps) => {
-    const defaultLang = 'uk'
-
-    const selectedLang = getLangFromCookie() || defaultLang
-
-    const handleLangChange = (newLang: string) => {
-        setLangInCookie(newLang)
-    }
+    const [lang, setLang] = useCookie('lang', langConfig.default)
 
     return (
         <Select
-            defaultValue={selectedLang}
-            onValueChange={handleLangChange}>
+            defaultValue={lang}
+            onValueChange={setLang}>
             <SelectTrigger
                 className={cn(
                     'w-32 border-none bg-transparent p-0 font-medium focus:ring-0 focus:ring-offset-0',
@@ -60,7 +32,7 @@ export const LangSelect = ({ withIcon = true, className }: LangSelectProps) => {
                 <SelectValue placeholder='Select a fruit' />
             </SelectTrigger>
             <SelectContent className='border-primary bg-accent text-primary'>
-                {langOptions.map((lang) => (
+                {langConfig.options.map((lang) => (
                     <SelectItem
                         key={lang.value}
                         className='font-medium hover:bg-primary hover:text-accent-foreground'

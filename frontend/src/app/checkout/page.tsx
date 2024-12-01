@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/breadcrumb'
 
 const CheckoutPage = () => {
-    const [isSuccess, setIsSuccess] = useState(false)
+    const [isSuccess] = useState(false)
     return (
         <section className='mt-12 pl-20 max-lg:pl-16 max-md:pl-16 max-sm:mt-8 max-sm:pl-6'>
             <Breadcrumb>
@@ -38,7 +38,7 @@ const CheckoutPage = () => {
                 <SuccessView />
             ) : (
                 <>
-                    <h1 className='mt-6 text-center text-2xl font-semibold max-md:text-lg'>
+                    <h1 className='mt-6 text-center text-2xl font-bold'>
                         Оформлення замовлення
                     </h1>
                     <div className='mt-20 flex items-start justify-between gap-x-20'>

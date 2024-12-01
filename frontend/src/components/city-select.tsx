@@ -11,26 +11,16 @@ import {
     SheetTitle,
     SheetTrigger
 } from '@/components/ui/sheet'
+import { cityConfig } from '@/config/app'
+import { useCookie } from '@/hooks/use-cookies'
 import { cn } from '@/lib/utils'
-
-const setCityInCookie = (city: string) => {
-    document.cookie = `city=${city}; path=/; max-age=31536000; SameSite=Strict`
-}
-
-const getCityFromCookie = () => {
-    const cityCookie = document.cookie.split('; ').find((row) => row.startsWith('city='))
-    return cityCookie ? cityCookie.split('=')[1] : null
-}
-
-const cityOptions = ['Київ', 'Львів', 'Рівне']
 
 interface CitySelectProps extends React.HTMLAttributes<HTMLButtonElement> {
     withIcon?: boolean
 }
 
 export const CitySelect = ({ withIcon = false, className }: CitySelectProps) => {
-    const defaultCity = 'Рівне'
-    const selectedCity = getCityFromCookie() || defaultCity
+    const [city, setCity] = useCookie('city', cityConfig.default)
 
     const [isCitySelectionMode, setIsCitySelectionMode] = useState(false)
     const [isSheetOpen, setIsSheetOpen] = useState(false)
@@ -38,7 +28,7 @@ export const CitySelect = ({ withIcon = false, className }: CitySelectProps) => 
     const handleCityChange = (newCity: string) => {
         setIsSheetOpen(false)
         setIsCitySelectionMode(false)
-        setCityInCookie(newCity)
+        setCity(newCity)
     }
 
     return (
@@ -51,7 +41,7 @@ export const CitySelect = ({ withIcon = false, className }: CitySelectProps) => 
                     className
                 )}>
                 {withIcon ? <MapPin className='mr-1' /> : ''}
-                <span className='font-medium'>{selectedCity}</span>
+                <span className='font-medium'>{city}</span>
                 <ChevronDown />
             </SheetTrigger>
             <SheetContent
@@ -70,14 +60,14 @@ export const CitySelect = ({ withIcon = false, className }: CitySelectProps) => 
                     <SheetTitle className='text-center text-lg font-medium text-accent'>
                         {isCitySelectionMode
                             ? 'Виберіть місто'
-                            : `Ваше місто доставки ${selectedCity}?`}
+                            : `Ваше місто доставки ${city}?`}
                     </SheetTitle>
                 </SheetHeader>
 
                 <div className='mt-6 flex items-center justify-center gap-x-8'>
                     {isCitySelectionMode ? (
-                        cityOptions
-                            .filter((city) => city !== selectedCity)
+                        cityConfig.options
+                            .filter((currentCity) => currentCity !== city)
                             .map((city) => (
                                 <Button
                                     key={city}
@@ -90,7 +80,7 @@ export const CitySelect = ({ withIcon = false, className }: CitySelectProps) => 
                     ) : (
                         <>
                             <Button
-                                onClick={() => handleCityChange(selectedCity)}
+                                onClick={() => handleCityChange(city)}
                                 className='w-20'
                                 variant='outline'>
                                 Так

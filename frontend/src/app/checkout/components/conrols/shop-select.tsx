@@ -47,8 +47,8 @@ export const ShopSelect = ({
     const options = useMemo(() => {
         if (data?.data) {
             return data.data.map((city) => ({
-                ref: city.Ref,
-                name: city.Description
+                ref: cities.Ref,
+                name: cities.Description
             }))
         }
         return []
@@ -68,7 +68,7 @@ export const ShopSelect = ({
                     variant='outline'
                     role='combobox'
                     aria-expanded={open}>
-                    {city?.name && city.name ? city.name : 'Адреса магазину'}
+                    {city?.name && cities.name ? cities.name : 'Адреса магазину'}
                     <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                 </Button>
             </PopoverTrigger>
@@ -102,7 +102,7 @@ export const ShopSelect = ({
 
                                             setCity(
                                                 selectedCity &&
-                                                    selectedCity.name === city?.name
+                                                    selectedcities.name === city?.name
                                                     ? null
                                                     : selectedCity || null
                                             )
