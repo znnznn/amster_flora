@@ -5,7 +5,7 @@ import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { object, string, type infer as zodInfer } from 'zod'
 
 import { SocialsButtons } from '../socials-buttons'
@@ -47,6 +47,7 @@ interface LoginFormProps {
 export const LoginForm = ({ setCurrentModal, setIsSheetOpen }: LoginFormProps) => {
     const [errorMessage, setErrorMessage] = useState('')
     const router = useRouter()
+    const queryClient = useQueryClient()
 
     const form = useForm<LoginFormData>({
         resolver: zodResolver(loginSchema),
@@ -62,6 +63,7 @@ export const LoginForm = ({ setCurrentModal, setIsSheetOpen }: LoginFormProps) =
             form.reset()
             setIsSheetOpen(false)
             router.refresh()
+            queryClient.invalidateQueries({ queryKey: ['auth'] })
         },
         onError: (error: any) => {
             setErrorMessage(error.message)

@@ -7,7 +7,7 @@ export interface Product {
     description: string
     category: number
     shop: number
-    variants: string
+    variants: Variant[]
 }
 
 export interface AddProductPayload {
