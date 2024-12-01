@@ -35,3 +35,30 @@ class Size:
         (LARGE, "large"),
         (EXTRA_LARGE, "extra_large"),
     ]
+
+
+class OrderStatus:
+    PENDING = "pending"
+    APPROVAL = "approval"
+    PAID = "paid"
+    DELIVERED = "delivered"
+    SHIPPED = "shipped"
+    CANCELED = "canceled"
+
+    CHOICES = [
+        (PENDING, "pending"),
+        (APPROVAL, "approval"),
+        (PAID, "paid"),
+        (DELIVERED, "delivered"),
+        (SHIPPED, "shipped"),
+        (CANCELED, "canceled"),
+    ]
+
+    UKRAINIAN = {
+        PENDING: "В очікуванні",
+        APPROVAL: "Погоджено",
+        PAID: "Оплачено",
+        DELIVERED: "Доставлено",
+        SHIPPED: "Відвантажно",
+        CANCELED: "Відмінено",
+    }

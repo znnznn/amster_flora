@@ -3,7 +3,6 @@ from mptt.exceptions import InvalidMove
 from rest_framework import serializers
 from rest_framework_recursive.fields import RecursiveField
 
-from common.constants import Size
 from products.models import Shop, Category, WishList, Image, Variant, Product, Component
 
 
@@ -101,13 +100,29 @@ class VariantCreateSerializer(serializers.ModelSerializer):
         return variant
 
 
-class VariantRetrieveSerializer(VariantCreateSerializer):
+class VariantRetrieveSerializer(serializers.ModelSerializer):
     images = ImageSerializer(many=True)
+    quantity = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Variant
+        fields = ('id', 'size', 'height', 'diameter', 'hex_color', 'quantity', 'price', 'image', 'images',)
+
+    def get_quantity(self, obj):
+        return obj.quantity - obj.quantity_sold
 
 
-class VariantAdminSerializer(VariantCreateSerializer):
+class VariantAdminSerializer(serializers.ModelSerializer):
+    quantity = serializers.SerializerMethodField()
     images = ImageSerializer(many=True)
     components = ComponentSerializer(many=True)
+
+    class Meta:
+        model = Variant
+        fields = ('id', 'size', 'height', 'diameter', 'hex_color', 'quantity', 'price', 'image', 'images', 'components',)
+
+    def get_quantity(self, obj):
+        return obj.quantity - obj.quantity_sold
 
 
 class ProductShortSerializer(serializers.ModelSerializer):
@@ -143,6 +158,7 @@ class ProductCreateSerializer(serializers.ModelSerializer):
 class VariantCartSerializer(serializers.ModelSerializer):
     product = serializers.SerializerMethodField()
     images = ImageSerializer(many=True)
+    quantity = serializers.SerializerMethodField()
 
     class Meta:
         model = Variant
@@ -152,6 +168,9 @@ class VariantCartSerializer(serializers.ModelSerializer):
     def get_product(self, obj):
         if obj.product:
             return ProductShortSerializer(obj.product).data
+
+    def get_quantity(self, obj) -> int:
+        return obj.quantity - obj.quantity_sold
 
 
 class ProductListSerializer(serializers.ModelSerializer):

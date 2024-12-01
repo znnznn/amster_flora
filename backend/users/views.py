@@ -8,14 +8,15 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
-from amster_flora.doc_api import UsersDocAPIView, ContactUsDocAPIView
+from amster_flora.doc_api import UsersDocAPIView, ContactUsDocAPIView, DeliveryAddressDocAPIView
 
 from common.constants import Role
-from users.filters import UserFilter
-from users.models import User, Message
+from users.filters import UserFilter, DeliveryAddressFilter
+from users.models import User, Message, DeliveryAddress
 from users.permissions import IsAuthenticatedAs, IsOwner, IsCreator
 from users.serializers import (
-    UserSerializer, PasswordResetSerializer, SetPasswordSerializer, PasswordChangeSerializer, ContactUsSerializer, UserListSerializer
+    UserSerializer, PasswordResetSerializer, SetPasswordSerializer, PasswordChangeSerializer, ContactUsSerializer, UserListSerializer,
+    DeliveryAddressSerializer
 )
 
 
@@ -122,3 +123,20 @@ def customer_page(request):
     print(request.user)
     print(request.GET.dict())
     return render(request, "i3.html", {})
+
+
+class DeliveryAddressViewSet(viewsets.ModelViewSet):
+    swagger_schema = DeliveryAddressDocAPIView
+    serializer_class = DeliveryAddressSerializer
+    permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER) | IsCreator,)
+    queryset = DeliveryAddress.objects.all()
+    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
+    filterset_class = DeliveryAddressFilter
+    ordering_fields = ("city",)
+    search_fields = ("creator__first_name", "creator__last_name", "city",)
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.request.user.role == Role.CLIENT:
+            queryset = queryset.filter(creator=self.request.user)
+        return queryset
