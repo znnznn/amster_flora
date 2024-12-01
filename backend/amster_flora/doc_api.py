@@ -85,6 +85,12 @@ class UsersDocAPIView(SwaggerAutoSchema):
                                                       Allowed only admin
                         .                                            
                         """
+        elif operation['operationId'] == 'users_me':
+            operation['summary'] = 'Get authenticated user profile'
+            operation['description'] = """
+                                                      Allowed only authenticated users
+                        .                                            
+                        """
         else:
             operation['summary'] = 'Update user by id'
             operation['description'] = """
