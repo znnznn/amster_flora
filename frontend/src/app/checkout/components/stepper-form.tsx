@@ -200,7 +200,7 @@ const InfoBlock = ({
 }) => {
     const { phone, username, email, city } = form.getValues()
 
-    const nextStepDisabled = !phone || !username || !email || !cities.ref
+    const nextStepDisabled = !phone || !username || !email || !city.ref
 
     return (
         <div className='mt-4 space-y-4'>

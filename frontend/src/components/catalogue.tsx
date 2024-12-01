@@ -19,7 +19,7 @@ interface CatalogueProps extends React.HTMLAttributes<HTMLDivElement> {
     activeTab: 'promo' | 'best-sellers' | 'similar'
 }
 
-const products: Product[] = [
+export const products: Product[] = [
     {
         id: 10,
         name: 'Item 0',

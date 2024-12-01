@@ -41,14 +41,14 @@ export const ShopSelect = ({
 
     const { data, isLoading, isFetching } = useQuery({
         queryFn: () => getCities({ search }),
-        queryKey: ['cities', search]
+        queryKey: ['city', search]
     })
 
     const options = useMemo(() => {
         if (data?.data) {
             return data.data.map((city) => ({
-                ref: cities.Ref,
-                name: cities.Description
+                ref: city.Ref,
+                name: city.Description
             }))
         }
         return []
@@ -68,7 +68,7 @@ export const ShopSelect = ({
                     variant='outline'
                     role='combobox'
                     aria-expanded={open}>
-                    {city?.name && cities.name ? cities.name : 'Адреса магазину'}
+                    {city?.name && city.name ? city.name : 'Адреса магазину'}
                     <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                 </Button>
             </PopoverTrigger>
@@ -102,7 +102,7 @@ export const ShopSelect = ({
 
                                             setCity(
                                                 selectedCity &&
-                                                    selectedcities.name === city?.name
+                                                    selectedCity.name === city?.name
                                                     ? null
                                                     : selectedCity || null
                                             )

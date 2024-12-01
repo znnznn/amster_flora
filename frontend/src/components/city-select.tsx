@@ -80,7 +80,7 @@ export const CitySelect = ({ withIcon = false, className }: CitySelectProps) => 
                     ) : (
                         <>
                             <Button
-                                onClick={() => handleCityChange(city)}
+                                onClick={() => handleCityChange(city!)}
                                 className='w-20'
                                 variant='outline'>
                                 Так
