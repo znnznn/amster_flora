@@ -5,7 +5,7 @@ from rest_framework import generics, viewsets, status
 from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import GenericAPIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from amster_flora.doc_api import UsersDocAPIView, ContactUsDocAPIView
@@ -35,6 +35,8 @@ class UserViewSet(viewsets.ModelViewSet):
             return [AllowAny()]
         if self.action in ('list', 'list_deleted'):
             return [IsAuthenticatedAs(Role.ADMIN, Role.MANAGER)()]
+        if self.action == 'me':
+            return [IsAuthenticated()]
         return super().get_permissions()
 
     def get_serializer_class(self):
