@@ -38,7 +38,7 @@ class UserViewSet(viewsets.ModelViewSet):
         return super().get_permissions()
 
     def get_serializer_class(self):
-        if self.action in ('list', 'retrieve', 'list_deleted'):
+        if self.action in ('list', 'retrieve', 'list_deleted', 'me'):
             return UserListSerializer
         return UserSerializer
 
@@ -55,6 +55,12 @@ class UserViewSet(viewsets.ModelViewSet):
         if self.action == 'partial_update':
             del filter_kwargs['is_deleted']
         return queryset.filter(**filter_kwargs)
+
+    @action(detail=False, url_path='me')
+    def me(self, request, *args, **kwargs):
+        obj = request.user
+        serializer = self.get_serializer(obj)
+        return Response(serializer.data)
 
     @action(detail=False, url_path='deleted')
     def list_deleted(self, request, *args, **kwargs):

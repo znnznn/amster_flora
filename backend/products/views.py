@@ -1,4 +1,4 @@
-from django.db.models import ProtectedError, Prefetch, F, Q
+from django.db.models import ProtectedError, Prefetch, F, Q, BooleanField, Value, OuterRef, Exists
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status
 from rest_framework.decorators import action
@@ -10,6 +10,7 @@ from rest_framework.viewsets import ModelViewSet
 from amster_flora.doc_api import CategoriesDocAPIView, WishListDocAPIView, ProductDocAPIView
 from common.constants import Role
 from common.mixins import ListWithOutPaginationMixin
+from orders.models import Cart
 from products.filters import CategoryFilter, WishListFilter, WishListOrderingFilter, ProductOrderingFilter, ProductFilter
 from products.models import Category, Product, WishList, Variant
 from products.serializers import (
@@ -118,7 +119,13 @@ class ProductsViewSet(ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
+        annotation_kwargs = {
+            "in_wish_list": Value(False, output_field=BooleanField()), "in_cart": Value(False, output_field=BooleanField())
+        }
         if not self.request.user.is_authenticated or self.request.user.role == Role.CLIENT:
             available_variants = Variant.objects.filter(quantity__gt=F('quantity_sold')).values_list('product__id', flat=True)
-            return queryset.filter(Q(id__in=available_variants))
-        return queryset.distinct()
+            queryset = queryset.filter(Q(id__in=available_variants))
+        if self.request.user.is_authenticated:
+            annotation_kwargs["in_wish_list"] = Exists(WishList.objects.filter(product=OuterRef("id"), creator=self.request.user))
+            annotation_kwargs["in_cart"] = Exists(Cart.objects.filter(variant__product=OuterRef("id"), creator=self.request.user))
+        return queryset.annotate(**annotation_kwargs).distinct()

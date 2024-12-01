@@ -73,17 +73,13 @@ class UserSerializer(serializers.ModelSerializer, EmailSender):
 
 
 class UserListSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = User
-        fields = (
-            'id', 'email', 'first_name', 'last_name', 'phone_number', 'role', 'is_active',
-            'last_login',
-        )
+        fields = ('id', 'email', 'first_name', 'last_name', 'phone_number', 'role', 'is_active', 'last_login',)
 
 
 class LoginSerializer(TokenObtainSerializer):
-    token_class = RefreshToken   # RefreshToken.for_user(self.user)
+    token_class = RefreshToken  # RefreshToken.for_user(self.user)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

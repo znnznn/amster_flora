@@ -1,3 +1,4 @@
+from drf_yasg.utils import swagger_serializer_method
 from mptt.exceptions import InvalidMove
 from rest_framework import serializers
 from rest_framework_recursive.fields import RecursiveField
@@ -102,8 +103,17 @@ class VariantCreateSerializer(serializers.ModelSerializer):
 
 class VariantRetrieveSerializer(VariantCreateSerializer):
     images = ImageSerializer(many=True)
+
+
+class VariantAdminSerializer(VariantCreateSerializer):
+    images = ImageSerializer(many=True)
     components = ComponentSerializer(many=True)
 
+
+class ProductShortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ('id', 'name', 'sku', 'description', 'category', 'shop')
 
 
 class ProductCreateSerializer(serializers.ModelSerializer):
@@ -130,12 +140,39 @@ class ProductCreateSerializer(serializers.ModelSerializer):
         return ProductListSerializer(instance).data
 
 
+class VariantCartSerializer(serializers.ModelSerializer):
+    product = serializers.SerializerMethodField()
+    images = ImageSerializer(many=True)
+
+    class Meta:
+        model = Variant
+        fields = ('id', 'product', 'size', 'height', 'diameter', 'hex_color', 'quantity', 'price', 'image', 'images', 'components',)
+
+    @swagger_serializer_method(ProductShortSerializer)
+    def get_product(self, obj):
+        if obj.product:
+            return ProductShortSerializer(obj.product).data
+
+
 class ProductListSerializer(serializers.ModelSerializer):
     variants = serializers.SerializerMethodField()
+    in_wish_list = serializers.SerializerMethodField()
+    in_cart = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
-        fields = ('id', 'name', 'sku', 'description', 'category', 'shop', 'variants',)
+        fields = ('id', 'name', 'sku', 'description', 'category', 'shop', 'variants', 'in_wish_list', 'in_cart')
 
+    @swagger_serializer_method(VariantRetrieveSerializer(many=True))
     def get_variants(self, obj):
         return VariantRetrieveSerializer(obj.variants.all(), many=True).data
+
+    def get_in_wish_list(self, obj) -> bool:
+        if getattr(obj, 'in_wish_list', None):
+            return obj.in_wish_list
+        return False
+
+    def get_in_cart(self, obj) -> bool:
+        if getattr(obj, 'in_cart', None):
+            return obj.in_cart
+        return False

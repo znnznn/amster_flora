@@ -1,7 +1,9 @@
 from django.db.models import Max
+from drf_yasg.utils import swagger_serializer_method
 from rest_framework import serializers
 
 from orders.models import Cart
+from products.serializers import VariantCartSerializer
 
 
 class CartSerializer(serializers.ModelSerializer):
@@ -29,5 +31,6 @@ class CartListSerializer(serializers.ModelSerializer):
         model = Cart
         fields = ('id', 'variant', 'amount', 'created_at')
 
+    @swagger_serializer_method(VariantCartSerializer)
     def get_variant(self, obj):
-        return obj.variant.id
+        return VariantCartSerializer(obj.variant).data
