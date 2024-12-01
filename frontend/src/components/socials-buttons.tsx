@@ -1,9 +1,10 @@
 'use client'
 
+import FacebookLogin, { type SuccessResponse } from '@greatsumini/react-facebook-login'
 import { GoogleLogin } from '@react-oauth/google'
 import { useRouter } from 'next/navigation'
-import FacebookLogin from 'react-facebook-login'
 
+import { buttonVariants } from './ui/button'
 import { facebookAuth, googleAuth } from '@/api/auth/auth'
 import { useCookie } from '@/hooks/use-cookies'
 import { cn } from '@/lib/utils'
@@ -31,10 +32,7 @@ export const SocialsButtons = ({ className, setIsSheetOpen }: SocialsButtonsProp
         googleAuth(credentialResponse.credential || '').then(handleAuthSuccess)
     }
 
-    const handleFacebookLogin = (response: any) => {
-        if (response?.status === 'unknown') {
-            return
-        }
+    const handleFacebookLogin = (response: SuccessResponse) => {
         facebookAuth(response.accessToken).then(handleAuthSuccess)
     }
 
@@ -52,16 +50,19 @@ export const SocialsButtons = ({ className, setIsSheetOpen }: SocialsButtonsProp
                     type='icon'
                     onSuccess={handleGoogleLogin}
                 />
+
                 <FacebookLogin
-                    textButton=''
-                    cssClass='inline-flex items-center border border-[#dadce0] justify-center rounded ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 size-10 bg-white [&_svg]:size-5'
-                    icon={<FacebookIcon />}
+                    className={cn(
+                        buttonVariants({ size: 'icon', variant: 'outline' }),
+                        'rounded border-[#dadce0] bg-white hover:bg-white'
+                    )}
                     appId='585697583978416'
                     autoLoad={false}
                     fields='name,email'
                     scope='email'
-                    callback={handleFacebookLogin}
-                />
+                    onSuccess={handleFacebookLogin}>
+                    <FacebookIcon />
+                </FacebookLogin>
             </div>
         </div>
     )
