@@ -1,9 +1,9 @@
 export const Post = () => {
     return (
-        <section className='mt-12 px-20 max-lg:px-16 max-md:px-10 max-sm:mt-8 max-sm:px-3'>
+        <section className='container mt-12 max-sm:mt-8'>
             <h2 className='text-2xl font-semibold max-md:text-lg'>Нова пошта</h2>
 
-            <div className='mt-10 space-y-4'>
+            <div className='mt-10 space-y-4 max-md:mt-4'>
                 <p>Доставка по місту Київ працює щодня цілодобово!</p>
                 <p>
                     Доставка Новою поштою по всій Україні: У відділення «Нової пошти» або

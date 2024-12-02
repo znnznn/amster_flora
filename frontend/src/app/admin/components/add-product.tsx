@@ -119,7 +119,7 @@ export const AddProduct = () => {
         formData.append('variants', JSON.stringify(variants))
 
         // Відправляємо дані на сервер
-        mutation.mutate(formData)
+        mutation.mutate(formData as any)
     }
 
     return (

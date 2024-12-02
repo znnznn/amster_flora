@@ -1,10 +1,10 @@
 export const Courier = () => {
     return (
-        <section className='mt-12 px-20 max-lg:px-16 max-md:px-10 max-sm:mt-8 max-sm:px-3'>
+        <section className='3 container mt-12 max-sm:mt-8'>
             <h2 className='text-2xl font-semibold max-md:text-lg'>Кур’єр</h2>
 
-            <ul className='mt-10 flex items-center justify-center gap-x-20'>
-                <li className='flex w-72 flex-col items-center justify-center gap-y-6 rounded-3xl border p-6'>
+            <ul className='mt-10 grid grid-cols-3 gap-x-16 gap-y-6 max-lg:grid-cols-2 max-lg:gap-x-10 max-sm:grid-cols-1'>
+                <li className='flex flex-col items-center justify-center gap-y-6 rounded-3xl border p-6'>
                     <div className='font-medium'>До 20:00</div>
                     <h3>У день замовлення</h3>
                     <div className='font-medium'>150 ₴</div>
@@ -13,7 +13,7 @@ export const Courier = () => {
                         в день замовлення
                     </p>
                 </li>
-                <li className='flex w-72 flex-col items-center justify-center gap-y-6 rounded-3xl border p-6'>
+                <li className='flex flex-col items-center justify-center gap-y-6 rounded-3xl border p-6'>
                     <div className='font-medium'>До 20:00</div>
                     <h3>У день замовлення</h3>
                     <div className='font-medium'>150 ₴</div>
@@ -22,7 +22,7 @@ export const Courier = () => {
                         в день замовлення
                     </p>
                 </li>
-                <li className='flex w-72 flex-col items-center justify-center gap-y-6 rounded-3xl border p-6'>
+                <li className='flex flex-col items-center justify-center gap-y-6 rounded-3xl border p-6'>
                     <div className='font-medium'>До 20:00</div>
                     <h3>У день замовлення</h3>
                     <div className='font-medium'>150 ₴</div>

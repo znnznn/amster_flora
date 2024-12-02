@@ -13,8 +13,8 @@ import {
 const PaymentAndDeliveryPage = () => {
     return (
         <>
-            <section className='mt-12 px-20 max-lg:px-16 max-md:px-10 max-sm:mt-8 max-sm:px-3'>
-                <Breadcrumb className='px-20 max-lg:px-16 max-md:px-10 max-sm:px-3'>
+            <section className='container mt-12 max-sm:mt-8'>
+                <Breadcrumb>
                     <BreadcrumbList className='max-sm:justify-center'>
                         <BreadcrumbItem>
                             <BreadcrumbLink href='/'>Головна</BreadcrumbLink>
@@ -28,12 +28,11 @@ const PaymentAndDeliveryPage = () => {
                 <h1 className='mt-4 text-center text-2xl font-semibold max-md:text-lg'>
                     Оплата і доставка
                 </h1>
+                <SelfDelivery />
             </section>
 
-            <SelfDelivery />
-
             <Courier />
-            <section className='mt-16 space-y-4 px-20 max-lg:px-16 max-md:px-10 max-sm:mt-8 max-sm:px-3'>
+            <section className='container mt-16 space-y-4 max-sm:mt-8'>
                 <h2 className='sr-only text-2xl font-semibold max-md:text-lg'>
                     Деталі замовлення
                 </h2>

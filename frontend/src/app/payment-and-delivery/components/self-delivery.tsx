@@ -8,24 +8,24 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 
 export const SelfDelivery = () => {
     return (
-        <section className='mt-12 px-20 max-lg:px-16 max-md:px-10 max-sm:mt-8 max-sm:px-3'>
+        <div className='mt-12 max-sm:mt-8'>
             <h2 className='text-2xl font-semibold max-md:text-lg'>Самовивіз</h2>
 
-            <div className='mr-8 mt-10 flex items-start justify-between gap-x-10'>
-                <div className='w-1/2'>
+            <div className='mt-10 flex items-start justify-between gap-10 max-lg:gap-6 max-md:flex-col'>
+                <div className='w-1/2 max-md:mx-auto max-md:w-2/3 max-sm:w-full'>
                     <CitySelect />
-                    <ScrollArea className='mt-6 h-80 pr-6'>
-                        <article>
+                    <ScrollArea className='h-80 pr-4 pt-4 max-md:h-[300px]'>
+                        <article className='max-md:flex max-md:items-start max-md:gap-x-4'>
                             <Image
                                 src={flower}
                                 alt='Півоній'
-                                className='h-40 w-full rounded-3xl object-cover'
+                                className='h-44 w-full rounded-3xl object-cover'
                             />
-                            <div className='mt-6 flex flex-col gap-y-5'>
-                                <h1 className='text-lg font-medium'>
+                            <div className='mt-6 flex flex-col gap-y-5 py-1 max-md:mt-0 max-md:min-h-full max-md:justify-between'>
+                                <h1 className='text-lg font-medium max-lg:text-base'>
                                     вул. Велика Кільцева, 6
                                 </h1>
-                                <div className='flex items-center justify-between gap-x-5 text-lg text-muted'>
+                                <div className='flex items-center justify-between gap-x-5 gap-y-3 text-lg text-muted max-lg:text-base max-md:flex-col max-md:items-start'>
                                     <Link
                                         className='transition-colors hover:text-accent'
                                         href='tel:0500000000'>
@@ -40,17 +40,17 @@ export const SelfDelivery = () => {
                                 </Button>
                             </div>
                         </article>
-                        <article className='mt-4'>
+                        <article className='mt-4 max-md:flex max-md:items-start max-md:gap-x-4'>
                             <Image
                                 src={flower}
                                 alt='Півоній'
-                                className='h-40 w-full rounded-3xl object-cover'
+                                className='h-44 w-full rounded-3xl object-cover'
                             />
-                            <div className='mt-6 flex flex-col gap-y-5'>
-                                <h1 className='text-lg font-medium'>
+                            <div className='mt-6 flex flex-col gap-y-5 py-1 max-md:mt-0 max-md:min-h-full max-md:justify-between'>
+                                <h1 className='text-lg font-medium max-lg:text-base'>
                                     вул. Велика Кільцева, 6
                                 </h1>
-                                <div className='flex items-center justify-between gap-x-5 text-lg text-muted'>
+                                <div className='flex items-center justify-between gap-x-5 gap-y-3 text-lg text-muted max-lg:text-base max-md:flex-col max-md:items-start'>
                                     <Link
                                         className='transition-colors hover:text-accent'
                                         href='tel:0500000000'>
@@ -76,6 +76,6 @@ export const SelfDelivery = () => {
                     loading='lazy'
                     referrerPolicy='no-referrer-when-downgrade'></iframe>
             </div>
-        </section>
+        </div>
     )
 }
