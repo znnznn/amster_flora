@@ -1,8 +1,8 @@
 import { publicApi } from '..'
 
-import type { LoginResponse, RegisterData } from './auth.types'
+import type { LoginCredentials, LoginResponse, RegisterData } from './auth.types'
 
-export const googleAuth = async (token: string): Promise<LoginResponse> => {
+export const googleAuth = async (token: string): Promise<any> => {
     const response = await publicApi.post('/auth/google/', {
         token
     })
@@ -10,7 +10,7 @@ export const googleAuth = async (token: string): Promise<LoginResponse> => {
     return response.data
 }
 
-export const facebookAuth = async (token: string): Promise<LoginResponse> => {
+export const facebookAuth = async (token: string): Promise<any> => {
     const response = await publicApi.post('/auth/facebook/', {
         token
     })
@@ -18,17 +18,17 @@ export const facebookAuth = async (token: string): Promise<LoginResponse> => {
     return response.data
 }
 
-// export const credentialsLogin = async ({
-//     email,
-//     password
-// }: LoginCredentials): Promise<LoginResponse> => {
-//     const response = await publicApi.post('/auth/token/', {
-//         email,
-//         password
-//     })
+export const credentialsLogin = async ({
+    email,
+    password
+}: LoginCredentials): Promise<LoginResponse> => {
+    const response = await publicApi.post('/auth/token/', {
+        email,
+        password
+    })
 
-//     return response.data
-// }
+    return response.data
+}
 
 export const register = async (payload: RegisterData): Promise<LoginResponse> => {
     const response = await publicApi.post('/users/', payload)

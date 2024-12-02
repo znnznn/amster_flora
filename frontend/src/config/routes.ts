@@ -9,4 +9,4 @@ export const publicRoutes = [
     'flower/:id'
 ]
 
-export const defaultLoginRedirect = '/'
+export const defaultLogoutRedirect = '/'

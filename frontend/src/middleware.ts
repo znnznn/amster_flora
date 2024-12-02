@@ -16,7 +16,7 @@ const matchRoute = (path: string, route: string) => {
 export const middleware = (req: NextRequest) => {
     const { nextUrl } = req
 
-    const isLoggedIn = !!req.cookies.get('access_token')?.value
+    const isLoggedIn = !!req.cookies.get('accessToken')?.value
 
     const isPublicRoute = publicRoutes.some((route) =>
         matchRoute(nextUrl.pathname, route)

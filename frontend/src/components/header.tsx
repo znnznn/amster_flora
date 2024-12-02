@@ -43,7 +43,7 @@ import {
 import { useAuth } from '@/hooks/use-auth'
 
 export const Header = () => {
-    const { isAuthenticated } = useAuth()
+    const { isAuth } = useAuth()
 
     return (
         <>
@@ -63,7 +63,7 @@ export const Header = () => {
                             </Link>
                         </li>
                         <li className='max-lg:hidden'>
-                            {isAuthenticated ? (
+                            {isAuth ? (
                                 <Link
                                     className='block p-1 transition-colors hover:text-background'
                                     href='/account'>
@@ -178,7 +178,7 @@ const HeaderTop = () => {
 }
 
 const MobileHeaderNav = () => {
-    const { isAuthenticated } = useAuth()
+    const { isAuth } = useAuth()
 
     return (
         <Sheet>
@@ -214,7 +214,7 @@ const MobileHeaderNav = () => {
                             className='w-full p-1'
                             withIcon
                         />
-                        {isAuthenticated ? (
+                        {isAuth ? (
                             <Link
                                 className='flex items-center gap-x-2 p-1 transition-colors hover:text-background'
                                 href='/account'>

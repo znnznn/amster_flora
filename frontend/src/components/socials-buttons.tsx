@@ -5,8 +5,7 @@ import { GoogleLogin } from '@react-oauth/google'
 import { useRouter } from 'next/navigation'
 
 import { buttonVariants } from './ui/button'
-import { facebookAuth, googleAuth } from '@/api/auth/auth'
-import { useCookie } from '@/hooks/use-cookies'
+import { useAuth } from '@/hooks/use-auth'
 import { cn } from '@/lib/utils'
 
 interface SocialsButtonsProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -16,24 +15,24 @@ interface SocialsButtonsProps extends React.HTMLAttributes<HTMLDivElement> {
 export const SocialsButtons = ({ className, setIsSheetOpen }: SocialsButtonsProps) => {
     const router = useRouter()
 
-    const [, setAccessToken] = useCookie('access_token', '')
-    const [, setRefreshToken] = useCookie('refresh_token', '')
-    const [, setUser] = useCookie('user', '')
-
-    const handleAuthSuccess = (response: any) => {
-        setAccessToken(response.access)
-        setRefreshToken(response.refresh)
-        setUser(JSON.stringify(response.user))
-        setIsSheetOpen?.(false)
-        router.refresh()
-    }
+    const { googleLogin, facebookLogin } = useAuth()
 
     const handleGoogleLogin = (credentialResponse: any) => {
-        googleAuth(credentialResponse.credential || '').then(handleAuthSuccess)
+        googleLogin(credentialResponse.credential || '')
+            .then(() => {
+                setIsSheetOpen?.(false)
+                router.refresh()
+            })
+            .catch((error) => console.error('Google login error:', error))
     }
 
     const handleFacebookLogin = (response: SuccessResponse) => {
-        facebookAuth(response.accessToken).then(handleAuthSuccess)
+        facebookLogin(response.accessToken)
+            .then(() => {
+                setIsSheetOpen?.(false)
+                router.refresh()
+            })
+            .catch((error) => console.error('Facebook login error:', error))
     }
 
     return (

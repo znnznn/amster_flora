@@ -14,7 +14,7 @@ import { useAuth } from '@/hooks/use-auth'
 import { cn } from '@/lib/utils'
 
 export const ProductCard = ({ product }: { product: Product }) => {
-    const { user, isAuthenticated } = useAuth()
+    const { user, isAuth } = useAuth()
 
     const queryClient = useQueryClient()
     const [isOverlayVisible, setIsOverlayVisible] = useState(false)
@@ -40,7 +40,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
         setInFavorites(!inFavorites)
         setIsOverlayVisible(true)
 
-        if (!inFavorites && !isAddingToFavorites && isAuthenticated) {
+        if (!inFavorites && !isAddingToFavorites && isAuth) {
             addToFavorites({
                 creator: user?.id!,
                 product: product.id
@@ -54,7 +54,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
 
         setInCart(!inCart)
 
-        if (!inCart && !isAddingToCart && isAuthenticated) {
+        if (!inCart && !isAddingToCart && isAuth) {
             addToCart({
                 variant: product.id,
                 amount: 1
@@ -66,7 +66,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
             onMouseEnter={() => setIsOverlayVisible(true)}
             onMouseLeave={() => setIsOverlayVisible(false)}
             className='relative overflow-hidden rounded-3xl border bg-background'>
-            {isAuthenticated ? (
+            {isAuth ? (
                 <button
                     onClick={toggleAddToFavorites}
                     className={cn(
@@ -120,7 +120,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
                 </div>
 
                 <Button
-                    disabled={!isAuthenticated}
+                    disabled={!isAuth}
                     onClick={toggleAddToCart}
                     className={cn(
                         'mx-auto mt-3 w-full gap-x-2 border-b-[3px] border-r-[3px] max-md:w-full max-sm:mt-2',

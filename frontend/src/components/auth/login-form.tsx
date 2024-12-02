@@ -2,10 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useMutation, useQueryClient } from 'react-query'
 import { object, string, type infer as zodInfer } from 'zod'
 
 import { SocialsButtons } from '../socials-buttons'
@@ -17,7 +14,7 @@ import type { CurrentModal } from './modal'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { credentialsLogin } from '@/lib/auth'
+import { useAuth } from '@/hooks/use-auth'
 
 const loginSchema = object({
     password: string({
@@ -45,9 +42,7 @@ interface LoginFormProps {
 }
 
 export const LoginForm = ({ setCurrentModal, setIsSheetOpen }: LoginFormProps) => {
-    const [errorMessage, setErrorMessage] = useState('')
-    const router = useRouter()
-    const queryClient = useQueryClient()
+    const { login, isLoginLoading, errorMessage } = useAuth()
 
     const form = useForm<LoginFormData>({
         resolver: zodResolver(loginSchema),
@@ -57,21 +52,13 @@ export const LoginForm = ({ setCurrentModal, setIsSheetOpen }: LoginFormProps) =
         }
     })
 
-    const mutation = useMutation({
-        mutationFn: credentialsLogin,
-        onSuccess: () => {
-            form.reset()
-            setIsSheetOpen(false)
-            router.refresh()
-            queryClient.invalidateQueries({ queryKey: ['auth'] })
-        },
-        onError: (error: any) => {
-            setErrorMessage(error.message)
-        }
-    })
-
     const onSubmit = (data: LoginFormData) => {
-        mutation.mutate(data)
+        try {
+            login(data).then(() => {
+                setIsSheetOpen(false)
+                form.reset()
+            })
+        } catch {}
     }
 
     return (
@@ -130,7 +117,7 @@ export const LoginForm = ({ setCurrentModal, setIsSheetOpen }: LoginFormProps) =
                         size='lg'
                         variant='secondary'
                         type='submit'>
-                        {mutation.isLoading ? <Loader2 /> : 'Увійти'}
+                        {isLoginLoading ? <Loader2 className='animate-spin' /> : 'Увійти'}
                     </Button>
 
                     <ErrorMessage message={errorMessage} />
