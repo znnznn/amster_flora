@@ -3,19 +3,23 @@ import { api } from '..'
 import type { AddProductPayload, Product, ProductResponse } from './products.types'
 
 export const getProducts = async () => {
-    const response = await api.get<ProductResponse>('/products')
+    const response = await api.get<ProductResponse>('/products/')
 
     return response.data
 }
 
 export const addProduct = async (payload: AddProductPayload) => {
-    const response = await api.post<Product>('/products', payload)
+    const response = await api.post<Product>('/products/', payload, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
 
     return response.data
 }
 
 export const removeProduct = async (id: number) => {
-    const response = await api.delete<Product>(`/products/${id}`)
+    const response = await api.delete<Product>(`/products/${id}/`)
 
     return response.data
 }
