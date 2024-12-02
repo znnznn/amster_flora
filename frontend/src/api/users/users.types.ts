@@ -1,4 +1,4 @@
-import type { Response } from '../index.types'
+import type { BaseQueryParams, Response } from '../index.types'
 
 export type UserRoles = 'client' | 'admin'
 
@@ -14,3 +14,5 @@ export interface User {
 }
 
 export type UserResponse = Response<User>
+
+export interface UsersQueryParams extends BaseQueryParams {}

@@ -28,12 +28,13 @@ const clientId =
 const RootLayout = ({ children }: PropsWithChildren) => {
     return (
         <html lang='en'>
-            <body className={`${montserrat.className} antialiased`}>
+            <body
+                className={`${montserrat.className} flex min-h-screen flex-col antialiased`}>
                 <GoogleOAuthProvider clientId={clientId}>
                     <ReactQueryProvider>
                         <Header />
 
-                        <main>
+                        <main className='flex-grow'>
                             <NuqsAdapter>{children}</NuqsAdapter>
                         </main>
 

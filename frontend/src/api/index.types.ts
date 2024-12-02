@@ -1,7 +1,7 @@
 export interface BaseQueryParams {
-    search: string
+    search?: string
     offset?: number
-    limit: number
+    limit?: number
 }
 
 export interface Response<T> {

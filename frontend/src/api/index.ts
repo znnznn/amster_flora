@@ -62,7 +62,7 @@ api.interceptors.response.use(
             } catch (refreshError) {
                 Cookies.remove('accessToken')
                 Cookies.remove('refreshToken')
-                window.location.href = '/'
+                // window.location.href = '/'
 
                 return Promise.reject(refreshError)
             }
