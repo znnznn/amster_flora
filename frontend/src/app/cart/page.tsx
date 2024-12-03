@@ -15,7 +15,7 @@ import { Button } from '@/components/ui/button'
 const CartPage = () => {
     return (
         <>
-            <section className='mt-12 px-20 max-lg:px-16 max-md:px-10 max-sm:mt-8 max-sm:px-3'>
+            <section className='container mt-12 max-sm:mt-8'>
                 <Breadcrumb>
                     <BreadcrumbList className='max-sm:justify-center'>
                         <BreadcrumbItem>
@@ -42,12 +42,14 @@ const CartPage = () => {
 
                 <div className='mt-12 flex flex-col items-center gap-y-4'>
                     <Button
-                        size='sm'
+                        className='max-md:w-full'
+                        size='lg'
                         variant='ghost'
                         asChild>
                         <Link href='/catalogue'>Продовжити покупки</Link>
                     </Button>
                     <Button
+                        className='max-md:w-full'
                         size='lg'
                         variant='secondary'
                         asChild>

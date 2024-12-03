@@ -59,22 +59,19 @@ export const StepperInput = ({
     return (
         <div
             className={cn(
-                'flex items-center space-x-2 rounded-md border border-accent bg-primary text-accent',
+                'flex items-center rounded-md border border-accent bg-primary text-accent',
                 className
             )}>
             <Button
                 variant='link'
                 size='icon'
+                className='text-accent'
                 onClick={handleDecrement}
                 disabled={disabled}>
-                {value <= min ? (
-                    <Trash className='size-4 text-accent' />
-                ) : (
-                    <Minus className='size-4 text-accent' />
-                )}
+                {value <= min ? <Trash /> : <Minus />}
             </Button>
             <Input
-                className='h-10 w-20 border-none bg-transparent text-center focus-visible:ring-0 focus-visible:ring-offset-0'
+                className='h-10 w-12 border-none bg-transparent px-0 text-center focus-visible:ring-0 focus-visible:ring-offset-0'
                 type='number'
                 value={value}
                 onChange={handleChange}
@@ -88,7 +85,7 @@ export const StepperInput = ({
                 size='icon'
                 onClick={handleIncrement}
                 disabled={value >= max || disabled}>
-                <Plus className='size-4 text-accent' />
+                <Plus className='text-accent' />
             </Button>
         </div>
     )

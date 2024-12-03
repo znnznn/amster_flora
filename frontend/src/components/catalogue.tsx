@@ -262,101 +262,103 @@ export const products: Product[] = [
 
 export const Catalogue = ({ className, activeTab }: CatalogueProps) => {
     return (
-        <section
-            className={cn(
-                'container max-lg:min-h-[640px] max-md:mt-16 max-md:min-h-[540px]',
-                className
-            )}>
-            <h2 className='sr-only text-left text-2xl font-bold'>Каталог квітів</h2>
+        <div className='overflow-x-clip'>
+            <section
+                className={cn(
+                    'container max-lg:min-h-[640px] max-md:mt-16 max-md:min-h-[540px]',
+                    className
+                )}>
+                <h2 className='sr-only text-left text-2xl font-bold'>Каталог квітів</h2>
 
-            <Carousel
-                opts={{
-                    align: 'start',
-                    loop: true,
-                    dragFree: true
-                }}>
-                <div className='flex h-[490px] w-fit flex-col items-start justify-between rounded-3xl bg-primary py-6 pl-6 pr-16 max-lg:relative max-lg:mx-auto max-lg:h-64 max-lg:w-3/4 max-lg:p-4 max-lg:!pb-16 max-sm:w-[90%]'>
-                    <div className='relative flex w-fit items-center gap-x-4 pt-10 max-lg:absolute max-lg:right-32'>
-                        <CarouselPrevious className='left-0 border-accent text-accent' />
-                        <CarouselNext className='-right-24 border-accent text-accent' />
-                    </div>
-                    <Tabs
-                        orientation='vertical'
-                        defaultValue={activeTab}>
-                        <TabsList className='flex h-full flex-col items-start gap-y-2 bg-transparent p-0'>
-                            <TabsTrigger
-                                className='bg-transparent text-left text-2xl text-accent/50 hover:text-background data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:hover:text-background max-md:text-base'
+                <Carousel
+                    opts={{
+                        align: 'start',
+                        loop: true,
+                        dragFree: true
+                    }}>
+                    <div className='flex h-[490px] w-fit flex-col items-start justify-between rounded-3xl bg-primary py-6 pl-6 pr-16 max-lg:relative max-lg:mx-auto max-lg:h-64 max-lg:w-3/4 max-lg:p-4 max-lg:!pb-16 max-sm:w-[90%]'>
+                        <div className='relative flex w-fit items-center gap-x-4 pt-10 max-lg:absolute max-lg:right-32'>
+                            <CarouselPrevious className='left-0 border-accent text-accent' />
+                            <CarouselNext className='-right-24 border-accent text-accent' />
+                        </div>
+                        <Tabs
+                            orientation='vertical'
+                            defaultValue={activeTab}>
+                            <TabsList className='flex h-full flex-col items-start gap-y-2 bg-transparent p-0'>
+                                <TabsTrigger
+                                    className='bg-transparent text-left text-2xl text-accent/50 hover:text-background data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:hover:text-background max-md:text-base'
+                                    value='promo'>
+                                    <DiamondPercent className='mr-2 !size-6' /> Акції
+                                </TabsTrigger>
+
+                                <TabsTrigger
+                                    className='bg-transparent text-left text-2xl text-accent/50 hover:text-background data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:hover:text-background max-md:text-base'
+                                    value='best-sellers'>
+                                    Бестселери
+                                </TabsTrigger>
+                                <TabsTrigger
+                                    className='bg-transparent text-left text-2xl text-accent/50 hover:text-background data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:hover:text-background max-md:text-base'
+                                    value='similar'>
+                                    Суміжні товари
+                                </TabsTrigger>
+                            </TabsList>
+                            <TabsContent
+                                className='absolute left-64 top-1/2 z-10 max-w-[105%] -translate-y-1/2 max-lg:-left-12 max-lg:top-56 max-lg:max-w-[220%] max-lg:!-translate-y-0 max-md:top-52 max-sm:-left-4'
                                 value='promo'>
-                                <DiamondPercent className='mr-2 !size-6' /> Акції
-                            </TabsTrigger>
-
-                            <TabsTrigger
-                                className='bg-transparent text-left text-2xl text-accent/50 hover:text-background data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:hover:text-background max-md:text-base'
+                                <CarouselContent>
+                                    {products.map((product) => (
+                                        <CarouselItem
+                                            key={product.id}
+                                            className='basis-1/5 max-md:basis-1/4'>
+                                            <ProductCard product={product} />
+                                        </CarouselItem>
+                                    ))}
+                                </CarouselContent>
+                            </TabsContent>
+                            <TabsContent
+                                className='absolute left-64 top-1/2 z-10 max-w-[105%] -translate-y-1/2 max-lg:-left-12 max-lg:top-56 max-lg:max-w-[220%] max-lg:!-translate-y-0 max-md:top-52 max-sm:-left-4'
                                 value='best-sellers'>
-                                Бестселери
-                            </TabsTrigger>
-                            <TabsTrigger
-                                className='bg-transparent text-left text-2xl text-accent/50 hover:text-background data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:hover:text-background max-md:text-base'
+                                <CarouselContent>
+                                    {products.map((product) => (
+                                        <CarouselItem
+                                            key={product.id}
+                                            className='basis-1/5 max-md:basis-1/4'>
+                                            <ProductCard product={product} />
+                                        </CarouselItem>
+                                    ))}
+                                </CarouselContent>
+                            </TabsContent>
+                            <TabsContent
+                                className='absolute left-64 top-1/2 z-10 max-w-[105%] -translate-y-1/2 max-lg:-left-12 max-lg:top-56 max-lg:max-w-[220%] max-lg:!-translate-y-0 max-md:top-52 max-sm:-left-4'
                                 value='similar'>
-                                Суміжні товари
-                            </TabsTrigger>
-                        </TabsList>
-                        <TabsContent
-                            className='absolute left-64 top-1/2 z-10 max-w-[105%] -translate-y-1/2 max-lg:-left-12 max-lg:top-56 max-lg:max-w-[220%] max-lg:!-translate-y-0 max-md:top-52 max-sm:-left-4'
-                            value='promo'>
-                            <CarouselContent>
-                                {products.map((product) => (
-                                    <CarouselItem
-                                        key={product.id}
-                                        className='basis-1/5 max-md:basis-1/4'>
-                                        <ProductCard product={product} />
-                                    </CarouselItem>
-                                ))}
-                            </CarouselContent>
-                        </TabsContent>
-                        <TabsContent
-                            className='absolute left-64 top-1/2 z-10 max-w-[105%] -translate-y-1/2 max-lg:-left-12 max-lg:top-56 max-lg:max-w-[220%] max-lg:!-translate-y-0 max-md:top-52 max-sm:-left-4'
-                            value='best-sellers'>
-                            <CarouselContent>
-                                {products.map((product) => (
-                                    <CarouselItem
-                                        key={product.id}
-                                        className='basis-1/5 max-md:basis-1/4'>
-                                        <ProductCard product={product} />
-                                    </CarouselItem>
-                                ))}
-                            </CarouselContent>
-                        </TabsContent>
-                        <TabsContent
-                            className='absolute left-64 top-1/2 z-10 max-w-[105%] -translate-y-1/2 max-lg:-left-12 max-lg:top-56 max-lg:max-w-[220%] max-lg:!-translate-y-0 max-md:top-52 max-sm:-left-4'
-                            value='similar'>
-                            <CarouselContent>
-                                {products.map((product) => (
-                                    <CarouselItem
-                                        key={product.id}
-                                        className='basis-1/5 max-md:basis-1/4'>
-                                        <ProductCard product={product} />
-                                    </CarouselItem>
-                                ))}
-                            </CarouselContent>
-                        </TabsContent>
-                    </Tabs>
+                                <CarouselContent>
+                                    {products.map((product) => (
+                                        <CarouselItem
+                                            key={product.id}
+                                            className='basis-1/5 max-md:basis-1/4'>
+                                            <ProductCard product={product} />
+                                        </CarouselItem>
+                                    ))}
+                                </CarouselContent>
+                            </TabsContent>
+                        </Tabs>
 
-                    <Link
-                        className='block max-lg:ml-auto'
-                        href='/catalogue'>
-                        <Button
-                            className='group text-2xl text-accent max-md:text-base'
-                            variant='link'>
-                            До каталогу
-                            <ArrowRight
-                                className='!size-6 transition-transform group-hover:translate-x-2'
-                                transition-transform
-                            />
-                        </Button>
-                    </Link>
-                </div>
-            </Carousel>
-        </section>
+                        <Link
+                            className='block max-lg:ml-auto'
+                            href='/catalogue'>
+                            <Button
+                                className='group text-2xl text-accent max-md:text-base'
+                                variant='link'>
+                                До каталогу
+                                <ArrowRight
+                                    className='!size-6 transition-transform group-hover:translate-x-2'
+                                    transition-transform
+                                />
+                            </Button>
+                        </Link>
+                    </div>
+                </Carousel>
+            </section>
+        </div>
     )
 }

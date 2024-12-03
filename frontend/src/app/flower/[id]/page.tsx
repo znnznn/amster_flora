@@ -9,6 +9,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import { WatchedProductTracker } from '@/hooks/use-watched-products'
 
 interface FlowerProps {
     params: {
@@ -22,9 +23,10 @@ export const generateMetadata = async ({ params }: FlowerProps) => {
     }
 }
 
-const FlowerPage = ({ params }: FlowerProps) => {
+const FlowerPage = async ({ params }: FlowerProps) => {
     return (
         <>
+            <WatchedProductTracker productId={params?.id} />
             <section className='mt-12 max-sm:mt-8'>
                 <Breadcrumb className='px-20 max-lg:px-16 max-md:px-10 max-sm:px-3'>
                     <BreadcrumbList className='max-sm:justify-center'>

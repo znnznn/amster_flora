@@ -4,7 +4,7 @@ import { ActiveFilters } from './components/active-filters'
 import { FiltersSidebar, MobileFilterSidebar } from './components/filters-sidebar'
 import { SortingFilter } from './components/filters/sorting'
 import { CataloguePagination } from './components/pagination'
-import { Products } from './components/products'
+import { ProductsList } from './components/products-list'
 import { Catalogue } from '@/components/catalogue'
 import {
     Breadcrumb,
@@ -46,7 +46,7 @@ const CataloguePage = async () => {
                         <Suspense fallback={<div>Loading...</div>}>
                             <ActiveFilters />
                         </Suspense>
-                        <Products products={[]} />
+                        <ProductsList products={[]} />
                         <CataloguePagination count={80} />
                     </div>
                 </div>

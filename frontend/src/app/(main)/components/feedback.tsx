@@ -12,7 +12,7 @@ import {
 
 export const Feedback = () => {
     return (
-        <section className='mt-28 max-md:mt-16'>
+        <section className='mt-28 overflow-x-clip max-md:mt-16'>
             <Carousel
                 opts={{
                     align: 'start',

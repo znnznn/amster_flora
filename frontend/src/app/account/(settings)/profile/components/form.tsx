@@ -193,10 +193,10 @@ export const ProfileForm = () => {
                     />
                 </div>
 
-                <div className='mt-10 max-lg:mx-auto max-lg:w-52'>
+                <div className='mt-10 flex justify-center md:justify-start'>
                     <Button
-                        className='w-full'
                         size='lg'
+                        className='w-44'
                         variant='secondary'
                         type='submit'>
                         Зберегти

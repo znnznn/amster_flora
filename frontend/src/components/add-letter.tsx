@@ -27,9 +27,10 @@ export const AddLetterModal = ({
         <Dialog>
             <DialogTrigger asChild>
                 <Button
-                    className={cn(className)}
+                    size='sm'
+                    className={cn('md:h-10 md:px-4', className)}
                     variant='ghost'>
-                    <BookHeart className='size-5' />
+                    <BookHeart className='!size-5 max-md:!size-4' />
                     Підписати листівку
                 </Button>
             </DialogTrigger>

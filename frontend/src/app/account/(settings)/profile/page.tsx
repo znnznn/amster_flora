@@ -3,7 +3,7 @@ import { ProfileForm } from './components/form'
 
 const ProfilePage = () => {
     return (
-        <section className='pr-20 max-lg:px-16 max-lg:px-20 max-lg:pr-16 max-md:px-10 max-sm:mt-8 max-sm:px-6'>
+        <section className='container mt-8 w-full lg:mt-0 lg:pl-0'>
             <h2 className='text-2xl font-medium'>Персональні дані</h2>
             <ProfileForm />
 
