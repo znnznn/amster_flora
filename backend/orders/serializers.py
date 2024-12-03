@@ -54,7 +54,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
             change_amount = amount - instance.amount
             discount_by_one = instance.discount / instance.amount
             change_discount = change_amount * discount_by_one
-            validated_data['discount'] = change_discount
+            validated_data['discount'] = amount * discount_by_one
             order = instance.order
             order.discount += change_discount
             order.save()
