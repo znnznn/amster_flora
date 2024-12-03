@@ -2,7 +2,7 @@ import { cookies } from 'next/headers'
 
 import { ProductsList } from '@/app/catalogue/components/products-list'
 import { products } from '@/components/catalogue'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { ProductListPagination } from '@/components/product-list-pagination'
 
 const WatchedPage = () => {
     const watchedProductsIds = cookies().get('watchedProducts')?.value
@@ -13,9 +13,11 @@ const WatchedPage = () => {
 
     return (
         <section className='container mt-8 lg:mt-0 lg:pl-0'>
-            <ScrollArea className='h-[700px]'>
-                <ProductsList products={watchedProducts} />
-            </ScrollArea>
+            <ProductsList products={watchedProducts} />
+            <ProductListPagination
+                className='mt-12'
+                count={80}
+            />
         </section>
     )
 }

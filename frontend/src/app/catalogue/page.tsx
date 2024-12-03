@@ -3,9 +3,9 @@ import { Suspense } from 'react'
 import { ActiveFilters } from './components/active-filters'
 import { FiltersSidebar, MobileFilterSidebar } from './components/filters-sidebar'
 import { SortingFilter } from './components/filters/sorting'
-import { CataloguePagination } from './components/pagination'
 import { ProductsList } from './components/products-list'
 import { Catalogue } from '@/components/catalogue'
+import { ProductListPagination } from '@/components/product-list-pagination'
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -47,7 +47,7 @@ const CataloguePage = async () => {
                             <ActiveFilters />
                         </Suspense>
                         <ProductsList products={[]} />
-                        <CataloguePagination count={80} />
+                        <ProductListPagination count={80} />
                     </div>
                 </div>
             </section>

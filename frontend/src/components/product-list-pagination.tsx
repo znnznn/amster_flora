@@ -10,12 +10,17 @@ import {
     PaginationItem,
     Pagination as PaginationWrapper
 } from '@/components/ui/pagination'
+import { cn } from '@/lib/utils'
 
-interface CataloguePaginationProps {
+interface ProductListPaginationPaginationProps {
     count: number
+    className?: string
 }
 
-export const CataloguePagination = ({ count }: CataloguePaginationProps) => {
+export const ProductListPagination = ({
+    count,
+    className
+}: ProductListPaginationPaginationProps) => {
     const limitStep = 24
 
     const [limit, setLimit] = useQueryState('limit', {
@@ -76,7 +81,11 @@ export const CataloguePagination = ({ count }: CataloguePaginationProps) => {
     }
 
     return (
-        <div className='flex flex-col items-center justify-center gap-y-4'>
+        <div
+            className={cn(
+                'flex flex-col items-center justify-center gap-y-4',
+                className
+            )}>
             {count > limitStep ? (
                 <Button
                     onClick={handleLimitChange}
