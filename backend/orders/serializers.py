@@ -40,10 +40,25 @@ class CartListSerializer(serializers.ModelSerializer):
         return VariantCartSerializer(obj.variant).data
 
 
-class OrderItemSerializers(serializers.ModelSerializer):
+class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
         fields = ('id', 'order', 'variant', 'amount', 'price', 'discount', 'percentage', 'creator')
+
+    def update(self, instance, validated_data):
+        if amount := validated_data.get('amount'):
+            variant = instance.variant
+            variant.quantity_sold -= instance.amount
+            variant.quantity_sold += amount
+            variant.save()
+            change_amount = amount - instance.amount
+            discount_by_one = instance.discount / instance.amount
+            change_discount = change_amount * discount_by_one
+            validated_data['discount'] = amount * discount_by_one
+            order = instance.order
+            order.discount += change_discount
+            order.save()
+        return super(OrderItemSerializer, self).update(instance, validated_data)
 
 
 class OrderItemListSerializer(serializers.ModelSerializer):
@@ -92,7 +107,6 @@ class OrderCreateSerializer(serializers.Serializer):
         return attrs
 
     def to_representation(self, instance):
-        print(instance)
         data = super().to_representation(instance)
         return data
 
