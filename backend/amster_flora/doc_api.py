@@ -386,3 +386,92 @@ class DeliveryAddressDocAPIView(SwaggerAutoSchema):
                         .
                         """
         return operation
+
+
+class OrderItemDocAPIView(SwaggerAutoSchema):
+    def get_operation(self, operation_keys=None):
+        operation = super().get_operation(operation_keys)
+        if operation['operationId'] == 'orders-items_list':
+            operation['summary'] = 'Get list of order items'
+            operation['description'] = """
+                                                      Allowed Admin, Manager
+                        .                                            
+                        """
+        elif operation['operationId'] == 'orders-items_create':
+            operation['summary'] = 'Create a new order item'
+            operation['description'] = """
+                                                      Allowed Admin, Manager
+                        .                                            
+                        """
+        elif operation['operationId'] == 'orders-items_read':
+            operation['summary'] = 'Get order item by id'
+            operation['description'] = """
+                                                      Allowed Admin, Manager
+                                                      needs params: id
+                        .
+                        """
+        elif operation['operationId'] == 'orders-items_delete':
+            operation['summary'] = 'Delete order item by id'
+            operation['description'] = """
+                                                      Allowed Admin, Manager
+                                                      needs params: id
+                        .
+                        """
+        else:
+            operation['summary'] = 'Update order item by id'
+            operation['description'] = """
+                                                      Allowed Admin, Manager
+                                                      needs params: id
+                        .
+                        """
+        return operation
+
+
+class OrderDocAPIView(SwaggerAutoSchema):
+    def get_operation(self, operation_keys=None):
+        operation = super().get_operation(operation_keys)
+        if operation['operationId'] == 'orders_list':
+            operation['summary'] = 'Get list of orders'
+            operation['description'] = """
+                                                      Allowed Admin, Manager, Owner
+                        .                                            
+                        """
+        elif operation['operationId'] == 'orders_create':
+            operation['summary'] = 'Create a new order'
+            operation['description'] = """
+                                                     Allowed Admin, Manager, Owner
+                        .                                            
+                        """
+        elif operation['operationId'] == 'orders_read':
+            operation['summary'] = 'Get order by id'
+            operation['description'] = """
+                                                      Allowed Admin, Manager, Owner
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        elif operation['operationId'] == 'orders_delete':
+            operation['summary'] = 'Delete order by id'
+            operation['description'] = """
+                                                      Allowed Admin, Manager
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        elif operation['operationId'] == 'orders_admin':
+            operation['summary'] = 'Create orders as staff'
+            operation['description'] = """
+                                                      Allowed Admin, Manager
+                                                      needs params:
+                                                      - list of stock products
+                        .                                            
+                        """
+        else:
+            operation['summary'] = 'Update order by id'
+            operation['description'] = """
+                                                      Allowed Admin, Manager
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        return operation

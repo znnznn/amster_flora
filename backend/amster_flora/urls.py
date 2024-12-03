@@ -3,7 +3,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from orders.views import CartsViewSet, OrdersViewSet
+from orders.views import CartsViewSet, OrdersViewSet, OrderItemsViewSet
 from products.views import WishListViewSet, CategoriesViewSet, VariantsViewSet, ProductsViewSet
 from shops.views import ShopsViewSet
 from users.views import UserViewSet, ContactUsAPIView, customer_page, DeliveryAddressViewSet
@@ -20,6 +20,7 @@ router.register('products', ProductsViewSet)
 router.register('carts', CartsViewSet)
 router.register('delivery-addresses', DeliveryAddressViewSet)
 router.register('orders', OrdersViewSet)
+router.register('orders-items', OrderItemsViewSet)
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
