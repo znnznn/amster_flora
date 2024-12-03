@@ -22,6 +22,34 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer, EmailSender):
     first_name = serializers.CharField(required=True)
     last_name = serializers.CharField(required=True)
+
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'first_name', 'last_name', 'phone_number', 'role', 'last_login',)
+        read_only_fields = ('last_login',)
+        extra_kwargs = {
+            "phone_number": {"required": True},
+        }
+
+    def get_fields(self):
+        fields = super().get_fields()
+        request = self.context.get("request")
+        if request and request.user.is_authenticated and request.user.role != Role.CLIENT:
+            fields['is_active'] = serializers.BooleanField(default=False)
+            fields['is_deleted'] = serializers.BooleanField(default=False)
+        return fields
+
+    def update(self, instance, validated_data):
+        if validated_data.get('role') and self.context.get('request').user.role != Role.ADMIN:
+            raise PermissionDenied()
+        if validated_data.get('is_active') and not instance.is_active:
+            self.send_email_invite_new_user(request=self.context.get('request'), obj_user=instance)
+        return super().update(instance, validated_data)
+
+
+class UserCreateSerializer(serializers.ModelSerializer, EmailSender):
+    first_name = serializers.CharField(required=True)
+    last_name = serializers.CharField(required=True)
     password = serializers.CharField(write_only=True)
 
     class Meta:
@@ -61,15 +89,6 @@ class UserSerializer(serializers.ModelSerializer, EmailSender):
         user = User.objects.create_user(**validated_data)
         self.send_email_new_user(request=self.context.get('request'), obj_user=user)
         return user
-
-    def update(self, instance, validated_data):
-        if validated_data.get('role') and self.context.get('request').user.role != Role.ADMIN:
-            raise PermissionDenied()
-        if validated_data.get('password'):
-            del validated_data['password']
-        if validated_data.get('is_active') and not instance.is_active:
-            self.send_email_invite_new_user(request=self.context.get('request'), obj_user=instance)
-        return super().update(instance, validated_data)
 
 
 class UserListSerializer(serializers.ModelSerializer):

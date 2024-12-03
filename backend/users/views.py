@@ -16,7 +16,7 @@ from users.models import User, Message, DeliveryAddress
 from users.permissions import IsAuthenticatedAs, IsOwner, IsCreator
 from users.serializers import (
     UserSerializer, PasswordResetSerializer, SetPasswordSerializer, PasswordChangeSerializer, ContactUsSerializer, UserListSerializer,
-    DeliveryAddressSerializer
+    DeliveryAddressSerializer, UserCreateSerializer
 )
 
 
@@ -41,6 +41,8 @@ class UserViewSet(viewsets.ModelViewSet):
         return super().get_permissions()
 
     def get_serializer_class(self):
+        if self.action == 'create':
+            return UserCreateSerializer
         if self.action in ('list', 'retrieve', 'list_deleted', 'me'):
             return UserListSerializer
         return UserSerializer
