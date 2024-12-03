@@ -13,7 +13,7 @@ from rest_framework_simplejwt.settings import api_settings
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from common.constants import Role
-from users.models import Message
+from users.models import Message, DeliveryAddress
 from users.utils import EmailSender
 
 User = get_user_model()
@@ -189,3 +189,9 @@ class CreatorSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'email', 'first_name', 'last_name', 'phone_number', 'role', 'last_login')
+
+
+class DeliveryAddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DeliveryAddress
+        fields = ('id', 'creator', 'street', 'city', 'title', 'description')

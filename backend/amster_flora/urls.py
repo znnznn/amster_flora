@@ -3,10 +3,10 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from orders.views import CartsViewSet
+from orders.views import CartsViewSet, OrdersViewSet
 from products.views import WishListViewSet, CategoriesViewSet, VariantsViewSet, ProductsViewSet
 from shops.views import ShopsViewSet
-from users.views import UserViewSet, ContactUsAPIView, customer_page
+from users.views import UserViewSet, ContactUsAPIView, customer_page, DeliveryAddressViewSet
 from .settings import ENVIRONMENT
 
 router = DefaultRouter()
@@ -18,7 +18,8 @@ router.register('categories', CategoriesViewSet)
 router.register('variants', VariantsViewSet)
 router.register('products', ProductsViewSet)
 router.register('carts', CartsViewSet)
-
+router.register('delivery-addresses', DeliveryAddressViewSet)
+router.register('orders', OrdersViewSet)
 
 urlpatterns = [
     # path('admin/', admin.site.urls),

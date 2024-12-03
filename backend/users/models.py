@@ -1,5 +1,4 @@
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import RegexValidator
 from django.db import models
 
 from common.constants import Role, PHONE_REGEX
@@ -35,3 +34,17 @@ class Message(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class DeliveryAddress(models.Model):
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='delivery_address')
+    city = models.CharField(max_length=255, null=True, blank=True)
+    street = models.CharField(max_length=255, null=True, blank=True)
+    title = models.CharField(max_length=255, null=True, blank=True)
+    description = models.CharField(max_length=1044, null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_full_address(self):
+        return f'{self.city} {self.street}'

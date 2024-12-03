@@ -344,3 +344,45 @@ class ProductDocAPIView(SwaggerAutoSchema):
                         .
                         """
         return operation
+
+
+class DeliveryAddressDocAPIView(SwaggerAutoSchema):
+    def get_operation(self, operation_keys=None):
+        operation = super().get_operation(operation_keys)
+        if operation['operationId'] == 'delivery-addresses_list':
+            operation['summary'] = 'Get list of delivery address'
+            operation['description'] = """
+                                                      Allowed Admin, Manager, Owner
+                        .                                            
+                        """
+        elif operation['operationId'] == 'delivery-addresses_create':
+            operation['summary'] = 'Create a new delivery address'
+            operation['description'] = """
+                                                      Allowed Admin, Manager, Owner
+                        .                                            
+                        """
+        elif operation['operationId'] == 'delivery-addresses_read':
+            operation['summary'] = 'Get delivery address by id'
+            operation['description'] = """
+                                                      Allowed Admin, Manager, Owner
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        elif operation['operationId'] == 'delivery-addresses_delete':
+            operation['summary'] = 'Delete delivery address by id'
+            operation['description'] = """
+                                                      Allowed Admin, Manager, Owner
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        else:
+            operation['summary'] = 'Update delivery address by id'
+            operation['description'] = """
+                                                      Allowed Admin, Manager, Owner
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        return operation
