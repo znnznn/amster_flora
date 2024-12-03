@@ -1,8 +1,10 @@
 from email.mime.image import MIMEImage
 
+from celery import shared_task
 from django.core.mail import get_connection, EmailMultiAlternatives
 
 
+@shared_task
 def send_email(subject, message, from_email, recipient_list, html_message, fail_silently=False, files_path:list=None):
     connection = get_connection(fail_silently=fail_silently)
     mail = EmailMultiAlternatives(subject, message, from_email, recipient_list, connection=connection)
