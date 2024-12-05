@@ -20,6 +20,8 @@ api.interceptors.request.use((config) => {
 
 const refreshToken = async () => {
     const refreshToken = Cookies.get('refreshToken')
+    console.log(!!refreshToken)
+
     if (!refreshToken) {
         throw new Error('Немає токена оновлення')
     }

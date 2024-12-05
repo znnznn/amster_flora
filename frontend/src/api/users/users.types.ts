@@ -13,7 +13,7 @@ export interface User {
     last_login: string | null
 }
 
-export interface PatchUserPayload {
+export interface AddUserPayload {
     email: string
     first_name: string
     last_name: string

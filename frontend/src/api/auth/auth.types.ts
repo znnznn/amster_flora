@@ -1,4 +1,4 @@
-import type { User } from '../users/users.types'
+import type { User, UserRoles } from '../users/users.types'
 
 export interface LoginResponse {
     refresh: string
@@ -12,12 +12,12 @@ export interface LoginCredentials {
     password: string
 }
 
-export interface RegisterData {
+export interface SignUpPayload {
     email: string
     first_name: string
-    last_name?: string
+    last_name: string
     phone_number: string
-    role?: string
+    role?: UserRoles
     password: string
 }
 

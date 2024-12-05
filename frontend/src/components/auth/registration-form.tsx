@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { isValidPhoneNumber } from 'react-phone-number-input'
 import { useMutation } from 'react-query'
 import { object, string, type infer as zodInfer } from 'zod'
 
@@ -12,35 +13,22 @@ import { SheetHeader, SheetTitle } from '../ui/sheet'
 
 import { ErrorMessage } from './error-message'
 import type { CurrentModal } from './modal'
-import { register } from '@/api/auth/auth'
+import { signUp } from '@/api/auth/auth'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { emailShape, passwordShape } from '@/config/schemas'
 
 const registrationSchema = object({
-    password: string({
-        required_error: "Це поле є обов'язковим"
-    })
-        .min(1, "Це поле є обов'язковим")
-        .min(8, 'Пароль повинен містити не менше 8 символів')
-        .regex(/[a-z]/, 'Пароль повинен містити не менше однієї малої літери')
-        .regex(/[A-Z]/, 'Пароль повинен містити не менше однієї великої літери')
-        .regex(/[0-9]/, 'Пароль повинен містити не менше однієї цифри')
-        .regex(
-            /[!@#$%^&*]/,
-            'Пароль повинен містити не менше одного спеціального символу (!@#$%^&*)'
-        ),
-    phone_number: string().min(1, {
+    password: passwordShape,
+    phone_number: string().refine((value) => isValidPhoneNumber(value), {
+        message: 'Неправильний формат номеру телефону'
+    }),
+    email: emailShape,
+    first_name: string().min(1, {
         message: 'Це поле є обов’язковим'
     }),
-    email: string()
-        .min(1, {
-            message: 'Це поле є обов’язковим'
-        })
-        .email({
-            message: 'Це поле має відповідати формату email'
-        }),
-    first_name: string().min(1, {
+    last_name: string().min(1, {
         message: 'Це поле є обов’язковим'
     })
 })
@@ -61,28 +49,27 @@ export const RegistrationForm = ({
     const form = useForm<RegistrationFormData>({
         resolver: zodResolver(registrationSchema),
         defaultValues: {
-            password: '',
-            phone_number: ''
+            phone_number: '',
+            email: '',
+            first_name: '',
+            last_name: '',
+            password: ''
         }
     })
 
     const mutation = useMutation({
-        mutationFn: register,
+        mutationFn: signUp,
         onSuccess: () => {
             form.reset()
             setSheetOpen(false)
         },
         onError: (error: any) => {
-            setErrorMessage(error.message)
+            setErrorMessage(error.response?.data?.detail || 'Помилка реєстрації')
         }
     })
 
     const onSubmit = (data: RegistrationFormData) => {
-        mutation.mutate({
-            ...data,
-            role: 'client',
-            last_name: data.first_name
-        })
+        mutation.mutate(data)
     }
     return (
         <>
@@ -116,6 +103,21 @@ export const RegistrationForm = ({
                                 <FormControl>
                                     <Input
                                         placeholder='Ім’я'
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name='last_name'
+                        render={({ field }) => (
+                            <FormItem className='w-full'>
+                                <FormControl>
+                                    <Input
+                                        placeholder='Прізвище'
                                         {...field}
                                     />
                                 </FormControl>

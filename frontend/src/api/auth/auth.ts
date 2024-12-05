@@ -1,6 +1,8 @@
-import { publicApi } from '..'
+import { api, publicApi } from '..'
 
-import type { LoginCredentials, LoginResponse, RegisterData } from './auth.types'
+import type { User } from '../users/users.types'
+
+import type { LoginCredentials, LoginResponse, SignUpPayload } from './auth.types'
 
 export const googleAuth = async (token: string): Promise<any> => {
     const response = await publicApi.post('/auth/google/', {
@@ -30,8 +32,8 @@ export const credentialsLogin = async ({
     return response.data
 }
 
-export const register = async (payload: RegisterData): Promise<LoginResponse> => {
-    const response = await publicApi.post('/users/', payload)
+export const signUp = async (payload: SignUpPayload) => {
+    const response = await api.post<User>('/users/', payload)
 
     return response.data
 }
