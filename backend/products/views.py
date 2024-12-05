@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import get_object_or_404
+from rest_framework.parsers import MultiPartParser, JSONParser
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -92,6 +93,7 @@ class WishListViewSet(ModelViewSet):
 
 
 class VariantsViewSet(ModelViewSet):
+    parser_classes = [MultiPartParser, JSONParser]
     serializer_class = VariantCreateSerializer
     permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER, ) | IsSafeMethod,)
     queryset = Variant.objects.select_related("product", "product__category").prefetch_related("images")
@@ -104,6 +106,7 @@ class VariantsViewSet(ModelViewSet):
 
 class ProductsViewSet(ModelViewSet):
     swagger_schema = ProductDocAPIView
+    parser_classes = [MultiPartParser, JSONParser]
     serializer_class = ProductCreateSerializer
     permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER, ) | IsSafeMethod,)
     queryset = Product.objects.select_related("category", "shop").prefetch_related("variants", "variants__images")
