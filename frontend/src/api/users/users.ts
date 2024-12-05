@@ -16,7 +16,7 @@ export const getUsers = async (queryParams: UsersQueryParams) => {
 }
 
 export const editUser = async (id: number, payload: PatchUserPayload) => {
-    const response = await api.put<User>(`/users/${id}/`, payload)
+    const response = await api.patch<User>(`/users/${id}/`, payload)
 
     return response.data
 }

@@ -4,7 +4,8 @@ import { Montserrat } from 'next/font/google'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import type { PropsWithChildren } from 'react'
 
-import './globals.css'
+import '../globals.css'
+
 import { CookieConsent } from '@/components/cookie-consent'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'

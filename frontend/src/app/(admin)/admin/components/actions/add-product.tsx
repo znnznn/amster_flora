@@ -1,11 +1,12 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { AlertCircle, CheckCircle, CirclePlus, Loader2, Plus, Trash2 } from 'lucide-react'
-import { Controller, useFieldArray, useForm } from 'react-hook-form'
+import { AlertCircle, CheckCircle, CirclePlus, Loader2 } from 'lucide-react'
+import { useForm } from 'react-hook-form'
 import { useMutation, useQuery } from 'react-query'
 import { z } from 'zod'
 
+import { ShopSelect } from './shop-select'
 import { getCategories } from '@/api/categories/categories'
 import { addProduct } from '@/api/products/products'
 import type { AddProductPayload } from '@/api/products/products.types'
@@ -34,6 +35,7 @@ import {
     SelectTrigger,
     SelectValue
 } from '@/components/ui/select'
+import { Textarea } from '@/components/ui/textarea'
 
 const addProductSchema = z.custom<AddProductPayload>()
 
@@ -68,14 +70,14 @@ export const AddProduct = () => {
         }
     })
 
-    const {
-        fields: variantFields,
-        append: appendVariant,
-        remove: removeVariant
-    } = useFieldArray({
-        control: form.control,
-        name: 'variants'
-    })
+    // const {
+    //     fields: variantFields,
+    //     append: appendVariant,
+    //     remove: removeVariant
+    // } = useFieldArray({
+    //     control: form.control,
+    //     name: 'variants'
+    // })
 
     const mutation = useMutation({
         mutationFn: (payload: AddProductFormData) => addProduct(payload),
@@ -130,7 +132,7 @@ export const AddProduct = () => {
                     Додати букет
                 </Button>
             </DialogTrigger>
-            <DialogContent className='max-w-3xl'>
+            <DialogContent className='max-w-3xl [&_label]:text-background'>
                 <DialogHeader>
                     <DialogTitle>Додати букет</DialogTitle>
                 </DialogHeader>
@@ -138,72 +140,101 @@ export const AddProduct = () => {
                     <form
                         onSubmit={form.handleSubmit(onSubmit)}
                         className='mt-8 space-y-4'>
-                        <FormField
-                            control={form.control}
-                            name='name'
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Назва букету</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            placeholder='Назва букету'
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name='sku'
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>SKU</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            placeholder='SKU'
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name='category'
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Категорія</FormLabel>
-                                    <FormControl>
-                                        <CategorySelect
-                                            onChange={field.onChange}
-                                            value={field.value}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name='description'
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Опис</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            placeholder='Опис букету'
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
+                        <div className='grid grid-cols-2 grid-rows-3 gap-x-4'>
+                            <FormField
+                                control={form.control}
+                                name='name'
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Назва букету</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder='Назва букету'
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name='name'
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Назва букету</FormLabel>
+                                        <FormControl></FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name='sku'
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>SKU</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder='SKU'
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name='shop'
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Магазин</FormLabel>
+                                        <FormControl>
+                                            <ShopSelect
+                                                onChange={field.onChange}
+                                                value={field.value}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name='category'
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Категорія</FormLabel>
+                                        <FormControl>
+                                            <CategorySelect
+                                                onChange={field.onChange}
+                                                value={field.value}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name='description'
+                                render={({ field }) => (
+                                    <FormItem className='col-span-2'>
+                                        <FormLabel>Опис</FormLabel>
+                                        <FormControl>
+                                            <Textarea
+                                                placeholder='Опис букету'
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
 
-                        <div>
+                        {/* <div>
                             <h3 className='mb-2 text-lg font-semibold'>Варіанти</h3>
                             {variantFields.map((field, index) => (
                                 <div
@@ -372,7 +403,7 @@ export const AddProduct = () => {
                                 <Plus className='mr-2 h-4 w-4' />
                                 Додати варіант
                             </Button>
-                        </div>
+                        </div> */}
 
                         <Button
                             disabled={mutation.isLoading}

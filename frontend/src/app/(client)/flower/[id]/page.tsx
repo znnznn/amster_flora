@@ -1,5 +1,5 @@
 import { Flower } from './components/flower'
-import { Advantages } from '@/app/(main)/components/advantages'
+import { Advantages } from '@/app/(client)/(main)/components/advantages'
 import { Catalogue } from '@/components/catalogue'
 import {
     Breadcrumb,
