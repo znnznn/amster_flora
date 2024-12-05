@@ -82,7 +82,7 @@ class VariantCreateSerializer(serializers.ModelSerializer):
         required=False, allow_empty=True,
         child=serializers.ImageField(max_length=1000, allow_empty_file=False, use_url=False)
     )
-    components = ComponentSerializer(many=True)
+    components = ComponentSerializer(many=True, required=False, allow_empty=True)
 
     class Meta:
         model = Variant
