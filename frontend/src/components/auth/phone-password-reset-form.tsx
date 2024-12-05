@@ -3,10 +3,10 @@ import { Loader2 } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
-import { withMask } from 'use-mask-input'
 import { object, string, type infer as zodInfer } from 'zod'
 
 import { Button } from '../ui/button'
+import { PhoneInput } from '../ui/phone-input'
 import { SheetHeader, SheetTitle } from '../ui/sheet'
 
 import { ErrorMessage } from './error-message'
@@ -14,7 +14,6 @@ import type { CurrentModal } from './modal'
 import { SuccessMessage } from './success-message'
 import { resetPasswordWithPhone } from '@/api/passwords/passwords'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
 
 const PhonePasswordResetSchema = object({
     phone: string().min(1, {
@@ -74,13 +73,8 @@ export const PhonePasswordResetForm = ({
                         name='phone'
                         render={({ field }) => (
                             <FormItem className='w-full'>
-                                <FormControl ref={withMask('+380 99 999 99 99')}>
-                                    <Input
-                                        type='tel'
-                                        inputMode='tel'
-                                        placeholder='+380 068 777 88 93'
-                                        {...field}
-                                    />
+                                <FormControl>
+                                    <PhoneInput {...field} />
                                 </FormControl>
 
                                 <FormMessage />

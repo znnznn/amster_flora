@@ -72,7 +72,7 @@ export const HeaderCatalogue = ({ className }: HeaderCatalogueProps) => {
                     </Link>
                 </div>
                 <Image
-                    className='size-60 rounded-3xl object-cover'
+                    className='aspect-square size-60 rounded-3xl object-cover'
                     src={currentImage}
                     alt='Flower image'
                 />

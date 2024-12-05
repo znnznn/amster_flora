@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { useState } from 'react'
 import { type UseFormReturn, useForm } from 'react-hook-form'
-import { withMask } from 'use-mask-input'
 import {
     boolean,
     date,
@@ -33,6 +32,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { PhoneInput } from '@/components/ui/phone-input'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Switch } from '@/components/ui/switch'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -225,13 +225,8 @@ const InfoBlock = ({
                     name='phone'
                     render={({ field }) => (
                         <FormItem className='w-full'>
-                            <FormControl ref={withMask('+380 99 999 99 99')}>
-                                <Input
-                                    type='tel'
-                                    inputMode='tel'
-                                    placeholder='+380679999569'
-                                    {...field}
-                                />
+                            <FormControl>
+                                <PhoneInput {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -571,16 +566,8 @@ const CourierBlock = ({
                         name='recipientPhone'
                         render={({ field }) => (
                             <FormItem className='mt-4'>
-                                <FormControl
-                                    ref={withMask('+380 99 999 99 99', {
-                                        inputmode: 'tel'
-                                    })}>
-                                    <Input
-                                        type='tel'
-                                        inputMode='tel'
-                                        {...field}
-                                        placeholder='Телефон отримувача'
-                                    />
+                                <FormControl>
+                                    <PhoneInput {...field} />
                                 </FormControl>
 
                                 <FormMessage />

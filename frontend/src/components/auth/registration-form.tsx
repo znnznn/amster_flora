@@ -3,11 +3,11 @@ import { Loader2 } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
-import { withMask } from 'use-mask-input'
 import { object, string, type infer as zodInfer } from 'zod'
 
 import { SocialsButtons } from '../socials-buttons'
 import { PasswordWithReveal } from '../ui/password-with-reveal'
+import { PhoneInput } from '../ui/phone-input'
 import { SheetHeader, SheetTitle } from '../ui/sheet'
 
 import { ErrorMessage } from './error-message'
@@ -100,13 +100,8 @@ export const RegistrationForm = ({
                         name='phone_number'
                         render={({ field }) => (
                             <FormItem className='w-full'>
-                                <FormControl ref={withMask('+380 99 999 99 99')}>
-                                    <Input
-                                        type='tel'
-                                        inputMode='tel'
-                                        placeholder='+380 068 777 88 93'
-                                        {...field}
-                                    />
+                                <FormControl>
+                                    <PhoneInput {...field} />
                                 </FormControl>
 
                                 <FormMessage />

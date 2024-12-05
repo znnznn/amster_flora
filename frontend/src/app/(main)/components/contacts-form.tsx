@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { AlertCircle, CheckCircle, Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
-import { withMask } from 'use-mask-input'
 import { string, z } from 'zod'
 
 import { addContactUs } from '@/api/contact-us/contact-us'
@@ -12,6 +11,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { PhoneInput } from '@/components/ui/phone-input'
 
 const contactsSchema = z.object({
     name: string().min(1, {
@@ -75,13 +75,8 @@ export const ContactsForm = () => {
                     name='phone_number'
                     render={({ field }) => (
                         <FormItem>
-                            <FormControl ref={withMask('+380 99 999 99 99')}>
-                                <Input
-                                    type='tel'
-                                    inputMode='tel'
-                                    placeholder='+380 068 777 88 93'
-                                    {...field}
-                                />
+                            <FormControl>
+                                <PhoneInput {...field} />
                             </FormControl>
 
                             <FormMessage />

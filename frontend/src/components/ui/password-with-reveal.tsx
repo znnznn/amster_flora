@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { Button } from './button'
 import { Input } from './input'
 
-interface PasswordWithRevealProps extends React.HTMLAttributes<HTMLInputElement> {
+interface PasswordWithRevealProps extends React.InputHTMLAttributes<HTMLInputElement> {
     variant?: 'underline' | 'default'
 }
 
@@ -17,12 +17,12 @@ export const PasswordWithReveal = ({
     return (
         <div className='relative'>
             <Input
-                {...props}
                 id='password'
                 variant={variant}
                 type={revealPassword ? 'text' : 'password'}
                 placeholder='••••••••'
                 className='pr-10'
+                {...props}
             />
             <Button
                 onClick={() => setRevealPassword(!revealPassword)}

@@ -1,6 +1,9 @@
-import { publicApi } from '..'
+import { api, publicApi } from '..'
 
-import type { ChangePasswordData, ResetPasswordConfirmationData } from './passwords.types'
+import type {
+    ChangePasswordPayload,
+    ResetPasswordConfirmationPayload
+} from './passwords.types'
 
 export const resetPassword = async (email: string) => {
     const response = await publicApi.post('/users/password-reset/', {
@@ -18,8 +21,8 @@ export const resetPasswordWithPhone = async (phone: string) => {
     return response.data
 }
 
-export const changePassword = async (id: number, payload: ChangePasswordData) => {
-    const response = await publicApi.post(`/users/${id}/password-change/`, payload)
+export const changePassword = async (id: number, payload: ChangePasswordPayload) => {
+    const response = await api.post(`/users/${id}/password-change/`, payload)
 
     return response.data
 }
@@ -28,7 +31,7 @@ export const resetPasswordConfirm = async ({
     uidb64,
     token,
     payload
-}: ResetPasswordConfirmationData) => {
+}: ResetPasswordConfirmationPayload) => {
     const response = await publicApi.post(
         `/users/password-reset-confirm/${uidb64}/${token}/`,
         payload

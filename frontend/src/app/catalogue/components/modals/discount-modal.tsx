@@ -3,7 +3,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
-import { withMask } from 'use-mask-input'
 import { object, string, type infer as zodInfer } from 'zod'
 
 import { SocialsButtons } from '@/components/socials-buttons'
@@ -11,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { PhoneInput } from '@/components/ui/phone-input'
 import { useAuth } from '@/hooks/use-auth'
 
 const loginSchema = object({
@@ -72,13 +72,8 @@ export const DiscountModal = () => {
                             name='phone'
                             render={({ field }) => (
                                 <FormItem className='w-full'>
-                                    <FormControl ref={withMask('+380 99 999 99 99')}>
-                                        <Input
-                                            type='tel'
-                                            inputMode='tel'
-                                            placeholder='+380 068 777 88 93'
-                                            {...field}
-                                        />
+                                    <FormControl>
+                                        <PhoneInput {...field} />
                                     </FormControl>
 
                                     <FormMessage />

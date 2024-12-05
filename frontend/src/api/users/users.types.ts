@@ -13,6 +13,14 @@ export interface User {
     last_login: string | null
 }
 
+export interface PatchUserPayload {
+    email: string
+    first_name: string
+    last_name: string
+    phone_number: string
+    role?: UserRoles
+}
+
 export type UserResponse = Response<User>
 
 export interface UsersQueryParams extends BaseQueryParams {}
