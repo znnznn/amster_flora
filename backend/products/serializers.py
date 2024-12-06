@@ -3,10 +3,13 @@ from mptt.exceptions import InvalidMove
 from rest_framework import serializers
 from rest_framework_recursive.fields import RecursiveField
 
+from key_crm.models import KeyCRMProduct
 from products.models import Shop, Category, WishList, Image, Variant, Product, Component
 
 
 class ComponentSerializer(serializers.ModelSerializer):
+    key_crm_product = serializers.PrimaryKeyRelatedField(queryset=KeyCRMProduct.objects.all())
+
     class Meta:
         model = Component
         fields = ('id', 'key_crm_product', 'quantity')
@@ -77,19 +80,31 @@ class WishListCreateSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
 
-class VariantCreateSerializer(serializers.ModelSerializer):
+class ProductVariantCreateSerializer(serializers.ModelSerializer):
     images = serializers.ListField(
         required=False, allow_empty=True,
         child=serializers.ImageField(max_length=1000, allow_empty_file=False, use_url=False)
     )
-    components = ComponentSerializer(many=True, required=False, allow_empty=True)
+    components = serializers.ListField(child=ComponentSerializer(), required=False, allow_empty=True)
 
     class Meta:
         model = Variant
         fields = ('id', 'size', 'height', 'diameter', 'hex_color', 'quantity', 'price', 'image', 'images', 'components',)
 
+
+class VariantSerializer(serializers.ModelSerializer):
+    images = serializers.ListField(
+        required=False, allow_empty=True,
+        child=serializers.ImageField(max_length=1000, allow_empty_file=False, use_url=False)
+    )
+    components = serializers.ListField(child=ComponentSerializer(), required=False, allow_empty=True)
+    product = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all())
+
+    class Meta:
+        model = Variant
+        fields = ('id', 'product', 'size', 'height', 'diameter', 'hex_color', 'quantity', 'price', 'image', 'images', 'components',)
+
     def create(self, validated_data):
-        validated_data['product'] = self.context['product']
         images = validated_data.pop('images', None)
         components = validated_data.pop('components', None)
         variant = super().create(validated_data)
@@ -99,14 +114,21 @@ class VariantCreateSerializer(serializers.ModelSerializer):
             Component.objects.bulk_create([Component(variant=variant, **component) for component in components])
         return variant
 
+    def to_representation(self, instance):
+        variant = Variant.objects.filter(id=instance.id).select_related(
+            'product', "product__category").prefetch_related('images', 'components').first()
+        instance = VariantRetrieveSerializer(variant).data
+        return instance
+
 
 class VariantRetrieveSerializer(serializers.ModelSerializer):
-    images = ImageSerializer(many=True)
     quantity = serializers.SerializerMethodField()
+    images = ImageSerializer(many=True)
+    components = ComponentSerializer(many=True)
 
     class Meta:
         model = Variant
-        fields = ('id', 'size', 'height', 'diameter', 'hex_color', 'quantity', 'price', 'image', 'images',)
+        fields = ('id', 'size', 'height', 'diameter', 'hex_color', 'quantity', 'price', 'image', 'images', 'components',)
 
     def get_quantity(self, obj):
         return obj.quantity - obj.quantity_sold
@@ -134,7 +156,7 @@ class ProductShortSerializer(serializers.ModelSerializer):
 class ProductCreateSerializer(serializers.ModelSerializer):
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
     shop = serializers.PrimaryKeyRelatedField(queryset=Shop.objects.all())
-    variants = VariantCreateSerializer(many=True)
+    variants = ProductVariantCreateSerializer(many=True)
 
     class Meta:
         model = Product
@@ -144,10 +166,14 @@ class ProductCreateSerializer(serializers.ModelSerializer):
         variants = validated_data.pop('variants', None)
         product = Product.objects.create(**validated_data)
         if variants:
-            variants = VariantCreateSerializer(many=True, data=variants, context={'product': product})
-            variants.is_valid(raise_exception=True)
-            variants = variants.save()
-            product.variants.set(variants)
+            for variant in variants:
+                components = variant.pop('components', None)
+                images = variant.pop('images', None)
+                variant = Variant.objects.create(product=product, **variant)
+                if components:
+                    Component.objects.bulk_create([Component(variant=variant, **component) for component in components])
+                if images:
+                    Image.objects.bulk_create([Image(variant=variant, image=image) for image in images])
         return product
 
     def to_representation(self, instance):
