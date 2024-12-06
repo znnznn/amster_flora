@@ -15,8 +15,8 @@ from orders.models import Cart
 from products.filters import CategoryFilter, WishListFilter, WishListOrderingFilter, ProductOrderingFilter, ProductFilter
 from products.models import Category, Product, WishList, Variant
 from products.serializers import (
-    CategorySerializer, CategoryTreeSerializer, CategoryRetrieveSerializer, WishListCreateSerializer, VariantCreateSerializer,
-    ProductCreateSerializer, ProductListSerializer, VariantRetrieveSerializer
+    CategorySerializer, CategoryTreeSerializer, CategoryRetrieveSerializer, WishListCreateSerializer, ProductCreateSerializer,
+    ProductListSerializer, VariantRetrieveSerializer, VariantSerializer
 )
 from users.permissions import IsAuthenticatedAs, IsSafeMethod
 
@@ -94,14 +94,14 @@ class WishListViewSet(ModelViewSet):
 
 class VariantsViewSet(ModelViewSet):
     parser_classes = [MultiPartParser, JSONParser]
-    serializer_class = VariantCreateSerializer
-    permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER, ) | IsSafeMethod,)
-    queryset = Variant.objects.select_related("product", "product__category").prefetch_related("images")
+    serializer_class = VariantSerializer
+    permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER, ),)
+    queryset = Variant.objects.select_related("product", "product__category").prefetch_related("images", "components")
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return VariantRetrieveSerializer
-        return VariantCreateSerializer
+        return VariantSerializer
 
 
 class ProductsViewSet(ModelViewSet):
