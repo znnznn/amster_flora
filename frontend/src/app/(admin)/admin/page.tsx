@@ -1,4 +1,5 @@
 import { AddProduct } from './components/actions/add-product'
+import { AddVariant } from './components/actions/add-variant'
 import { CategoryFilter } from './components/filters/category'
 import { FlowerFilter } from './components/filters/flower'
 import { SizeFilter } from './components/filters/size'
@@ -18,6 +19,7 @@ const AdminPage = () => {
                     Букети <Badge className='pointer-events-none'>14</Badge>
                 </h1>
                 <AddProduct />
+                <AddVariant />
             </div>
             <div className='flex items-center gap-x-4'>
                 <CategoryFilter />

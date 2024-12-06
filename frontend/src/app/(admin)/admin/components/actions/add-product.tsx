@@ -159,17 +159,6 @@ export const AddProduct = () => {
                             />
                             <FormField
                                 control={form.control}
-                                name='name'
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Назва букету</FormLabel>
-                                        <FormControl></FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
                                 name='sku'
                                 render={({ field }) => (
                                     <FormItem>

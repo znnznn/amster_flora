@@ -20,7 +20,7 @@ export const Flowers = () => {
                     <Image
                         src={rose}
                         alt='Троянда'
-                        className='size-full origin-top-left object-cover transition-transform duration-500 group-hover:scale-110'
+                        className='aspect-video size-full origin-top-left object-cover transition-transform duration-500 group-hover:scale-110'
                     />
                 </div>
                 <div className='group relative cursor-pointer overflow-hidden rounded-3xl bg-primary'>
@@ -28,7 +28,7 @@ export const Flowers = () => {
                     <Image
                         src={tulpin}
                         alt='Тюльпан'
-                        className='size-full origin-top-left object-cover transition-transform duration-500 group-hover:scale-110'
+                        className='aspect-square size-full origin-top-left object-cover transition-transform duration-500 group-hover:scale-110'
                     />
                 </div>
                 <div className='group relative cursor-pointer overflow-hidden rounded-3xl bg-primary'>
@@ -46,7 +46,7 @@ export const Flowers = () => {
                     <Image
                         src={flowerpot}
                         alt='Вазони'
-                        className='size-full origin-top-left object-cover transition-transform duration-500 group-hover:scale-110'
+                        className='aspect-square size-full origin-top-left object-cover transition-transform duration-500 group-hover:scale-110'
                     />
                 </div>
                 <div className='group relative cursor-pointer overflow-hidden rounded-3xl bg-primary'>
@@ -54,7 +54,7 @@ export const Flowers = () => {
                     <Image
                         src={orchid}
                         alt='Орхідея'
-                        className='size-full origin-top-left object-cover transition-transform duration-500 group-hover:scale-110'
+                        className='aspect-video size-full origin-top-left object-cover transition-transform duration-500 group-hover:scale-110'
                     />
                 </div>
                 <div className='group relative cursor-pointer overflow-hidden rounded-3xl bg-primary'>
@@ -62,7 +62,7 @@ export const Flowers = () => {
                     <Image
                         src={pion}
                         alt='Півонії'
-                        className='size-full origin-top-left object-cover transition-transform duration-500 group-hover:scale-110'
+                        className='aspect-square size-full origin-top-left object-cover transition-transform duration-500 group-hover:scale-110'
                     />
                 </div>
             </div>

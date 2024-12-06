@@ -28,7 +28,7 @@ export const ShopSelect = ({ value, onChange }: ShopSelectProps) => {
             value={value.toString()}>
             <div className='space-y-1'>
                 <SelectTrigger>
-                    <SelectValue placeholder='Оберіть мазазин' />
+                    <SelectValue placeholder='Оберіть магазин' />
                 </SelectTrigger>
             </div>
             <SelectContent>
