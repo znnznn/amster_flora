@@ -23,9 +23,12 @@ export const AddLetterModal = () => {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant='ghost'>
-                    <BookHeart className='size-5' />
-                    Підписати листівку
+                <Button
+                    className='max-md:px-2 max-md:text-sm'
+                    variant='ghost'>
+                    <BookHeart className='size-5 max-md:size-4' />
+                    <span className='hidden sm:inline'>Підписати листівку</span>
+                    <span className='sm:hidden'>Листівка</span>
                 </Button>
             </DialogTrigger>
             <DialogContent className='max-w-[620px] px-14'>

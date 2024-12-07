@@ -23,9 +23,12 @@ export const AddGiftModal = () => {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant='ghost'>
-                    <Gift className='size-5' />
-                    Обрати подарунок
+                <Button
+                    className='max-md:px-2 max-md:text-sm'
+                    variant='ghost'>
+                    <Gift className='size-5 max-md:size-4' />
+                    <span className='hidden sm:inline'>Обрати подарунок</span>
+                    <span className='sm:hidden'>Подарунок</span>
                 </Button>
             </DialogTrigger>
             <DialogContent className='max-w-[620px] px-14'>

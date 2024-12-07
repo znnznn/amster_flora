@@ -46,7 +46,6 @@ export const Hero = () => {
                     loop: true
                 }}
                 plugins={[
-                    // @ts-ignore
                     Autoplay({
                         delay: 10_000
                     })

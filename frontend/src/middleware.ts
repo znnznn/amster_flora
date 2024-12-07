@@ -9,7 +9,7 @@ const matchRoute = (path: string, route: string) => {
     if (pathSegments.length !== routeSegments.length) return false
 
     return routeSegments.every(
-        (segment, i) => segment === pathSegments[i] || segment.startsWith(':') //
+        (segment, i) => segment === pathSegments[i] || segment.startsWith(':')
     )
 }
 

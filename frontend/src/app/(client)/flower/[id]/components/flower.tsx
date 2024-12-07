@@ -19,38 +19,55 @@ export const Flower = () => {
 
     return (
         <>
-            <div className='mt-8 h-[700px] rounded-3xl bg-primary py-8 text-accent'>
-                <div className='container flex h-full items-start gap-x-14 max-xl:justify-center'>
-                    <FlowerSlider />
+            <div className='container'>
+                <Image
+                    src={flower}
+                    alt={'Півоній'}
+                    className='mx-auto mt-6 aspect-video w-[620px] rounded-3xl object-cover max-md:w-[500px] max-sm:w-96 lg:hidden'
+                />
+                <FlowerSlider className='lg:hidden' />
+            </div>
+
+            <div className='mt-8 h-[700px] rounded-3xl bg-primary py-8 text-accent max-lg:h-fit'>
+                <div className='container flex h-full items-start gap-x-14 max-xl:justify-center max-sm:block'>
+                    <FlowerSlider
+                        orientation='vertical'
+                        className='max-xl:hidden'
+                    />
                     <Image
                         src={flower}
                         alt={'Півоній'}
-                        className='h-full rounded-3xl object-cover max-xl:hidden'
+                        className='h-full max-w-md rounded-3xl object-cover max-lg:hidden'
                     />
-                    <div className='flex flex-col gap-y-11'>
-                        <h2 className='text-2xl font-semibold max-md:text-lg'>
+                    <div className='flex flex-col gap-y-10 max-md:gap-y-8'>
+                        <h2 className='text-2xl font-semibold max-md:text-lg max-sm:hidden'>
                             Букет півоній
                         </h2>
 
-                        <div className='flex items-center justify-between gap-x-4'>
+                        <div className='flex items-center justify-between gap-x-4 text-sm max-md:text-xs'>
                             <div className='flex items-center gap-x-2'>
-                                <CircleCheck className='size-5' />В наявності
+                                <CircleCheck className='size-5 max-md:size-4' />В
+                                наявності
                             </div>
-                            <span className='text-sm'>Артикул: 0101-0012</span>
+                            <span>Артикул: 0101-0012</span>
                         </div>
 
-                        <div className='flex items-center gap-x-4'>
-                            <span className='text-accent/40 line-through'>2 300₴</span>
-                            <span className='text-2xl font-medium'>2 000₴</span>
+                        <div className='flex items-center gap-x-4 max-md:justify-center'>
+                            <span className='text-accent/40 line-through max-md:text-sm'>
+                                2 300₴
+                            </span>
+                            <span className='text-2xl font-medium max-md:text-lg'>
+                                2 000₴
+                            </span>
                         </div>
 
-                        <div className='flex items-end justify-between gap-x-4'>
+                        <div className='flex items-end justify-between gap-x-4 max-md:justify-center'>
                             <div>
                                 <h3 className='font-medium'>Розмір:</h3>
                                 <ToggleGroup
                                     defaultValue={size}
                                     onValueChange={setSize}
-                                    className='mt-2 justify-start gap-x-2'
+                                    className='mt-2 justify-start gap-2 max-md:flex-wrap'
                                     type='single'>
                                     <ToggleGroupItem
                                         className='size-11 bg-accent/40 text-lg font-medium text-accent'
@@ -74,7 +91,7 @@ export const Flower = () => {
                                     </ToggleGroupItem>
                                 </ToggleGroup>
                             </div>
-                            <div>
+                            <div className='max-md:text-sm'>
                                 <div>
                                     Висота: <span className='font-medium'>35 см</span>
                                 </div>
@@ -89,7 +106,7 @@ export const Flower = () => {
                             <AddLetterModal />
                         </div>
 
-                        <div className='flex items-center justify-between gap-x-4'>
+                        <div className='flex items-center justify-between gap-4 max-md:flex-col max-md:justify-center'>
                             <Button
                                 size='lg'
                                 variant='secondary'>
@@ -98,16 +115,20 @@ export const Flower = () => {
                             </Button>
                             <QuickOrderModal />
                         </div>
-                        <div className='flex items-center justify-between gap-x-12'>
+                        <div className='flex items-center justify-between gap-x-12 max-md:gap-x-6'>
                             <Input
-                                className='w-60'
+                                className='w-60 border-b-accent max-md:w-full'
                                 type='text'
+                                variant='underline'
                                 placeholder='Промокод/Дисконтна картка'
                             />
                             <Button
                                 size='lg'
                                 variant='outline'>
-                                Застосувати знижку
+                                <span className='hidden sm:inline'>
+                                    Застосувати знижку
+                                </span>
+                                <span className='sm:hidden'>Застосувати</span>
                             </Button>
                         </div>
                     </div>
