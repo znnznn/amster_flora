@@ -475,3 +475,95 @@ class OrderDocAPIView(SwaggerAutoSchema):
                         .
                         """
         return operation
+
+
+class CartDocAPIView(SwaggerAutoSchema):
+    def get_operation(self, operation_keys=None):
+        operation = super().get_operation(operation_keys)
+        if operation['operationId'] == 'carts_list':
+            operation['summary'] = 'Get list of carts'
+            operation['description'] = """
+                                                      Allowed owner profile
+                        .                                            
+                        """
+        elif operation['operationId'] == 'carts_create':
+            operation['summary'] = 'Create a new cart'
+            operation['description'] = """
+                                                      Allowed owner profile
+                        .                                            
+                        """
+        elif operation['operationId'] == 'carts_read':
+            operation['summary'] = 'Get cart by id'
+            operation['description'] = """
+                                                      Allowed owner profile
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        elif operation['operationId'] == 'carts_delete':
+            operation['summary'] = 'Delete cart by id'
+            operation['description'] = """
+                                                      Allowed owner profile
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        elif operation['operationId'] == 'carts_delete_by_variant':
+            operation['summary'] = 'Delete cart by variant id'
+            operation['description'] = """
+                                                      Allowed owner profile
+                                                      needs params:
+                                                      - id (variant id)
+                        .
+                        """
+        else:
+            operation['summary'] = 'Update cart by id'
+            operation['description'] = """
+                                                      Allowed owner profile
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        return operation
+
+
+class VariantDocAPIView(SwaggerAutoSchema):
+    def get_operation(self, operation_keys=None):
+        operation = super().get_operation(operation_keys)
+        if operation['operationId'] == 'variants_list':
+            operation['summary'] = 'Get list of variants'
+            operation['description'] = """
+                                                      Allowed Admin, Manager
+                        .                                            
+                        """
+        elif operation['operationId'] == 'variants_create':
+            operation['summary'] = 'Create a new variant'
+            operation['description'] = """
+                                                      Allowed Admin, Manager
+                        .                                            
+                        """
+        elif operation['operationId'] == 'variants_read':
+            operation['summary'] = 'Get variants by id'
+            operation['description'] = """
+                                                      Allowed Admin, Manager
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        elif operation['operationId'] == 'variants_delete':
+            operation['summary'] = 'Delete variants by id'
+            operation['description'] = """
+                                                      Allowed Admin, Manager
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        else:
+            operation['summary'] = 'Update variants by id'
+            operation['description'] = """
+                                                      Allowed Admin, Manager
+                                                      needs params:
+                                                      - id
+                        .
+                        """
+        return operation

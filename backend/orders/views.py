@@ -1,7 +1,11 @@
 from django.db.models import Prefetch
+from rest_framework import status
+from rest_framework.decorators import action
+from rest_framework.generics import get_object_or_404
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from amster_flora.doc_api import OrderDocAPIView, OrderItemDocAPIView
+from amster_flora.doc_api import OrderDocAPIView, OrderItemDocAPIView, CartDocAPIView
 from common.constants import Role
 from orders.models import Cart, Order, OrderItem
 from orders.serializers import CartSerializer, CartListSerializer, OrderCreateSerializer, OrderListSerializer, OrderItemSerializer
@@ -10,6 +14,7 @@ from users.permissions import IsCreator, IsAuthenticatedAs
 
 
 class CartsViewSet(ModelViewSet):
+    swagger_schema = CartDocAPIView
     queryset = Cart.objects.prefetch_related(
         Prefetch('variant', Variant.objects.select_related('product').prefetch_related('images'))
     )
@@ -23,6 +28,12 @@ class CartsViewSet(ModelViewSet):
 
     def get_queryset(self):
         return Cart.objects.filter(creator=self.request.user)
+
+    @action(detail=True, methods=['delete'], url_path='delete')
+    def delete_by_variant(self, request, *args, **kwargs):
+        cart_product = get_object_or_404(self.get_queryset().filter(variant_id=kwargs['pk']), creator=request.user)
+        cart_product.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class OrdersViewSet(ModelViewSet):

@@ -8,7 +8,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from amster_flora.doc_api import CategoriesDocAPIView, WishListDocAPIView, ProductDocAPIView
+from amster_flora.doc_api import CategoriesDocAPIView, WishListDocAPIView, ProductDocAPIView, VariantDocAPIView
 from common.constants import Role
 from common.mixins import ListWithOutPaginationMixin
 from common.parsers import MultipartJsonParser
@@ -94,6 +94,7 @@ class WishListViewSet(ModelViewSet):
 
 
 class VariantsViewSet(ModelViewSet):
+    swagger_schema = VariantDocAPIView
     parser_classes = [MultipartJsonParser, JSONParser]
     serializer_class = VariantSerializer
     permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER, ),)
