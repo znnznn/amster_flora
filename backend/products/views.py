@@ -74,7 +74,7 @@ class WishListViewSet(ModelViewSet):
     swagger_schema = WishListDocAPIView
     serializer_class = WishListCreateSerializer
     permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER, Role.CLIENT),)
-    queryset = WishList.objects.select_related("product", "creator").prefetch_related("product__images")
+    queryset = WishList.objects.all()
     filter_backends = [DjangoFilterBackend, SearchFilter, WishListOrderingFilter]
     filterset_class = WishListFilter
     ordering_fields = ("name", "category")
@@ -87,7 +87,7 @@ class WishListViewSet(ModelViewSet):
         return queryset
 
     @action(detail=True, methods=['delete'], url_path='delete')
-    def delete_by_shop_product(self, request, *args, **kwargs):
+    def delete_by_product(self, request, *args, **kwargs):
         wish_product = get_object_or_404(self.get_queryset().filter(product_id=kwargs['pk']), creator=request.user)
         wish_product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

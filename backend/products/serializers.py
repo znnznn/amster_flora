@@ -72,10 +72,12 @@ class CategoryTreeSerializer(serializers.ModelSerializer):
 class WishListCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = WishList
-        fields = ('id', 'product', 'creator')
+        fields = ('id', 'product')
 
     def create(self, validated_data):
-        if wish_product := WishList.objects.filter(shop_product=validated_data['shop_product'].id, creator=validated_data['creator']):
+        user = self.context['request'].user
+        validated_data['creator'] = user
+        if wish_product := WishList.objects.filter(product=validated_data['product'].id, creator=user):
             return wish_product.first()
         return super().create(validated_data)
 
