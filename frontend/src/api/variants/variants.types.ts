@@ -1,9 +1,9 @@
 import type { BaseQueryParams, Response } from '../index.types'
-import type { Component } from '../products/products.types'
 
+export type VariantSize = 'small' | 'medium' | 'large' | 'extra_large'
 export interface Variant {
     id: number
-    size: string
+    size: VariantSize
     height: number
     diameter: number
     hex_color: string
@@ -27,7 +27,7 @@ export interface AddVariantPayload {
     quantity: number
     price: string
     images: File[]
-    components: Component[]
+    components: any[]
 }
 
 export type VariantsResponse = Response<Variant>

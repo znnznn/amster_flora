@@ -9,7 +9,6 @@ export interface FavoritesItem {
 
 export interface AddFavoritesItemPayload {
     product: number
-    creator: number
 }
 
 export type FavoritesItemsResponse = Response<FavoritesItem>

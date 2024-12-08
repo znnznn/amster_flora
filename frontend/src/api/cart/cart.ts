@@ -13,3 +13,9 @@ export const addCartItem = async (payload: AddCartItemPayload) => {
 
     return response.data
 }
+
+export const removeCartItem = async (id: number) => {
+    const response = await api.delete(`/carts/${id}/delete/`)
+
+    return response.data
+}

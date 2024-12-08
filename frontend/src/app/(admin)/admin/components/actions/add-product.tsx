@@ -1,15 +1,14 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { AlertCircle, CheckCircle, CirclePlus, Loader2 } from 'lucide-react'
-import { useForm } from 'react-hook-form'
+import { AlertCircle, CheckCircle, CirclePlus, Loader2, Plus, Trash2 } from 'lucide-react'
+import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { useMutation, useQuery } from 'react-query'
 import { z } from 'zod'
 
 import { ShopSelect } from './shop-select'
 import { getCategories } from '@/api/categories/categories'
 import { addProduct } from '@/api/products/products'
-import type { AddProductPayload } from '@/api/products/products.types'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import {
@@ -37,7 +36,56 @@ import {
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 
-const addProductSchema = z.custom<AddProductPayload>()
+const addProductSchema = z.object({
+    name: z.string().min(1, {
+        message: 'Це поле є обов’язковим'
+    }),
+    sku: z.string().min(1, {
+        message: 'Це поле є обов’язковим'
+    }),
+    description: z.string().min(1, {
+        message: 'Це поле є обов’язковим'
+    }),
+    category: z.number().min(1, {
+        message: 'Це поле є обов’язковим'
+    }),
+    shop: z.number().min(1, {
+        message: 'Це поле є обов’язковим'
+    }),
+    variants: z.array(
+        z.object({
+            size: z.string().min(1, {
+                message: 'Це поле є обов’язковим'
+            }),
+            height: z.number().min(1, {
+                message: 'Це поле є обов’язковим'
+            }),
+            diameter: z.number().min(1, {
+                message: 'Це поле є обов’язковим'
+            }),
+            hex_color: z.string().min(1, {
+                message: 'Це поле є обов’язковим'
+            }),
+            quantity: z.number().min(1, {
+                message: 'Це поле є обов’язковим'
+            }),
+            price: z.string().min(1, {
+                message: 'Це поле є обов’язковим'
+            }),
+            images: z.any(),
+            components: z.array(
+                z.object({
+                    key_crm_product: z.number().min(1, {
+                        message: 'Це поле є обов’язковим'
+                    }),
+                    quantity: z.number().min(1, {
+                        message: 'Це поле є обов’язковим'
+                    })
+                })
+            )
+        })
+    )
+})
 
 type AddProductFormData = z.infer<typeof addProductSchema>
 
@@ -70,14 +118,16 @@ export const AddProduct = () => {
         }
     })
 
-    // const {
-    //     fields: variantFields,
-    //     append: appendVariant,
-    //     remove: removeVariant
-    // } = useFieldArray({
-    //     control: form.control,
-    //     name: 'variants'
-    // })
+    console.log(form.formState.errors)
+
+    const {
+        fields: variantFields,
+        append: appendVariant,
+        remove: removeVariant
+    } = useFieldArray({
+        control: form.control,
+        name: 'variants'
+    })
 
     const mutation = useMutation({
         mutationFn: (payload: AddProductFormData) => addProduct(payload),
@@ -223,7 +273,44 @@ export const AddProduct = () => {
                             />
                         </div>
 
-                        {/* <div>
+                        {/* <FormField
+                            control={form.control}
+                            name='variants'
+                            render={({ field }) => (
+                                <div>
+                                    <FormItem className='mt-4 flex w-full items-start justify-between gap-x-4 space-y-0 border-t pt-4'>
+                                        <FormLabel className='w-1/5 text-lg'>
+                                            Варіанти
+                                        </FormLabel>
+                                        <div className='flex flex-col gap-y-2'>
+                                            <FormControl>
+                                                <AddVariant
+                                                    variants={field.value}
+                                                    setVariants={field.onChange}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </div>
+                                    </FormItem>
+
+                                    {form.watch('variants')?.length > 0 ? (
+                                        <ul className='mt-4 max-h-56 overflow-auto rounded-2xl border'>
+                                            {form
+                                                .watch('variants')
+                                                ?.map((variant, index) => (
+                                                    <li
+                                                        className='border-b last:border-b-0'
+                                                        key={index}>
+                                                        {variant.height}
+                                                    </li>
+                                                ))}
+                                        </ul>
+                                    ) : null}
+                                </div>
+                            )}
+                        /> */}
+
+                        <div>
                             <h3 className='mb-2 text-lg font-semibold'>Варіанти</h3>
                             {variantFields.map((field, index) => (
                                 <div
@@ -392,7 +479,7 @@ export const AddProduct = () => {
                                 <Plus className='mr-2 h-4 w-4' />
                                 Додати варіант
                             </Button>
-                        </div> */}
+                        </div>
 
                         <Button
                             disabled={mutation.isLoading}

@@ -10,13 +10,16 @@ import {
     SelectValue
 } from '@/components/ui/select'
 
-export const SortingFilter = () => {
-    const [sorting, setSorting] = useQueryState('sorting', { defaultValue: 'price' })
+export const OrderingFilter = () => {
+    const [ordering, setOrdering] = useQueryState('ordering', {
+        defaultValue: '-price',
+        shallow: false
+    })
 
     return (
         <Select
-            defaultValue={sorting}
-            onValueChange={setSorting}>
+            defaultValue={ordering}
+            onValueChange={setOrdering}>
             <SelectTrigger className='w-48 font-medium max-sm:w-full'>
                 <SelectValue placeholder='Theme' />
             </SelectTrigger>

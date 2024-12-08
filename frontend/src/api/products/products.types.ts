@@ -1,4 +1,5 @@
-import type { Response } from '../index.types'
+import type { BaseQueryParams, Response } from '../index.types'
+import type { Variant, VariantSize } from '../variants/variants.types'
 
 export interface Product {
     id: number
@@ -8,6 +9,12 @@ export interface Product {
     category: number
     shop: number
     variants: Variant[]
+    in_wish_list: boolean
+    in_cart: boolean
+}
+
+export type SingleVariantProduct = Omit<Product, 'variants'> & {
+    variant: Variant
 }
 
 export interface AddProductPayload {
@@ -19,20 +26,10 @@ export interface AddProductPayload {
     variants: Variant[]
 }
 
-export interface Variant {
-    size: string
-    height: number
-    diameter: number
-    hex_color: string
-    quantity: number
-    price: string
-    images: string[]
-    components: Component[]
-}
-
-export interface Component {
-    key_crm_product: number
-    quantity: number
-}
-
 export type ProductResponse = Response<Product>
+
+export interface ProductQueryParams extends BaseQueryParams {
+    size: VariantSize
+    ordering: string
+    availability: string | boolean
+}

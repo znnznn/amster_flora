@@ -1,9 +1,16 @@
 import { api } from '..'
 
-import type { AddProductPayload, Product, ProductResponse } from './products.types'
+import type {
+    AddProductPayload,
+    Product,
+    ProductQueryParams,
+    ProductResponse
+} from './products.types'
+import { getQueryParamString } from '@/utils/get-query-param-string'
 
-export const getProducts = async () => {
-    const response = await api.get<ProductResponse>('/products/')
+export const getProducts = async (queryParams: Partial<ProductQueryParams>) => {
+    const queryString = getQueryParamString(queryParams)
+    const response = await api.get<ProductResponse>('/products/?' + queryString)
 
     return response.data
 }

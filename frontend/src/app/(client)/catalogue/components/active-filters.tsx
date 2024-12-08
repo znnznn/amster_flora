@@ -3,7 +3,7 @@
 import { X } from 'lucide-react'
 import { useQueryState } from 'nuqs'
 
-import { SortingFilter } from './filters/sorting'
+import { OrderingFilter } from './filters/ordering'
 import { Button } from '@/components/ui/button'
 
 const colorLabels = {
@@ -29,13 +29,21 @@ const sizeLabels = {
     large: 'L'
 } as const
 
-export const ActiveFilters = () => {
-    const [color, setColor] = useQueryState('color', { defaultValue: '' })
-    const [flower, setFlower] = useQueryState('flower', { defaultValue: '' })
-    const [availability, setAvailability] = useQueryState('availability', {
-        defaultValue: ''
+interface ActiveFiltersProps {
+    productsCount: number
+}
+
+export const ActiveFilters = ({ productsCount }: ActiveFiltersProps) => {
+    const [color, setColor] = useQueryState('color', { defaultValue: '', shallow: false })
+    const [flower, setFlower] = useQueryState('flower', {
+        defaultValue: '',
+        shallow: false
     })
-    const [size, setSize] = useQueryState('size', { defaultValue: '' })
+    const [availability, setAvailability] = useQueryState('availability', {
+        defaultValue: '',
+        shallow: false
+    })
+    const [size, setSize] = useQueryState('size', { defaultValue: '', shallow: false })
 
     const resetAllFilters = () => {
         setColor('')
@@ -76,7 +84,7 @@ export const ActiveFilters = () => {
     return (
         <div className='flex items-end justify-between gap-x-6 pt-3 max-lg:hidden'>
             <div className='flex flex-col gap-y-3'>
-                <span className='text-sm'>Знайдено 444 товарів</span>
+                <span className='text-sm'>Знайдено {productsCount} товарів</span>
                 <div className='flex items-center gap-x-4'>
                     <Button
                         disabled={!isActiveFilters}
@@ -105,7 +113,7 @@ export const ActiveFilters = () => {
                     </ul>
                 </div>
             </div>
-            <SortingFilter />
+            <OrderingFilter />
         </div>
     )
 }
@@ -141,12 +149,16 @@ const ActiveFilter = ({
 }
 
 export const MobileActiveFilters = () => {
-    const [color, setColor] = useQueryState('color', { defaultValue: '' })
-    const [flower, setFlower] = useQueryState('flower', { defaultValue: '' })
-    const [availability, setAvailability] = useQueryState('availability', {
-        defaultValue: ''
+    const [color, setColor] = useQueryState('color', { defaultValue: '', shallow: false })
+    const [flower, setFlower] = useQueryState('flower', {
+        defaultValue: '',
+        shallow: false
     })
-    const [size, setSize] = useQueryState('size', { defaultValue: '' })
+    const [availability, setAvailability] = useQueryState('availability', {
+        defaultValue: '',
+        shallow: false
+    })
+    const [size, setSize] = useQueryState('size', { defaultValue: '', shallow: false })
 
     const resetAllFilters = () => {
         setColor('')

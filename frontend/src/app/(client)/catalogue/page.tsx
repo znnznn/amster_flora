@@ -2,8 +2,10 @@ import { Suspense } from 'react'
 
 import { ActiveFilters } from './components/active-filters'
 import { FiltersSidebar, MobileFilterSidebar } from './components/filters-sidebar'
-import { SortingFilter } from './components/filters/sorting'
+import { OrderingFilter } from './components/filters/ordering'
 import { ProductsList } from './components/products-list'
+import { getProducts } from '@/api/products/products'
+import type { ProductQueryParams } from '@/api/products/products.types'
 import { Catalogue } from '@/components/catalogue'
 import { ProductListPagination } from '@/components/product-list-pagination'
 import {
@@ -15,7 +17,16 @@ import {
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
 
-const CataloguePage = async () => {
+interface CatalogueProps {
+    searchParams: ProductQueryParams
+}
+
+const CataloguePage = async ({ searchParams }: CatalogueProps) => {
+    const products = await getProducts({
+        size: searchParams.size,
+        ordering: searchParams.ordering
+    })
+
     return (
         <>
             <section className='mt-12 max-sm:mt-8'>
@@ -39,15 +50,15 @@ const CataloguePage = async () => {
                         <FiltersSidebar />
                         <div className='flex flex-col gap-y-4 max-sm:w-full lg:hidden'>
                             <MobileFilterSidebar />
-                            <SortingFilter />
+                            <OrderingFilter />
                         </div>
                     </Suspense>
                     <div className='flex flex-col gap-y-6'>
                         <Suspense fallback={<div>Loading...</div>}>
-                            <ActiveFilters />
+                            <ActiveFilters productsCount={products?.count} />
                         </Suspense>
-                        <ProductsList products={[]} />
-                        <ProductListPagination count={80} />
+                        <ProductsList initialProducts={products?.results || []} />
+                        <ProductListPagination count={products?.count} />
                     </div>
                 </div>
             </section>

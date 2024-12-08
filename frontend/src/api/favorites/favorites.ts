@@ -13,3 +13,9 @@ export const addFavoritesItem = async (payload: AddFavoritesItemPayload) => {
 
     return response.data
 }
+
+export const removeFavoritesItem = async (id: number) => {
+    const response = await api.delete(`/wish-list/${id}/delete/`)
+
+    return response.data
+}

@@ -11,16 +11,20 @@ export const publicApi = axios.create({
 })
 
 api.interceptors.request.use((config) => {
-    const token = Cookies.get('accessToken')
-    if (token) {
-        config.headers.Authorization = `Bearer ${token}`
+    if (typeof window === 'undefined') {
+        const { cookies } = require('next/headers')
+        const cookieStore = cookies()
+        const accessToken = cookieStore.get('accessToken')?.value
+        config.headers['Authorization'] = `Bearer ${accessToken}`
+    } else {
+        const accessToken = Cookies.get('accessToken')
+        config.headers['Authorization'] = `Bearer ${accessToken}`
     }
     return config
 })
 
 const refreshToken = async () => {
     const refreshToken = Cookies.get('refreshToken')
-    console.log(!!refreshToken)
 
     if (!refreshToken) {
         throw new Error('Немає токена оновлення')

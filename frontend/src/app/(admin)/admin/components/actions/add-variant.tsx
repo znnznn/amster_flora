@@ -41,7 +41,12 @@ const addVariantSchema = z.custom<AddVariantPayload>()
 
 type AddVariantFormData = z.infer<typeof addVariantSchema>
 
-export const AddVariant = () => {
+interface AddVariantProps {
+    variants: AddVariantFormData[]
+    setVariants: React.Dispatch<React.SetStateAction<AddVariantFormData[]>>
+}
+
+export const AddVariant = ({ variants, setVariants }: AddVariantProps) => {
     const form = useForm<AddVariantFormData>({
         resolver: zodResolver(addVariantSchema),
         defaultValues: {
