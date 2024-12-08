@@ -280,12 +280,12 @@ class WishListDocAPIView(SwaggerAutoSchema):
                                                       - id
                         .
                         """
-        elif operation['operationId'] == 'wish-list_delete_by_shop_product':
-            operation['summary'] = 'Delete product from wish list by id shop_product'
+        elif operation['operationId'] == 'wish-list_delete_by_product':
+            operation['summary'] = 'Delete product from wish list by id product'
             operation['description'] = """
                                                       Allowed only Owner
                                                       needs params:
-                                                      - id (shop_product)
+                                                      - id (product)
                         .
                         """
         else:
