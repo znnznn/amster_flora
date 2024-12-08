@@ -14,7 +14,7 @@ from common.mixins import ListWithOutPaginationMixin
 from common.parsers import MultipartJsonParser
 from orders.models import Cart
 from products.filters import CategoryFilter, WishListFilter, WishListOrderingFilter, ProductOrderingFilter, ProductFilter
-from products.models import Category, Product, WishList, Variant
+from products.models import Category, Product, WishList, Variant, Component
 from products.serializers import (
     CategorySerializer, CategoryTreeSerializer, CategoryRetrieveSerializer, WishListCreateSerializer, ProductCreateSerializer,
     ProductListSerializer, VariantRetrieveSerializer, VariantSerializer
@@ -97,7 +97,10 @@ class VariantsViewSet(ModelViewSet):
     parser_classes = [MultipartJsonParser, JSONParser]
     serializer_class = VariantSerializer
     permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER, ),)
-    queryset = Variant.objects.select_related("product", "product__category").prefetch_related("images", "components")
+    queryset = Variant.objects.select_related("product", "product__category").prefetch_related(
+        "images",
+        Prefetch("components", queryset=Component.objects.select_related("key_crm_product")),
+    )
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
@@ -110,7 +113,14 @@ class ProductsViewSet(ModelViewSet):
     parser_classes = [MultipartJsonParser, JSONParser]
     serializer_class = ProductCreateSerializer
     permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER, ) | IsSafeMethod,)
-    queryset = Product.objects.select_related("category", "shop").prefetch_related("variants", "variants__images")
+    queryset = Product.objects.select_related("category", "shop").prefetch_related(
+        Prefetch(
+            "variants", queryset=Variant.objects.prefetch_related(
+                "images",
+                Prefetch("components", queryset=Component.objects.select_related("key_crm_product"))
+            ),
+        )
+    )
     filter_backends = [DjangoFilterBackend, SearchFilter, ProductOrderingFilter]
     filterset_class = ProductFilter
     ordering_fields = ("name", "category", "price", "height", "diameter",)

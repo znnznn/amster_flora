@@ -4,6 +4,7 @@ from rest_framework import serializers
 from rest_framework_recursive.fields import RecursiveField
 
 from key_crm.models import KeyCRMProduct
+from key_crm.serializers import KeyCRMProductSerializer
 from products.models import Shop, Category, WishList, Image, Variant, Product, Component
 
 
@@ -13,6 +14,22 @@ class ComponentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Component
         fields = ('id', 'key_crm_product', 'quantity')
+
+
+class ComponentListSerializer(serializers.ModelSerializer):
+    key_crm_product = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Component
+        fields = ('id', 'key_crm_product', 'quantity')
+
+    @swagger_serializer_method(KeyCRMProductSerializer)
+    def get_key_crm_product(self, obj):
+        if obj.key_crm_product:
+            return KeyCRMProductSerializer(obj.key_crm_product).data
+        return None
+
+
 
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -125,8 +142,8 @@ class VariantSerializer(serializers.ModelSerializer):
 
 class VariantRetrieveSerializer(serializers.ModelSerializer):
     quantity = serializers.SerializerMethodField()
-    images = ImageSerializer(many=True)
-    components = ComponentSerializer(many=True)
+    images = serializers.SerializerMethodField()
+    components = serializers.SerializerMethodField()
 
     class Meta:
         model = Variant
@@ -134,6 +151,14 @@ class VariantRetrieveSerializer(serializers.ModelSerializer):
 
     def get_quantity(self, obj):
         return obj.quantity - obj.quantity_sold
+
+    @swagger_serializer_method(ComponentListSerializer(many=True))
+    def get_components(self, obj):
+        return ComponentListSerializer(obj.components.all(), many=True).data
+
+    @swagger_serializer_method(ImageSerializer(many=True))
+    def get_images(self, obj):
+        return ImageSerializer(obj.images.all(), many=True).data
 
 
 class VariantAdminSerializer(serializers.ModelSerializer):
