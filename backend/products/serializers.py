@@ -37,25 +37,12 @@ class ImageSerializer(serializers.ModelSerializer):
         fields = ('id', 'image', 'variant')
 
 
-class FileUploadSerializer(serializers.ModelSerializer):
+class ImageUploadSerializer(serializers.Serializer):
     images = serializers.ListField(child=serializers.ImageField(max_length=1000, allow_empty_file=False, use_url=False))
 
-    class Meta:
-        model = Image
-        exclude = ('product',)
 
-    def create(self, validated_data):
-        product = self.context['product']
-        file = validated_data.pop('images')
-        image_list = []
-        for img in file:
-            photo = Image.objects.create(image=img, product=product)
-            image_info = f'{photo.image.url}'
-            image_list.append(image_info)
-        return {'images': image_list}
-
-    def to_representation(self, instance):
-        return instance
+class ImageDeleteSerializer(serializers.Serializer):
+    images_ids = serializers.ListField(child=serializers.IntegerField())
 
 
 class CategorySerializer(serializers.ModelSerializer):

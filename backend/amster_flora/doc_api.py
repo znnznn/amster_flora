@@ -528,6 +528,8 @@ class CartDocAPIView(SwaggerAutoSchema):
 
 
 class VariantDocAPIView(SwaggerAutoSchema):
+    implicit_body_methods = ('PUT', 'PATCH', 'POST', 'DELETE')
+
     def get_operation(self, operation_keys=None):
         operation = super().get_operation(operation_keys)
         if operation['operationId'] == 'variants_list':
@@ -556,6 +558,28 @@ class VariantDocAPIView(SwaggerAutoSchema):
                                                       Allowed Admin, Manager
                                                       needs params:
                                                       - id
+                        .
+                        """
+        elif operation['operationId'] == 'variants_images_create':
+            operation['summary'] = 'Upload images for variants'
+            operation['description'] = """
+                                                      Allowed Admin, Manager
+                                                      needs params:
+                                                      - id variant
+                                                      - images - list of images
+                        for example:
+                        images: [image1, image2]
+                        .
+                        """
+        elif operation['operationId'] == 'variants_images_delete':
+            operation['summary'] = 'Delete images for variants by images ids'
+            operation['description'] = """
+                                                      Allowed Admin, Manager
+                                                      needs params:
+                                                      - id variant
+                                                      - images_ids - list of images ids
+                        for example:
+                        images_ids: [id1, id2]
                         .
                         """
         else:
