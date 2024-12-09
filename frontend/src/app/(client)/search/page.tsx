@@ -1,27 +1,18 @@
-'use client'
-
-import { useState } from 'react'
-import { useQuery } from 'react-query'
-
 import { SearchCommand } from './components/search-command'
-import { getUsers } from '@/api/users/users'
+import { getProducts } from '@/api/products/products'
+import type { ProductQueryParams } from '@/api/products/products.types'
 
-export const SearchPage = () => {
-    const [search, setSearch] = useState('')
-
-    const { data: users, isFetching } = useQuery({
-        queryKey: ['users', search],
-        queryFn: () => getUsers({ search })
+interface SearchPageProps {
+    searchParams: ProductQueryParams
+}
+export const SearchPage = async ({ searchParams }: SearchPageProps) => {
+    const products = await getProducts({
+        search: searchParams.search
     })
 
     return (
         <section className='container mx-auto mb-20 mt-12'>
-            <SearchCommand
-                isFetching={isFetching}
-                data={users?.results || []}
-                setSearch={setSearch}
-                search={search}
-            />
+            <SearchCommand initialProducts={products.results} />
         </section>
     )
 }

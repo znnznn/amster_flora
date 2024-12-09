@@ -1,78 +1,63 @@
-import axios from 'axios'
+import axios, {
+    AxiosError,
+    type AxiosInstance,
+    type InternalAxiosRequestConfig
+} from 'axios'
 import Cookies from 'js-cookie'
 
-const API_URL = 'https://api.amster.org.ua'
+import type { AuthTokens } from './auth/auth.types'
+import { API_URL } from './config/api'
 
-export const api = axios.create({
-    baseURL: API_URL
-})
-export const publicApi = axios.create({
-    baseURL: API_URL
-})
-
-api.interceptors.request.use((config) => {
-    if (typeof window === 'undefined') {
-        const { cookies } = require('next/headers')
-        const cookieStore = cookies()
-        const accessToken = cookieStore.get('accessToken')?.value
-        config.headers['Authorization'] = `Bearer ${accessToken}`
-    } else {
-        const accessToken = Cookies.get('accessToken')
-        config.headers['Authorization'] = `Bearer ${accessToken}`
-    }
-    return config
-})
-
-const refreshToken = async () => {
-    const refreshToken = Cookies.get('refreshToken')
-
-    if (!refreshToken) {
-        throw new Error('Немає токена оновлення')
-    }
-
-    try {
-        const response = await api.post(`${API_URL}/auth/token/refresh/`, {
-            refresh: refreshToken
-        })
-        const { access } = response.data
-        Cookies.set('accessToken', access)
-        return access
-    } catch (error) {
-        Cookies.remove('accessToken')
-        Cookies.remove('refreshToken')
-        throw error
-    }
+interface RetryConfig extends InternalAxiosRequestConfig {
+    _retry?: boolean
 }
 
-const setAuthToken = (token: string | null) => {
-    if (token) {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-    } else {
-        delete axios.defaults.headers.common['Authorization']
-    }
-}
+const createApi = (baseURL: string): AxiosInstance => {
+    const instance = axios.create({ baseURL })
 
-api.interceptors.response.use(
-    (response) => response,
-    async (error) => {
-        const originalRequest = error.config
-        if (error.response.status === 401 && !originalRequest._retry) {
-            originalRequest._retry = true
-            try {
-                const newToken = await refreshToken()
-                setAuthToken(newToken)
-
-                originalRequest.headers.Authorization = `Bearer ${newToken}`
-
-                return api(originalRequest)
-            } catch (refreshError) {
-                Cookies.remove('accessToken')
-                Cookies.remove('refreshToken')
-                // window.location.href = '/'
-
-                return Promise.reject(refreshError)
-            }
+    instance.interceptors.request.use((config: RetryConfig) => {
+        const token = Cookies.get('accessToken')
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`
         }
-        return Promise.reject(error)
-    }
-)
+        return config
+    })
+
+    instance.interceptors.response.use(
+        (response) => response,
+        async (error: AxiosError) => {
+            const originalRequest = error.config as RetryConfig
+            if (
+                error.response?.status === 401 &&
+                originalRequest &&
+                !originalRequest._retry
+            ) {
+                originalRequest._retry = true
+                try {
+                    const refreshToken = Cookies.get('refreshToken')
+                    if (!refreshToken) throw new Error('Немає токена оновлення')
+
+                    const { data } = await publicApi.post<AuthTokens>(
+                        '/auth/token/refresh/',
+                        { refresh: refreshToken }
+                    )
+                    Cookies.set('accessToken', data.access)
+                    if (originalRequest.headers) {
+                        originalRequest.headers['Authorization'] = `Bearer ${data.access}`
+                    }
+                    return instance(originalRequest)
+                } catch (refreshError) {
+                    Cookies.remove('accessToken')
+                    Cookies.remove('refreshToken')
+                    return Promise.reject(refreshError)
+                }
+            }
+            return Promise.reject(error)
+        }
+    )
+
+    return instance
+}
+
+export const api = createApi(API_URL)
+export const publicApi = axios.create({ baseURL: API_URL })

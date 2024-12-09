@@ -73,10 +73,10 @@ export const ProductCard = ({ product }: { product: SingleVariantProduct }) => {
 
         if (!isAddingToFavorites && isAuth && !isRemovingFromFavorites) {
             if (inFavorites) {
-                removeFromFavorites(product.id)
+                removeFromFavorites(product?.id)
             } else {
                 addToFavorites({
-                    product: product.variant.id
+                    product: product.variant?.id
                 })
             }
         }
@@ -91,10 +91,10 @@ export const ProductCard = ({ product }: { product: SingleVariantProduct }) => {
 
         if (!isAddingToCart && isAuth && !isRemovingFromCart) {
             if (inCart) {
-                removeFromCart(product.variant.id)
+                removeFromCart(product.variant?.id)
             } else {
                 addToCart({
-                    variant: product.variant.id,
+                    variant: product.variant?.id,
                     amount: 1
                 })
             }
@@ -102,7 +102,7 @@ export const ProductCard = ({ product }: { product: SingleVariantProduct }) => {
     }
     return (
         <Link
-            href={`/flower/${product.id}`}
+            href={`/flower/${product.variant?.id}`}
             prefetch>
             <article
                 onMouseEnter={() => setIsOverlayVisible(true)}

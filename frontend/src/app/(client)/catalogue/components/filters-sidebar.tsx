@@ -3,7 +3,6 @@
 import { Filter } from 'lucide-react'
 
 import { MobileActiveFilters } from './active-filters'
-import { AvailabilityFilter } from './filters/availability'
 import { ColorFilter } from './filters/color'
 import { FlowerFilter } from './filters/flower'
 import { PriceFilter } from './filters/price'
@@ -35,16 +34,6 @@ export const FiltersSidebar = () => {
                     </AccordionTrigger>
                     <AccordionContent>
                         <FlowerFilter />
-                    </AccordionContent>
-                </AccordionItem>
-                <AccordionItem
-                    className='border-none'
-                    value='availability'>
-                    <AccordionTrigger className='pb-0 pt-6'>
-                        <h3 className='text-2xl font-medium text-accent'>Наявність</h3>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                        <AvailabilityFilter />
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem
@@ -97,18 +86,7 @@ export const MobileFilterSidebar = () => {
                                 <FlowerFilter />
                             </AccordionContent>
                         </AccordionItem>
-                        <AccordionItem
-                            className='border-none'
-                            value='availability'>
-                            <AccordionTrigger className='pb-0 pt-6'>
-                                <h3 className='text-2xl font-medium text-accent'>
-                                    Наявність
-                                </h3>
-                            </AccordionTrigger>
-                            <AccordionContent>
-                                <AvailabilityFilter />
-                            </AccordionContent>
-                        </AccordionItem>
+
                         <AccordionItem
                             className='border-none'
                             value='color'>

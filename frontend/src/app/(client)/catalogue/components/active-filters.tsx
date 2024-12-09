@@ -18,11 +18,6 @@ const flowerLabels = {
     lilly: 'Лілія'
 } as const
 
-const availabilityLabels = {
-    'in-stock': 'В наявності',
-    'out-of-stock': 'Не в наявності'
-} as const
-
 const sizeLabels = {
     small: 'S',
     medium: 'M',
@@ -39,16 +34,12 @@ export const ActiveFilters = ({ productsCount }: ActiveFiltersProps) => {
         defaultValue: '',
         shallow: false
     })
-    const [availability, setAvailability] = useQueryState('availability', {
-        defaultValue: '',
-        shallow: false
-    })
+
     const [size, setSize] = useQueryState('size', { defaultValue: '', shallow: false })
 
     const resetAllFilters = () => {
         setColor('')
         setFlower('')
-        setAvailability('')
         setSize('')
     }
 
@@ -65,12 +56,7 @@ export const ActiveFilters = ({ productsCount }: ActiveFiltersProps) => {
             setFilter: setFlower,
             labels: flowerLabels
         },
-        {
-            label: 'Наявність',
-            values: availability.split(','),
-            setFilter: setAvailability,
-            labels: availabilityLabels
-        },
+
         {
             label: 'Розмір',
             values: size.split(','),
@@ -154,16 +140,12 @@ export const MobileActiveFilters = () => {
         defaultValue: '',
         shallow: false
     })
-    const [availability, setAvailability] = useQueryState('availability', {
-        defaultValue: '',
-        shallow: false
-    })
+
     const [size, setSize] = useQueryState('size', { defaultValue: '', shallow: false })
 
     const resetAllFilters = () => {
         setColor('')
         setFlower('')
-        setAvailability('')
         setSize('')
     }
 
@@ -180,12 +162,7 @@ export const MobileActiveFilters = () => {
             setFilter: setFlower,
             labels: flowerLabels
         },
-        {
-            label: 'Наявність',
-            values: availability.split(','),
-            setFilter: setAvailability,
-            labels: availabilityLabels
-        },
+
         {
             label: 'Розмір',
             values: size.split(','),

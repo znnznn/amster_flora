@@ -3,6 +3,7 @@
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react'
 import { useQueryState } from 'nuqs'
 
+import { defaultLimit, defaultOffset } from '@/api/config/api'
 import { Button } from '@/components/ui/button'
 import {
     PaginationContent,
@@ -21,36 +22,37 @@ export const ProductListPagination = ({
     count,
     className
 }: ProductListPaginationPaginationProps) => {
-    const limitStep = 24
-
     const [limit, setLimit] = useQueryState('limit', {
-        defaultValue: limitStep,
+        defaultValue: defaultLimit,
+        shallow: false,
         parse: Number
     })
 
-    const handleLimitChange = () => setLimit(limit + limitStep)
+    const handleLimitChange = () => setLimit(limit + defaultLimit)
 
     const [offset, setOffset] = useQueryState('offset', {
-        shallow: false
+        defaultValue: defaultOffset,
+        shallow: false,
+        parse: Number
     })
 
     const totalPages = Math.ceil(count / limit) || 1
-    const currentPage = Math.floor(parseInt(offset || '0') / limit) + 1
+    const currentPage = Math.floor(offset / limit) + 1
 
     const handleNextPage = () => {
         if (currentPage < totalPages) {
-            setOffset((currentPage * limit).toString())
+            setOffset(currentPage * limit)
         }
     }
 
     const handlePreviousPage = () => {
         if (currentPage > 1) {
-            setOffset(((currentPage - 2) * limit).toString())
+            setOffset((currentPage - 2) * limit)
         }
     }
 
     const handleGoToPage = (page: number) => {
-        setOffset(((page - 1) * limit).toString())
+        setOffset((page - 1) * limit)
     }
 
     const renderPageNumbers = () => {
@@ -86,11 +88,11 @@ export const ProductListPagination = ({
                 'flex flex-col items-center justify-center gap-y-4',
                 className
             )}>
-            {count > limitStep ? (
+            {count > defaultLimit ? (
                 <Button
                     onClick={handleLimitChange}
                     variant='ghost'>
-                    Показати ще {limitStep}
+                    Показати ще {defaultLimit}
                 </Button>
             ) : null}
             <PaginationWrapper>

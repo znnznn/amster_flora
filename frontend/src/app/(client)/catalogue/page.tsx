@@ -4,6 +4,7 @@ import { ActiveFilters } from './components/active-filters'
 import { FiltersSidebar, MobileFilterSidebar } from './components/filters-sidebar'
 import { OrderingFilter } from './components/filters/ordering'
 import { ProductsList } from './components/products-list'
+import { defaultLimit, defaultOffset } from '@/api/config/api'
 import { getProducts } from '@/api/products/products'
 import type { ProductQueryParams } from '@/api/products/products.types'
 import { Catalogue } from '@/components/catalogue'
@@ -24,7 +25,9 @@ interface CatalogueProps {
 const CataloguePage = async ({ searchParams }: CatalogueProps) => {
     const products = await getProducts({
         size: searchParams.size,
-        ordering: searchParams.ordering
+        ordering: searchParams.ordering,
+        offset: searchParams.offset || defaultOffset,
+        limit: searchParams.limit || defaultLimit
     })
 
     return (
