@@ -14,10 +14,10 @@ from common.mixins import ListWithOutPaginationMixin
 from common.parsers import MultipartJsonParser
 from orders.models import Cart
 from products.filters import CategoryFilter, WishListFilter, WishListOrderingFilter, ProductOrderingFilter, ProductFilter
-from products.models import Category, Product, WishList, Variant, Component
+from products.models import Category, Product, WishList, Variant, Component, Image
 from products.serializers import (
     CategorySerializer, CategoryTreeSerializer, CategoryRetrieveSerializer, WishListCreateSerializer, ProductCreateSerializer,
-    ProductListSerializer, VariantRetrieveSerializer, VariantSerializer
+    ProductListSerializer, VariantRetrieveSerializer, VariantSerializer, ImageUploadSerializer, ImageDeleteSerializer
 )
 from users.permissions import IsAuthenticatedAs, IsSafeMethod
 
@@ -106,7 +106,31 @@ class VariantsViewSet(ModelViewSet):
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return VariantRetrieveSerializer
+        if self.action == 'images' and self.request.method == 'POST':
+            return ImageUploadSerializer
+        if self.action == 'images' and self.request.method == 'DELETE':
+            return ImageDeleteSerializer
         return VariantSerializer
+
+    @action(detail=True, methods=['post', 'delete'], url_path='images')
+    def images(self, request, *args, **kwargs):
+        if request.method == 'DELETE':
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            images_delete_ids = serializer.validated_data['images_ids']
+            variant = self.get_object()
+            images = Image.objects.filter(variant=variant, id__in=images_delete_ids)
+            images.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        variant = self.get_object()
+        files = request.FILES.getlist('images')
+        files_list = []
+        for file in files:
+            files_list.append(Image(variant=variant, image=file))
+        Image.objects.bulk_create(files_list)
+        variant = self.get_object()
+        return Response(VariantRetrieveSerializer(variant).data)
+
 
 
 class ProductsViewSet(ModelViewSet):

@@ -39,6 +39,18 @@ class Variant(models.Model):
     quantity_sold = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
 
+    def delete(self, using=None, keep_parents=False):
+        super().delete(using, keep_parents)
+        if self.image:
+            self.image.storage.delete(str(self.image.name))
+
+    def save(self, *args, force_insert=False, force_update=False, using=None, update_fields=None):
+        if self.pk:
+            old_instance = Variant.objects.values('image').get(pk=self.pk)
+            if old_instance.get('image') and old_instance.get('image') != self.image:
+                self.image.storage.delete(str(old_instance.get('image')))
+        super().save(force_insert, force_update, using, update_fields)
+
 
 class Image(models.Model):
     variant = models.ForeignKey(Variant, on_delete=models.CASCADE, related_name='images')
