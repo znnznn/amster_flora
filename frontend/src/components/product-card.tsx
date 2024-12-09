@@ -25,6 +25,10 @@ const productSize: Record<VariantSize, string> = {
 export const ProductCard = ({ product }: { product: SingleVariantProduct }) => {
     const { isAuth } = useAuth()
 
+    const productContent = product.variant?.components
+        ?.map((component) => component.key_crm_product.description)
+        .join(', ')
+
     const queryClient = useQueryClient()
     const router = useRouter()
 
@@ -144,10 +148,7 @@ export const ProductCard = ({ product }: { product: SingleVariantProduct }) => {
                             <li>Ширина: {product?.variant?.diameter} см</li>
                         </ul>
 
-                        <p>
-                            Склад букету: протея, калла, роза, серрурия, гвоздика,
-                            эустома, эвкалипт
-                        </p>
+                        <p>Склад букету: {productContent}</p>
                     </div>
                 </div>
 

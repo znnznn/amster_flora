@@ -5,7 +5,7 @@ export interface KeyCrmComponent {
     key_crm_id: number
     name: string
     description: string
-    thumbnail_url: string
+    thumbnail_url: any
     sku: string
     price: string
     purchased_price: string

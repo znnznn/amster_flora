@@ -25,6 +25,16 @@ export const addProduct = async (payload: AddProductPayload) => {
     return response.data
 }
 
+export const editProduct = async (id: number, payload: Partial<AddProductPayload>) => {
+    const response = await api.patch<Product>(`/products/${id}/`, payload, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+
+    return response.data
+}
+
 export const removeProduct = async (id: number) => {
     const response = await api.delete<Product>(`/products/${id}/`)
 

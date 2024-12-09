@@ -1,6 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { objectToFormData } from '@octetstream/object-to-form-data'
 import { AlertCircle, CheckCircle, CirclePlus, Loader2, Plus, Trash2 } from 'lucide-react'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { useMutation, useQuery } from 'react-query'
@@ -72,7 +73,7 @@ const addProductSchema = z.object({
             price: z.string().min(1, {
                 message: 'Це поле є обов’язковим'
             }),
-            images: z.any(),
+            images: z.any(z.instanceof(File).optional()),
             components: z.array(
                 z.object({
                     key_crm_product: z.number().min(1, {
@@ -95,9 +96,9 @@ export const AddProduct = () => {
         defaultValues: {
             name: 'Test',
             category: 1,
-            description: '',
+            description: 'random description',
             shop: 1,
-            sku: 'sku',
+            sku: 'sku' + Math.random().toString(36).substring(7),
             variants: [
                 {
                     diameter: 10,
@@ -118,8 +119,6 @@ export const AddProduct = () => {
         }
     })
 
-    console.log(form.formState.errors)
-
     const {
         fields: variantFields,
         append: appendVariant,
@@ -130,48 +129,45 @@ export const AddProduct = () => {
     })
 
     const mutation = useMutation({
-        mutationFn: (payload: AddProductFormData) => addProduct(payload),
+        mutationFn: (payload: FormData) => addProduct(payload as any),
         onSuccess: () => {
             form.reset()
         }
     })
 
     const onSubmit = (data: AddProductFormData) => {
-        const formData = new FormData()
+        const formData = objectToFormData(data)
 
-        // Додаємо основні поля продукту
-        formData.append('name', data.name)
-        formData.append('sku', data.sku)
-        formData.append('description', data.description)
-        formData.append('category', data.category.toString())
-        formData.append('shop', data.shop.toString())
+        // formData.append('name', data.name)
+        // formData.append('sku', data.sku)
+        // formData.append('description', data.description)
+        // formData.append('category', data.category.toString())
+        // formData.append('shop', data.shop.toString())
 
-        // Створюємо масив варіантів
-        const variants = data.variants.map((variant) => {
-            const variantData = {
-                size: variant.size,
-                height: variant.height,
-                diameter: variant.diameter,
-                hex_color: variant.hex_color,
-                quantity: variant.quantity,
-                price: variant.price,
-                components: variant.components,
-                images: []
-            }
+        // data.variants.forEach((variant, index) => {
+        //     const variantData = {
+        //         size: variant.size,
+        //         height: variant.height,
+        //         diameter: variant.diameter,
+        //         hex_color: variant.hex_color,
+        //         quantity: variant.quantity,
+        //         price: variant.price,
+        //         components: variant.components
+        //     }
 
-            // Якщо є зображення, додаємо їх до FormData
-            if (variant.images && variant.images.length > 0) {
-                formData.append(`images`, variant.images[0])
-            }
+        //     formData.append(`variants[${index}]`, JSON.stringify(variantData))
 
-            return variantData
-        })
+        //     // Append images for each variant
+        //     if (variant.images && variant.images.length > 0) {
+        //         variant.images.forEach((image, imageIndex) => {
+        //             formData.append(`variants[${index}].images[${imageIndex}]`, image)
+        //         })
+        //     }
+        // })
 
-        // Додаємо масив варіантів як JSON-рядок
-        formData.append('variants', JSON.stringify(variants))
+        console.log(formData)
 
-        // Відправляємо дані на сервер
-        mutation.mutate(formData as any)
+        mutation.mutate(formData)
     }
 
     return (

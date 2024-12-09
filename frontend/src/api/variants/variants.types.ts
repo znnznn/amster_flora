@@ -1,6 +1,13 @@
 import type { BaseQueryParams, Response } from '../index.types'
+import type { KeyCrmComponent } from '../key-crm/key-crm.types'
 
 export type VariantSize = 'small' | 'medium' | 'large' | 'extra_large'
+
+export type VariantComponent = {
+    id: number
+    key_crm_product: KeyCrmComponent
+    quantity: number
+}
 export interface Variant {
     id: number
     size: VariantSize
@@ -11,6 +18,7 @@ export interface Variant {
     price: string
     image: string
     images: Image[]
+    components: VariantComponent[]
 }
 
 export interface Image {
