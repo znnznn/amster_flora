@@ -3,7 +3,6 @@ import { CategoryFilter } from './components/filters/category'
 import { FlowerFilter } from './components/filters/flower'
 import { SizeFilter } from './components/filters/size'
 import { AdminProductsList } from './components/products-list'
-import { defaultLimit, defaultOffset } from '@/api/config/api'
 import { getProducts } from '@/api/products/products'
 import type { ProductQueryParams } from '@/api/products/products.types'
 import { Badge } from '@/components/ui/badge'
@@ -18,9 +17,9 @@ interface CatalogueProps {
 const AdminPage = async ({ searchParams }: CatalogueProps) => {
     const products = await getProducts({
         size: searchParams.size,
-        ordering: searchParams.ordering,
-        offset: searchParams.offset || defaultOffset,
-        limit: searchParams.limit || defaultLimit
+        ordering: searchParams.ordering
+        // offset: searchParams.offset || defaultOffset,
+        // limit: searchParams.limit || defaultLimit
     })
 
     return (
@@ -37,7 +36,7 @@ const AdminPage = async ({ searchParams }: CatalogueProps) => {
                 <FlowerFilter />
             </div>
 
-            <AdminProductsList initialProducts={products.results || []} />
+            <AdminProductsList initialProductsResponse={products} />
         </section>
     )
 }

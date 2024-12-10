@@ -24,8 +24,6 @@ import { cn } from '@/lib/utils'
 export const Flower = ({ product }: { product: SingleVariantProduct }) => {
     const queryClient = useQueryClient()
 
-    console.log(product)
-
     const router = useRouter()
 
     const { isAuth } = useAuth()

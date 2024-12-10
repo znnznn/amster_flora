@@ -10,7 +10,7 @@ import { getQueryParamString } from '@/utils/get-query-param-string'
 
 export const getProducts = async (queryParams: Partial<ProductQueryParams>) => {
     const queryString = getQueryParamString(queryParams)
-    const response = await api.get<ProductResponse>('/products/?' + queryString)
+    const response = await api.get<ProductResponse>('/products/' + queryString)
 
     return response.data
 }

@@ -8,10 +8,7 @@ import { useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 
 import { editProduct } from '@/api/products/products'
-import type {
-    AddProductPayload,
-    SingleVariantProduct
-} from '@/api/products/products.types'
+import type { AddProductPayload, Product } from '@/api/products/products.types'
 import { deleteVariant, editVariant } from '@/api/variants/variants'
 import type { AddVariantPayload, VariantSize } from '@/api/variants/variants.types'
 import imagePlaceholder from '@/assets/images/image-placeholder.svg'
@@ -36,8 +33,8 @@ const productSize: Record<VariantSize, string> = {
     extra_large: 'XL'
 } as const
 
-export const AdminProductCard = ({ product }: { product: SingleVariantProduct }) => {
-    const productContent = product.variant?.components
+export const AdminProductCard = ({ product }: { product: Product }) => {
+    const productContent = product.variants[0]?.components
         ?.map((component) => component.key_crm_product.description)
         .join(', ')
 
@@ -51,12 +48,12 @@ export const AdminProductCard = ({ product }: { product: SingleVariantProduct })
             <DeleteVariantBtn product={product} />
 
             <Link
-                href={`/flower/${product?.id}/${product?.variant?.id}`}
+                href={`/flower/${product?.id}/${product?.variants[0]?.id}`}
                 prefetch>
                 <div className='relative overflow-hidden rounded-b-[22px]'>
-                    {product?.variant?.images[0] ? (
+                    {product?.variants[0]?.images[0] ? (
                         <Image
-                            src={product?.variant?.images[0].image}
+                            src={product?.variants[0]?.images[0].image}
                             width={300}
                             height={200}
                             alt={product?.name}
@@ -75,9 +72,9 @@ export const AdminProductCard = ({ product }: { product: SingleVariantProduct })
                             isOverlayVisible ? 'opacity-100' : 'opacity-0'
                         )}>
                         <ul>
-                            <li>Висота: {product?.variant?.height} см</li>
-                            <li>Розмір: {productSize[product?.variant?.size]} </li>
-                            <li>Ширина: {product?.variant?.diameter} см</li>
+                            <li>Висота: {product?.variants[0]?.height} см</li>
+                            <li>Розмір: {productSize[product?.variants[0]?.size]} </li>
+                            <li>Ширина: {product?.variants[0]?.diameter} см</li>
                         </ul>
 
                         <p>Склад букету: {productContent}</p>
@@ -116,7 +113,7 @@ export const AdminProductCard = ({ product }: { product: SingleVariantProduct })
     )
 }
 
-const NameInput = ({ product }: { product: SingleVariantProduct }) => {
+const NameInput = ({ product }: { product: Product }) => {
     const queryClient = useQueryClient()
     const router = useRouter()
     const [initialName, setInitialName] = useState(product.name)
@@ -168,15 +165,15 @@ const NameInput = ({ product }: { product: SingleVariantProduct }) => {
     )
 }
 
-const PriceInput = ({ product }: { product: SingleVariantProduct }) => {
+const PriceInput = ({ product }: { product: Product }) => {
     const queryClient = useQueryClient()
     const router = useRouter()
-    const [initialPrice, setInitialPrice] = useState(product.variant?.price)
+    const [initialPrice, setInitialPrice] = useState(product.variants[0]?.price)
     const [isFocused, setIsFocused] = useState(false)
 
     const mutation = useMutation({
         mutationFn: async (payload: Partial<AddVariantPayload>) =>
-            await editVariant(product.variant?.id, payload),
+            await editVariant(product.variants[0]?.id, payload),
         onSuccess: () => {
             queryClient.invalidateQueries('products')
             router.refresh()
@@ -233,7 +230,7 @@ const PriceInput = ({ product }: { product: SingleVariantProduct }) => {
     )
 }
 
-const DeleteVariantBtn = ({ product }: { product: SingleVariantProduct }) => {
+const DeleteVariantBtn = ({ product }: { product: Product }) => {
     const queryClient = useQueryClient()
     const router = useRouter()
 
@@ -264,7 +261,7 @@ const DeleteVariantBtn = ({ product }: { product: SingleVariantProduct }) => {
                     <AlertDialogCancel>Відмінити</AlertDialogCancel>
                     <AlertDialogAction
                         onClick={() => {
-                            mutation.mutate(product.variant.id)
+                            mutation.mutate(product.variants[0].id)
                         }}>
                         Видалити
                     </AlertDialogAction>
