@@ -15,6 +15,12 @@ export const getProducts = async (queryParams: Partial<ProductQueryParams>) => {
     return response.data
 }
 
+export const getProduct = async (id: number) => {
+    const response = await api.get<Product>(`/products/${id}/`)
+
+    return response.data
+}
+
 export const addProduct = async (payload: AddProductPayload) => {
     const response = await api.post<Product>('/products/', payload, {
         headers: {

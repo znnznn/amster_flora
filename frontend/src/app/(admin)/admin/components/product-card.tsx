@@ -50,7 +50,9 @@ export const AdminProductCard = ({ product }: { product: SingleVariantProduct })
             className='relative overflow-hidden rounded-3xl border bg-background'>
             <DeleteVariantBtn product={product} />
 
-            <Link href={`/flower/${product.variant?.id}`}>
+            <Link
+                href={`/flower/${product?.id}/${product?.variant?.id}`}
+                prefetch>
                 <div className='relative overflow-hidden rounded-b-[22px]'>
                     {product?.variant?.images[0] ? (
                         <Image

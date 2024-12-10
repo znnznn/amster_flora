@@ -106,7 +106,7 @@ export const ProductCard = ({ product }: { product: SingleVariantProduct }) => {
     }
     return (
         <Link
-            href={`/flower/${product.variant?.id}`}
+            href={`/flower/${product?.id}/${product?.variant?.id}`}
             prefetch>
             <article
                 onMouseEnter={() => setIsOverlayVisible(true)}

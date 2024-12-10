@@ -1,4 +1,7 @@
+import { flattenItem } from '../../catalogue/components/products-list'
+
 import { Flower } from './components/flower'
+import { getProduct } from '@/api/products/products'
 import { Advantages } from '@/app/(client)/(main)/components/advantages'
 import { Catalogue } from '@/components/catalogue'
 import {
@@ -13,25 +16,36 @@ import { WatchedProductTracker } from '@/hooks/use-watched-products'
 
 interface FlowerProps {
     params: {
-        id: number
+        id: number[]
     }
 }
 
 export const generateMetadata = async ({ params }: FlowerProps) => {
+    const [productId] = params.id
+    const product = await getProduct(productId)
+
     return {
-        title: params.id
+        title: product.name
     }
 }
 
 const FlowerPage = async ({ params }: FlowerProps) => {
+    const [productId, variantId] = params.id
+
+    const product = await getProduct(productId)
+
+    const singleVariantProduct = flattenItem(product)[0]
+
     return (
         <>
-            <WatchedProductTracker productId={params?.id} />
+            {JSON.stringify(singleVariantProduct, null, 2)}
+            <WatchedProductTracker productId={productId} />
+
             <section className='mt-12 max-sm:mt-8'>
                 <Breadcrumb className='px-20 max-lg:px-16 max-md:px-10 max-sm:px-3'>
                     <BreadcrumbList className='max-sm:justify-center'>
                         <BreadcrumbItem>
-                            <BreadcrumbLink href='/'>Головна</BreadcrumbLink>
+                            <BreadcrumbLink href='/'>Головна {variantId}</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
@@ -39,15 +53,15 @@ const FlowerPage = async ({ params }: FlowerProps) => {
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
-                            <BreadcrumbPage>{params.id}</BreadcrumbPage>
+                            <BreadcrumbPage>{singleVariantProduct?.name}</BreadcrumbPage>
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
                 <h1 className='mt-4 text-center text-2xl font-semibold max-md:text-lg'>
-                    {params.id}
+                    {singleVariantProduct?.name}
                 </h1>
 
-                <Flower />
+                <Flower product={singleVariantProduct} />
             </section>
 
             <Advantages />
