@@ -14,7 +14,7 @@ import { QuickOrderModal } from './modals/quick-order'
 import { addCartItem, removeCartItem } from '@/api/cart/cart'
 import type { SingleVariantProduct } from '@/api/products/products.types'
 import type { VariantSize } from '@/api/variants/variants.types'
-import flower from '@/assets/images/flower.jpg'
+import imagePlaceholder from '@/assets/images/image-placeholder.svg'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
@@ -71,25 +71,56 @@ export const Flower = ({ product }: { product: SingleVariantProduct }) => {
     return (
         <>
             <div className='container'>
-                <Image
+                {product?.variant?.images[0] ? (
+                    <Image
+                        src={product?.variant?.images[0].image}
+                        width={300}
+                        height={200}
+                        alt={product?.name}
+                        className='mx-auto mt-6 aspect-video w-[620px] rounded-3xl object-cover max-md:w-[500px] max-sm:w-96 lg:hidden'
+                    />
+                ) : (
+                    <Image
+                        src={imagePlaceholder}
+                        alt={product?.name}
+                        className='mx-auto mt-6 aspect-video w-[620px] rounded-3xl object-cover max-md:w-[500px] max-sm:w-96 lg:hidden'
+                    />
+                )}
+                {/* <Image
                     src={flower}
                     alt={'Півоній'}
                     className='mx-auto mt-6 aspect-video w-[620px] rounded-3xl object-cover max-md:w-[500px] max-sm:w-96 lg:hidden'
-                />
-                <FlowerSlider className='lg:hidden' />
+                /> */}
+                {/* <FlowerSlider
+                    images={product.variant.images}
+                    className='lg:hidden'
+                /> */}
             </div>
 
             <div className='mt-8 h-[700px] rounded-3xl bg-primary py-8 text-accent max-lg:h-fit'>
                 <div className='container flex h-full items-start gap-x-14 max-xl:justify-center max-sm:block'>
                     <FlowerSlider
+                        images={product.variant.images}
                         orientation='vertical'
                         className='max-xl:hidden'
                     />
-                    <Image
-                        src={flower}
-                        alt={'Півоній'}
-                        className='h-full max-w-md rounded-3xl object-cover max-lg:hidden'
-                    />
+
+                    {product?.variant?.images[0] ? (
+                        <Image
+                            src={product?.variant?.images[0].image}
+                            width={300}
+                            height={200}
+                            alt={product?.name}
+                            className='h-full w-[470px] max-w-lg rounded-3xl object-cover max-lg:hidden'
+                        />
+                    ) : (
+                        <Image
+                            src={imagePlaceholder}
+                            alt={product?.name}
+                            className='h-full max-w-md rounded-3xl object-cover max-lg:hidden'
+                        />
+                    )}
+
                     <div className='flex flex-col gap-y-10 max-md:gap-y-8'>
                         <h2 className='text-2xl font-semibold max-md:text-lg max-sm:hidden'>
                             Букет півоній

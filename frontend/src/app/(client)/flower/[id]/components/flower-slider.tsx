@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
-import flower from '@/assets/images/flower.jpg'
+import type { Image as ImageType } from '@/api/variants/variants.types'
 import {
     Carousel,
     type CarouselApi,
@@ -17,11 +17,13 @@ import { cn } from '@/lib/utils'
 interface FlowerSliderProps {
     className?: string
     orientation?: 'horizontal' | 'vertical'
+    images: ImageType[]
 }
 
 export const FlowerSlider = ({
     className,
-    orientation = 'horizontal'
+    orientation = 'horizontal',
+    images
 }: FlowerSliderProps) => {
     const [api, setApi] = useState<CarouselApi>()
     const [, setCurrent] = useState(0)
@@ -62,14 +64,16 @@ export const FlowerSlider = ({
 
             <CarouselContent
                 className={cn(isVertical ? '-mt-1 h-[540px]' : '-ml-1 max-w-2xl')}>
-                {[...Array(5)].map((_, index) => (
+                {images?.map((img, index) => (
                     <CarouselItem
                         onClick={() => api?.scrollTo(index)}
-                        key={index}
+                        key={img?.id}
                         className={cn('basis-1/3 cursor-pointer')}>
                         <Image
-                            src={flower}
-                            alt={'Півонії'}
+                            src={img?.image}
+                            width={200}
+                            height={160}
+                            alt={img?.id?.toString()}
                             className={cn(
                                 'aspect-video rounded-3xl object-cover',
                                 isVertical ? 'h-40 w-full' : 'h-40 max-sm:h-24'

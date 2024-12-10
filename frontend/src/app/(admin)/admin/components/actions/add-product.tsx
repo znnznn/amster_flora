@@ -165,8 +165,6 @@ export const AddProduct = () => {
         //     }
         // })
 
-        console.log(formData)
-
         mutation.mutate(formData)
     }
 

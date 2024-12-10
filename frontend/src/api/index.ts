@@ -1,63 +1,73 @@
-import axios, {
-    AxiosError,
-    type AxiosInstance,
-    type InternalAxiosRequestConfig
-} from 'axios'
+import axios from 'axios'
 import Cookies from 'js-cookie'
 
-import type { AuthTokens } from './auth/auth.types'
-import { API_URL } from './config/api'
+const API_URL = 'https://api.amster.org.ua'
 
-interface RetryConfig extends InternalAxiosRequestConfig {
-    _retry?: boolean
+export const api = axios.create({
+    baseURL: API_URL
+})
+export const publicApi = axios.create({
+    baseURL: API_URL
+})
+
+api.interceptors.request.use((config) => {
+    const token = Cookies.get('accessToken')
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+})
+
+const refreshToken = async () => {
+    const refreshToken = Cookies.get('refreshToken')
+
+    if (!refreshToken) {
+        throw new Error('Немає токена оновлення')
+    }
+
+    try {
+        const response = await api.post(`${API_URL}/auth/token/refresh/`, {
+            refresh: refreshToken
+        })
+        const { access } = response.data
+        Cookies.set('accessToken', access)
+        return access
+    } catch (error) {
+        Cookies.remove('accessToken')
+        Cookies.remove('refreshToken')
+        throw error
+    }
 }
 
-const createApi = (baseURL: string): AxiosInstance => {
-    const instance = axios.create({ baseURL })
+const setAuthToken = (token: string | null) => {
+    if (token) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    } else {
+        delete axios.defaults.headers.common['Authorization']
+    }
+}
 
-    instance.interceptors.request.use((config: RetryConfig) => {
-        const token = Cookies.get('accessToken')
-        if (token) {
-            config.headers['Authorization'] = `Bearer ${token}`
-        }
-        return config
-    })
+api.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+        const originalRequest = error.config
+        if (error.response.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true
+            try {
+                const newToken = await refreshToken()
+                setAuthToken(newToken)
 
-    instance.interceptors.response.use(
-        (response) => response,
-        async (error: AxiosError) => {
-            const originalRequest = error.config as RetryConfig
-            if (
-                error.response?.status === 401 &&
-                originalRequest &&
-                !originalRequest._retry
-            ) {
-                originalRequest._retry = true
-                try {
-                    const refreshToken = Cookies.get('refreshToken')
-                    if (!refreshToken) throw new Error('Немає токена оновлення')
+                originalRequest.headers.Authorization = `Bearer ${newToken}`
 
-                    const { data } = await publicApi.post<AuthTokens>(
-                        '/auth/token/refresh/',
-                        { refresh: refreshToken }
-                    )
-                    Cookies.set('accessToken', data.access)
-                    if (originalRequest.headers) {
-                        originalRequest.headers['Authorization'] = `Bearer ${data.access}`
-                    }
-                    return instance(originalRequest)
-                } catch (refreshError) {
-                    Cookies.remove('accessToken')
-                    Cookies.remove('refreshToken')
-                    return Promise.reject(refreshError)
-                }
+                return api(originalRequest)
+            } catch (refreshError) {
+                Cookies.remove('accessToken')
+                Cookies.remove('refreshToken')
+                // window.location.href = '/'
+
+                return Promise.reject(refreshError)
             }
-            return Promise.reject(error)
         }
-    )
-
-    return instance
-}
-
-export const api = createApi(API_URL)
-export const publicApi = axios.create({ baseURL: API_URL })
+        return Promise.reject(error)
+    }
+)
