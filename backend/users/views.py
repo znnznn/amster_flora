@@ -1,6 +1,8 @@
 from django.db.models import Prefetch
 from django.shortcuts import render
+from django.views.generic import TemplateView
 from django_filters.rest_framework import DjangoFilterBackend
+from liqpay import LiqPay
 from rest_framework import generics, viewsets, status
 from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -9,6 +11,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from amster_flora.doc_api import UsersDocAPIView, ContactUsDocAPIView, DeliveryAddressDocAPIView
+from amster_flora.settings import LIQPAY_PUBLIC_KEY, LIQPAY_PRIVATE_KEY
 
 from common.constants import Role
 from users.filters import UserFilter, DeliveryAddressFilter
@@ -142,3 +145,23 @@ class DeliveryAddressViewSet(viewsets.ModelViewSet):
         if self.request.user.role == Role.CLIENT:
             queryset = queryset.filter(creator=self.request.user)
         return queryset
+
+
+class PayView(TemplateView):
+    template_name = 'payments.html'
+
+    def get(self, request, *args, **kwargs):
+        liqpay = LiqPay(LIQPAY_PUBLIC_KEY, LIQPAY_PRIVATE_KEY)
+        params = {
+            'action': 'pay',
+            'amount': '100',
+            'currency': 'USD',
+            'description': 'Payment for clothes',
+            'order_id': 'order_id_1',
+            'version': '3',
+            'sandbox': 0, # sandbox mode, set to 1 to enable it
+            'server_url': 'https://api.amster.org.ua/payments/callback-liqpay/',  # url to callback view
+        }
+        signature = liqpay.cnb_signature(params)
+        data = liqpay.cnb_data(params)
+        return render(request, self.template_name, {'signature': signature, 'data': data})

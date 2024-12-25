@@ -24,6 +24,7 @@ celery = {extras = ["redis"], version = "*"}
 redis = "*"
 django-celery-results = "*"
 django-celery-beat = "*"
+liqpay-sdk-python3 = "*"
 
 [dev-packages]
 

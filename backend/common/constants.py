@@ -62,3 +62,22 @@ class OrderStatus:
         SHIPPED: "Відвантажно",
         CANCELED: "Відмінено",
     }
+
+class PaymentStatus:
+    ACTIVE = "active"
+    PAYED = "payed"
+    UNSUCCESSFUL = "unsuccessful"
+
+    STATUS_CHOICE = (
+        (ACTIVE, 'Active'),
+        (PAYED, 'Payed'),
+        (UNSUCCESSFUL, 'Unsuccessful'),
+    )
+
+
+class PaymentMethod:
+    LIQPAY = "liqpay"
+
+    PAYMENT_METHOD_CHOICE = (
+        (LIQPAY, 'Liqpay'),
+    )

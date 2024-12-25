@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'shops',
     'key_crm',
     'orders',
+    'payments',
 ]
 
 AUTH_USER_MODEL = "users.User"
@@ -185,3 +186,6 @@ CELERY_BROKER_URL = config('REDIS_URL', default='redis://redis:6379')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+LIQPAY_PUBLIC_KEY = config('LIQPAY_PUBLIC_KEY', default='')
+LIQPAY_PRIVATE_KEY = config('LIQPAY_PRIVATE_KEY', default='')

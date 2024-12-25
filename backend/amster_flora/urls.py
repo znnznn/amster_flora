@@ -6,7 +6,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from orders.views import CartsViewSet, OrdersViewSet, OrderItemsViewSet
 from products.views import WishListViewSet, CategoriesViewSet, VariantsViewSet, ProductsViewSet
 from shops.views import ShopsViewSet
-from users.views import UserViewSet, ContactUsAPIView, customer_page, DeliveryAddressViewSet
+from users.views import UserViewSet, ContactUsAPIView, customer_page, DeliveryAddressViewSet, PayView
 from .settings import ENVIRONMENT
 
 router = DefaultRouter()
@@ -28,6 +28,8 @@ urlpatterns = [
     path('key-crm/', include('key_crm.urls')),
     path('', include(router.urls)),
     # path('facebook/', customer_page),
+    path('liqpay/', PayView.as_view()),
+    path('payments/', include('payments.urls')),
     path('', include('auth.urls'), name="social-login"),
     path('auth/token/', TokenObtainPairView.as_view(), name='token_create'),
     path('auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
