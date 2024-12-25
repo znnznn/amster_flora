@@ -1,6 +1,7 @@
 from django.db import models
 
 from common.constants import OrderStatus
+from payments.models import Transaction
 from products.models import Variant
 from users.models import User, DeliveryAddress
 
@@ -17,6 +18,7 @@ class Order(models.Model):
     status = models.CharField(max_length=255, choices=OrderStatus.CHOICES, default=OrderStatus.PENDING)
     created_at = models.DateTimeField(auto_now_add=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
+    payment = models.ForeignKey(Transaction, on_delete=models.SET_NULL, blank=True, null=True, related_name='orders')
     discount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     address = models.ForeignKey(DeliveryAddress, blank=True, null=True, on_delete=models.SET_NULL, related_name='orders')
 
