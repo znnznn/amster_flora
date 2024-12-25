@@ -155,7 +155,7 @@ class PayView(TemplateView):
         params = {
             'action': 'pay',
             'amount': '100',
-            'currency': 'USD',
+            'currency': 'UAH',
             'description': 'Payment for clothes',
             'order_id': 'order_id_1',
             'version': '3',
