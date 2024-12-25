@@ -1,3 +1,5 @@
+import random
+
 from django.db.models import Prefetch
 from django.shortcuts import render
 from django.views.generic import TemplateView
@@ -157,7 +159,7 @@ class PayView(TemplateView):
             'amount': '100',
             'currency': 'UAH',
             'description': 'Payment for clothes',
-            'order_id': 'order_id_1',
+            'order_id': f'order_id_{random.randint(0, 100)}',
             'version': '3',
             'sandbox': 0, # sandbox mode, set to 1 to enable it
             'server_url': 'https://api.amster.org.ua/payments/callback-liqpay/',  # url to callback view
