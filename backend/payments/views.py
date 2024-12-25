@@ -52,7 +52,7 @@ class LiqpayCallbackView(CreateAPIView):
 
 class TransactionListAPIView(ListAPIView):
     serializer_class = TransactionSerializer
-    # permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER),)
+    permission_classes = (IsAuthenticatedAs(Role.ADMIN, Role.MANAGER),)
 
     def get_queryset(self):
         return Transaction.objects.all()
