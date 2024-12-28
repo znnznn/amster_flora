@@ -62,20 +62,22 @@ class TransactionListAPIView(ListAPIView):
 
 
 class WayForPayView(CreateAPIView):
+    parser_classes = [FormParser]
 
     def create(self, request, *args, **kwargs):
         print('wayforpay')
         print(request.data)
-        merchantSignature = request.data.get('merchantSignature')
+        print(request.headers)
+        merchantSignature = request.POST.get('merchantSignature')
         data = dict(
-            merchantAccount=request.data.get('merchantAccount'),
-            orderReference=request.data.get('orderReference'),
-            amount=request.data.get('amount'),
-            currency=request.data.get('currency'),
-            authCode=request.data.get('authCode'),
-            cardPan=request.data.get('cardPan'),
-            transactionStatus=request.data.get('transactionStatus'),
-            reasonCode=request.data.get('reasonCode'),
+            merchantAccount=request.POST.get('merchantAccount'),
+            orderReference=request.POST.get('orderReference'),
+            amount=request.POST.get('amount'),
+            currency=request.POST.get('currency'),
+            authCode=request.POST.get('authCode'),
+            cardPan=request.POST.get('cardPan'),
+            transactionStatus=request.POST.get('transactionStatus'),
+            reasonCode=request.POST.get('reasonCode'),
         )
         values = [str(item) for item in data.values()]
         print('data', data)
