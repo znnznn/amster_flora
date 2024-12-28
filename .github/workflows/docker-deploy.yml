@@ -41,6 +41,8 @@ jobs:
             KEY_CRM_API_KEY=${{ secrets.KEY_CRM_API_KEY }}
             LIQPAY_PUBLIC_KEY=${{ secrets.LIQPAY_PUBLIC_KEY }}
             LIQPAY_PRIVATE_KEY=${{ secrets.LIQPAY_PRIVATE_KEY }}
+            WAYFORPAY_MERCHANT_LOGIN=${{ secrets.WAYFORPAY_MERCHANT_LOGIN }}
+            WAYFORPAY_SECRET_KEY=${{ secrets.WAYFORPAY_SECRET_KEY }}
           directory: ${{ github.workspace }}/backend
       - name: Create frontend .env
         uses: DeveloperRic/action-create-env@v1.0.2

@@ -1,3 +1,5 @@
+import hashlib
+import hmac
 import random
 
 from django.db.models import Prefetch
@@ -13,7 +15,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from amster_flora.doc_api import UsersDocAPIView, ContactUsDocAPIView, DeliveryAddressDocAPIView
-from amster_flora.settings import LIQPAY_PUBLIC_KEY, LIQPAY_PRIVATE_KEY
+from amster_flora.settings import LIQPAY_PUBLIC_KEY, LIQPAY_PRIVATE_KEY, WAYFORPAY_MERCHANT_LOGIN, WAYFORPAY_SECRET_KEY
 
 from common.constants import Role
 from users.filters import UserFilter, DeliveryAddressFilter
@@ -149,8 +151,8 @@ class DeliveryAddressViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class PayView(TemplateView):
-    template_name = 'payments.html'
+class LiqPayView(TemplateView):
+    template_name = 'liqpay.html'
 
     def get(self, request, *args, **kwargs):
         liqpay = LiqPay(LIQPAY_PUBLIC_KEY, LIQPAY_PRIVATE_KEY)
@@ -167,3 +169,35 @@ class PayView(TemplateView):
         signature = liqpay.cnb_signature(params)
         data = liqpay.cnb_data(params)
         return render(request, self.template_name, {'signature': signature, 'data': data})
+
+
+class WayForPayView(TemplateView):
+    template_name = 'wayforpay.html'
+
+    def get(self, request, *args, **kwargs):
+        order = f"order_id_{random.randint(0, 100)}"
+        params = {
+            "merchantAccount": WAYFORPAY_MERCHANT_LOGIN,
+            "merchantDomainName": "amster.org.ua",
+            "orderReference": order,
+            "orderDate": "1415379863",
+            "amount": "1",
+            "currency": "UAH",
+            "productName": "Clothes",
+            "productCount": 1,
+            "productPrice": 1,
+
+        }
+        values = [str(item) for item in params.values()]
+        params["merchantSignature"] = hmac.new(WAYFORPAY_SECRET_KEY.encode(), ";".join(values).encode(), hashlib.md5).hexdigest()
+        extra_params = {
+            "clientEmail": "znnznn@ukr.net",
+            "clientPhone": "+380969754740",
+            "clientFirstName": "John",
+            "clientLastName": "Doe",
+            "returnUrl": "https://api.amster.org.ua/payments/callback-wayforpay/",
+            "serviceUrl": "https://api.amster.org.ua/payments/callback-wayforpay/",
+            "language": "ua",
+        }
+        params = {**params, **extra_params}
+        return render(request, self.template_name, params)
