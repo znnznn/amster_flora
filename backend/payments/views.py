@@ -87,7 +87,7 @@ class WayForPayView(CreateAPIView):
         response = {
             'orderReference': data.get('orderReference'),
             'status': 'accept',
-            'time': time.time(),
+            'time': int(time.time()),
             'accept': '',
         }
         print('response', response)
