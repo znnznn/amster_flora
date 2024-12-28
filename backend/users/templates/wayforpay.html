@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script id="widget-wfp-script" language="javascript" type="text/javascript" src="https://secure.wayforpay.com/server/pay-widget.js"></script>
+<script type="text/javascript">
+    var wayforpay = new Wayforpay();
+    var pay = function () {
+    wayforpay.run({
+        merchantAccount: "{{ merchantAccount }}",
+        merchantDomainName: "{{ merchantDomainName }}",
+        authorizationType: "SimpleSignature",
+        merchantSignature: "{{ merchantSignature }}",
+        apiVersion: 1,
+        orderReference: "{{ orderReference }}",
+        orderDate: "{{ orderDate }}",
+        amount: "{{ amount }}",
+        currency: "{{ currency }}",
+        productName: "{{ productName }}",
+        productPrice: "{{ productPrice }}",
+        productCount: "{{ productCount }}",
+        clientEmail: "{{ clientEmail }}",
+        clientPhone: "{{ clientPhone }}",
+        returnUrl: "https://api.amster.org.ua/payments/callback-wayforpay/",
+        serviceUrl: "https://api.amster.org.ua/payments/callback-wayforpay/",
+        language: "ua"
+    });};
+</script>
+<button type="button" onclick="pay()">Оплатити</button>
+
+
+
+<!--    <script type="text/javascript" id="widget-wfp-script" src="https://secure.wayforpay.com/server/pay-widget.js?ref=button"></script>-->
+<!--    <script type="text/javascript">-->
+<!--        function runWfpWdgt(url){-->
+<!--        var wayforpay=new Wayforpay();-->
+<!--&lt;!&ndash;        wayforpay.invoice(url);&ndash;&gt;-->
+<!--            wayforpay.run({-->
+<!--                merchantAccount: "{{ merchantAccount }}",-->
+<!--                merchantAuthType: "{{ merchantAuthType }}",-->
+<!--                merchantDomainName: "amster.org.ua",-->
+<!--                merchantSignature: "{{ merchantSignature }}",-->
+<!--                apiVersion: 1,-->
+<!--                orderReference: "{{ orderReference }}",-->
+<!--                amount: "1",-->
+<!--                currency: "UAH",-->
+<!--                clientEmail: "znnznn@ukr.net",-->
+<!--                clientPhone: "+380969754740",-->
+<!--                serviceUrl: "https://api.amster.org.ua/payments/callback-wayforpay/",-->
+<!--                language: "ua"-->
+<!--            });-->
+<!--        }-->
+<!--    </script>-->
+<!--    <button-->
+<!--            type="button" onclick="runWfpWdgt('https://secure.wayforpay.com/button/b18cc4d7099c8');"-->
+<!--            style="display:inline-block!important;background:#2B3160 url('https://s3.eu-central-1.amazonaws.com/w4p-merch/button/bg5x2.png') no-repeat center right;background-size:cover;width: 256px!important;height:54px!important;border:none!important;border-radius:14px!important;padding:18px!important;box-shadow:3px 2px 8px rgba(71,66,66,0.22)!important;text-align:left!important;box-sizing:border-box!important;"-->
+<!--            onmouseover="this.style.opacity='0.8';" onmouseout="this.style.opacity='1';">-->
+<!--        <span style="font-family:Verdana,Arial,sans-serif!important;font-weight:bold!important;font-size:14px!important;color:#ffffff!important;line-height:18px!important;vertical-align:middle!important;"-->
+<!--    >Оплатити</span>-->
+<!--    </button>-->
+<!--<form method="post" action="https://secure.wayforpay.com/pay" accept-charset="utf-8">-->
+<!--     <input name="merchantAccount" value="{{ merchantAccount }}" type="hidden">-->
+<!--     <input name="merchantTransactionSecureType" value="AUTO" type="hidden">-->
+<!--     <input name="merchantDomainName" value="www.market.ua">-->
+<!--     <input name="merchantSignature" value="{{ merchantSignature }}", type="hidden">-->
+<!--     <input name="orderReference" value="{{ orderReference }}">-->
+<!--     <input name="orderDate" value="1415379863">-->
+<!--     <input name="amount" value="1">-->
+<!--     <input name="currency" value="UAH">-->
+<!--     <input name="orderTimeout" value="49000">-->
+<!--     <input name="productName[]" value="[Процесор Intel Core i5-4670 3.4GHz]">-->
+<!--     <input name="productPrice[]" value="[1]">-->
+<!--     <input name="productCount[]" value="[1]">-->
+<!--     <input name="clientFirstName" value="Василь">-->
+<!--     <input name="clientLastName" value="Пібаренко">-->
+<!--     <input name="clientAddress" value="пр. Науки, 12">-->
+<!--     <input name="clientCity" value="Дніпро">-->
+<!--     <input name="clientEmail" value="some@mail.com">-->
+<!--     <input name="defaultPaymentSystem" value="card">-->
+<!--     <button-->
+<!--         type="submit">-->
+<!--&lt;!&ndash;         style="display:inline-block!important;background:#2B3160 url('https://s3.eu-central-1.amazonaws.com/w4p-merch/button/bg5x2.png') no-repeat center right;background-size:cover;width: 256px!important;height:54px!important;border:none!important;border-radius:14px!important;padding:18px!important;box-shadow:3px 2px 8px rgba(71,66,66,0.22)!important;text-align:left!important;box-sizing:border-box!important;"&ndash;&gt;-->
+<!--&lt;!&ndash;         onmouseover="this.style.opacity='0.8';" onmouseout="this.style.opacity='1';">&ndash;&gt;-->
+<!--&lt;!&ndash;         <span style="font-family:Verdana,Arial,sans-serif!important;font-weight:bold!important;font-size:14px!important;color:#ffffff!important;line-height:18px!important;vertical-align:middle!important;"&ndash;&gt;-->
+<!--&lt;!&ndash; >&ndash;&gt;-->
+<!--     Оплатити</button>-->
+<!--</form>-->
+</body>
+</html>

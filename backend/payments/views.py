@@ -56,3 +56,11 @@ class TransactionListAPIView(ListAPIView):
 
     def get_queryset(self):
         return Transaction.objects.all()
+
+
+class WayForPayView(CreateAPIView):
+
+    def create(self, request, *args, **kwargs):
+        print('wayforpay')
+        print(request.data)
+        return Response({'wayforpay': 'wayforpay'})
