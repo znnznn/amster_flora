@@ -12,7 +12,8 @@ from rest_framework.parsers import FormParser
 from rest_framework.response import Response
 
 from amster_flora.settings import LIQPAY_PUBLIC_KEY, LIQPAY_PRIVATE_KEY, WAYFORPAY_SECRET_KEY
-from common.constants import PaymentStatus, Role
+from common.constants import PaymentStatus, Role, PaymentMethod
+from common.parsers import DictFormParser
 from orders.models import Order
 from payments.models import Transaction
 from payments.serializers import LiqpayEncodeSerializer, TransactionSerializer
@@ -62,22 +63,22 @@ class TransactionListAPIView(ListAPIView):
 
 
 class WayForPayView(CreateAPIView):
-    parser_classes = [FormParser]
+    parser_classes = [DictFormParser]
 
     def create(self, request, *args, **kwargs):
         print('wayforpay')
         print(request.data)
         print(request.headers)
-        merchantSignature = request.POST.get('merchantSignature')
+        merchantSignature = request.data.get('merchantSignature')
         data = dict(
-            merchantAccount=request.POST.get('merchantAccount'),
-            orderReference=request.POST.get('orderReference'),
-            amount=request.POST.get('amount'),
-            currency=request.POST.get('currency'),
-            authCode=request.POST.get('authCode'),
-            cardPan=request.POST.get('cardPan'),
-            transactionStatus=request.POST.get('transactionStatus'),
-            reasonCode=request.POST.get('reasonCode'),
+            merchantAccount=request.data.get('merchantAccount'),
+            orderReference=request.data.get('orderReference'),
+            amount=request.data.get('amount'),
+            currency=request.data.get('currency'),
+            authCode=request.data.get('authCode'),
+            cardPan=request.data.get('cardPan'),
+            transactionStatus=request.data.get('transactionStatus'),
+            reasonCode=request.data.get('reasonCode'),
         )
         values = [str(item) for item in data.values()]
         print('data', data)
@@ -86,11 +87,25 @@ class WayForPayView(CreateAPIView):
         print('merchantSignature', merchantSignature)
         if merchantSignature == right_signature:
             print('signature is valid')
-        response = {
-            'orderReference': data.get('orderReference'),
-            'status': 'accept',
-            'time': int(time.time()),
-            'accept': '',
-        }
-        print('response', response)
-        return Response(response, status=status.HTTP_200_OK)
+            order_id = data.get('orderReference')
+            order = None
+            creator = None
+            if order_id and str(order_id).isdigit():
+                order = Order.objects.filter(id=order_id).select_related('creator').first()
+            if order:
+                creator = order.creator
+            transactions_data = {
+                'title': order_id, 'status': PaymentStatus.PAYED, 'amount': Decimal(data.get('amount')),
+                'creator': creator, 'method': PaymentMethod.WAYFORPAY, 'response': request.data
+            }
+            Transaction.objects.create(**transactions_data)
+            response = {
+                'orderReference': data.get('orderReference'),
+                'status': 'accept',
+                'time': int(time.time()),
+                'accept': '',
+            }
+            print('response', response)
+            return Response(response, status=status.HTTP_200_OK)
+        else:
+            return Response({'status': 'error'}, status=status.HTTP_400_BAD_REQUEST)
