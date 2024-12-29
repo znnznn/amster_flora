@@ -77,7 +77,9 @@ class PaymentStatus:
 
 class PaymentMethod:
     LIQPAY = "liqpay"
+    WAYFORPAY = "wayforpay"
 
     PAYMENT_METHOD_CHOICE = (
         (LIQPAY, 'Liqpay'),
+        (WAYFORPAY, 'Wayforpay'),
     )
