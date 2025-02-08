@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import { Link } from "@/i18n/routing";
-import Image from "next/image";
+import Image from 'next/image'
 
-import notFound from '@/assets/images/not-found.png';
+import notFound from '@/assets/images/not-found.png'
+import { Link } from '@/i18n/routing'
 
 export default function NotFound() {
     return (
-        <html lang="uk">
+        <html lang='uk'>
             <body>
                 <section className='flex flex-col items-center justify-center px-8 py-20'>
                     <Image
@@ -20,12 +20,13 @@ export default function NotFound() {
                         <Link
                             locale='ua'
                             className='text-primary'
-                            href='/'>
+                            href='/'
+                        >
                             головну сторінку.
                         </Link>
                     </p>
                 </section>
             </body>
         </html>
-    );
+    )
 }

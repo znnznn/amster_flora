@@ -1,8 +1,5 @@
-
 const StoryPage = () => {
-    return (
-        <div>DeliveryPage</div>
-    )
+    return <div>DeliveryPage</div>
 }
 
 export default StoryPage

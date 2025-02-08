@@ -1,8 +1,5 @@
-
 const WishlistPage = () => {
-    return (
-        <div>WishlistPage</div>
-    )
+    return <div>WishlistPage</div>
 }
 
 export default WishlistPage

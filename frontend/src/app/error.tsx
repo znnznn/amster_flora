@@ -11,4 +11,3 @@ const Error = ({ reset }: { reset: () => void }) => {
 }
 
 export default Error
-

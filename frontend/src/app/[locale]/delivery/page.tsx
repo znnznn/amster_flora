@@ -1,8 +1,5 @@
-
 const DeliveryPage = () => {
-    return (
-        <div>DeliveryPage</div>
-    )
+    return <div>DeliveryPage</div>
 }
 
 export default DeliveryPage

@@ -1,7 +1,7 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 import notFound from '@/assets/images/not-found.png'
-import Image from 'next/image'
 
 const NotFound = () => {
     return (
@@ -15,7 +15,8 @@ const NotFound = () => {
                 Схоже у нас виникли проблеми. Поверніться на{' '}
                 <Link
                     className='text-primary'
-                    href='/'>
+                    href='/'
+                >
                     головну сторінку.
                 </Link>
             </p>
