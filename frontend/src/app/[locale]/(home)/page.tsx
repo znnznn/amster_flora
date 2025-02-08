@@ -1,12 +1,11 @@
-import { Link } from '@/i18n/routing';
-import { useTranslations } from 'next-intl';
+import Marquee from "react-fast-marquee";
 
 export default function HomePage() {
-  const t = useTranslations('HomePage');
-  return (
-    <div>
-      <h1>{t('title')}</h1>
-      <Link href="/about">{t('about')}</Link>
-    </div>
-  );
+    return (
+        <>
+            <Marquee autoFill className="bg-accent h-7" pauseOnHover>
+                <span className="font-medium px-5">працюємо на генераторах </span>
+            </Marquee>
+        </>
+    )
 }
