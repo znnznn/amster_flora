@@ -1,6 +1,34 @@
 {
     "HomePage": {
         "title": "Привіт світе!",
-        "about": "Перейти на сторінку про нас"
+        "about": "Перейти на сторінку про нас",
+        "categories": {
+            "title": "Категорії",
+            "roses": "Троянда",
+            "tulips": "Тюльпан",
+            "orchids": "Орхідея",
+            "flowerpots": "Вазони",
+            "chrysanthemums": "Хризантема",
+            "peony": "Півонії"
+        },
+        "faq": {
+            "title": "Часті питання",
+            "item-1": {
+                "title": "Які квіти найкраще підходять для подарунка?",
+                "content": "Yes. It adheres to the WAI-ARIA design pattern."
+            },
+            "item-2": {
+                "title": "Які квіти найкраще підходять для подарунка?",
+                "content": "Yes. It adheres to the WAI-ARIA design pattern."
+            },
+            "item-3": {
+                "title": "Які квіти найкраще підходять для подарунка?",
+                "content": "Yes. It adheres to the WAI-ARIA design pattern."
+            },
+            "item-4": {
+                "title": "Які квіти найкраще підходять для подарунка?",
+                "content": "Yes. It adheres to the WAI-ARIA design pattern."
+            }
+        }
     }
 }

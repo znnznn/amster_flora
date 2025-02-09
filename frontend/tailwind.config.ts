@@ -20,7 +20,7 @@ export default {
         },
         container: {
             center: true,
-            padding: '2rem',
+            padding: '1rem',
             screens: {
                 '2xl': '1280px'
             }
@@ -79,6 +79,7 @@ export default {
                 }
             },
             borderRadius: {
+                '3xl': '1.375rem',
                 lg: 'var(--radius)',
                 md: 'calc(var(--radius) - 2px)',
                 sm: 'calc(var(--radius) - 4px)'
