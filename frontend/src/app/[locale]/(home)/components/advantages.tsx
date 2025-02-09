@@ -1,46 +1,57 @@
+import { useTranslations } from 'next-intl'
+
 import { Section } from '@/components/ui/section'
 import { H2 } from '@/components/ui/typography'
 
 export const Advantages = () => {
+    const t = useTranslations('HomePage')
     return (
         <Section>
-            <H2 className='sr-only'>Переваги</H2>
+            <H2 className='sr-only'>{t('advantages.title')}</H2>
 
             <ul className='grid grid-cols-4 items-center gap-8 max-lg:grid-cols-2 max-sm:grid-cols-1'>
                 <li className='flex flex-col items-center'>
                     <div className='flex size-24 items-center justify-center rounded-full bg-accent/40'>
                         <FlowerIcon />
                     </div>
-                    <h3 className='mt-5 text-center font-bold'>Великий вибір</h3>
+                    <h3 className='mt-5 text-center font-bold'>
+                        {t('advantages.items.item-1.title')}
+                    </h3>
                     <p className='mt-3 max-w-60 text-center'>
-                        В нас більше ніж 50 варіантів букетів на будь-який смак
+                        {t('advantages.items.item-1.content')}
                     </p>
                 </li>
                 <li className='flex flex-col items-center'>
                     <div className='flex size-24 items-center justify-center rounded-full bg-accent/40'>
                         <ShopIcon />
                     </div>
-                    <h3 className='mt-5 text-center font-bold'>Великий вибір</h3>
+                    <h3 className='mt-5 text-center font-bold'>
+                        {t('advantages.items.item-2.title')}
+                    </h3>
                     <p className='mt-3 max-w-60 text-center'>
-                        В нас більше ніж 50 варіантів букетів на будь-який смак
+                        {t('advantages.items.item-2.content')}
                     </p>
                 </li>
                 <li className='flex flex-col items-center'>
                     <div className='flex size-24 items-center justify-center rounded-full bg-accent/40'>
                         <WaterIcon />
                     </div>
-                    <h3 className='mt-5 text-center font-bold'>Великий вибір</h3>
+                    <h3 className='mt-5 text-center font-bold'>
+                        {t('advantages.items.item-3.title')}
+                    </h3>
                     <p className='mt-3 max-w-60 text-center'>
-                        В нас більше ніж 50 варіантів букетів на будь-який смак
+                        {t('advantages.items.item-3.content')}
                     </p>
                 </li>
                 <li className='flex flex-col items-center'>
                     <div className='flex size-24 items-center justify-center rounded-full bg-accent/40'>
                         <FlowerIcon />
                     </div>
-                    <h3 className='mt-5 text-center font-bold'>Великий вибір</h3>
+                    <h3 className='mt-5 text-center font-bold'>
+                        {t('advantages.items.item-4.title')}
+                    </h3>
                     <p className='mt-3 max-w-60 text-center'>
-                        В нас більше ніж 50 варіантів букетів на будь-який смак
+                        {t('advantages.items.item-4.content')}
                     </p>
                 </li>
             </ul>
