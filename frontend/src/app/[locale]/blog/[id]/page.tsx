@@ -1,9 +1,13 @@
-interface Params {
-    id: string
+import type { IdParams } from '@/types/params'
+
+export const generateMetadata = async ({ params }: IdParams) => {
+    return {
+        title: params?.id
+    }
 }
 
-const BlogPostPage = ({ params }: { params: Params }) => {
-    return <div>BlogPostPage {params.id}</div>
+const BlogPostPage = ({ params }: IdParams) => {
+    return <div>BlogPostPage {params?.id}</div>
 }
 
 export default BlogPostPage

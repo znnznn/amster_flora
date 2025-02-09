@@ -1,4 +1,39 @@
 {
+    "Metadata": {
+        "Account": {
+            "title": "Аккаунт"
+        },
+        "Orders": {
+            "title": "Замовлення"
+        },
+        "Cart": {
+            "title": "Кошик"
+        },
+        "Wishlist": {
+            "title": "Збережене"
+        },
+        "Checkout": {
+            "title": "Оформлення замовлення"
+        },
+        "Viewed": {
+            "title": "Переглянуті"
+        },
+        "Blog": {
+            "title": "Блог"
+        },
+        "Story": {
+            "title": "Історія"
+        },
+        "Delivery": {
+            "title": "Оплата та доставка"
+        },
+        "Profile": {
+            "title": "Профіль"
+        },
+        "Catalogue": {
+            "title": "Каталог"
+        }
+    },
     "HomePage": {
         "title": "Привіт світе!",
         "about": "Перейти на сторінку про нас",
