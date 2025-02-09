@@ -1,18 +1,15 @@
-import * as Sentry from '@sentry/nextjs'
+// This file configures the initialization of Sentry on the server.
+// The config you add here will be used whenever the server handles a request.
+// https://docs.sentry.io/platforms/javascript/guides/nextjs/
+
+import * as Sentry from "@sentry/nextjs";
 
 Sentry.init({
-    dsn: 'https://d85d390a651c14d740c46fe36c2b998d@o4508789428649984.ingest.de.sentry.io/4508789430091856',
+  dsn: "https://d85d390a651c14d740c46fe36c2b998d@o4508789428649984.ingest.de.sentry.io/4508789430091856",
 
-    // Set tracesSampleRate to 1.0 to capture 100%
-    // of transactions for tracing.
-    // We recommend adjusting this value in production
-    // Learn more at
-    // https://docs.sentry.io/platforms/javascript/configuration/options/#traces-sample-rate
-    tracesSampleRate: 1.0
+  // Define how likely traces are sampled. Adjust this value in production, or use tracesSampler for greater control.
+  tracesSampleRate: 1,
 
-    // ...
-
-    // Note: if you want to override the automatic release value, do not set a
-    // `release` value here - use the environment variable `SENTRY_RELEASE`, so
-    // that it will also get attached to your source maps
-})
+  // Setting this option to true will print useful information to the console while you're setting up Sentry.
+  debug: false,
+});
