@@ -6,6 +6,7 @@ import { Faq } from './components/faq'
 import { Map } from './components/map'
 
 export default function HomePage() {
+    throw new Error('home page')
     return (
         <>
             <TickerTape />
