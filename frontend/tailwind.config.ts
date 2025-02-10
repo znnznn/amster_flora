@@ -20,6 +20,7 @@ export default {
         },
         borderRadius: {
             full: '9999px',
+            '5xl': '2rem',
             '3xl': '1.375rem',
             '2xl': '1.125rem',
             lg: 'var(--radius)',
