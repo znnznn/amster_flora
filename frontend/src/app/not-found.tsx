@@ -18,7 +18,7 @@ export default function NotFound() {
                     <p className='mt-10 text-lg font-medium text-muted max-md:text-base'>
                         Схоже у нас виникли проблеми. Поверніться на{' '}
                         <Link
-                            locale='ua'
+                            locale='uk'
                             className='text-primary'
                             href='/'
                         >

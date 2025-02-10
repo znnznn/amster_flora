@@ -18,6 +18,16 @@ export default {
             sm: '0.875rem',
             xs: '0.75rem'
         },
+        borderRadius: {
+            full: '9999px',
+            '3xl': '1.375rem',
+            '2xl': '1.125rem',
+            lg: 'var(--radius)',
+            md: 'calc(var(--radius) - 2px)',
+            sm: 'calc(var(--radius) - 4px)',
+            xs: 'calc(var(--radius) - 6px)',
+            none: '0'
+        },
         container: {
             center: true,
             padding: '1rem',
@@ -77,12 +87,6 @@ export default {
                     border: 'hsl(var(--sidebar-border))',
                     ring: 'hsl(var(--sidebar-ring))'
                 }
-            },
-            borderRadius: {
-                '3xl': '1.375rem',
-                lg: 'var(--radius)',
-                md: 'calc(var(--radius) - 2px)',
-                sm: 'calc(var(--radius) - 4px)'
             },
             keyframes: {
                 'accordion-down': {
