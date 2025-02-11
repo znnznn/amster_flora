@@ -21,7 +21,7 @@ interface BreadcrumbItem {
 }
 
 interface PageHeaderProps {
-    titleKey: DotNestedKeys<Messages>
+    titleKey?: DotNestedKeys<Messages>
     breadcrumbKeys: BreadcrumbItem[]
 }
 
@@ -56,10 +56,11 @@ export const PageHeader = ({ titleKey, breadcrumbKeys }: PageHeaderProps) => {
                     ))}
                 </BreadcrumbList>
             </Breadcrumb>
-
-            <H2 className='md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2'>
-                {t(titleKey)}
-            </H2>
+            {titleKey ? (
+                <H2 className='md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2'>
+                    {t(titleKey)}
+                </H2>
+            ) : null}
         </div>
     )
 }
