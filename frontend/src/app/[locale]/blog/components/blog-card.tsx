@@ -1,4 +1,4 @@
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
 import blog01 from '@/assets/images/blog/blog_01.jpg'
@@ -9,14 +9,10 @@ interface BlogCardProps {
     blogId: number
 }
 export const BlogCard = ({ blogId }: BlogCardProps) => {
-    const locale = useLocale()
-
     const t = useTranslations('BlogPage.BlogCard')
 
     return (
         <Link
-            locale={locale}
-            prefetch
             className='group flex gap-5 rounded-3xl border p-4 transition-colors hover:border-primary max-md:flex-col md:h-[270px] md:p-6'
             href={`/blog/${blogId}/`}
         >
