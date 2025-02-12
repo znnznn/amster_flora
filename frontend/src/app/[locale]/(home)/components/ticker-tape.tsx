@@ -8,7 +8,6 @@ export const TickerTape = () => {
         <Marquee
             autoFill
             className='h-7 bg-accent'
-            pauseOnHover
         >
             <span className='px-5 font-medium'>{t('ticker-tape')}</span>
         </Marquee>

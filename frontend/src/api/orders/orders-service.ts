@@ -1,26 +1,28 @@
-import { api } from '../api'
 import type { ApiResponse } from '../api.types'
 
-import type { Order, OrderPayload } from './orders.types'
+import { clientApi } from './../client'
+import type { Order, OrderPayload, OrderQueryParams } from './orders-types'
 
 export const ordersService = {
-    async get() {
-        const { data } = await api.get<ApiResponse<Order>>('/orders')
+    async get(params: OrderQueryParams) {
+        const { data } = await clientApi.get<ApiResponse<Order>>('/orders', {
+            params
+        })
         return data
     },
 
     async create(payload: OrderPayload) {
-        const { data } = await api.post<Order>('/orders/', payload)
+        const { data } = await clientApi.post<Order>('/orders/', payload)
         return data
     },
 
     async update(id: string, payload: OrderPayload) {
-        const { data } = await api.patch<Order>(`/orders/${id}/`, payload)
+        const { data } = await clientApi.patch<Order>(`/orders/${id}/`, payload)
         return data
     },
 
     async delete(id: string) {
-        await api.delete(`/orders/${id}/`)
+        await clientApi.delete(`/orders/${id}/`)
         return true
     }
 }

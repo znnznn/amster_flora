@@ -1,3 +1,4 @@
+import { GoogleOAuthProvider } from '@react-oauth/google'
 import { type Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
@@ -12,7 +13,7 @@ import { type Locale, routing } from '@/i18n/routing'
 import { ReactQueryProvider } from '@/providers/react-query-provider'
 
 interface LocaleLayoutProps extends PropsWithChildren {
-    params: { locale: string }
+    params: Promise<{ locale: string }>
 }
 
 export const metadata: Metadata = {
@@ -27,7 +28,9 @@ const montserrat = Montserrat({
     preload: true
 })
 
-const LocaleLayout = async ({ children, params: { locale } }: LocaleLayoutProps) => {
+const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
+    const locale = (await params).locale
+
     if (!routing.locales.includes(locale as Locale)) {
         notFound()
     }
@@ -42,9 +45,11 @@ const LocaleLayout = async ({ children, params: { locale } }: LocaleLayoutProps)
                 <NextIntlClientProvider messages={messages}>
                     <ReactQueryProvider>
                         <NuqsAdapter>
-                            <Header />
-                            <main className='flex-grow'>{children}</main>
-                            <Footer />
+                            <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID!}>
+                                <Header />
+                                <main className='flex-grow'>{children}</main>
+                                <Footer />
+                            </GoogleOAuthProvider>
                         </NuqsAdapter>
                     </ReactQueryProvider>
                 </NextIntlClientProvider>

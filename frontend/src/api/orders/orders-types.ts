@@ -1,3 +1,5 @@
+import type { PaginationParams } from '../api.types'
+
 export interface Order {
     id: number
     status: string
@@ -60,3 +62,5 @@ export interface Image {
 export interface OrderPayload {
     address: number
 }
+
+export interface OrderQueryParams extends PaginationParams {}

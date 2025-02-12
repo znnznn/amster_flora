@@ -3,19 +3,21 @@ import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { toast } from 'sonner'
 
 import { ordersService } from './orders-service'
-import type { OrderPayload } from './orders-types'
+import type { OrderPayload, OrderQueryParams } from './orders-types'
 
 export const ORDERS_QUERY_KEY = ['orders'] as const
 
-export const useOrders = () => {
+interface UseOrdersProps {
+    params: OrderQueryParams
+}
+export const useOrders = ({ params }: UseOrdersProps) => {
     const queryClient = useQueryClient()
 
     const t = useTranslations('Common')
 
-    // Query for fetching orders
     const ordersQuery = useQuery({
-        queryKey: ORDERS_QUERY_KEY,
-        queryFn: () => ordersService.get(),
+        queryKey: [ORDERS_QUERY_KEY, params],
+        queryFn: () => ordersService.get(params),
         onError: (error: Error) => {
             toast.error(t('Errors.Orders.Get.Title'), {
                 description: error.message || t('Errors.Orders.Get.Description')
@@ -27,9 +29,6 @@ export const useOrders = () => {
         mutationFn: (payload: OrderPayload) => ordersService.create(payload),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ORDERS_QUERY_KEY })
-            // toast.success(t('Success.Orders.Create.Title'), {
-            //     description: t('Success.Orders.Create.Description')
-            // })
         },
         onError: (error: Error) => {
             toast.error(t('Errors.Orders.Create.Title'), {
@@ -38,15 +37,11 @@ export const useOrders = () => {
         }
     })
 
-    // Mutation for updating an order
     const updateOrderMutation = useMutation({
         mutationFn: ({ id, payload }: { id: string; payload: OrderPayload }) =>
             ordersService.update(id, payload),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ORDERS_QUERY_KEY })
-            // toast.success(t('Success.Orders.Update.Title'), {
-            //     description: t('Success.Orders.Update.Description')
-            // })
         },
         onError: (error: Error) => {
             toast.error(t('Errors.Orders.Update.Title'), {
@@ -55,14 +50,10 @@ export const useOrders = () => {
         }
     })
 
-    // Mutation for deleting an order
     const deleteOrderMutation = useMutation({
         mutationFn: (id: string) => ordersService.delete(id),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ORDERS_QUERY_KEY })
-            // toast.success(t('Success.Orders.Delete.Title'), {
-            //     description: t('Success.Orders.Delete.Description')
-            // })
         },
         onError: (error: Error) => {
             toast.error(t('Errors.Orders.Delete.Title'), {
