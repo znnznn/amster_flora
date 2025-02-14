@@ -4,12 +4,12 @@ import * as React from 'react'
 import { cn } from '@/lib/utils'
 
 const inputVariants = cva(
-    'flex h-12 w-full bg-background px-6 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+    'flex h-[54px] w-full bg-background px-6 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
     {
         variants: {
             variant: {
                 default:
-                    'focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input rounded-md',
+                    'focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input rounded-2xl',
                 underline:
                     'border-b border-b-primary bg-transparent px-0.5 pb-1 outline-none placeholder:text-muted-foreground'
             }

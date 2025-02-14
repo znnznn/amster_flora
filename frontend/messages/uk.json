@@ -92,6 +92,32 @@
         "ticker-tape": "працюємо на генераторах"
     },
     "Common": {
+        "Auth": {
+            "AuthPopup": "Увійти за допомогою",
+            "CreateAccount": "Створити акаунт",
+            "ForgotPassword": "Забули пароль?",
+            "DoNotHaveAccount": "Ще не зареєстровані?",
+            "Login": "Увійти",
+            "SignUp": "Зареєструватися",
+            "LoginTitle": "Вхід",
+            "RecoverPassword": "Відновити пароль",
+            "SignUpTitle": "Реєстрація"
+        },
+        "ProductsList": {
+            "SeeAll": "Дивитись всі букети"
+        },
+        "HeaderNav": {
+            "Bouquets": "Букети",
+            "Flowerpots": "Вазони",
+            "Sales": "Акції",
+            "Client": {
+                "Title": "Клієнту",
+                "Delivery": "Оплата і доставка",
+                "Policy": "Політика конфінденційності",
+                "Blog": "Блог",
+                "Story": "Історія"
+            }
+        },
         "selectLanguage": "Оберіть мову",
         "selectCurrency": "Оберіть валюту",
         "Breadcrumb": {
@@ -143,6 +169,9 @@
                     "Description": "Ваше замовлення було успішно видалено"
                 }
             }
+        },
+        "Placeholders": {
+            "password": "Пароль"
         }
     },
     "StoryPage": {

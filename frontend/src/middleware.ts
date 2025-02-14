@@ -1,10 +1,9 @@
 import createMiddleware from 'next-intl/middleware'
 import { type NextRequest, NextResponse } from 'next/server'
 
-import { middlewareCookies } from './api/auth/client-auth-storage'
+import { getMiddlewareAccessToken } from './api/auth/server-auth-storage'
+import { PUBLIC_ROUTES } from './config/routes'
 import { routing } from './i18n/routing'
-
-const publicRoutes = ['/']
 
 const intlMiddleware = createMiddleware(routing)
 
@@ -13,8 +12,9 @@ export function middleware(request: NextRequest) {
 
     const { pathname } = request.nextUrl
 
-    if (!publicRoutes.includes(pathname.replace(/^\/(uk|en)/, '/'))) {
-        const token = middlewareCookies.getAccessToken(request)
+    if (!PUBLIC_ROUTES.includes(pathname.replace(/^\/(uk|en)/, '/'))) {
+        const token = getMiddlewareAccessToken(request)
+
         if (!token) {
             return NextResponse.redirect(new URL('/', request.url))
         }

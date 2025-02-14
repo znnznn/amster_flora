@@ -7,6 +7,16 @@ const withNextIntl = createNextIntlPlugin()
 const nextConfig: NextConfig = {
     experimental: {
         inlineCss: true
+    },
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'amster-flora.s3.amazonaws.com',
+                port: '',
+                pathname: '/static/images/**'
+            }
+        ]
     }
 }
 

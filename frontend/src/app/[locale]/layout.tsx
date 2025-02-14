@@ -29,7 +29,7 @@ const montserrat = Montserrat({
 })
 
 const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
-    const locale = (await params).locale
+    const { locale } = await params
 
     if (!routing.locales.includes(locale as Locale)) {
         notFound()

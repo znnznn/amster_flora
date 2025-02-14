@@ -8,7 +8,9 @@ export interface RefreshToken {
     refresh: string
 }
 
-export type AuthTokens = Token & RefreshToken
+export interface AuthTokens extends RefreshToken {
+    access: string
+}
 
 export interface AuthResponse extends AuthTokens {
     user: User

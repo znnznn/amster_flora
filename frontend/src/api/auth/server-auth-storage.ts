@@ -1,13 +1,14 @@
-'use server'
-
 import { cookies } from 'next/headers'
 import type { NextRequest } from 'next/server'
 
-import { ACCESS_TOKEN, REFRESH_TOKEN, USER_DATA } from './client-auth-storage'
+const ACCESS_TOKEN = 'accessToken'
+const REFRESH_TOKEN = 'refreshToken'
+const USER_DATA = 'user'
 
 export const serverCookies = {
     getTokens: async () => {
         const cookieStore = await cookies()
+
         return {
             access: cookieStore.get(ACCESS_TOKEN)?.value,
             refresh: cookieStore.get(REFRESH_TOKEN)?.value
@@ -20,6 +21,6 @@ export const serverCookies = {
     }
 }
 
-export const middlewareCookies = {
-    getAccessToken: (request: NextRequest) => request.cookies.get(ACCESS_TOKEN)?.value
+export function getMiddlewareAccessToken(request: NextRequest) {
+    return request.cookies.get(ACCESS_TOKEN)?.value
 }

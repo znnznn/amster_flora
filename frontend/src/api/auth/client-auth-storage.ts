@@ -1,5 +1,4 @@
 import { deleteCookie, getCookie, setCookie } from 'cookies-next/client'
-import type { NextRequest } from 'next/server'
 
 import type { User } from '../users/user-types'
 
@@ -11,16 +10,14 @@ export const USER_DATA = 'user'
 
 export const clientCookies = {
     setTokens: (tokens: AuthTokens) => {
-        setCookie(ACCESS_TOKEN, tokens.token, {
+        setCookie(ACCESS_TOKEN, tokens.access, {
             path: '/',
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
             maxAge: 60 * 15 // 15 minutes for access token
         })
         setCookie(REFRESH_TOKEN, tokens.refresh, {
             path: '/',
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
             maxAge: 60 * 60 * 24 * 7 // 1 week for refresh token
         })
     },
@@ -28,7 +25,6 @@ export const clientCookies = {
         setCookie(USER_DATA, JSON.stringify(user), {
             path: '/',
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
             maxAge: 60 * 60 * 24 * 7 // 1 week
         })
     },
@@ -45,9 +41,4 @@ export const clientCookies = {
         deleteCookie(REFRESH_TOKEN)
         deleteCookie(USER_DATA)
     }
-}
-
-// Middleware cookies (unchanged)
-export const middlewareCookies = {
-    getAccessToken: (request: NextRequest) => request.cookies.get(ACCESS_TOKEN)?.value
 }

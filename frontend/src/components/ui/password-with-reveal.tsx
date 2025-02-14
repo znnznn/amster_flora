@@ -19,7 +19,7 @@ export const PasswordWithReveal = ({
             <Input
                 {...props}
                 id='password'
-                // variant={variant}
+                variant={variant}
                 type={revealPassword ? 'text' : 'password'}
                 placeholder='••••••••'
                 className='pr-10'

@@ -1,8 +1,10 @@
 'use client'
 
 import { GoogleLogin } from '@react-oauth/google'
+import { useLocale, useTranslations } from 'next-intl'
 
-import { Button } from './ui/button'
+import { Button } from '../ui/button'
+
 import { useAuth } from '@/hooks/use-auth'
 import { cn } from '@/lib/utils'
 
@@ -14,14 +16,19 @@ interface SocialsButtonsProps {
 export const SocialsButtons = ({ className, onSuccess }: SocialsButtonsProps) => {
     const { googleLogin } = useAuth()
 
+    const t = useTranslations('Common.Auth')
+
+    const locale = useLocale()
+
     return (
         <div
             className={cn(className, 'flex flex-col items-center justify-center gap-y-1')}
         >
-            <span className='text-sm text-background'>Увійти за допомогою</span>
+            <span className='text-sm text-background'>{t('AuthPopup')}</span>
 
             <div className='flex items-center gap-x-4'>
                 <GoogleLogin
+                    locale={locale}
                     logo_alignment='center'
                     shape='square'
                     type='icon'

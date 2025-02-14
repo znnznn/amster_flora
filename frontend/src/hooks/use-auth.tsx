@@ -19,7 +19,7 @@ export const useAuth = () => {
             return data
         },
         onSuccess: (data) => {
-            clientCookies.setTokens({ token: data.token, refresh: data.refresh })
+            clientCookies.setTokens({ access: data.access, refresh: data.refresh })
             clientCookies.setUser(data.user)
             router.refresh()
             router.push(DEFAULT_LOGIN_REDIRECT)
@@ -32,7 +32,7 @@ export const useAuth = () => {
             return data
         },
         onSuccess: (data) => {
-            clientCookies.setTokens({ token: data.token, refresh: data.refresh })
+            clientCookies.setTokens({ access: data.access, refresh: data.refresh })
             clientCookies.setUser(data.user)
             router.refresh()
             router.push(DEFAULT_LOGIN_REDIRECT)

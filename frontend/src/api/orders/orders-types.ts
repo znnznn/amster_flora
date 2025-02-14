@@ -1,4 +1,5 @@
 import type { PaginationParams } from '../api.types'
+import type { Variant } from '../products/products-types'
 
 export interface Order {
     id: number
@@ -30,21 +31,7 @@ export interface OrdersItem {
     creator: number
 }
 
-export interface Variant {
-    id: number
-    product: Product
-    size: string
-    height: number
-    diameter: number
-    hex_color: string
-    quantity: number
-    price: string
-    image: string
-    images: Image[]
-    components: number[]
-}
-
-export interface Product {
+export interface OrderProduct {
     id: number
     name: string
     sku: string
