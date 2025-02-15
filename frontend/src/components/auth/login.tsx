@@ -1,8 +1,10 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import z from 'zod'
 
 import { Button } from '../ui/button'
@@ -12,8 +14,16 @@ import { PasswordWithReveal } from '../ui/password-with-reveal'
 import type { State } from './auth-popup'
 import { SocialsButtons } from './socials-buttons'
 import type { LoginCredentials } from '@/api/auth/auth-types'
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormMessage,
+    FormSubmissionMessage
+} from '@/components/ui/form'
 import { passwordShape } from '@/config/schemas'
+import { useAuthContext } from '@/providers/auth-provider'
 
 interface SocialsButtonsProps {
     setAuthState: (authState: State) => void
@@ -24,7 +34,9 @@ const loginSchema = z.object({
 })
 
 export const Login = ({ setAuthState }: SocialsButtonsProps) => {
-    const t = useTranslations('Common.Auth')
+    const t = useTranslations('Common')
+
+    const { login } = useAuthContext()
 
     const form = useForm<LoginCredentials>({
         defaultValues: {
@@ -35,7 +47,13 @@ export const Login = ({ setAuthState }: SocialsButtonsProps) => {
     })
 
     const onLogin = (data: LoginCredentials) => {
-        console.log(data)
+        try {
+            login.mutate(data)
+        } catch {
+            toast.error(t('Errors.Auth.Login.Title'), {
+                description: t('Errors.Auth.Login.Description')
+            })
+        }
     }
 
     return (
@@ -75,26 +93,38 @@ export const Login = ({ setAuthState }: SocialsButtonsProps) => {
                     <button
                         type='button'
                         className='mx-auto w-full py-2 text-center text-sm leading-snug text-accent hover:text-background'
-                        onClick={() => setAuthState('forgot-password')}
+                        onClick={() => setAuthState('forgot-password-mail')}
                     >
-                        {t('ForgotPassword')}
+                        {t('Auth.ForgotPassword')}
                     </button>{' '}
                     <Button
                         className='w-full text-xl'
                         variant='accent'
                         type='submit'
                     >
-                        {t('Login')}
+                        {login.isLoading ? (
+                            <Loader2 className='animate-spin' />
+                        ) : (
+                            t('Auth.Login')
+                        )}
                     </Button>
                 </form>
+                {login.isError ? (
+                    <FormSubmissionMessage
+                        message={t('Errors.Auth.Login.Description')}
+                        variant='destructive'
+                    />
+                ) : null}
             </Form>
             <div className='flex flex-col items-center justify-center gap-y-1'>
-                <span className='text-sm text-background'>{t('DoNotHaveAccount')}</span>
+                <span className='text-sm text-background'>
+                    {t('Auth.DoNotHaveAccount')}
+                </span>
                 <button
                     className='text-lg font-medium leading-snug text-accent hover:text-background'
                     onClick={() => setAuthState('sign-up')}
                 >
-                    {t('CreateAccount')}
+                    {t('Auth.CreateAccount')}
                 </button>
             </div>
             <SocialsButtons />

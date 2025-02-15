@@ -2,6 +2,7 @@ import { ChevronRight } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 
+import { LogoutButton } from '@/components/auth/logout-button'
 import { PageHeader } from '@/components/ui/page-header'
 import { Section } from '@/components/ui/section'
 import { Link } from '@/i18n/routing'
@@ -29,6 +30,7 @@ const AccountPage = () => {
                         key: 'account'
                     }
                 ]}
+                actionComponent={<LogoutButton className='underline'>Вихід</LogoutButton>}
             />
             <ul className='mt-8 grid gap-4 md:mt-12 md:gap-8 lg:grid-cols-2'>
                 <li>

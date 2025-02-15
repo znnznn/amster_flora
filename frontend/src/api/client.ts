@@ -48,7 +48,7 @@ clientApi.interceptors.response.use(
     async (error) => {
         const originalRequest = error.config
 
-        if (originalRequest?.url === '/auth/refresh/') {
+        if (originalRequest?.url === '/auth/token/refresh/') {
             return Promise.reject(error)
         }
 
@@ -76,7 +76,7 @@ clientApi.interceptors.response.use(
                     throw new AuthError('No refresh token')
                 }
 
-                const response = await axios.post(`${BASE_URL}/auth/refresh/`, {
+                const response = await axios.post(`${BASE_URL}'/auth/token/refresh/`, {
                     refresh
                 })
                 const { access, refresh: newRefresh } = response.data

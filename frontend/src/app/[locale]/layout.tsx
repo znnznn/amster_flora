@@ -6,10 +6,12 @@ import { Montserrat } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { type PropsWithChildren } from 'react'
+import { Toaster } from 'sonner'
 
 import { Footer } from '@/components/layout/footer'
 import { Header } from '@/components/layout/header'
 import { type Locale, routing } from '@/i18n/routing'
+import { AuthProvider } from '@/providers/auth-provider'
 import { ReactQueryProvider } from '@/providers/react-query-provider'
 
 interface LocaleLayoutProps extends PropsWithChildren {
@@ -46,12 +48,15 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
                     <ReactQueryProvider>
                         <NuqsAdapter>
                             <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID!}>
-                                <Header />
-                                <main className='flex-grow'>{children}</main>
-                                <Footer />
+                                <AuthProvider>
+                                    <Header />
+                                    <main className='flex-grow'>{children}</main>
+                                    <Footer />
+                                </AuthProvider>
                             </GoogleOAuthProvider>
                         </NuqsAdapter>
                     </ReactQueryProvider>
+                    <Toaster richColors />
                 </NextIntlClientProvider>
             </body>
         </html>

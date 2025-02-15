@@ -11,8 +11,8 @@ export const useProducts = (params: Partial<CategoriesQueryParams>) => {
 
     const productsQuery = useQuery({
         queryKey: [PRODUCT_QUERY_KEY, params],
-        queryFn: () => productsService.get(params),
-        retry: 1
+        queryFn: () => productsService.get(params)
+
         // onError: (error: Error) => {
         //     // toast.error(t('Errors.Product.Get.Title'), {
         //     //     description: error.message || t('Errors.Product.Get.Description')

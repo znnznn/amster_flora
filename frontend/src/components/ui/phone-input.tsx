@@ -31,9 +31,10 @@ const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> = React.forwa
     return (
         <RPNInput.default
             ref={ref}
+            defaultCountry='UA'
             labels={ua}
             className={cn(
-                'flex overflow-clip rounded-md border',
+                'flex overflow-clip rounded-2xl border',
                 'focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
                 variant === 'underline' &&
                     'focus-within:border-b-2 focus-within:border-primary focus-within:ring-0 focus-within:ring-offset-0',
@@ -117,7 +118,7 @@ const CountrySelect = ({
                 <Button
                     type='button'
                     variant='ghost'
-                    className='flex h-12 gap-1 !rounded-none px-3 hover:bg-accent/40 focus:z-10'
+                    className='flex h-[54px] gap-1 !rounded-none bg-background px-3 hover:bg-accent'
                     disabled={disabled}
                 >
                     <FlagComponent
@@ -134,7 +135,7 @@ const CountrySelect = ({
             </PopoverTrigger>
             <PopoverContent
                 align='start'
-                className='w-[320px]'
+                className='w-80 p-0'
             >
                 <Command>
                     <CommandInput placeholder='Введіть назву або код країни...' />
@@ -176,7 +177,7 @@ const UnderlineCountrySelect = ({
                 <Button
                     type='button'
                     variant='ghost'
-                    className='flex h-12 gap-1 rounded-b-none rounded-t-[2px] border-x-0 border-t-0 border-primary px-3 focus:z-10'
+                    className='flex h-[54px] gap-1 rounded-b-none rounded-t-[2px] border-x-0 border-t-0 border-primary px-3'
                     disabled={disabled}
                 >
                     <FlagComponent
@@ -234,7 +235,7 @@ const CountrySelectOption = ({
 }: CountrySelectOptionProps) => {
     return (
         <CommandItem
-            className='gap-2'
+            className='gap-2 rounded-md'
             onSelect={() => onChange(country)}
         >
             <FlagComponent
@@ -264,7 +265,7 @@ export const FlagComponent = ({
     return (
         <span
             className={cn(
-                'flex h-4 w-6 flex-shrink-0 items-center justify-center overflow-hidden rounded bg-foreground/20 [&_svg]:size-full',
+                'rounded flex size-5 flex-shrink-0 items-center justify-center overflow-hidden rounded-full bg-foreground/20 [&_svg]:size-full [&_svg]:scale-150',
                 className
             )}
         >

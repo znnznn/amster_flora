@@ -5,8 +5,8 @@ import { useLocale, useTranslations } from 'next-intl'
 
 import { Button } from '../ui/button'
 
-import { useAuth } from '@/hooks/use-auth'
 import { cn } from '@/lib/utils'
+import { useAuthContext } from '@/providers/auth-provider'
 
 interface SocialsButtonsProps {
     className?: string
@@ -14,7 +14,7 @@ interface SocialsButtonsProps {
 }
 
 export const SocialsButtons = ({ className, onSuccess }: SocialsButtonsProps) => {
-    const { googleLogin } = useAuth()
+    const { googleLogin } = useAuthContext()
 
     const t = useTranslations('Common.Auth')
 
@@ -33,7 +33,7 @@ export const SocialsButtons = ({ className, onSuccess }: SocialsButtonsProps) =>
                     shape='square'
                     type='icon'
                     onSuccess={(credentialResponse) => {
-                        googleLogin({
+                        googleLogin.mutate({
                             token: credentialResponse?.credential || ''
                         })
                         onSuccess?.()

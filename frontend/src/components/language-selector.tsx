@@ -69,7 +69,7 @@ export const LanguageSelector = ({ className }: LanguageSelectorProps) => {
                     >
                         <div className='flex items-center gap-2'>
                             <FlagComponent
-                                className='size-4 rounded-full [&_svg]:scale-150'
+                                className='size-4'
                                 country={countryCode}
                                 countryName={label}
                             />

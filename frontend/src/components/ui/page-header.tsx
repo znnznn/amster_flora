@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { Fragment } from 'react'
+import { Fragment, type JSX } from 'react'
 
 import type { DotNestedKeys, Messages } from '../../../global'
 
@@ -23,13 +23,18 @@ interface BreadcrumbItem {
 interface PageHeaderProps {
     titleKey?: DotNestedKeys<Messages>
     breadcrumbKeys: BreadcrumbItem[]
+    actionComponent?: JSX.Element
 }
 
-export const PageHeader = ({ titleKey, breadcrumbKeys }: PageHeaderProps) => {
+export const PageHeader = ({
+    titleKey,
+    breadcrumbKeys,
+    actionComponent
+}: PageHeaderProps) => {
     const t = useTranslations()
 
     return (
-        <div className='relative flex gap-6 max-md:flex-col max-md:items-center'>
+        <div className='relative flex gap-6 max-md:flex-col max-md:items-center md:justify-between'>
             <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>
@@ -61,6 +66,7 @@ export const PageHeader = ({ titleKey, breadcrumbKeys }: PageHeaderProps) => {
                     {t(titleKey)}
                 </H2>
             ) : null}
+            {actionComponent}
         </div>
     )
 }

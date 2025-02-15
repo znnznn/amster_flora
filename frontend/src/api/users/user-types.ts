@@ -13,6 +13,13 @@ export interface User {
     last_login: string
 }
 
-export type UserPayload = Omit<User, 'id' | 'is_active' | 'last_login'>
+export interface UserPayload {
+    email: string
+    first_name: string
+    last_name: string
+    phone_number: string
+    role?: Roles
+    password: string
+}
 
 export interface UserQueryParams extends PaginationParams {}

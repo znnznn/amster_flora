@@ -2,12 +2,14 @@
 
 import * as LabelPrimitive from '@radix-ui/react-label'
 import { Slot } from '@radix-ui/react-slot'
+import { cva } from 'class-variance-authority'
+import { X } from 'lucide-react'
 import * as React from 'react'
 import {
     Controller,
-    ControllerProps,
-    FieldPath,
-    FieldValues,
+    type ControllerProps,
+    type FieldPath,
+    type FieldValues,
     FormProvider,
     useFormContext
 } from 'react-hook-form'
@@ -167,13 +169,54 @@ const FormMessage = React.forwardRef<
 })
 FormMessage.displayName = 'FormMessage'
 
+const formSubmissionMessageVariants = cva('rounded-md p-3 text-center text-sm ', {
+    variants: {
+        variant: {
+            success: 'bg-accent/10 text-accent',
+            destructive: 'bg-destructive/10 text-destructive'
+        }
+    }
+})
+
+const FormSubmissionMessage = ({
+    message,
+    variant,
+    onClose
+}: {
+    message: string
+    variant: 'success' | 'destructive'
+    onClose?: () => void
+}) => {
+    const [isVisible, setIsVisible] = React.useState(true)
+
+    if (!isVisible) return null
+
+    return (
+        <div className={cn('relative', formSubmissionMessageVariants({ variant }))}>
+            {message}
+            <button
+                onClick={() => {
+                    setIsVisible(false)
+                    onClose?.()
+                }}
+                className='absolute -right-2.5 -top-2.5 rounded-full p-1 transition-colors hover:bg-gray-200'
+                aria-label='Закрити повідомлення'
+            >
+                <X className='size-4' />
+            </button>
+        </div>
+    )
+}
+FormSubmissionMessage.displayName = 'FormSubmissionMessage'
+
 export {
-    useFormField,
     Form,
-    FormItem,
-    FormLabel,
     FormControl,
     FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
     FormMessage,
-    FormField
+    FormSubmissionMessage,
+    useFormField
 }

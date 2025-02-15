@@ -16,8 +16,11 @@ export interface AuthResponse extends AuthTokens {
     user: User
 }
 
-export interface LoginCredentials {
+export interface Email {
     email: string
+}
+
+export interface LoginCredentials extends Email {
     password: string
 }
 

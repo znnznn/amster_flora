@@ -16,7 +16,10 @@ export const authService = {
         return data
     },
     async refreshToken(payload: RefreshToken) {
-        const { data } = await clientApi.post<AuthResponse>('/auth/refresh/', payload)
+        const { data } = await clientApi.post<AuthResponse>(
+            '/auth/token/refresh/',
+            payload
+        )
         return data
     }
 }
