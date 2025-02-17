@@ -1,7 +1,7 @@
 export interface LocaleParams {
-    params: { locale: string }
+    params: Promise<{ locale: string }>
 }
 
 export interface IdParams {
-    params: { id: string; locale: string }
+    params: Promise<{ id: string; locale: string }>
 }

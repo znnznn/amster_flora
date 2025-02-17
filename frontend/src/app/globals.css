@@ -103,7 +103,16 @@
     * {
         @apply border-border tabular-nums underline-offset-4;
     }
+
+    html {
+        @apply scroll-smooth;
+    }
+
     body {
         @apply overscroll-none bg-background text-foreground;
+    }
+
+    section {
+        scroll-margin-top: calc(var(--header-height) + var(--header-top-height) + 1rem);
     }
 }

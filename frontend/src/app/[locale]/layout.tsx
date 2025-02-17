@@ -42,7 +42,7 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
     return (
         <html lang={locale}>
             <body
-                className={`${montserrat.className} flex min-h-screen flex-col antialiased`}
+                className={`${montserrat.className} flex min-h-screen flex-col overflow-x-hidden antialiased`}
             >
                 <NextIntlClientProvider messages={messages}>
                     <ReactQueryProvider>

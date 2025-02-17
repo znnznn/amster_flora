@@ -71,6 +71,8 @@ PhoneInput.displayName = 'PhoneInput'
 const InputComponent = React.forwardRef<HTMLInputElement, React.ComponentProps<'input'>>(
     ({ className, ...props }, ref) => (
         <Input
+            type='tel'
+            inputMode='tel'
             className={cn(
                 'rounded-r-md rounded-s-none border-none !outline-none !ring-0 !ring-offset-0',
                 className
@@ -87,6 +89,8 @@ const UnderlineInputComponent = React.forwardRef<
     React.ComponentProps<'input'>
 >(({ className, ...props }, ref) => (
     <Input
+        type='tel'
+        inputMode='tel'
         variant='underline'
         className={cn(className)}
         {...props}
