@@ -23,6 +23,7 @@ export default {
             '5xl': '2rem',
             '3xl': '1.375rem',
             '2xl': '1.125rem',
+            xl: '1rem',
             lg: 'var(--radius)',
             md: 'calc(var(--radius) - 2px)',
             sm: 'calc(var(--radius) - 4px)',

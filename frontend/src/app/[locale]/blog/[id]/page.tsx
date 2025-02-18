@@ -3,13 +3,16 @@ import { Section } from '@/components/ui/section'
 import type { IdParams } from '@/types/params'
 
 export const generateMetadata = async ({ params }: IdParams) => {
+    const { id } = await params
     return {
-        title: params?.id
+        title: id
     }
 }
 
-const BlogPostPage = ({ params }: IdParams) => {
-    console.log(params)
+const BlogPostPage = async ({ params }: IdParams) => {
+    const { id } = await params
+
+    console.log(id)
 
     return (
         <Section className='lg:mt-16'>

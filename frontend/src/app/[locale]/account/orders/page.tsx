@@ -3,8 +3,10 @@ import { getTranslations } from 'next-intl/server'
 import type { LocaleParams } from '@/types/params'
 
 export const generateMetadata = async ({ params }: LocaleParams) => {
+    const { locale } = await params
+
     const t = await getTranslations({
-        locale: params?.locale,
+        locale,
         namespace: 'Metadata.Orders'
     })
 

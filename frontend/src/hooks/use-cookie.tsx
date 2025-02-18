@@ -6,6 +6,8 @@ export const useCookie = <T,>(
     initialValue: T,
     options: { maxAge?: number } = {}
 ) => {
+    let serverSnapshotCache: T | undefined
+
     const subscribe = (callback: () => void) => {
         window.addEventListener('storage', callback)
         return () => window.removeEventListener('storage', callback)
@@ -21,17 +23,28 @@ export const useCookie = <T,>(
         }
     }
 
-    const getServerSnapshot = () => {}
+    const getServerSnapshot = () => {
+        if (serverSnapshotCache !== undefined) {
+            return serverSnapshotCache
+        }
+
+        serverSnapshotCache = initialValue
+        return serverSnapshotCache
+    }
 
     const value = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 
     const setValue = (newValue: T | ((val: T) => T)) => {
         try {
             const valueToStore = newValue instanceof Function ? newValue(value) : newValue
+
             setCookie(key, JSON.stringify(valueToStore), {
                 maxAge: options.maxAge,
                 path: '/'
             })
+
+            serverSnapshotCache = undefined
+
             window.dispatchEvent(new Event('storage'))
         } catch (error) {
             console.error('Error setting cookie:', error)

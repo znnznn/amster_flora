@@ -139,6 +139,10 @@
         },
         "ticker-tape": "працюємо на генераторах"
     },
+    "NotFoundPage": {
+        "title": "Схоже у нас виникли проблеми. Поверніться на",
+        "link": "головну сторінку."
+    },
     "Common": {
         "Auth": {
             "AuthPopup": "Увійти за допомогою",
@@ -191,6 +195,13 @@
         },
         "selectLanguage": "Оберіть мову",
         "selectCurrency": "Оберіть валюту",
+        "CitySelector": {
+            "title": "Виберіть місто",
+            "Back": "Назад",
+            "ChangeCity": "Змінити місто",
+            "Select": "Так",
+            "YourCity": "Ваше місто доставки"
+        },
         "Breadcrumb": {
             "home": "Головна",
             "about": "Про нас",

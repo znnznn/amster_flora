@@ -1,7 +1,6 @@
 import createMiddleware from 'next-intl/middleware'
 import { type NextRequest } from 'next/server'
 
-import { getMiddlewareAccessToken } from './api/auth/server-auth-storage'
 import { routing } from './i18n/routing'
 
 const intlMiddleware = createMiddleware(routing)
@@ -9,9 +8,9 @@ const intlMiddleware = createMiddleware(routing)
 export const middleware = (request: NextRequest) => {
     const response = intlMiddleware(request)
 
-    const { pathname } = request.nextUrl
+    // const { pathname } = request.nextUrl
 
-    const token = getMiddlewareAccessToken(request)
+    // const token = getMiddlewareAccessToken(request)
 
     // if (!PUBLIC_ROUTES.includes(pathname.replace(/^\/(uk|en)/, '/')) && !token) {
     //     if (!token) {

@@ -1,9 +1,11 @@
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import notFound from '@/assets/images/not-found.png'
 
 const NotFound = () => {
+    const t = useTranslations('NotFoundPage')
     return (
         <section className='flex flex-col items-center justify-center px-8 py-20'>
             <Image
@@ -12,12 +14,12 @@ const NotFound = () => {
                 alt='Сторінку не знайдено'
             />
             <p className='mt-10 text-lg font-medium text-muted max-md:text-base'>
-                Схоже у нас виникли проблеми. Поверніться на{' '}
+                {t('title')}{' '}
                 <Link
                     className='text-primary'
                     href='/'
                 >
-                    головну сторінку.
+                    {t('link')}
                 </Link>
             </p>
         </section>

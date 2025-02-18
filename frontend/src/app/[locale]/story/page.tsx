@@ -11,8 +11,9 @@ import { Section } from '@/components/ui/section'
 import type { LocaleParams } from '@/types/params'
 
 export const generateMetadata = async ({ params }: LocaleParams) => {
+    const { locale } = await params
     const t = await getTranslations({
-        locale: params?.locale,
+        locale,
         namespace: 'Metadata.Story'
     })
 
@@ -33,7 +34,7 @@ const StoryPage = () => {
                 <div className='flex items-center gap-x-5 gap-y-3 max-lg:flex-col'>
                     <Image
                         priority
-                        className='rounded-5xl h-64 w-full object-cover object-top md:h-[450px] lg:max-w-[500px]'
+                        className='h-64 w-full rounded-5xl object-cover object-top md:h-[450px] lg:max-w-[500px]'
                         src={story01}
                         alt={t('stories.story-1')}
                     />
@@ -43,7 +44,7 @@ const StoryPage = () => {
                 </div>
                 <div className='flex flex-col items-center gap-x-5 gap-y-3 lg:flex-row-reverse'>
                     <Image
-                        className='rounded-5xl h-64 w-full object-cover object-top md:h-[450px] lg:max-w-[500px]'
+                        className='h-64 w-full rounded-5xl object-cover object-top md:h-[450px] lg:max-w-[500px]'
                         src={story02}
                         alt={t('stories.story-2')}
                     />
@@ -53,7 +54,7 @@ const StoryPage = () => {
                 </div>
                 <div className='flex items-center gap-x-5 gap-y-3 max-lg:flex-col'>
                     <Image
-                        className='rounded-5xl h-64 w-full object-cover md:h-[450px] lg:max-w-[500px]'
+                        className='h-64 w-full rounded-5xl object-cover md:h-[450px] lg:max-w-[500px]'
                         src={story03}
                         alt={t('stories.story-3')}
                     />
@@ -63,7 +64,7 @@ const StoryPage = () => {
                 </div>
                 <div className='flex flex-col items-center gap-x-5 gap-y-3 lg:flex-row-reverse'>
                     <Image
-                        className='rounded-5xl h-64 w-full object-cover md:h-[450px] lg:max-w-[500px]'
+                        className='h-64 w-full rounded-5xl object-cover md:h-[450px] lg:max-w-[500px]'
                         src={story04}
                         alt={t('stories.story-4')}
                     />
