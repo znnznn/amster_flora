@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import Link from 'next/link'
 
 import notFound from '@/assets/images/not-found.png'
+import { Link } from '@/i18n/routing'
 
 const NotFound = () => {
     const t = useTranslations('NotFoundPage')
