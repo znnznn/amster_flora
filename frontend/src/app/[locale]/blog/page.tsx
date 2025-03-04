@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 
 import { BlogCard } from './components/blog-card'
-import { PageHeader } from '@/components/ui/page-header'
+import { PageHeader } from '@/components/page-header'
 import { Section } from '@/components/ui/section'
 import type { LocaleParams } from '@/types/params'
 

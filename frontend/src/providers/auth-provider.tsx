@@ -19,6 +19,7 @@ import { DEFAULT_LOGIN_REDIRECT, DEFAULT_LOGOUT_REDIRECT } from '@/config/routes
 interface AuthContextType {
     user: User | undefined
     isAuthenticated: boolean
+    isLoading: boolean
     login: UseMutationResult<AuthResponse, unknown, LoginCredentials, unknown>
     googleLogin: UseMutationResult<AuthResponse, unknown, Token, unknown>
     signUp: UseMutationResult<User, unknown, UserPayload, unknown>
@@ -48,25 +49,41 @@ export const useAuthContext = () => {
 
 const useAuth = () => {
     const router = useRouter()
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
     const queryClient = useQueryClient()
+
+    const initialTokens = clientCookies.getTokens()
+    const initialUser = clientCookies.getUser()
+    const [isAuthenticated, setIsAuthenticated] = useState(!!initialTokens.access)
+    const [isInitialized, setIsInitialized] = useState(false)
 
     useEffect(() => {
         const { access } = clientCookies.getTokens()
         setIsAuthenticated(!!access)
+        setIsInitialized(true)
     }, [])
 
-    const { data: user, refetch: refetchUser } = useQuery(
+    const {
+        data: user,
+        refetch: refetchUser,
+        isLoading: isUserLoading
+    } = useQuery(
         ['user'],
         async () => {
             const userId = clientCookies.getUser()?.id
             if (!userId) throw new Error('No user ID found')
             return usersService.getUser(userId)
         },
+
         {
             enabled: isAuthenticated,
             staleTime: 5 * 60 * 1000,
-            cacheTime: 10 * 60 * 1000
+            cacheTime: 5 * 60 * 1000,
+            retry: 1,
+            initialData: initialUser,
+            refetchOnWindowFocus: true,
+            onSuccess: (data) => {
+                clientCookies.setUser(data)
+            }
         }
     )
 
@@ -93,6 +110,8 @@ const useAuth = () => {
             clientCookies.setTokens({ access: data.access, refresh: data.refresh })
             clientCookies.setUser(data.user)
             setIsAuthenticated(true)
+            // Update React Query cache with the user data to avoid additional network request
+            queryClient.setQueryData(['user'], data.user)
             await refetchUser()
             router.refresh()
             router.push(DEFAULT_LOGIN_REDIRECT)
@@ -108,6 +127,8 @@ const useAuth = () => {
             clientCookies.setTokens({ access: data.access, refresh: data.refresh })
             clientCookies.setUser(data.user)
             setIsAuthenticated(true)
+            // Update React Query cache with the user data to avoid additional network request
+            queryClient.setQueryData(['user'], data.user)
             await refetchUser()
             router.refresh()
             router.push(DEFAULT_LOGIN_REDIRECT)
@@ -122,9 +143,12 @@ const useAuth = () => {
         setIsAuthenticated(false)
     }
 
+    const isLoading = !isInitialized || (isAuthenticated && isUserLoading)
+
     return {
         user,
         isAuthenticated,
+        isLoading,
         login: loginMutation,
         googleLogin: googleLoginMutation,
         signUp: signUpMutation,

@@ -27,16 +27,19 @@ export const DatePicker = ({
             <PopoverTrigger asChild>
                 <Button
                     disabled={disabled}
-                    size='sm'
-                    className={cn(className, !date && 'text-muted-foreground')}
+                    className={cn(
+                        'text-base',
+                        className,
+                        !date && 'text-muted-foreground'
+                    )}
                 >
-                    <CalendarIcon className='mr-2 size-4' />
+                    <CalendarIcon className='mr-2' />
                     {date ? (
                         format(date, 'dd.MM.yyyy', {
                             locale: uk
                         })
                     ) : (
-                        <span>DD-MM-YYYY</span>
+                        <span className='text-base'>DD-MM-YYYY</span>
                     )}
                 </Button>
             </PopoverTrigger>

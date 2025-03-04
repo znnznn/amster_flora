@@ -1,5 +1,5 @@
 import { AuthPopup } from '../auth/auth-popup'
-import { CitySelector } from '../city-selector'
+import { CityPopup } from '../city-popup'
 import { CurrencySelector } from '../currency-selector'
 import { LanguageSelector } from '../language-selector'
 import { buttonVariants } from '../ui/button'
@@ -14,7 +14,7 @@ export const Header = () => {
         <header className='sticky top-0 z-50 bg-primary'>
             <div className='bg-accent'>
                 <div className='container relative flex h-[var(--header-top-height)] items-center justify-between gap-4'>
-                    <CitySelector />
+                    <CityPopup />
                     <Link
                         className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-medium text-primary transition-all hover:underline'
                         href='tel:+380687778893'

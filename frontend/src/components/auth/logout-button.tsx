@@ -14,15 +14,13 @@ export const LogoutButton = ({ className, ...props }: LogoutButtonProps) => {
 
     return (
         <Button
-            className={cn('text-lg font-normal', className)}
+            className={cn('!text-base font-normal', className)}
             onClick={logout}
             variant='ghost'
             size='sm'
         >
             <svg
-                className='!size-5 shrink-0'
-                width='36'
-                height='36'
+                className='!size-8 shrink-0'
                 viewBox='0 0 44 44'
                 fill='none'
                 xmlns='http://www.w3.org/2000/svg'
@@ -50,7 +48,7 @@ export const LogoutButton = ({ className, ...props }: LogoutButtonProps) => {
                 />
             </svg>
 
-            <span> {props.children}</span>
+            <span>{props.children}</span>
         </Button>
     )
 }

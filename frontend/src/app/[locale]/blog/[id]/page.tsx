@@ -1,4 +1,4 @@
-import { PageHeader } from '@/components/ui/page-header'
+import { PageHeader } from '@/components/page-header'
 import { Section } from '@/components/ui/section'
 import type { IdParams } from '@/types/params'
 
@@ -11,8 +11,6 @@ export const generateMetadata = async ({ params }: IdParams) => {
 
 const BlogPostPage = async ({ params }: IdParams) => {
     const { id } = await params
-
-    console.log(id)
 
     return (
         <Section className='lg:mt-16'>

@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 
 import { LogoutButton } from '@/components/auth/logout-button'
-import { PageHeader } from '@/components/ui/page-header'
+import { PageHeader } from '@/components/page-header'
 import { Section } from '@/components/ui/section'
 import { Link } from '@/i18n/routing'
 import type { LocaleParams } from '@/types/params'
@@ -23,6 +23,7 @@ export const generateMetadata = async ({ params }: LocaleParams) => {
 
 const AccountPage = () => {
     const t = useTranslations('AccountPage')
+
     return (
         <Section className='lg:mt-16'>
             <PageHeader
@@ -32,7 +33,9 @@ const AccountPage = () => {
                         key: 'account'
                     }
                 ]}
-                actionComponent={<LogoutButton className='underline'>Вихід</LogoutButton>}
+                actionComponent={
+                    <LogoutButton className='underline max-md:hidden'>Вихід</LogoutButton>
+                }
             />
             <ul className='mt-8 grid gap-4 md:mt-12 md:gap-8 lg:grid-cols-2'>
                 <li>
@@ -200,6 +203,9 @@ const AccountPage = () => {
                     </Link>
                 </li>
             </ul>
+            <div className='mt-6 flex justify-end md:hidden'>
+                <LogoutButton className='underline'>Вихід</LogoutButton>
+            </div>
         </Section>
     )
 }

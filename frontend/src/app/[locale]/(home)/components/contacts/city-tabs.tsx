@@ -10,11 +10,7 @@ interface CityTabsProps {
     className?: string
 }
 export const CityTabs = ({ className }: CityTabsProps) => {
-    const [city, setCity] = useCookie<string>(
-        'city',
-        DEFAULT_CITY,
-        { maxAge: 31536000 } // One year in seconds
-    )
+    const [city, setCity] = useCookie<string>('NEXT_CITY', DEFAULT_CITY)
 
     return (
         <Tabs

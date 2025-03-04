@@ -6,7 +6,7 @@ import story01 from '@/assets/images/story/story_01.jpg'
 import story02 from '@/assets/images/story/story_02.jpg'
 import story03 from '@/assets/images/story/story_03.jpg'
 import story04 from '@/assets/images/story/story_04.jpg'
-import { PageHeader } from '@/components/ui/page-header'
+import { PageHeader } from '@/components/page-header'
 import { Section } from '@/components/ui/section'
 import type { LocaleParams } from '@/types/params'
 

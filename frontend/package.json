@@ -60,6 +60,7 @@
         "tailwind-merge": "^3.0.1",
         "tailwindcss-animate": "^1.0.7",
         "use-debounce": "^10.0.4",
+        "use-mask": "^0.1.0",
         "use-mask-input": "^3.4.2",
         "zod": "^3.24.2"
     },

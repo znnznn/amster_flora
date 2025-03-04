@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl'
 import { Fragment, type JSX } from 'react'
 
-import type { DotNestedKeys, Messages } from '../../../global'
+import type { DotNestedKeys, Messages } from '../../global'
 
 import {
     Breadcrumb,
@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/breadcrumb'
 import { H2 } from '@/components/ui/typography'
 
-interface BreadcrumbItem {
+export interface BreadcrumbItem {
     key: keyof Messages['Common']['Breadcrumb']
     href?: string
 }

@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query'
 import type { UserPayload, UserQueryParams } from './user-types'
 import { usersService } from './users-service'
 
-export const USERS_QUERY_KEY = ['users'] as const
+export const USERS_QUERY_KEY = ['user'] as const
 
 export const useGetUsers = (params: UserQueryParams, options = {}) => {
     return useQuery({
