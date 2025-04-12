@@ -36,7 +36,6 @@ class Variant(models.Model):
     hex_color = models.CharField(max_length=255, null=True, blank=True, default='#000000')
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=0)
-    quantity_sold = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def delete(self, using=None, keep_parents=False):

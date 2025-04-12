@@ -55,7 +55,7 @@ class ProductFilter(FilterSet):
         return queryset.filter(category__id__in=ids)
 
     def filter_by_available(self, queryset: QuerySet, name: str, value: str) -> QuerySet:
-        available_variants = Variant.objects.filter(quantity__gt=F('quantity_sold')).values_list('product__id', flat=True)
+        available_variants = Variant.objects.filter(quantity__gt=0).values_list('product__id', flat=True)
         if value:
             return queryset.filter(Q(id__in=available_variants))
         return queryset.filter(~Q(id__in=available_variants))
