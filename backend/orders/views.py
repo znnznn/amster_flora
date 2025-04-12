@@ -67,7 +67,7 @@ class OrderItemsViewSet(ModelViewSet):
         variant = instance.variant
         if order and instance.discount:
             order.discount -= instance.discount
-        variant.quantity_sold -= instance.amount
+        variant.quantity += instance.amount
         variant.save()
         order.save()
         instance.delete()

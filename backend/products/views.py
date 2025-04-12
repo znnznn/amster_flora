@@ -162,7 +162,7 @@ class ProductsViewSet(ModelViewSet):
             "in_wish_list": Value(False, output_field=BooleanField()), "in_cart": Value(False, output_field=BooleanField())
         }
         if not self.request.user.is_authenticated or self.request.user.role == Role.CLIENT:
-            available_variants = Variant.objects.filter(quantity__gt=F('quantity_sold')).values_list('product__id', flat=True)
+            available_variants = Variant.objects.filter(quantity__gt=0).values_list('product__id', flat=True)
             queryset = queryset.filter(Q(id__in=available_variants))
         if self.request.user.is_authenticated:
             annotation_kwargs["in_wish_list"] = Exists(WishList.objects.filter(product=OuterRef("id"), creator=self.request.user))

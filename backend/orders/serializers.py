@@ -48,8 +48,8 @@ class OrderItemSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         if amount := validated_data.get('amount'):
             variant = instance.variant
-            variant.quantity_sold -= instance.amount
-            variant.quantity_sold += amount
+            variant.quantity += instance.amount
+            variant.quantity -= amount
             variant.save()
             change_amount = amount - instance.amount
             discount_by_one = instance.discount / instance.amount
@@ -98,10 +98,10 @@ class OrderCreateSerializer(serializers.Serializer):
                 )
             )
             variant = cart.variant
-            variant.quantity_sold += cart.amount
+            variant.quantity -= cart.amount
             variants_updated.append(variant)
         OrderItem.objects.bulk_create(order_items)
-        Variant.objects.bulk_update(variants_updated, ['quantity_sold'])
+        Variant.objects.bulk_update(variants_updated, ['quantity'])
         carts.delete()
         attrs['order'] = order
         return attrs
