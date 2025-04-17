@@ -1,23 +1,35 @@
-import { getTranslations } from 'next-intl/server'
+'use client'
 
-import type { LocaleParams } from '@/types/params'
+import { useProducts } from '@/api/products'
+import { ProductCard } from '@/components/product-card'
 
-export const generateMetadata = async ({ params }: LocaleParams) => {
-    const { locale } = await params
+// export const generateMetadata = async ({ params }: LocaleParams) => {
+//     const { locale } = await params
 
-    const t = await getTranslations({
-        locale,
-        namespace: 'Metadata.Catalogue'
-    })
+//     const t = await getTranslations({
+//         locale,
+//         namespace: 'Metadata.Catalogue'
+//     })
 
-    return {
-        title: t('title')
-    }
-}
+//     return {
+//         title: t('title')
+//     }
+// }
 
 const CataloguePage = () => {
+    const {
+        productsQuery: { data }
+    } = useProducts({})
+
     return (
-        <div className='mt-10 flex h-10 w-10 items-center bg-slate-500'>CheckoutPage</div>
+        <div className='mt-10 flex items-center'>
+            {data?.results?.map((product) => (
+                <ProductCard
+                    key={product.id}
+                    product={product}
+                />
+            ))}
+        </div>
     )
 }
 

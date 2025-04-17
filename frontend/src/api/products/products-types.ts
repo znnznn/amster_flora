@@ -10,6 +10,10 @@ export interface Product {
     in_cart: boolean
 }
 
+export type SingleVariantProduct = Omit<Product, 'variants'> & {
+    variant: Variant
+}
+
 export interface Variant {
     id: number
     size: string
