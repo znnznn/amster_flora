@@ -6,18 +6,24 @@ interface UseProductProps {
 }
 
 export const useProduct = ({ singleVariantProduct }: UseProductProps) => {
+    const variantId = singleVariantProduct?.variants?.[0]?.id
+
     const handleAddToCart = (amount: number) => {
+        if (!variantId) return
+
         if (singleVariantProduct.in_cart) {
-            cartsService.delete(singleVariantProduct?.variants?.[0]?.id)
-        } else {
-            cartsService.create({
-                variant: singleVariantProduct?.variants?.[0]?.id,
-                amount
-            })
+            if (amount <= 0) {
+                cartsService.delete(variantId)
+                return
+            }
+            cartsService.update(variantId, { variant: variantId, amount })
+            return
+        }
+
+        if (amount > 0) {
+            cartsService.create({ variant: variantId, amount })
         }
     }
 
-    return {
-        handleAddToCart
-    }
+    return { handleAddToCart }
 }

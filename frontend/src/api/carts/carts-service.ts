@@ -22,7 +22,7 @@ export const cartsService = {
     },
 
     async delete(id: number) {
-        await clientApi.delete(`/carts/${id}/`)
+        await clientApi.delete(`/carts/${id}/delete/`)
         return true
     }
 }
