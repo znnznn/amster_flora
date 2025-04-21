@@ -43,11 +43,15 @@ export const NumberInput = ({
         >
             <Group
                 className={cn(
-                    'border-grey-300 data-focus-within:border-ring data-focus-within:ring-ring min-w-30 data-disabled:opacity-50 data-focus-within:ring-[3px] data-focus-within:has-aria-invalid:border-red-300 data-focus-within:has-aria-invalid:ring-red-300/20 dark:data-focus-within:has-aria-invalid:ring-red-300/40 relative inline-flex h-11 w-full items-center overflow-hidden whitespace-nowrap rounded-lg text-sm outline-none transition-[color,box-shadow]',
+                    'border-grey-300 data-focus-within:border-ring data-focus-within:ring-ring min-w-30 data-disabled:opacity-50 data-focus-within:ring-[3px] data-focus-within:has-aria-invalid:border-red-300 data-focus-within:has-aria-invalid:ring-red-300/20 dark:data-focus-within:has-aria-invalid:ring-red-300/40 relative inline-flex h-11 w-full items-center overflow-hidden whitespace-nowrap rounded-lg text-sm outline-none transition-all',
                     className
                 )}
             >
                 <Button
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                    }}
                     slot='decrement'
                     className={cn(
                         '[&_svg]:!text-black-200 -ms-px aspect-square h-[inherit] rounded-s-md bg-primary hover:!bg-primary hover:text-accent',
@@ -62,6 +66,10 @@ export const NumberInput = ({
                 </Button>
                 <Input className='text-grey-500 w-full grow bg-inherit p-2.5 text-center tabular-nums outline-none' />
                 <Button
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                    }}
                     slot='increment'
                     className={cn(
                         '[&_svg]:!text-black-200 -me-px aspect-square h-[inherit] rounded-e-md bg-primary hover:!bg-primary hover:text-accent',

@@ -40,7 +40,9 @@ export const ToCartButton = ({ flower }: ToCartButtonProps) => {
         handleAddToCart(newValue)
     }
 
-    const handleShowInput = () => {
+    const handleShowInput = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation()
+        e.preventDefault()
         setShowInput(true)
         setValue(1)
         handleAddToCart(1)
@@ -52,7 +54,7 @@ export const ToCartButton = ({ flower }: ToCartButtonProps) => {
     if (showInput) {
         return (
             <NumberInput
-                className='bg-accent text-primary [&_button]:bg-accent [&_button]:text-primary [&_button]:hover:!bg-transparent [&_svg]:!text-primary'
+                className='max-w-40 bg-accent text-primary [&_button]:bg-accent [&_button]:text-primary [&_button]:hover:!bg-transparent [&_svg]:!text-primary'
                 value={value}
                 maxValue={maxValue}
                 minValue={0}

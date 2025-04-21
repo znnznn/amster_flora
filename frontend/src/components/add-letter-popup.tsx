@@ -13,6 +13,7 @@ export const AddLetterPopup = () => {
         <Dialog>
             <DialogTrigger asChild>
                 <Button
+                    className='px-2'
                     variant='ghost'
                     size='sm'
                 >

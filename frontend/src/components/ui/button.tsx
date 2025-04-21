@@ -18,12 +18,14 @@ const buttonVariants = cva(
                 accent: 'bg-accent text-accent-foreground hover:bg-accent/80',
                 'accent-shadow':
                     'bg-accent border-r-[3px] border-b-[3px] border-primary text-accent-foreground hover:bg-primary hover:border-accent hover:text-primary-foreground',
+                'primary-shadow':
+                    'bg-primary border-r-[3px] border-b-[3px] border-accent text-primary-foreground hover:bg-accent hover:border-primary hover:text-accent-foreground',
                 ghost: 'hover:bg-accent hover:text-accent-foreground',
                 link: 'text-primary underline-offset-4 hover:underline'
             },
             size: {
                 default: 'h-[52px] px-6 py-2 max-md:h-11',
-                sm: 'h-9 rounded-[14px] !text-base px-4',
+                sm: 'h-9 rounded-[12px] !text-base px-4',
                 lg: 'h-[55px] rounded-md px-6',
                 icon: 'h-11 w-11 rounded-md'
             }
