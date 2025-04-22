@@ -10,6 +10,7 @@ import { Toaster } from 'sonner'
 
 import { Footer } from '@/components/layout/footer'
 import { Header } from '@/components/layout/header'
+import { TooltipProvider } from '@/components/ui/tooltip'
 import { type Locale, routing } from '@/i18n/routing'
 import { AuthProvider } from '@/providers/auth-provider'
 import { ReactQueryProvider } from '@/providers/react-query-provider'
@@ -49,9 +50,11 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
                         <NuqsAdapter>
                             <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID!}>
                                 <AuthProvider>
-                                    <Header />
-                                    <main className='flex-grow'>{children}</main>
-                                    <Footer />
+                                    <TooltipProvider>
+                                        <Header />
+                                        <main className='flex-grow'>{children}</main>
+                                        <Footer />
+                                    </TooltipProvider>
                                 </AuthProvider>
                             </GoogleOAuthProvider>
                         </NuqsAdapter>

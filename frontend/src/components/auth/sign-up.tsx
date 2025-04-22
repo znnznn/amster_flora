@@ -3,7 +3,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
 import z from 'zod'
 
 import { Button } from '../ui/button'
@@ -16,7 +15,6 @@ import { SocialsButtons } from './socials-buttons'
 import type { UserPayload } from '@/api/users/user-types'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { passwordShape } from '@/config/schemas'
-import { useAuthContext } from '@/providers/auth-provider'
 
 interface SocialsButtonsProps {
     setAuthState: (authState: State) => void
@@ -32,7 +30,7 @@ const loginSchema = z.object({
 export const SignUp = ({ setAuthState }: SocialsButtonsProps) => {
     const t = useTranslations('Common')
 
-    const { signUp } = useAuthContext()
+    // const { signUp } = useAuth()
 
     const form = useForm<UserPayload>({
         defaultValues: {
@@ -46,15 +44,15 @@ export const SignUp = ({ setAuthState }: SocialsButtonsProps) => {
     })
 
     const onLogin = (formData: UserPayload) => {
-        signUp
-            .mutateAsync({
-                ...formData,
-                phone_number: formData.phone_number.replaceAll(' ', '')
-            })
-            .then(() => {
-                setAuthState('login')
-                toast.success(t('Auth.SignUpSuccess'))
-            })
+        // signUp
+        //     .mutateAsync({
+        //         ...formData,
+        //         phone_number: formData.phone_number.replaceAll(' ', '')
+        //     })
+        //     .then(() => {
+        //         setAuthState('login')
+        //         toast.success(t('Auth.SignUpSuccess'))
+        //     })
     }
 
     return (

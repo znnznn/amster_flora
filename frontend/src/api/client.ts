@@ -1,104 +1,134 @@
-import axios from 'axios'
+import axios, {
+    type AxiosInstance,
+    type AxiosRequestConfig,
+    type AxiosResponse,
+    type InternalAxiosRequestConfig
+} from 'axios'
+import Cookies from 'js-cookie'
 
-import { clientCookies } from './auth/client-auth-storage'
+import { authService } from './auth/auth-service'
 import { BASE_URL } from '@/config/api'
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@/config/app'
 
-// Create custom error type
-class AuthError extends Error {
-    constructor(message: string) {
-        super(message)
-        this.name = 'AuthError'
-    }
+interface RefreshTokenResponse {
+    access: string
+    refresh: string
 }
 
-export const clientApi = axios.create({
+type RefreshSubscriberCallback = (token: string) => void
+
+export const apiClient: AxiosInstance = axios.create({
     baseURL: BASE_URL,
     headers: {
         'Content-Type': 'application/json'
     }
 })
 
-clientApi.interceptors.request.use((config) => {
-    const { access } = clientCookies.getTokens()
-    if (access) {
-        config.headers.Authorization = `Bearer ${access}`
-    }
-    return config
-})
-
-let isRefreshing = false
-let failedQueue: Array<{
-    resolve: (value: unknown) => void
-    reject: (error: unknown) => void
-}> = []
-
-const processQueue = (error: unknown | null, token: string | null = null) => {
-    failedQueue.forEach((prom) => {
-        if (error) {
-            prom.reject(error)
-        } else {
-            prom.resolve(token)
-        }
-    })
-    failedQueue = []
+export const onLogout = () => {
+    // Cookies.remove(ACCESS_TOKEN_KEY)
+    // Cookies.remove(REFRESH_TOKEN_KEY)
 }
 
-clientApi.interceptors.response.use(
-    (response) => response,
-    async (error) => {
-        const originalRequest = error.config
+let isRefreshing = false
+let refreshSubscribers: RefreshSubscriberCallback[] = []
 
-        if (originalRequest?.url === '/auth/token/refresh/') {
+const subscribeTokenRefresh = (callback: RefreshSubscriberCallback): void => {
+    refreshSubscribers.push(callback)
+}
+
+const onRefreshed = (token: string): void => {
+    refreshSubscribers.forEach((callback) => callback(token))
+    refreshSubscribers = []
+}
+
+export const setupInterceptors = (): (() => void) => {
+    const requestInterceptor = apiClient.interceptors.request.use(
+        (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
+            const token = Cookies.get(ACCESS_TOKEN_KEY)
+            if (token) {
+                config.headers.Authorization = `Bearer ${token}`
+            }
+            return config
+        },
+        (error: any) => Promise.reject(error)
+    )
+
+    const responseInterceptor = apiClient.interceptors.response.use(
+        (response: AxiosResponse): AxiosResponse => response,
+        async (error: any) => {
+            const originalRequest: AxiosRequestConfig & { _retry?: boolean } =
+                error.config
+
+            if (error.response?.status === 401 && !originalRequest._retry) {
+                originalRequest._retry = true
+
+                if (isRefreshing) {
+                    return new Promise<AxiosResponse>((resolve) => {
+                        subscribeTokenRefresh((token: string) => {
+                            if (originalRequest.headers) {
+                                originalRequest.headers.Authorization = `Bearer ${token}`
+                            } else {
+                                originalRequest.headers = {
+                                    Authorization: `Bearer ${token}`
+                                }
+                            }
+                            resolve(apiClient(originalRequest))
+                        })
+                    })
+                }
+
+                isRefreshing = true
+
+                try {
+                    const refreshToken = Cookies.get(REFRESH_TOKEN_KEY)
+
+                    if (!refreshToken) {
+                        onLogout()
+                        isRefreshing = false
+                        return Promise.reject(error)
+                    }
+
+                    const data: RefreshTokenResponse = await authService.refreshToken({
+                        refresh: refreshToken
+                    })
+
+                    Cookies.set(ACCESS_TOKEN_KEY, data.access, {
+                        secure: process.env.NODE_ENV === 'production',
+                        sameSite: 'lax'
+                    })
+                    Cookies.set(REFRESH_TOKEN_KEY, data.refresh, {
+                        secure: process.env.NODE_ENV === 'production',
+                        sameSite: 'lax'
+                    })
+
+                    if (originalRequest.headers) {
+                        originalRequest.headers.Authorization = `Bearer ${data.access}`
+                    } else {
+                        originalRequest.headers = {
+                            Authorization: `Bearer ${data.access}`
+                        }
+                    }
+
+                    onRefreshed(data.access)
+                    isRefreshing = false
+
+                    return apiClient(originalRequest)
+                } catch (refreshError) {
+                    onLogout()
+                    isRefreshing = false
+                    refreshSubscribers = []
+                    return Promise.reject(refreshError)
+                }
+            }
+
             return Promise.reject(error)
         }
+    )
 
-        if (error.response?.status === 401 && !originalRequest._retry) {
-            if (isRefreshing) {
-                return new Promise((resolve, reject) => {
-                    failedQueue.push({ resolve, reject })
-                })
-                    .then((token) => {
-                        originalRequest.headers.Authorization = `Bearer ${token}`
-                        return clientApi(originalRequest)
-                    })
-                    .catch((err) => {
-                        return Promise.reject(err)
-                    })
-            }
-
-            originalRequest._retry = true
-            isRefreshing = true
-
-            try {
-                const { refresh } = clientCookies.getTokens()
-
-                if (!refresh) {
-                    throw new AuthError('No refresh token')
-                }
-
-                const response = await axios.post(`${BASE_URL}'/auth/token/refresh/`, {
-                    refresh
-                })
-                const { access, refresh: newRefresh } = response.data
-
-                if (!access || !newRefresh) {
-                    throw new AuthError('Invalid refresh response')
-                }
-
-                clientCookies.setTokens({ access, refresh: newRefresh })
-                processQueue(null, access)
-                originalRequest.headers.Authorization = `Bearer ${access}`
-
-                return clientApi(originalRequest)
-            } catch (refreshError) {
-                processQueue(refreshError, null)
-                clientCookies.clearAll()
-                throw new AuthError('Authentication failed')
-            } finally {
-                isRefreshing = false
-            }
-        }
-
-        return Promise.reject(error)
+    return () => {
+        apiClient.interceptors.request.eject(requestInterceptor)
+        apiClient.interceptors.response.eject(responseInterceptor)
     }
-)
+}
+
+setupInterceptors()

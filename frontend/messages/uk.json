@@ -146,6 +146,16 @@
         "continue-shopping": "Продовжити покупки",
         "checkout": "Оформити"
     },
+    "CheckoutPage": {
+        "title": "Оформлення замовлення",
+        "your-order": "Ваше замовлення",
+        "edit-order": "Редагувати",
+        "total": "Разом",
+        "discount": "Знижка",
+        "bonus-placeholder": "Скільки бонусів списати",
+        "bonuses": "Бонуси",
+        "what-is-bonus": "що за бонуси ?"
+    },
     "DeliveryPage": {
         "title": "Оплата та доставка"
     },
@@ -226,6 +236,7 @@
             "cart": "Кошик",
             "story": "Історія",
             "orders": "Замовлення",
+            "checkout": "Оформлення замовлення",
             "blog": "Блог",
             "account": "Мій аккаунт"
         },

@@ -1,4 +1,5 @@
-import { serverCookies } from './auth/server-auth-storage'
+import { getTokens } from './auth/server-auth-storage'
+import { handleRefresh } from '@/app/actions/auth'
 import { BASE_URL } from '@/config/api'
 
 interface ApiError extends Error {
@@ -6,70 +7,68 @@ interface ApiError extends Error {
     data?: any
 }
 
-interface Tokens {
-    access?: string
-}
-
 export const createServerApi = () => {
-    const fetchWithAuth = async (endpoint: string, options: RequestInit = {}) => {
-        try {
-            const tokens: Tokens = await serverCookies.getTokens()
+    const fetchWithAuth = async (
+        endpoint: string,
+        options: RequestInit = {},
+        retry = true
+    ): Promise<any> => {
+        const tokens = await getTokens()
 
-            if (!tokens.access) {
-                throw new Error('No access token available')
+        if (!tokens.access) {
+            throw new Error('No access token available')
+        }
+
+        const response = await fetch(`${BASE_URL}${endpoint}`, {
+            ...options,
+            headers: {
+                ...options.headers,
+                Authorization: `Bearer ${tokens.access}`,
+                'Content-Type': 'application/json'
             }
+        })
 
-            const response = await fetch(`${BASE_URL}${endpoint}`, {
-                ...options,
-                headers: {
-                    ...options.headers,
-                    Authorization: `Bearer ${tokens.access}`,
-                    'Content-Type': 'application/json'
-                }
-            })
+        if (response.status === 401 && retry && tokens.refresh) {
+            const newTokens = await handleRefresh(tokens.refresh)
 
-            if (!response.ok) {
-                const error = new Error('API call failed') as ApiError
-                error.status = response.status
-
-                try {
-                    error.data = await response.json()
-                } catch {
-                    error.data = await response.text()
-                }
-
-                throw error
+            return {
+                __refresh__: true,
+                newTokens,
+                endpoint,
+                options
             }
+        }
 
-            return response.json()
-        } catch (error) {
-            if (error instanceof Error) {
-                console.error(`API Error (${endpoint}):`, {
-                    message: error.message,
-                    status: (error as ApiError).status,
-                    data: (error as ApiError).data
-                })
+        if (!response.ok) {
+            const error = new Error('API call failed') as ApiError
+            error.status = response.status
+            try {
+                error.data = await response.json()
+            } catch {
+                error.data = await response.text()
             }
             throw error
         }
+
+        return response.json()
     }
 
     return {
-        get: (endpoint: string) => fetchWithAuth(endpoint)
-        // post: (endpoint: string, data: any) =>
-        //     fetchWithAuth(endpoint, {
-        //         method: 'POST',
-        //         body: JSON.stringify(data)
-        //     }),
-        // put: (endpoint: string, data: any) =>
-        //     fetchWithAuth(endpoint, {
-        //         method: 'PUT',
-        //         body: JSON.stringify(data)
-        //     }),
-        // delete: (endpoint: string) =>
-        //     fetchWithAuth(endpoint, {
-        //         method: 'DELETE'
-        //     })
+        get: (endpoint: string) => fetchWithAuth(endpoint),
+        post: (endpoint: string, data: any) =>
+            fetchWithAuth(endpoint, {
+                method: 'POST',
+                body: JSON.stringify(data)
+            }),
+        put: (endpoint: string, data: any) =>
+            fetchWithAuth(endpoint, {
+                method: 'PUT',
+                body: JSON.stringify(data)
+            }),
+        delete: (endpoint: string) =>
+            fetchWithAuth(endpoint, {
+                method: 'DELETE'
+            })
     }
 }
 

@@ -17,12 +17,12 @@ import {
 } from '@/components/ui/sheet'
 import { Link } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
-import { useAuthContext } from '@/providers/auth-provider'
+import { useAuth } from '@/providers/auth-provider'
 
 export type State = 'login' | 'sign-up' | 'forgot-password-mail'
 
 export const AuthPopup = () => {
-    const { isAuthenticated } = useAuthContext()
+    const { isAuth } = useAuth()
 
     const t = useTranslations('Common.Auth')
     const [authState, setAuthState] = useState<State>('login')
@@ -51,7 +51,7 @@ export const AuthPopup = () => {
         return null
     }
 
-    if (isAuthenticated) {
+    if (isAuth) {
         return (
             <Link
                 href='/account'

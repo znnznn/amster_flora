@@ -4,6 +4,7 @@ import { CheckCircle2 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
+import { DiscountForm } from './discount-form'
 import { FlowerCarousel } from './flower-carousel'
 import { FlowerCarouselMobile } from './flower-carousel-mobile'
 import type { Product } from '@/api/products/products-types'
@@ -18,8 +19,6 @@ import {
     AccordionItem,
     AccordionTrigger
 } from '@/components/ui/accordion'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Section } from '@/components/ui/section'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
@@ -30,6 +29,7 @@ interface FlowerInfoProps {
 export const FlowerInfo = ({ flower }: FlowerInfoProps) => {
     const [flowerSize, setFlowerSize] = useState<ProductSize>('small')
     const t = useTranslations('FlowerPage')
+
     return (
         <>
             <FlowerCarouselMobile flower={flower} />
@@ -194,29 +194,5 @@ const FlowerDescription = ({ flower }: FlowerInfoProps) => {
                 </AccordionItem>
             </Accordion>
         </Section>
-    )
-}
-
-const DiscountForm = () => {
-    const t = useTranslations('FlowerPage')
-    const [discount, setDiscount] = useState('')
-
-    return (
-        <div className='flex items-center justify-between gap-10'>
-            <Input
-                value={discount}
-                onChange={(e) => setDiscount(e.target.value)}
-                className='max-w-56 border-accent/50'
-                variant='underline'
-                placeholder='Промокод/Дисконтна картка'
-            />
-            <Button
-                disabled={!discount}
-                variant='accent-outline'
-                size='sm'
-            >
-                {t('use-discount')}
-            </Button>
-        </div>
     )
 }

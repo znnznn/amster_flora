@@ -1,27 +1,31 @@
-import { clientApi } from '../client'
+import { apiClient } from '../client'
 
 import type { User, UserPayload, UserQueryParams } from './user-types'
 
 export const usersService = {
     async getUser(userId: string) {
-        const { data } = await clientApi.get<User>(`/users/${userId}/`)
+        const { data } = await apiClient.get<User>(`/users/${userId}/`)
+        return data
+    },
+    async getMe() {
+        const { data } = await apiClient.get<User>('/users/me/')
         return data
     },
     async getAll(params?: Partial<UserQueryParams>) {
-        const { data } = await clientApi.get('/users/all/', {
+        const { data } = await apiClient.get('/users/all/', {
             params
         })
         return data
     },
     async update(id: number, payload: Partial<UserPayload>) {
-        const { data } = await clientApi.patch(`/users/${id}/`, payload)
+        const { data } = await apiClient.patch(`/users/${id}/`, payload)
         return data
     },
     async create(payload: UserPayload) {
-        const { data } = await clientApi.post('/users/', payload)
+        const { data } = await apiClient.post('/users/', payload)
         return data
     },
     async delete(id: number) {
-        await clientApi.delete(`/users/${id}/`)
+        await apiClient.delete(`/users/${id}/`)
     }
 }

@@ -1,26 +1,46 @@
+'use server'
+
 import { cookies } from 'next/headers'
-import type { NextRequest } from 'next/server'
 
-const ACCESS_TOKEN = 'accessToken'
-const REFRESH_TOKEN = 'refreshToken'
-const USER_DATA = 'user'
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@/config/app'
 
-export const serverCookies = {
-    getTokens: async () => {
-        const cookieStore = await cookies()
-
-        return {
-            access: cookieStore.get(ACCESS_TOKEN)?.value,
-            refresh: cookieStore.get(REFRESH_TOKEN)?.value
-        }
-    },
-    getUser: async () => {
-        const cookieStore = await cookies()
-        const userData = cookieStore.get(USER_DATA)?.value
-        return userData ? JSON.parse(userData) : null
+// Read tokens (can be used anywhere on the server)
+export async function getTokens() {
+    const cookieStore = await cookies()
+    return {
+        access: cookieStore.get(ACCESS_TOKEN_KEY)?.value,
+        refresh: cookieStore.get(REFRESH_TOKEN_KEY)?.value
     }
 }
 
-export function getMiddlewareAccessToken(request: NextRequest) {
-    return request.cookies.get(ACCESS_TOKEN)?.value
+// Set tokens (only in server actions or route handlers)
+export async function setTokens({
+    access,
+    refresh
+}: {
+    access: string
+    refresh: string
+}) {
+    const cookieStore = await cookies()
+    cookieStore.set(ACCESS_TOKEN_KEY, access, {
+        httpOnly: true,
+        path: '/',
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 60 * 60
+    })
+    cookieStore.set(REFRESH_TOKEN_KEY, refresh, {
+        httpOnly: true,
+        path: '/',
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 60 * 60 * 24 * 7
+    })
+}
+
+// Clear tokens (only in server actions or route handlers)
+export async function clearTokens() {
+    // const cookieStore = await cookies()
+    // cookieStore.delete(ACCESS_TOKEN_KEY)
+    // cookieStore.delete(REFRESH_TOKEN_KEY)
 }

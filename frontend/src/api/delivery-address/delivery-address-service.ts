@@ -1,4 +1,4 @@
-import { clientApi } from '../client'
+import { apiClient } from '../client'
 
 import type {
     DeliveryAddress,
@@ -8,26 +8,26 @@ import type {
 
 export const deliveryAddressService = {
     async getUser(userId: string) {
-        const { data } = await clientApi.get<DeliveryAddress>(
+        const { data } = await apiClient.get<DeliveryAddress>(
             `/delivery-addresses/${userId}/`
         )
         return data
     },
     async getAll(params?: Partial<DeliveryAddressQueryParams>) {
-        const { data } = await clientApi.get('/delivery-addresses/all/', {
+        const { data } = await apiClient.get('/delivery-addresses/all/', {
             params
         })
         return data
     },
     async update(id: number, payload: Partial<DeliveryAddressPayload>) {
-        const { data } = await clientApi.patch(`/delivery-addresses/${id}/`, payload)
+        const { data } = await apiClient.patch(`/delivery-addresses/${id}/`, payload)
         return data
     },
     async create(payload: DeliveryAddressPayload) {
-        const { data } = await clientApi.post('/delivery-addresses/', payload)
+        const { data } = await apiClient.post('/delivery-addresses/', payload)
         return data
     },
     async delete(id: number) {
-        await clientApi.delete(`/delivery-addresses/${id}/`)
+        await apiClient.delete(`/delivery-addresses/${id}/`)
     }
 }

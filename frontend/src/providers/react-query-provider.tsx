@@ -23,6 +23,11 @@ export const ReactQueryProvider = ({ children }: React.PropsWithChildren) => {
                         toast.error(errorMessage)
                     }
                 }),
+                defaultOptions: {
+                    queries: {
+                        retry: 1
+                    }
+                },
                 mutationCache: new MutationCache({
                     onError: (error) => {
                         const isErrorMessage = isErrorWithMessage(error)

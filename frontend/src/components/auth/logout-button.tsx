@@ -3,14 +3,14 @@
 import { Button } from '../ui/button'
 
 import { cn } from '@/lib/utils'
-import { useAuthContext } from '@/providers/auth-provider'
+import { useAuth } from '@/providers/auth-provider'
 
 interface LogoutButtonProps extends React.ComponentProps<'button'> {
     className?: string
 }
 
 export const LogoutButton = ({ className, ...props }: LogoutButtonProps) => {
-    const { logout } = useAuthContext()
+    const { logout } = useAuth()
 
     return (
         <Button

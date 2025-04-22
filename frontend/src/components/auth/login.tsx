@@ -23,7 +23,7 @@ import {
     FormSubmissionMessage
 } from '@/components/ui/form'
 import { passwordShape } from '@/config/schemas'
-import { useAuthContext } from '@/providers/auth-provider'
+import { useAuth } from '@/providers/auth-provider'
 
 interface SocialsButtonsProps {
     setAuthState: (authState: State) => void
@@ -36,7 +36,9 @@ const loginSchema = z.object({
 export const Login = ({ setAuthState }: SocialsButtonsProps) => {
     const t = useTranslations('Common')
 
-    const { login } = useAuthContext()
+    const { login } = useAuth()
+
+    const loginMutation = login({})
 
     const form = useForm<LoginCredentials>({
         defaultValues: {
@@ -48,7 +50,7 @@ export const Login = ({ setAuthState }: SocialsButtonsProps) => {
 
     const onLogin = (data: LoginCredentials) => {
         try {
-            login.mutate(data)
+            loginMutation.mutate(data)
         } catch {
             toast.error(t('Errors.Auth.Login.Title'), {
                 description: t('Errors.Auth.Login.Description')
@@ -102,14 +104,14 @@ export const Login = ({ setAuthState }: SocialsButtonsProps) => {
                         variant='accent'
                         type='submit'
                     >
-                        {login.isLoading ? (
+                        {loginMutation.isLoading ? (
                             <Loader2 className='animate-spin' />
                         ) : (
                             t('Auth.Login')
                         )}
                     </Button>
                 </form>
-                {login.isError ? (
+                {loginMutation.isError ? (
                     <FormSubmissionMessage
                         message={t('Errors.Auth.Login.Description')}
                         variant='destructive'

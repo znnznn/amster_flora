@@ -10,7 +10,7 @@ import { useUpdateUser } from '@/api/users'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { useAuthContext } from '@/providers/auth-provider'
+import { useAuth } from '@/providers/auth-provider'
 
 const profileSchema = z.object({
     first_name: z
@@ -57,7 +57,7 @@ const profileSchema = z.object({
 })
 
 export const ProfileForm = () => {
-    const { user, isLoading } = useAuthContext()
+    const { user, isUserLoading } = useAuth()
 
     const form = useForm<z.infer<typeof profileSchema>>({
         defaultValues: {
@@ -94,7 +94,7 @@ export const ProfileForm = () => {
                                 <FormControl>
                                     <Input
                                         variant='underline'
-                                        disabled={isLoading || isUpdating}
+                                        disabled={isUserLoading || isUpdating}
                                         placeholder="Ім'я"
                                         {...field}
                                     />
@@ -112,7 +112,7 @@ export const ProfileForm = () => {
                                 <FormControl>
                                     <Input
                                         variant='underline'
-                                        disabled={isLoading || isUpdating}
+                                        disabled={isUserLoading || isUpdating}
                                         type='email'
                                         inputMode='email'
                                         placeholder='E-mail'
@@ -132,7 +132,7 @@ export const ProfileForm = () => {
                                 <FormControl>
                                     <Input
                                         variant='underline'
-                                        disabled={isLoading || isUpdating}
+                                        disabled={isUserLoading || isUpdating}
                                         type='tel'
                                         inputMode='tel'
                                         placeholder='Телефон'
@@ -152,7 +152,7 @@ export const ProfileForm = () => {
                                 <FormControl>
                                     <Input
                                         variant='underline'
-                                        disabled={isLoading || isUpdating}
+                                        disabled={isUserLoading || isUpdating}
                                         placeholder='Прізвище'
                                         {...field}
                                     />
