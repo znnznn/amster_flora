@@ -8,6 +8,10 @@ from key_crm.serializers import KeyCRMProductSerializer
 def get_products_data(response_data) -> dict:
     products_data = {}
     for product in response_data['data']:
+        if product['quantity'] < 0:
+            continue
+        if isinstance(product['quantity'], float):
+            product['quantity'] = int(product['quantity'])
         serializer = KeyCRMProductSerializer(data=product)
         serializer.is_valid(raise_exception=True)
         products_data[product['id']] = serializer.validated_data
