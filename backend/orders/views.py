@@ -38,7 +38,7 @@ class CartsViewSet(ModelViewSet):
     @action(detail=True, methods=['patch'], url_path='update')
     def update_by_variant(self, request, *args, **kwargs):
         cart_product = get_object_or_404(self.get_queryset().filter(variant_id=kwargs['pk']), creator=request.user)
-        self.kwargs['pk'] = cart_product.pk
+        self.kwargs['pk'] = cart_product.id
         return self.partial_update(request, *args, **kwargs)
 
 
