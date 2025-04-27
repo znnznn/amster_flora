@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 import { Fragment } from 'react'
 
+import { CheckoutForm } from './components/checkout-form'
 import { CheckoutInfo } from './components/checkout-info'
 import type { ApiResponse } from '@/api/api.types'
 import type { Cart } from '@/api/carts/carts-types'
@@ -73,8 +74,8 @@ const CheckoutPage = async () => {
                 </Breadcrumb>
                 <H2 className='mt-6 text-center'>{t('Breadcrumb.checkout')}</H2>
             </Section>
-            <div className='mt-24 flex items-center justify-between'>
-                1
+            <div className='mt-24 flex items-start justify-between'>
+                <CheckoutForm />
                 <CheckoutInfo initialCartResponse={carts} />
             </div>
         </>

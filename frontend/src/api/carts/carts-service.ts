@@ -10,14 +10,16 @@ export const cartsService = {
         })
         return data
     },
-
     async create(payload: CartPayload) {
         const { data } = await apiClient.post<Cart>('/carts/', payload)
         return data
     },
 
-    async update(id: number, payload: CartPayload) {
-        const { data } = await apiClient.patch<Cart>(`/carts/${id}/`, payload)
+    async update(variantId: number, payload: CartPayload) {
+        const { data } = await apiClient.patch<Cart>(
+            `/carts/${variantId}/update/`,
+            payload
+        )
         return data
     },
 

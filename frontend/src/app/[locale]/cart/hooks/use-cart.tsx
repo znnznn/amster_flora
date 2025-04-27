@@ -45,7 +45,7 @@ export const useCart = ({ cart }: UseCartProps) => {
             deleteCartMutation.mutate(variantId)
             return
         }
-        cartsService.update(cart.id, { variant: variantId, amount })
+        cartsService.update(variantId, { variant: variantId, amount })
     }
 
     return { handleAddToCart }

@@ -5,7 +5,7 @@ import type { Product, ProductPayload, ProductsQueryParams } from './products-ty
 
 export const productsService = {
     async get(params: ProductsQueryParams) {
-        const { data } = await apiClient.get<ApiResponse<Product>>('/products', {
+        const { data } = await apiClient.get<ApiResponse<Product>>('/products/', {
             params
         })
         return data

@@ -9,7 +9,7 @@ const inputVariants = cva(
         variants: {
             variant: {
                 default:
-                    'focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input rounded-2xl',
+                    'focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input/50 rounded-2xl',
                 underline:
                     'border-b border-b-primary bg-transparent px-0.5 pb-1 outline-none placeholder:text-muted-foreground'
             }

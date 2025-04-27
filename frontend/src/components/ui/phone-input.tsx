@@ -34,7 +34,7 @@ const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> = React.forwa
             defaultCountry='UA'
             labels={ua}
             className={cn(
-                'flex overflow-clip rounded-2xl border',
+                'flex overflow-clip rounded-2xl border border-input/50',
                 'focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
                 variant === 'underline' &&
                     'focus-within:border-b-2 focus-within:border-primary focus-within:ring-0 focus-within:ring-offset-0',
